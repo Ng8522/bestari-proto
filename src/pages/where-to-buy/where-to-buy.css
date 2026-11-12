@@ -1,0 +1,149 @@
+/* Where to buy, in the handoff's visual language. Scoped under .wtb. */
+.wtb__hero {
+  padding: 90px 0 40px;
+}
+
+.wtb__hero h1 {
+  margin: 14px 0 18px;
+  font-size: clamp(48px, 6vw, 88px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--maroon);
+}
+
+.wtb__lede {
+  max-width: 56ch;
+  font-size: 19px;
+  color: var(--ink-2);
+}
+
+.wtb__list {
+  padding: 20px 0 80px;
+}
+
+.wtb__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.wtb__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 20px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.wtb__tab:hover {
+  border-color: var(--ink);
+}
+
+.wtb__tab[aria-selected='true'] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.wtb__count {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.wtb__description {
+  margin-bottom: 20px;
+  color: var(--ink-2);
+}
+
+.wtb__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 18px;
+  list-style: none;
+}
+
+.wtb__card {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 26px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.wtb__card:hover {
+  box-shadow: 0 20px 40px rgba(42, 26, 20, 0.1);
+  transform: translateY(-2px);
+}
+
+.wtb__name {
+  font-size: 24px;
+}
+
+.wtb__address {
+  color: var(--ink-2);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.wtb__phones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin-top: 4px;
+  font-weight: 700;
+  color: var(--maroon);
+}
+
+.wtb__phones a:hover {
+  text-decoration: underline;
+}
+
+.wtb__note {
+  margin-top: 22px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.wtb__cta {
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+  margin-bottom: 90px;
+  padding: 56px;
+  border-radius: 32px;
+  background: var(--maroon);
+  color: var(--cream);
+}
+
+.wtb__cta h2 {
+  font-size: clamp(36px, 4vw, 56px);
+}
+
+.wtb__cta p {
+  max-width: 52ch;
+  opacity: 0.85;
+}
+
+@media (max-width: 900px) {
+  .wtb__hero {
+    padding: 60px 0 24px;
+  }
+
+  .wtb__cta {
+    padding: 36px 26px;
+  }
+}

@@ -1,0 +1,142 @@
+/* Investors: placeholder colours, hero and sticky sub-nav. */
+
+/* Placeholders take the colour of their context on this page. */
+.ir .ph {
+  color: inherit;
+}
+
+/* ---------- Hero ---------- */
+.ir .irh {
+  background: var(--green-deep);
+  color: #fff;
+  padding: 70px 0 0;
+}
+
+.ir .irh-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 60px;
+  align-items: end;
+}
+
+.ir .irh-copy {
+  padding-bottom: 70px;
+}
+
+.ir .irh .eyebrow {
+  color: var(--saffron);
+}
+
+.ir .irh h1 {
+  font-size: clamp(48px, 5.4vw, 82px);
+  margin: 14px 0 20px;
+}
+
+.ir .irh-lede {
+  color: #cfe3d5;
+  font-size: 18px;
+  max-width: 560px;
+}
+
+.ir .badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 26px 0 0;
+  list-style: none;
+}
+
+.ir .badges li {
+  font-family: var(--mono);
+  font-size: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  padding: 7px 14px;
+}
+
+.ir .badges .is-highlight {
+  background: var(--saffron);
+  color: var(--ink);
+  border-color: var(--saffron);
+}
+
+.ir .glance {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 0;
+  border-radius: 28px 28px 0 0;
+  padding: 32px 34px;
+}
+
+.ir .glance-title {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--saffron);
+  margin-bottom: 20px;
+}
+
+.ir .glance-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 24px;
+}
+
+.ir .glance dt {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 6px;
+}
+
+.ir .glance dd {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.ir .glance .ph {
+  font-size: inherit;
+  background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0 6px, rgba(255, 255, 255, 0.06) 6px 12px);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* ---------- Sticky sub-nav ---------- */
+.ir .subnav {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 40;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+
+.ir .subnav-bar {
+  display: flex;
+  gap: 4px;
+  height: 60px;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.ir .subnav a {
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: var(--ink-2);
+  transition: all 0.2s;
+}
+
+.ir .subnav a:hover {
+  color: var(--ink);
+  background: var(--cream);
+}
+
+.ir .subnav a[aria-current] {
+  background: var(--ink);
+  color: #fff;
+}

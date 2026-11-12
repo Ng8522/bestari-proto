@@ -1,0 +1,165 @@
+/* Shop: page root, utility bar and shop nav (ShopHeader). */
+
+.shop {
+  background: #fff;
+  /* Safety net at phone widths; `clip` (unlike `hidden`) keeps the sticky nav working. */
+  overflow-x: clip;
+}
+
+/* ---------- Utility bar ---------- */
+.shop .shop-util {
+  background: var(--maroon-deep);
+  color: #f6dcc0;
+  font-size: 13px;
+}
+
+.shop .shop-util__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 38px;
+}
+
+.shop .shop-util__ph {
+  color: #fff;
+}
+
+.shop .shop-util__links {
+  display: flex;
+  gap: 22px;
+}
+
+.shop .shop-util a {
+  opacity: 0.85;
+}
+
+.shop .shop-util a:hover {
+  opacity: 1;
+}
+
+/* ---------- Shop nav ---------- */
+.shop .shop-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(251, 245, 234, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.shop .shop-nav__inner {
+  display: flex;
+  align-items: center;
+  height: 84px;
+  gap: 28px;
+}
+
+.shop .shop-nav__logo {
+  flex: none;
+}
+
+.shop .shop-nav__logo img {
+  height: 58px;
+  width: auto;
+}
+
+.shop .shop-nav__badge {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--green);
+  background: #e3f0e7;
+  border-radius: 999px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+.shop .shop-nav__search {
+  flex: 1;
+  display: flex;
+  min-width: 0;
+}
+
+.shop .shop-search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  height: 48px;
+  padding: 0 20px;
+  min-width: 0;
+}
+
+/* The input drops its own outline, so the pill carries the focus ring. */
+.shop .shop-search:focus-within {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px var(--saffron);
+}
+
+.shop .shop-search__input {
+  border: 0;
+  background: none;
+  outline: none;
+  font: inherit;
+  font-size: 15px;
+  flex: 1;
+  min-width: 0;
+  appearance: none;
+}
+
+.shop .shop-search__input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.shop .shop-search kbd {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+
+.shop .shop-icobtn {
+  flex: none;
+  height: 48px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fff;
+  font: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shop .shop-cartbtn {
+  background: var(--maroon);
+  color: #fff;
+  border: 0;
+}
+
+.shop .shop-cartbtn__count {
+  background: var(--saffron);
+  color: var(--ink);
+  border-radius: 999px;
+  min-width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 0 6px;
+  transition: transform 0.25s;
+}
+
+.shop .shop-cartbtn__count.pop {
+  transform: scale(1.4);
+}

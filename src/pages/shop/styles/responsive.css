@@ -1,0 +1,138 @@
+/* Shop: 900px and 600px breakpoints, then reduced motion. Must stay last. */
+
+/* ---------- Responsive (the handoff's ≤900px rules, plus phone fixes) ---------- */
+@media (max-width: 900px) {
+  .shop .phero__grid,
+  .shop .trade__box {
+    grid-template-columns: 1fr;
+  }
+
+  .shop .grid-p {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .shop .bgrid,
+  .shop .perks {
+    grid-template-columns: 1fr;
+  }
+
+  .shop .banner h1 {
+    font-size: 44px;
+  }
+
+  .shop .shop-nav__search,
+  .shop .shop-util__links {
+    display: none;
+  }
+
+  .shop .shop-nav__signin {
+    margin-left: auto;
+  }
+
+  .shop .mini {
+    min-height: 210px;
+  }
+
+  .shop .perks li {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .shop .perks li:last-child {
+    border: 0;
+  }
+
+  .shop .shop-util__inner {
+    height: auto;
+    min-height: 38px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 600px) {
+  .shop .shop-nav__inner {
+    height: 72px;
+    gap: 12px;
+  }
+
+  .shop .shop-nav__logo img {
+    height: 44px;
+  }
+
+  .shop .shop-nav__badge {
+    display: none;
+  }
+
+  .shop .banner {
+    padding: 36px 24px 230px;
+    justify-content: flex-start;
+  }
+
+  .shop .banner__imgs {
+    width: 72%;
+  }
+
+  .shop .cat-head {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .shop .cat-head__title,
+  .shop .bundles h2,
+  .shop .trade h2 {
+    font-size: 40px;
+  }
+
+  .shop .grid-p {
+    gap: 14px;
+  }
+
+  .shop .pc__bd {
+    padding: 4px 14px 16px;
+  }
+
+  .shop .price {
+    font-size: 18px;
+  }
+
+  .shop .add {
+    width: 40px;
+    height: 40px;
+  }
+
+  .shop .bc {
+    padding: 24px;
+  }
+
+  .shop .bc__stack {
+    height: 170px;
+  }
+
+  .shop .bc__stack img {
+    height: 140px;
+  }
+
+  .shop .trade__box {
+    padding: 32px 24px;
+    gap: 32px;
+  }
+
+  .shop .trade .btn {
+    height: auto;
+    min-height: 52px;
+    padding: 12px 24px;
+    white-space: normal;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shop .pc:hover,
+  .shop .pc:hover .pc__im img,
+  .shop .add:hover,
+  .shop .shop-cartbtn__count.pop {
+    transform: none;
+  }
+}

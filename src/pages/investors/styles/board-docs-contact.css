@@ -1,0 +1,246 @@
+/* Investors: board, documents & directory and IR contact. */
+
+/* ---------- Board ---------- */
+.ir .people {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  list-style: none;
+}
+
+.ir .pp {
+  background: #fff;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+
+.ir .pp-img {
+  aspect-ratio: 4 / 4.2;
+  background: repeating-linear-gradient(135deg, var(--cream-2) 0 10px, var(--cream) 10px 20px);
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+.ir .pp-body {
+  padding: 20px 22px;
+}
+
+.ir .pp-name {
+  font-size: 22px;
+}
+
+/* Also styles the lead card's eyebrow, as the handoff's ".pp span" rule does. */
+.ir .pp-role {
+  font-size: 14px;
+  color: var(--ink-2);
+  display: block;
+  margin-top: 4px;
+}
+
+/* In the handoff the heading / role element itself is the placeholder box. */
+.ir .pp-name .ph,
+.ir .pp-role .ph {
+  display: block;
+  font-size: inherit;
+}
+
+.ir .pp--lead {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+}
+
+.ir .pp--lead .pp-img {
+  aspect-ratio: auto;
+}
+
+.ir .pp--lead .pp-body {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.ir .pp--lead .pp-name {
+  font-size: 32px;
+  margin-top: 8px;
+}
+
+/* ---------- Documents & directory ---------- */
+.ir .docs-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 24px;
+}
+
+.ir .tabs {
+  display: flex;
+  gap: 8px;
+  margin: 14px 0 6px;
+}
+
+.ir .tabs button {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ir .tabs button[aria-selected='true'] {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+}
+
+.ir .doc-list {
+  list-style: none;
+}
+
+.ir .doc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  gap: 20px;
+}
+
+.ir .doc:last-child {
+  border: 0;
+}
+
+.ir .doc small {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-2);
+  margin-top: 4px;
+}
+
+.ir .doc-link {
+  font-family: var(--mono);
+  font-size: 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 12px;
+  white-space: nowrap;
+}
+
+.ir a.doc-link:hover {
+  border-color: var(--maroon);
+  color: var(--maroon);
+}
+
+.ir .dir dl {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.ir .dir dt {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.ir .dir dd {
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* ---------- IR contact ---------- */
+.ir .contact {
+  background: var(--maroon);
+  color: #fff;
+  border-radius: 32px;
+  padding: 50px 56px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.ir .contact h2 {
+  font-size: 46px;
+  margin-top: 12px;
+}
+
+.ir .contact .eyebrow {
+  color: var(--saffron);
+}
+
+.ir .contact-lede {
+  color: #f1d6c4;
+  margin-top: 12px;
+}
+
+.ir .contact-lede .ph {
+  color: #fff;
+}
+
+.ir .contact form {
+  display: grid;
+  gap: 10px;
+}
+
+.ir .field {
+  display: grid;
+  gap: 6px;
+}
+
+/* The handoff sets outline:none here; it is left out so the site-wide focus ring stays visible. */
+.ir .contact input,
+.ir .contact textarea {
+  font: inherit;
+  font-size: 15px;
+  border: 0;
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.ir .contact input::placeholder,
+.ir .contact textarea::placeholder {
+  color: #f1d6c4;
+}
+
+.ir .contact [aria-invalid='true'] {
+  box-shadow: inset 0 0 0 1.5px var(--saffron);
+}
+
+.ir .contact [aria-invalid='true']:focus-visible {
+  box-shadow: inset 0 0 0 1.5px var(--saffron), 0 0 0 5px var(--saffron);
+}
+
+.ir .field-error {
+  font-size: 13px;
+  color: var(--saffron-soft);
+}
+
+.ir .contact-submit {
+  justify-self: start;
+}
+
+.ir .contact-thanks {
+  font-size: 18px;
+}
+
+.ir .disc {
+  font-size: 13px;
+  color: var(--ink-2);
+  margin-top: 22px;
+  max-width: 980px;
+}

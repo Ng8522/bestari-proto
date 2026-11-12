@@ -1,0 +1,8 @@
+node_modules
+dist
+coverage
+*.local
+.DS_Store
+.claude/
+# Client design handoff: reference only, not needed for the build, kept out of the public repo.
+design/

@@ -1,0 +1,12 @@
+/*
+ * Shop (shop.bestarifood.com), ported from "Bestari Shop.html". Every selector is scoped under .shop.
+ * The page draws its own chrome, so the utility bar and nav rules from the handoff's theme.css live here too.
+ */
+
+/* Split by section to keep each file under 800 lines. Order matters: responsive.css (breakpoints and reduced motion) must stay last. */
+@import './styles/header.css';
+@import './styles/promo.css';
+@import './styles/catalogue.css';
+@import './styles/bundles-footer.css';
+@import './styles/cart.css';
+@import './styles/responsive.css';

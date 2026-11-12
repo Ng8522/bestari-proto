@@ -1,0 +1,311 @@
+/* Home: 02 intro + 3 doors (IntroDoors) and 03 brands carousel (BrandCarousel). */
+
+/* ---------- 02 Intro + 3 doors ---------- */
+.home .intro {
+  padding: 90px 0 40px;
+}
+
+.home .intro .wrap {
+  max-width: 1440px;
+}
+
+.home .intro .line {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 60px;
+  align-items: end;
+  margin-bottom: 46px;
+}
+
+.home .intro h2 {
+  font-size: clamp(40px, 4vw, 60px);
+  color: var(--maroon);
+}
+
+.home .intro h2 em {
+  font-style: normal;
+  color: var(--green);
+}
+
+.home .intro p {
+  color: var(--ink-2);
+  font-size: 18px;
+}
+
+.home .doors {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.home .door {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  aspect-ratio: 4 / 4.4;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 30px;
+  color: #fff;
+  isolation: isolate;
+}
+
+.home .door .bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transition: transform 0.6s;
+}
+
+.home .door:hover .bg {
+  transform: scale(1.05);
+}
+
+.home .door .bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home .door .bg.prod {
+  display: grid;
+  place-items: center;
+}
+
+.home .door .bg.prod img {
+  width: auto;
+  height: 72%;
+  object-fit: contain;
+  transform: translateY(-14%);
+  filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.3));
+}
+
+.home .door::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent 55%);
+}
+
+.home .door .eyebrow {
+  color: var(--saffron);
+}
+
+.home .door h3 {
+  font-size: 36px;
+  margin: 8px 0 14px;
+}
+
+.home .door .go {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.home .door .go b {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  transition: transform 0.3s;
+}
+
+.home .door:hover .go b {
+  transform: translateX(6px);
+}
+
+/* ---------- 03 Brands carousel ---------- */
+.home .hero {
+  height: 100vh;
+  min-height: 720px;
+  max-height: 960px;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  transition: background-color 0.7s ease;
+  /* Horizontal swipes reach the pointer handlers; vertical drags still scroll the page. */
+  touch-action: pan-y;
+}
+
+.home .hero .bhead {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 110px;
+  z-index: 5;
+}
+
+.home .hero .bhead .wrap {
+  max-width: 1440px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.home .hero .bhead .eyebrow {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.home .hero .bhead h2 {
+  font-size: clamp(40px, 4vw, 60px);
+  margin-top: 10px;
+}
+
+.home .hero .mq {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-58%);
+  white-space: nowrap;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.home .hero .mq div {
+  display: inline-block;
+  font-family: var(--serif);
+  font-size: clamp(140px, 17vw, 260px);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.35);
+  animation: home-mq 40s linear infinite;
+  padding-right: 60px;
+}
+
+.home .hero .mq--still div {
+  animation: none;
+}
+
+.home .hero .slides {
+  position: absolute;
+  inset: 0;
+}
+
+.home .hero .slide {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+
+.home .hero .slide.on {
+  opacity: 1;
+}
+
+/* The design's `.hero .slide img { height: min(50vh, 480px) !important }` override, folded in. */
+.home .hero .slide img {
+  height: min(50vh, 480px);
+  width: auto;
+  filter: drop-shadow(0 40px 50px rgba(0, 0, 0, 0.35));
+  transform: translateY(40px) scale(0.9) rotate(-6deg);
+  transition: transform 0.9s var(--ease-out);
+}
+
+.home .hero .slide.on img {
+  transform: translateY(20px) scale(1) rotate(-3deg);
+}
+
+.home .hero .info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 48px;
+  z-index: 5;
+}
+
+.home .hero .info .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 30px;
+  max-width: 1440px;
+}
+
+.home .hero .name .eyebrow {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.home .hero .name h3 {
+  font-size: clamp(40px, 4.4vw, 64px);
+  max-width: 620px;
+  margin-top: 10px;
+}
+
+.home .hero .name .zh {
+  opacity: 0.85;
+  margin-top: 6px;
+}
+
+.home .hero .ctrl {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+}
+
+.home .hero .ctrl .btn {
+  background: #fff;
+  color: var(--ink);
+  margin-left: 14px;
+}
+
+.home .hero .arrow {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  background: transparent;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.home .hero .arrow:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.home .hero .dots {
+  display: flex;
+  gap: 8px;
+  margin-left: 8px;
+}
+
+.home .hero .dots button {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.4);
+  transition: width 0.3s, background 0.3s;
+  cursor: pointer;
+}
+
+/* Bigger hit area for the 8px dots without changing how they look. */
+.home .hero .dots button::before {
+  content: '';
+  position: absolute;
+  inset: -12px -4px;
+}
+
+.home .hero .dots button.on {
+  width: 28px;
+  background: #fff;
+}
+
+.home .hero .count {
+  font-family: var(--mono);
+  font-size: 13px;
+  opacity: 0.8;
+}

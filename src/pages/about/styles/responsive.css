@@ -1,0 +1,143 @@
+/* About: 900px and 600px breakpoints, then reduced motion. Must stay last. */
+
+/* ≤900px: single column (the handoff's media query), plus fixes so nothing overflows. */
+@media (max-width: 900px) {
+  .about .origin .grid,
+  .about .trio .grid,
+  .about .hq .grid,
+  .about .next .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about .panels {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .about .pn {
+    min-height: 160px;
+  }
+
+  .about .pn.on {
+    min-height: 360px;
+  }
+
+  .about .yc {
+    flex-basis: 300px;
+  }
+
+  .about .origin .yr {
+    min-height: 440px;
+  }
+
+  .about .hist .hd,
+  .about .biz .hd {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .about .people .hd {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .about .rail {
+    padding-left: 20px;
+  }
+
+  .about .rail__end {
+    flex-basis: 20px;
+  }
+
+  .about .ptrack {
+    padding: 0 20px 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .about .ah h1 {
+    font-size: clamp(64px, 24vw, 110px);
+  }
+
+  .about .ah .sub {
+    bottom: 24px;
+  }
+
+  .about .ah .sub .wrap {
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+  }
+
+  .about .origin .yr b {
+    font-size: clamp(110px, 34vw, 160px);
+  }
+
+  .about .origin .tx {
+    padding: 64px 20px;
+  }
+
+  .about .yc {
+    height: min(52vh, 440px);
+    padding: 26px;
+  }
+
+  .about .yc .y {
+    font-size: 72px;
+  }
+
+  .about .yc h3 {
+    font-size: 26px;
+  }
+
+  .about .yc .tag {
+    top: 26px;
+    right: 26px;
+  }
+
+  .about .stack div {
+    font-size: clamp(64px, 21vw, 90px);
+  }
+
+  .about .pn .ph-i {
+    width: 140px;
+    height: 140px;
+  }
+
+  .about .hq .tile {
+    min-height: 400px;
+  }
+
+  .about .hq .info {
+    padding: 30px 24px;
+  }
+
+  .about .hq .stats b {
+    font-size: 30px;
+  }
+
+  .about .nx {
+    min-height: 180px;
+    padding: 30px 26px;
+  }
+
+  .about .nx h3 {
+    font-size: 30px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about .pk,
+  .about .pk img,
+  .about .ah .lr__ch {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .about .mq .t {
+    animation: none;
+  }
+}

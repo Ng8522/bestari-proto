@@ -1,0 +1,11 @@
+/*
+ * About Us, ported from the handoff's "Bestari About.html" (inline <style>).
+ * Every selector is scoped under .about; keyframes are prefixed about-.
+ */
+
+/* Split by section to keep each file under 800 lines. Order matters: responsive.css (breakpoints and reduced motion) must stay last. */
+@import './styles/hero.css';
+@import './styles/story.css';
+@import './styles/business.css';
+@import './styles/people.css';
+@import './styles/responsive.css';

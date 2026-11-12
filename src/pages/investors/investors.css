@@ -1,0 +1,11 @@
+/*
+ * Investor Relations, ported from "Bestari Investors.html" (inline <style>).
+ * Every selector is scoped under .ir because other pages reuse names such as .card and .note.
+ */
+
+/* Split by section to keep each file under 800 lines. Order matters: responsive.css (breakpoints and reduced motion) must stay last. */
+@import './styles/hero.css';
+@import './styles/overview-ipo.css';
+@import './styles/financials.css';
+@import './styles/board-docs-contact.css';
+@import './styles/responsive.css';

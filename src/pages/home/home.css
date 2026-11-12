@@ -1,0 +1,11 @@
+/*
+ * Home: port of "Bestari Corporate & IPO.html" (inline <style>). Values are copied from the design.
+ * Every rule is scoped under .home because other pages reuse names like .hero; keyframes use the home- prefix.
+ */
+
+/* Split by section to keep each file under 800 lines. Order matters: responsive.css (breakpoints and reduced motion) must stay last. */
+@import './styles/hero.css';
+@import './styles/intro-brands.css';
+@import './styles/stories.css';
+@import './styles/keyframes.css';
+@import './styles/responsive.css';

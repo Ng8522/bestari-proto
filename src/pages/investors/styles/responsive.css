@@ -1,0 +1,102 @@
+/* Investors: 900px and 560px breakpoints, then reduced motion. Must stay last. */
+
+/* ---------- Responsive (the handoff's single breakpoint, plus phone fixes) ---------- */
+@media (max-width: 900px) {
+  .ir .irh-grid,
+  .ir .ov,
+  .ir .struct,
+  .ir .fin,
+  .ir .sharegrid,
+  .ir .docs-grid,
+  .ir .contact {
+    grid-template-columns: 1fr;
+  }
+
+  .ir .people {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ir .pp--lead {
+    grid-column: span 2;
+    grid-template-columns: 1fr;
+  }
+
+  .ir .owners {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Not in the handoff: keep the stacked lead portrait from collapsing to a strip. */
+  .ir .pp--lead .pp-img {
+    aspect-ratio: 4 / 3;
+  }
+
+  /* Not in the handoff: long placeholders wrap instead of overflowing narrow columns. */
+  .ir .ph {
+    white-space: normal;
+  }
+}
+
+/* Not in the handoff (mobile was only roughly designed): keep everything inside 375px. */
+@media (max-width: 560px) {
+  .ir .sec-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .ir .glance {
+    padding: 28px 24px;
+  }
+
+  .ir .uses {
+    grid-template-columns: 1fr;
+  }
+
+  .ir .tt li {
+    grid-template-columns: 1fr auto;
+    row-gap: 6px;
+  }
+
+  .ir .tt-date {
+    grid-column: 1 / -1;
+    max-width: 120px;
+  }
+
+  .ir .tabs {
+    flex-wrap: wrap;
+  }
+
+  .ir .donut {
+    width: 240px;
+    height: 240px;
+    justify-self: center;
+  }
+
+  .ir .donut::after {
+    inset: 48px;
+  }
+
+  .ir .people {
+    grid-template-columns: 1fr;
+  }
+
+  .ir .pp--lead {
+    grid-column: auto;
+  }
+
+  .ir .contact {
+    padding: 36px 24px;
+  }
+
+  .ir .contact h2 {
+    font-size: 38px;
+  }
+}
+
+/* Reduced motion: the bars and sub-nav pills change state without animating. */
+@media (prefers-reduced-motion: reduce) {
+  .ir .chart-bar,
+  .ir .subnav a {
+    transition: none;
+  }
+}

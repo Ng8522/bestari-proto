@@ -1,0 +1,156 @@
+/* Shop: promo hero and trust strip (PromoHero). */
+
+/* ---------- Promo hero ---------- */
+.shop .phero {
+  padding: 30px 0 0;
+}
+
+.shop .phero__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.shop .banner {
+  border-radius: 30px;
+  background: var(--maroon);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  min-height: 440px;
+  padding: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.shop .banner__sun {
+  position: absolute;
+  right: 8%;
+  top: 10%;
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  background: var(--maroon-deep);
+}
+
+.shop .banner__copy {
+  position: relative;
+  z-index: 2;
+}
+
+.shop .banner .eyebrow {
+  color: var(--saffron);
+}
+
+.shop .banner h1 {
+  font-size: 68px;
+  max-width: 520px;
+  margin: 14px 0 18px;
+}
+
+.shop .banner__lede {
+  max-width: 420px;
+  color: #f1d6c4;
+  margin-bottom: 28px;
+}
+
+.shop .banner__imgs {
+  position: absolute;
+  right: -20px;
+  bottom: -30px;
+  width: 56%;
+  height: 110%;
+}
+
+.shop .banner__imgs img {
+  position: absolute;
+  filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.4));
+}
+
+.shop .banner__img--a {
+  width: 62%;
+  right: 28%;
+  bottom: 4%;
+  transform: rotate(-8deg);
+}
+
+.shop .banner__img--b {
+  width: 58%;
+  right: 2%;
+  bottom: 10%;
+  transform: rotate(6deg);
+}
+
+.shop .side {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+}
+
+.shop .mini {
+  border-radius: 30px;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.shop .mini__title {
+  font-size: 30px;
+  max-width: 200px;
+}
+
+.shop .mini p {
+  font-size: 14px;
+  max-width: 190px;
+  margin-top: 6px;
+}
+
+.shop .mini img {
+  position: absolute;
+  right: -10px;
+  top: 10px;
+  width: 58%;
+  filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.25));
+}
+
+.shop .mini--y {
+  background: var(--saffron);
+}
+
+.shop .mini--g {
+  background: var(--green);
+  color: #fff;
+}
+
+/* Trust strip */
+.shop .perks {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 20px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  list-style: none;
+}
+
+.shop .perks li {
+  padding: 20px 24px;
+  border-right: 1px solid var(--line);
+}
+
+.shop .perks li:last-child {
+  border: 0;
+}
+
+.shop .perks b {
+  display: block;
+  font-size: 15px;
+}
+
+.shop .perks span {
+  font-size: 13px;
+  color: var(--ink-2);
+}

@@ -1,0 +1,242 @@
+/* Investors: shared section parts, overview and IPO structure. */
+
+/* ---------- Shared section parts ---------- */
+.ir .sec {
+  padding: 90px 0;
+  scroll-margin-top: 140px;
+}
+
+.ir .sec--flush {
+  padding-top: 0;
+}
+
+.ir .sec--tinted {
+  background: var(--cream-2);
+}
+
+.ir .sec-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.ir .sec-head h2 {
+  font-size: clamp(38px, 3.8vw, 54px);
+  color: var(--maroon);
+  margin-top: 12px;
+}
+
+.ir .sec-intro {
+  max-width: 460px;
+  color: var(--ink-2);
+}
+
+.ir .card {
+  background: #fff;
+  border-radius: 26px;
+  padding: 32px;
+  border: 1px solid var(--line);
+}
+
+.ir .card h3 {
+  font-size: 28px;
+}
+
+.ir .card-sub {
+  color: var(--ink-2);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.ir .note {
+  font-size: 13px;
+  color: var(--ink-2);
+  margin-top: 18px;
+}
+
+/* ---------- Overview ---------- */
+.ir .ov {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 24px;
+}
+
+.ir .ov-text p {
+  color: var(--ink-2);
+  margin-bottom: 14px;
+  font-size: 17px;
+}
+
+.ir .ov-text b {
+  color: var(--ink);
+}
+
+.ir .quote {
+  background: var(--maroon);
+  color: #fff;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ir .quote blockquote {
+  font-family: var(--serif);
+  font-size: 28px;
+  line-height: 1.25;
+}
+
+.ir .quote figcaption {
+  margin-top: 24px;
+}
+
+.ir .quote figcaption b {
+  display: block;
+}
+
+.ir .quote figcaption span {
+  color: #f1d6c4;
+  font-size: 14px;
+}
+
+/* ---------- IPO structure ---------- */
+.ir .struct {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.ir .alloc-bar {
+  display: flex;
+  height: 56px;
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 20px 0 18px;
+}
+
+.ir .alloc-bar > div {
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.ir .legend {
+  display: grid;
+  gap: 12px;
+  list-style: none;
+}
+
+.ir .legend li {
+  display: grid;
+  grid-template-columns: 14px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  font-size: 15px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.ir .legend li:last-child {
+  border: 0;
+}
+
+.ir .swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+}
+
+.ir .legend b {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.ir .card .tt-title {
+  margin-top: 34px;
+}
+
+.ir .tt {
+  list-style: none;
+  margin-top: 14px;
+}
+
+.ir .tt li {
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+  font-size: 15px;
+}
+
+.ir .tt li:last-child {
+  border: 0;
+}
+
+.ir .tt-date {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+/* In the handoff the date span itself is the placeholder box, filling the 120px column. */
+.ir .tt-date .ph {
+  display: block;
+  font-size: inherit;
+}
+
+.ir .chip {
+  font-size: 10px;
+  font-family: var(--mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--cream-2);
+  white-space: nowrap;
+}
+
+.ir .chip--done {
+  background: #dcebdf;
+  color: var(--green);
+}
+
+.ir .uses {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+  list-style: none;
+}
+
+.ir .use {
+  border-radius: 20px;
+  padding: 22px;
+  background: var(--cream);
+}
+
+.ir .use-num {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 28px;
+  color: var(--maroon);
+  display: block;
+}
+
+.ir .use h4 {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 16px;
+  margin: 6px 0 4px;
+}
+
+.ir .use p {
+  font-size: 14px;
+  color: var(--ink-2);
+}

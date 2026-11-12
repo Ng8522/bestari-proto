@@ -1,0 +1,354 @@
+/* Home: 04 purpose, 05 recipe videos, 06 latest and 07 careers. */
+
+/* ---------- 04 Our Purpose ---------- */
+.home .purpose {
+  background: var(--maroon);
+  color: #fff;
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.home .purpose .wrap {
+  max-width: 1440px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.home .purpose .eyebrow {
+  color: var(--saffron);
+}
+
+.home .purpose h2 {
+  font-size: clamp(40px, 4.2vw, 64px);
+  margin: 16px 0 24px;
+}
+
+.home .purpose h2 em {
+  font-style: normal;
+  color: var(--saffron);
+}
+
+.home .purpose p {
+  color: #f1d6c4;
+  font-size: 18px;
+  max-width: 560px;
+}
+
+.home .pillars {
+  display: grid;
+  gap: 14px;
+}
+
+.home .pillar {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 20px;
+  align-items: center;
+  padding: 22px 24px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: background 0.3s;
+}
+
+.home .pillar:hover {
+  background: rgba(255, 255, 255, 0.13);
+}
+
+.home .pillar b {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 34px;
+  color: var(--saffron);
+  line-height: 1;
+}
+
+.home .pillar h3 {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.home .pillar span {
+  font-size: 14px;
+  color: #f1d6c4;
+}
+
+.home .purpose .cert {
+  margin-top: 34px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 14px 20px;
+  display: inline-block;
+}
+
+.home .purpose .cert img {
+  height: 56px;
+  width: auto;
+}
+
+/* ---------- 05 Recipe videos ---------- */
+.home .vids {
+  padding: 100px 0 30px;
+}
+
+.home .vids .wrap {
+  max-width: 1440px;
+}
+
+.home .vids .head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 28px;
+}
+
+.home .vids .eyebrow {
+  color: var(--green);
+}
+
+.home .vids h2 {
+  font-size: clamp(40px, 4vw, 56px);
+  color: var(--green-deep);
+  margin-top: 12px;
+}
+
+.home .vgrid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 20px;
+}
+
+.home .player {
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--ink);
+  aspect-ratio: 16 / 9;
+  position: relative;
+}
+
+.home .player iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.home .vlist {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  list-style: none;
+}
+
+.home .vi {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
+  padding: 12px;
+  border-radius: 20px;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  transition: border-color 0.2s;
+}
+
+.home .vi:hover {
+  border-color: var(--green);
+}
+
+.home .vi.on {
+  border-color: var(--green);
+  background: #eef5f0;
+}
+
+.home .vi .t {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.home .vi .t img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home .vi .t::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-40%, -50%);
+  border-left: 16px solid #fff;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.home .vi .txt {
+  display: block;
+}
+
+.home .vi .kind {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* The design's h4, as a span: headings are not allowed inside a button. */
+.home .vi .title {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  font-size: 20px;
+  margin-top: 4px;
+}
+
+/* ---------- 06 Latest ---------- */
+.home .latest {
+  padding: 80px 0 70px;
+}
+
+.home .latest .wrap {
+  max-width: 1440px;
+}
+
+.home .latest .head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 26px;
+}
+
+.home .latest h2 {
+  font-size: 44px;
+  color: var(--maroon);
+}
+
+.home .latest .all {
+  font-weight: 700;
+  color: var(--maroon);
+}
+
+.home .lrow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.home .lc {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 20px;
+  align-items: center;
+  background: #fff;
+  border-radius: 22px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.home .lc:hover {
+  border-color: var(--maroon);
+  transform: translateY(-3px);
+}
+
+.home .lc .im {
+  aspect-ratio: 1;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--cream-2);
+}
+
+.home .lc .im img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home .lc .label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.home .lc h3 {
+  font-size: 21px;
+  margin-top: 6px;
+}
+
+.home .lc.ipo .im {
+  background: var(--green-deep);
+  display: grid;
+  place-items: center;
+  color: var(--saffron);
+  font-family: var(--serif);
+  font-size: 34px;
+}
+
+/* ---------- 07 Careers ---------- */
+.home .careers {
+  padding: 20px 0 0;
+}
+
+.home .careers .wrap {
+  max-width: 1440px;
+}
+
+.home .careers .box {
+  border-radius: 32px;
+  background: var(--saffron);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: center;
+  padding: 50px 56px;
+  position: relative;
+  overflow: hidden;
+}
+
+.home .careers h2 {
+  font-size: clamp(36px, 3.6vw, 52px);
+  color: var(--maroon-deep);
+  max-width: 700px;
+  margin-top: 12px;
+}
+
+.home .careers p {
+  margin-top: 12px;
+  max-width: 560px;
+}
+
+.home .careers .big {
+  position: absolute;
+  right: -30px;
+  bottom: -60px;
+  font-family: var(--serif);
+  font-size: 220px;
+  color: rgba(126, 27, 30, 0.08);
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* The design's `<footer style="margin-top:90px">`. */
+.home .foot {
+  margin-top: 90px;
+}

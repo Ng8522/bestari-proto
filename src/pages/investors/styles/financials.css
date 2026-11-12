@@ -1,0 +1,197 @@
+/* Investors: financials and shareholding. */
+
+/* ---------- Financials ---------- */
+.ir .fin {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+}
+
+.ir .chart {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  margin-top: 26px;
+  align-items: end;
+  height: 300px;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.ir .chart-col {
+  display: flex;
+  gap: 14px;
+  align-items: end;
+  justify-content: center;
+  height: 100%;
+}
+
+.ir .chart-bar {
+  width: 72px;
+  border-radius: 12px 12px 0 0;
+  position: relative;
+  transition: height 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.ir .chart-bar span {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.ir .chart-x {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  padding: 14px 20px 0;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.ir .chart-key {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  margin-top: 14px;
+}
+
+.ir .chart-key i {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  margin-right: 6px;
+  vertical-align: -1px;
+}
+
+.ir .kpis {
+  display: grid;
+  gap: 16px;
+}
+
+.ir .kpi {
+  border-radius: 22px;
+  padding: 26px;
+  color: #fff;
+}
+
+.ir .kpi--green {
+  background: var(--green-deep);
+}
+
+.ir .kpi--maroon {
+  background: var(--maroon);
+}
+
+.ir .kpi--saffron {
+  background: var(--saffron);
+  color: var(--ink);
+}
+
+.ir .kpi-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.ir .kpi-value {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 46px;
+  display: block;
+  line-height: 1.1;
+  margin-top: 6px;
+}
+
+.ir .kpi p {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+/* ---------- Shareholding ---------- */
+.ir .sharegrid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.ir .donut {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.ir .donut::after {
+  content: '';
+  position: absolute;
+  inset: 56px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.ir .donut-label {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  z-index: 2;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+.ir .donut-label b {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 36px;
+  color: var(--ink);
+}
+
+.ir .share-title {
+  font-size: 34px;
+  margin: 10px 0 16px;
+}
+
+.ir .share-intro {
+  color: var(--ink-2);
+}
+
+.ir .owners {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top: 18px;
+  list-style: none;
+}
+
+.ir .owners li {
+  background: var(--cream);
+  border-radius: 16px;
+  padding: 14px;
+}
+
+.ir .owners b {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 26px;
+  color: var(--maroon);
+  display: block;
+}
+
+.ir .owners span {
+  font-size: 13px;
+  color: var(--ink-2);
+}
