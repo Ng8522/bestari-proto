@@ -2,13 +2,14 @@
  * Home page content, ported from "Bestari Corporate & IPO.html" (design handoff).
  * Video titles and the two non-IPO news links are placeholders from the handoff and must be replaced.
  */
-import { asset, ROUTES, type ImageAsset, type LinkItem } from '../../content/site'
+import { asset, IR_MENU, ROUTES, type ImageAsset, type NavItem } from '../../content/site'
 
 /** Centre links of the transparent home header. */
-export const HEADER_LINKS: LinkItem[] = [
+export const HEADER_LINKS: NavItem[] = [
   { label: 'Our Brands', href: '#brands' },
   { label: 'About Us', href: ROUTES.about },
-  { label: 'Investor Relations', href: ROUTES.investors },
+  { label: 'Investor Relations', href: ROUTES.investors, children: IR_MENU },
+  { label: 'Sustainability', href: ROUTES.sustainability },
   { label: 'News', href: '#latest' },
 ]
 
@@ -78,7 +79,7 @@ export const DOORS: Door[] = [
   },
   {
     href: ROUTES.shop,
-    eyebrow: 'shop.bestarifood.com',
+    eyebrow: 'Shop Today',
     title: 'Your pantry, delivered',
     cta: 'Shop now',
     image: { src: asset('p-flour-mala-520g.png'), alt: '' },

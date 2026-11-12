@@ -61,27 +61,6 @@
   font-size: 18px;
 }
 
-.shop .ship {
-  padding: 16px 28px;
-  background: var(--cream);
-  font-size: 14px;
-}
-
-.shop .ship__bar {
-  height: 6px;
-  border-radius: 9px;
-  background: var(--cream-2);
-  margin-top: 10px;
-  overflow: hidden;
-}
-
-.shop .ship__fill {
-  display: block;
-  height: 100%;
-  background: var(--brand);
-  transition: width 0.4s;
-}
-
 .shop .items {
   flex: 1;
   overflow: auto;

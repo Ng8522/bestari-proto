@@ -4,7 +4,6 @@ import {
   bundleLine,
   changeQty,
   formatRM,
-  freeDeliveryProgress,
   isCartItem,
   itemCount,
   lineTotal,
@@ -106,28 +105,6 @@ describe('totals', () => {
   it('formats ringgit with two decimals', () => {
     expect(formatRM(7.9)).toBe('RM 7.90')
     expect(formatRM(0)).toBe('RM 0.00')
-  })
-})
-
-describe('freeDeliveryProgress', () => {
-  it('starts at 0% with the full RM80 to go', () => {
-    expect(freeDeliveryProgress(0)).toEqual({ remaining: 80, percent: 0, isUnlocked: false })
-  })
-
-  it('reports what is left part-way', () => {
-    const progress = freeDeliveryProgress(24.9)
-    expect(progress.remaining).toBe(55.1)
-    expect(progress.percent).toBeCloseTo(31.125)
-    expect(progress.isUnlocked).toBe(false)
-  })
-
-  it('unlocks at the threshold and caps the bar at 100%', () => {
-    expect(freeDeliveryProgress(80)).toEqual({ remaining: 0, percent: 100, isUnlocked: true })
-    expect(freeDeliveryProgress(120)).toEqual({ remaining: 0, percent: 100, isUnlocked: true })
-  })
-
-  it('accepts a custom threshold', () => {
-    expect(freeDeliveryProgress(25, 50)).toEqual({ remaining: 25, percent: 50, isUnlocked: false })
   })
 })
 

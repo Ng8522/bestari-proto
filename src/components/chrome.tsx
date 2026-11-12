@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { Link, NavLink, Outlet } from 'react-router'
+import { NavDropdown } from './NavDropdown'
 import { SmartLink } from './routing'
 import { CERT_STRIP, COMPANY, FOOTER_COLUMNS, LEGAL, LOGO, MAIN_NAV, SHOP_CTA } from '../content/site'
 
@@ -68,21 +69,28 @@ export function SiteHeader() {
         </button>
         <nav className="nav__menu" id={menuId} aria-label="Main" data-open={isMenuOpen}>
           <ul className="nav__links">
-            {MAIN_NAV.map((link) => (
-              <li key={link.href}>
+            {MAIN_NAV.map((link) => {
+              const navLink = (
                 <NavLink to={link.href} end onClick={closeMenu}>
                   {link.label}
                 </NavLink>
-              </li>
-            ))}
+              )
+              return link.children ? (
+                <NavDropdown key={link.href} label={link.label} links={link.children} onNavigate={closeMenu}>
+                  {navLink}
+                </NavDropdown>
+              ) : (
+                <li key={link.href}>{navLink}</li>
+              )
+            })}
           </ul>
-          <Link className="btn btn-brand nav__shop" to={SHOP_CTA.href} onClick={closeMenu}>
+          <SmartLink className="btn btn-brand nav__shop" href={SHOP_CTA.href} onClick={closeMenu}>
             {SHOP_CTA.label} <span className="arr" aria-hidden="true">→</span>
-          </Link>
+          </SmartLink>
         </nav>
-        <Link className="btn btn-brand nav__shop" to={SHOP_CTA.href}>
+        <SmartLink className="btn btn-brand nav__shop" href={SHOP_CTA.href}>
           {SHOP_CTA.label} <span className="arr" aria-hidden="true">→</span>
-        </Link>
+        </SmartLink>
       </div>
     </header>
   )
@@ -132,7 +140,7 @@ export function SiteFooter() {
   )
 }
 
-/** Frame for the inner corporate pages (About, Investor Relations, Where to buy, 404). */
+/** Frame for the inner corporate pages (About, Investor Relations, Onsite Outlets, 404). */
 export function Layout() {
   return (
     <>

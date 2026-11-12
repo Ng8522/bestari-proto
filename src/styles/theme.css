@@ -323,8 +323,8 @@ p {
 
 /* Footer */
 .foot {
-  background: var(--ink);
-  color: #d9c8b8;
+  background: var(--brand);
+  color: var(--brand-tint);
   padding: 56px 0 26px;
   font-size: 15px;
 }
@@ -340,7 +340,7 @@ p {
   font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--saffron);
+  color: var(--saffron-soft);
   margin-bottom: 18px;
   font-weight: 500;
 }
@@ -390,7 +390,6 @@ p {
   gap: 8px 24px;
   justify-content: space-between;
   font-size: 13px;
-  opacity: 0.7;
 }
 
 /* Scroll reveal (useScrollReveal adds .in) */

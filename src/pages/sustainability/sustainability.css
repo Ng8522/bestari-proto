@@ -1,0 +1,513 @@
+/*
+ * Sustainability, in the handoff's visual language; layout after the Farm Fresh page the client referenced.
+ * Every class is prefixed sus- so nothing leaks into the other pages.
+ */
+
+/* Pillar tones: --tone-band/--tone-text colour each pillar's section, --tone-accent its ring segment and chip. */
+.sus-tone--brand {
+  --tone-band: var(--brand);
+  --tone-text: #fff;
+  --tone-soft: var(--brand-tint);
+  --tone-accent: var(--brand);
+  --tone-accent-text: #fff;
+}
+
+.sus-tone--sand {
+  --tone-band: var(--cream-2);
+  --tone-text: var(--ink);
+  --tone-soft: var(--ink-2);
+  --tone-accent: #c8861a;
+  --tone-accent-text: var(--ink);
+}
+
+.sus-tone--saffron {
+  --tone-band: var(--saffron);
+  --tone-text: var(--ink);
+  --tone-soft: var(--ink);
+  --tone-accent: var(--saffron);
+  --tone-accent-text: var(--ink);
+}
+
+.sus-tone--deep {
+  --tone-band: var(--brand-deep);
+  --tone-text: #fff;
+  --tone-soft: var(--brand-tint);
+  --tone-accent: var(--brand-deep);
+  --tone-accent-text: #fff;
+}
+
+.sus-tone--ink {
+  --tone-band: var(--ink);
+  --tone-text: #fff;
+  --tone-soft: #e9dfd8;
+  --tone-accent: var(--ink);
+  --tone-accent-text: #fff;
+}
+
+/* In-page anchors land below the sticky header. */
+.sus [id] {
+  scroll-margin-top: var(--nav-h);
+}
+
+/* Hero: photo left, brand panel right */
+.sus-hero {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  min-height: min(640px, calc(100vh - var(--nav-h)));
+  background: var(--brand);
+  color: #fff;
+}
+
+.sus-hero__photo {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  object-fit: cover;
+}
+
+.sus-hero__panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 64px clamp(24px, 5vw, 80px);
+}
+
+.sus-hero__eyebrow {
+  color: var(--saffron-soft);
+}
+
+.sus-hero h1 {
+  margin: 14px 0 20px;
+  font-size: clamp(44px, 5.2vw, 80px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+
+.sus-hero__lede {
+  max-width: 46ch;
+  font-size: 18px;
+  color: var(--brand-tint);
+}
+
+.sus-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.sus-hero .btn-ghost {
+  color: #fff;
+}
+
+.sus-hero .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Commitment: copy and pillar chips beside the ring */
+.sus-commit {
+  padding: 110px 0 100px;
+}
+
+.sus-commit__grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(320px, 470px);
+  gap: clamp(40px, 6vw, 96px);
+  align-items: center;
+}
+
+.sus-commit h2 {
+  margin-bottom: 22px;
+  font-size: clamp(44px, 4.6vw, 72px);
+  color: var(--brand);
+}
+
+.sus-commit__copy > p {
+  max-width: 54ch;
+  margin-bottom: 14px;
+  font-size: 18px;
+  color: var(--ink-2);
+}
+
+.sus-commit__pillars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+  list-style: none;
+}
+
+.sus-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 18px 0 7px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.sus-chip:hover {
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+
+.sus-chip__num {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--tone-accent);
+  color: var(--tone-accent-text);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.sus-chip .arr {
+  transition: transform 0.2s;
+}
+
+.sus-chip:hover .arr {
+  transform: translateX(3px);
+}
+
+.sus-commit__ring.reveal {
+  transform: scale(0.92) rotate(-14deg);
+}
+
+.sus-commit__ring.reveal.in {
+  transform: none;
+}
+
+.sus-ring {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.sus-ring__arc {
+  fill: none;
+  stroke: var(--tone-accent);
+  stroke-width: 64;
+}
+
+.sus-ring__label {
+  fill: var(--tone-accent-text);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sus-ring__core {
+  fill: #fff;
+  stroke: var(--line);
+}
+
+.sus-ring__centre {
+  fill: var(--brand);
+  font-family: var(--serif);
+  font-size: 30px;
+}
+
+/* Pillar bands */
+.sus-pillar {
+  position: relative;
+  overflow: hidden;
+  padding: 100px 0;
+  background: var(--tone-band);
+  color: var(--tone-text);
+}
+
+.sus-pillar__pack {
+  position: absolute;
+  top: 56px;
+  right: max(40px, calc((100vw - 1280px) / 2 + 40px));
+  width: clamp(120px, 12vw, 180px);
+  transform: rotate(8deg);
+  filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.3));
+}
+
+.sus-pillar__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.sus-pillar__num {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  letter-spacing: 0;
+}
+
+.sus-pillar__title {
+  max-width: 16ch;
+  margin: 18px 0 44px;
+  font-size: clamp(40px, 4.6vw, 72px);
+}
+
+.sus-pillar__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+}
+
+.sus-pillar__copy p {
+  max-width: 58ch;
+  margin-bottom: 16px;
+  color: var(--tone-soft);
+}
+
+.sus-pillar__copy .sus-pillar__intro {
+  margin-bottom: 22px;
+  font-family: var(--serif);
+  font-size: clamp(22px, 2vw, 28px);
+  line-height: 1.3;
+  color: var(--tone-text);
+}
+
+.sus-pillar__cards {
+  display: grid;
+  gap: 14px;
+  list-style: none;
+}
+
+.sus-card {
+  padding: 22px 26px;
+  border-left: 6px solid var(--tone-accent);
+  border-radius: 20px;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 10px 30px rgba(42, 26, 20, 0.08);
+}
+
+.sus-card h3 {
+  margin-bottom: 6px;
+  font-size: 22px;
+}
+
+.sus-card p {
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.sus-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0 32px;
+  margin-top: 56px;
+  border-top: 1.5px solid color-mix(in srgb, currentColor 28%, transparent);
+  list-style: none;
+}
+
+.sus-stat {
+  display: grid;
+  gap: 8px;
+  padding-top: 22px;
+}
+
+.sus-stat__value {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(32px, 3vw, 44px);
+  line-height: 1;
+}
+
+.sus-stat__label {
+  font-size: 15px;
+  color: var(--tone-soft);
+}
+
+/* Placeholders must stay readable on the dark bands too. */
+.sus-stat .ph {
+  justify-self: start;
+  font-size: 15px;
+  background-color: var(--saffron-soft);
+}
+
+/* Reports and contact */
+.sus-reports {
+  padding: 100px 0 110px;
+}
+
+.sus-reports__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: end;
+}
+
+.sus-reports h2 {
+  margin: 14px 0 18px;
+  font-size: clamp(40px, 4.2vw, 64px);
+  color: var(--brand);
+}
+
+.sus-reports__lede {
+  max-width: 50ch;
+  font-size: 18px;
+  color: var(--ink-2);
+}
+
+.sus-reports__list {
+  display: grid;
+  gap: 14px;
+  list-style: none;
+}
+
+.sus-report {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 4px 20px;
+  padding: 24px 28px;
+  border: 1.5px solid var(--line);
+  border-radius: 20px;
+  background: #fff;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+a.sus-report:hover {
+  border-color: var(--brand);
+  transform: translateY(-2px);
+}
+
+.sus-report__title {
+  font-family: var(--serif);
+  font-size: 24px;
+  line-height: 1.15;
+}
+
+.sus-report__note {
+  grid-column: 1;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.sus-report__status {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--brand);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.sus-report--pending {
+  border-style: dashed;
+}
+
+.sus-report--pending .sus-report__status {
+  background: var(--cream-2);
+  color: var(--ink-2);
+}
+
+.sus-contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 40px;
+  margin-top: 64px;
+  padding: 36px 40px;
+  border-radius: 28px;
+  background: var(--saffron-soft);
+}
+
+.sus-contact h3 {
+  margin-bottom: 6px;
+  font-size: clamp(28px, 2.6vw, 36px);
+  color: var(--brand-deep);
+}
+
+.sus-contact p {
+  max-width: 52ch;
+  color: var(--ink-2);
+}
+
+@media (max-width: 900px) {
+  .sus-hero,
+  .sus-commit__grid,
+  .sus-pillar__grid,
+  .sus-reports__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sus-hero__photo {
+    height: 280px;
+    min-height: 0;
+  }
+
+  .sus-hero__panel {
+    padding: 48px 20px 56px;
+  }
+
+  .sus-commit,
+  .sus-pillar,
+  .sus-reports {
+    padding: 72px 0;
+  }
+
+  .sus-commit__ring {
+    width: min(100%, 380px);
+    margin: 0 auto;
+  }
+
+  .sus-pillar__pack {
+    display: none;
+  }
+
+  .sus-pillar__title {
+    margin-bottom: 28px;
+  }
+
+  .sus-stats {
+    margin-top: 40px;
+  }
+
+  .sus-contact {
+    padding: 28px 24px;
+  }
+}
+
+@media (max-width: 560px) {
+  .sus-report {
+    grid-template-columns: 1fr;
+  }
+
+  .sus-report__status {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: start;
+    margin-top: 8px;
+  }
+
+  /* Long labels (the email button) wrap instead of overflowing a phone screen. */
+  .sus .btn {
+    height: auto;
+    min-height: 52px;
+    padding-block: 12px;
+    white-space: normal;
+  }
+}

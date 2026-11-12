@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
 import { Layout } from './components/chrome'
 import { ScrollManager } from './components/routing'
 import { ROUTES } from './content/site'
@@ -7,6 +7,7 @@ import { HomePage } from './pages/home/HomePage'
 import { InvestorsPage } from './pages/investors/InvestorsPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 import { ShopPage } from './pages/shop/ShopPage'
+import { SustainabilityPage } from './pages/sustainability/SustainabilityPage'
 import { WhereToBuyPage } from './pages/where-to-buy/WhereToBuyPage'
 
 /** Route table only, so tests can render it inside a MemoryRouter. */
@@ -21,7 +22,9 @@ export function AppRoutes() {
         <Route element={<Layout />}>
           <Route path={ROUTES.about} element={<AboutPage />} />
           <Route path={ROUTES.investors} element={<InvestorsPage />} />
-          <Route path={ROUTES.whereToBuy} element={<WhereToBuyPage />} />
+          <Route path={ROUTES.onsiteOutlets} element={<WhereToBuyPage />} />
+          <Route path={ROUTES.legacyWhereToBuy} element={<Navigate to={ROUTES.onsiteOutlets} replace />} />
+          <Route path={ROUTES.sustainability} element={<SustainabilityPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

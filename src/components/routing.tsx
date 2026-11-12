@@ -1,18 +1,27 @@
 import { useEffect, useLayoutEffect, type AnchorHTMLAttributes } from 'react'
 import { Link, useLocation } from 'react-router'
+import { ROUTES } from '../content/site'
 
 /** In-site paths start with "/": route them client-side. Everything else is a normal link. */
 export function isRoute(href: string): boolean {
   return href.startsWith('/')
 }
 
+/** The online shop (and its #sections) opens in its own tab, so visitors keep their place on the corporate site. */
+export function isShopHref(href: string): boolean {
+  return href === ROUTES.shop || href.startsWith(`${ROUTES.shop}#`) || href.startsWith(`${ROUTES.shop}?`)
+}
+
+const NEW_TAB = { target: '_blank', rel: 'noopener noreferrer' } as const
+
 interface SmartLinkProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> {
   href: string
 }
 
 export function SmartLink({ href, ...props }: SmartLinkProps) {
-  if (isRoute(href)) return <Link to={href} {...props} />
-  return <a href={href} {...props} />
+  const newTab = isShopHref(href) ? NEW_TAB : undefined
+  if (isRoute(href)) return <Link to={href} {...newTab} {...props} />
+  return <a href={href} {...newTab} {...props} />
 }
 
 /**

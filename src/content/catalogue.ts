@@ -1,6 +1,6 @@
 /**
  * Distributor records migrated from https://www.bestarifood.com/distributors/ (November 2026),
- * used by the Where to buy page (linked from the footer's Shop column).
+ * used by the Onsite Outlets page (linked from the footer's Shop column).
  */
 import type { LinkItem } from './site'
 

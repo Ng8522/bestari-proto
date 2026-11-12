@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef } from 'react'
-import { formatRM, freeDeliveryProgress, lineTotal, subtotal, type Cart, type CartItem } from './cart'
+import { formatRM, lineTotal, subtotal, type Cart, type CartItem } from './cart'
 import { PAYMENT_METHODS } from './data'
 import { useModalKeys } from './hooks'
 
@@ -10,37 +10,6 @@ interface CartDrawerProps {
   onClose: () => void
   onChangeQty: (key: string, delta: number) => void
   onCheckout: () => void
-}
-
-interface DeliveryProgressBarProps {
-  amount: number
-}
-
-function DeliveryProgressBar({ amount }: DeliveryProgressBarProps) {
-  const { remaining, percent, isUnlocked } = freeDeliveryProgress(amount)
-  return (
-    <div className="ship">
-      <span>
-        {isUnlocked ? (
-          <b>You’ve unlocked free delivery</b>
-        ) : (
-          <>
-            Add <b>{formatRM(remaining)}</b> more for free delivery
-          </>
-        )}
-      </span>
-      <div
-        className="ship__bar"
-        role="progressbar"
-        aria-label="Progress to free delivery"
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-valuenow={Math.round(percent)}
-      >
-        <i className="ship__fill" style={{ width: `${percent}%` }} />
-      </div>
-    </div>
-  )
 }
 
 interface CartLineProps {
@@ -151,7 +120,6 @@ export function CartDrawer({ id, isOpen, cart, onClose, onChangeQty, onCheckout 
             ✕
           </button>
         </div>
-        <DeliveryProgressBar amount={amount} />
         <div className="items">
           <CartLines cart={cart} onChangeQty={onChangeQty} />
         </div>

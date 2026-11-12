@@ -23,7 +23,10 @@ export const ROUTES = {
   about: '/about-us',
   investors: '/investor-relations',
   shop: '/shop',
-  whereToBuy: '/where-to-buy',
+  onsiteOutlets: '/onsite-outlets',
+  /** Old URL for Onsite Outlets, kept so shared links still land on the page. */
+  legacyWhereToBuy: '/where-to-buy',
+  sustainability: '/sustainability',
 } as const
 
 export const LOGO: ImageAsset = { src: asset('logo.png'), alt: 'Bestari Food Berhad' }
@@ -43,11 +46,37 @@ export const COMPANY = {
   email: { label: 'enquiry@bestarifood.com', href: 'mailto:enquiry@bestarifood.com' } satisfies LinkItem,
 }
 
+/** A header link; `children` render as its dropdown (NavDropdown). */
+export interface NavItem extends LinkItem {
+  children?: readonly LinkItem[]
+}
+
+/** Investor Relations sections, in page order: the IR sub-nav, its scroll spy and the header dropdown. */
+export const IR_SECTIONS = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'corporate', label: 'Corporate Info' },
+  { id: 'ipo', label: 'IPO Centre' },
+  { id: 'governance', label: 'Governance' },
+  { id: 'financials', label: 'Financials' },
+  { id: 'stock', label: 'Stock Info' },
+  { id: 'news', label: 'News Centre' },
+  { id: 'reports', label: 'Reports' },
+  { id: 'resources', label: 'Resources' },
+  { id: 'contact', label: 'IR Contact' },
+] as const satisfies readonly { id: string; label: string }[]
+
+/** The header's Investor Relations dropdown: one link per IR section. */
+export const IR_MENU: readonly LinkItem[] = IR_SECTIONS.map((section) => ({
+  label: section.label,
+  href: `${ROUTES.investors}#${section.id}`,
+}))
+
 /** Inner-page header links (site.js). */
-export const MAIN_NAV: LinkItem[] = [
+export const MAIN_NAV: NavItem[] = [
   { label: 'Home', href: ROUTES.home },
   { label: 'About Us', href: ROUTES.about },
-  { label: 'Investor Relations', href: ROUTES.investors },
+  { label: 'Investor Relations', href: ROUTES.investors, children: IR_MENU },
+  { label: 'Sustainability', href: ROUTES.sustainability },
 ]
 
 export const SHOP_CTA: LinkItem = { label: 'Shop online', href: ROUTES.shop }
@@ -63,6 +92,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     links: [
       { label: 'About us', href: ROUTES.about },
       { label: 'Our journey', href: `${ROUTES.about}#journey` },
+      { label: 'Sustainability', href: ROUTES.sustainability },
       { label: 'Contact', href: COMPANY.email.href },
     ],
   },
@@ -78,8 +108,8 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
   {
     title: 'Shop',
     links: [
-      { label: 'shop.bestarifood.com', href: ROUTES.shop },
-      { label: 'Where to buy', href: ROUTES.whereToBuy },
+      { label: 'Shop Today', href: ROUTES.shop },
+      { label: 'Onsite Outlets', href: ROUTES.onsiteOutlets },
       { label: 'Bulk / F&B', href: `${ROUTES.shop}#trade` },
     ],
   },

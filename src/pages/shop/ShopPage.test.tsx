@@ -232,23 +232,21 @@ describe('Shop page', () => {
     expect(close).toHaveFocus()
   })
 
-  it('changes quantities, removes at 0 and tracks free delivery', async () => {
+  it('changes quantities and removes at 0, with no free-delivery nudge', async () => {
     const { user } = renderShop()
     await user.click(screen.getByRole('button', { name: `Add ${EGG} 800g to cart` }))
     const dialog = await openCart(user)
-    const progress = within(dialog).getByRole('progressbar', { name: 'Progress to free delivery' })
 
-    expect(within(dialog).getByText('RM 55.10')).toBeInTheDocument()
-    expect(dialog).toHaveTextContent('Add RM 55.10 more for free delivery')
-    expect(progress).toHaveAttribute('aria-valuenow', '31')
+    expect(within(dialog).getAllByText('RM 24.90')).toHaveLength(2)
+    expect(dialog).not.toHaveTextContent(/free delivery/i)
+    expect(within(dialog).queryByRole('progressbar')).not.toBeInTheDocument()
 
     const increase = within(dialog).getByRole('button', { name: `Increase quantity of ${EGG} 800g` })
     await user.click(increase)
     await user.click(increase)
     await user.click(increase)
     expect(within(dialog).getByText('Quantity').parentElement).toHaveTextContent('Quantity 4')
-    expect(dialog).toHaveTextContent('You’ve unlocked free delivery')
-    expect(progress).toHaveAttribute('aria-valuenow', '100')
+    expect(dialog).not.toHaveTextContent(/free delivery/i)
     expect(within(dialog).getAllByText('RM 99.60')).toHaveLength(2)
     expect(cartCount()).toBe('4')
 

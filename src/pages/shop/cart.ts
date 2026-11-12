@@ -1,5 +1,5 @@
 /** Pure cart logic: every update returns a new array and never mutates its input. */
-import { CART_STORAGE_KEY, FREE_DELIVERY_THRESHOLD, type Bundle, type Product, type Variant } from './data'
+import { CART_STORAGE_KEY, type Bundle, type Product, type Variant } from './data'
 
 export interface CartItem {
   readonly key: string
@@ -56,19 +56,6 @@ export function lineTotal(line: CartItem): number {
 
 export function subtotal(cart: Cart): number {
   return roundCents(cart.reduce((total, line) => total + line.price * line.qty, 0))
-}
-
-export interface DeliveryProgress {
-  /** RM still needed for free delivery (0 once unlocked). */
-  remaining: number
-  /** 0–100, for the progress bar. */
-  percent: number
-  isUnlocked: boolean
-}
-
-export function freeDeliveryProgress(amount: number, threshold: number = FREE_DELIVERY_THRESHOLD): DeliveryProgress {
-  const remaining = roundCents(Math.max(0, threshold - amount))
-  return { remaining, percent: Math.min(100, (Math.max(0, amount) / threshold) * 100), isUnlocked: remaining === 0 }
 }
 
 export function formatRM(amount: number): string {

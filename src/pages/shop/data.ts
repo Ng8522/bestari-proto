@@ -4,9 +4,6 @@
  */
 import { asset } from '../../content/site'
 
-/** Free delivery in Peninsular Malaysia above this subtotal, in RM (a placeholder in the design). */
-export const FREE_DELIVERY_THRESHOLD = 80
-
 export const CART_STORAGE_KEY = 'bestari_cart'
 
 export const PAYMENT_METHODS = "FPX · Visa / Mastercard · Touch 'n Go · GrabPay"

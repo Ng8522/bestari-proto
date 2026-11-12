@@ -1,7 +1,16 @@
 import { useEffect, useRef, useState, type RefObject } from 'react'
 import { useInView, usePrefersReducedMotion } from '../../components/motion'
+import { Ph } from '../../components/text'
+import {
+  FINANCIAL_STATEMENTS,
+  HIGHLIGHT_YEAR_LABELS,
+  SEGMENTS,
+  SEGMENT_SHARE_PLACEHOLDER,
+  buildHighlightRows,
+} from './content/financials'
 import { FINANCIAL_SERIES, FINANCIAL_YEARS, KPIS } from './data'
 import { IrSection, SectionHead } from './Section'
+import { DocList, Tabs, type TabItem } from './Tabs'
 
 /** Bars grow once the chart top is 85% of the way down the viewport. */
 const CHART_ROOT_MARGIN = '0px 0px -15% 0px'
@@ -52,6 +61,7 @@ export function Financials() {
           ))}
         </div>
       </div>
+      <FinancialDetails />
     </IrSection>
   )
 }
@@ -126,5 +136,75 @@ function ChartTable() {
         </tbody>
       </table>
     </div>
+  )
+}
+
+type FinanceTabId = 'highlights' | 'segments' | 'statements'
+
+const DETAILS_HEADING_ID = 'ir-fin-details-title'
+const HIGHLIGHT_ROWS = buildHighlightRows(FINANCIAL_YEARS, HIGHLIGHT_YEAR_LABELS)
+
+const FINANCE_TABS: readonly TabItem<FinanceTabId>[] = [
+  { id: 'highlights', label: 'Financial highlights', content: <HighlightsTable /> },
+  { id: 'segments', label: 'Segmental analysis', content: <SegmentList /> },
+  { id: 'statements', label: 'Financial statements', content: <DocList documents={FINANCIAL_STATEMENTS} /> },
+]
+
+/** Multi-year highlights, segmental analysis and financial statements, as tabs under the chart. */
+function FinancialDetails() {
+  return (
+    <div className="card fin-details reveal">
+      <h3 id={DETAILS_HEADING_ID}>Financial information</h3>
+      <Tabs idPrefix="ir-fin" labelledBy={DETAILS_HEADING_ID} tabs={FINANCE_TABS} />
+    </div>
+  )
+}
+
+function HighlightsTable() {
+  return (
+    <>
+      <div className="table-scroll" role="region" aria-label="Financial highlights table" tabIndex={0}>
+        <table className="data-table">
+          <caption className="visually-hidden">Financial highlights, RM million, FY2022 to FY2025</caption>
+          <thead>
+            <tr>
+              <th scope="col">RM million</th>
+              {HIGHLIGHT_YEAR_LABELS.map((label) => (
+                <th key={label} scope="col">
+                  {label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {HIGHLIGHT_ROWS.map((row) => (
+              <tr key={row.label}>
+                <th scope="row">{row.label}</th>
+                {row.values.map((value, index) => (
+                  <td key={HIGHLIGHT_YEAR_LABELS[index]}>{value ?? <Ph>TBA</Ph>}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="note">Figures marked TBA are added from the accountants’ report in the registered prospectus.</p>
+    </>
+  )
+}
+
+function SegmentList() {
+  return (
+    <ul className="seg-list">
+      {SEGMENTS.map((segment) => (
+        <li key={segment.name}>
+          <div>
+            <b>{segment.name}</b>
+            <small>{segment.description}</small>
+          </div>
+          <Ph>{SEGMENT_SHARE_PLACEHOLDER}</Ph>
+        </li>
+      ))}
+    </ul>
   )
 }

@@ -28,6 +28,18 @@ describe('SiteHeader', () => {
     expect(within(nav).getByRole('link', { name: /Shop online/ })).toHaveAttribute('href', ROUTES.shop)
   })
 
+  it('opens every shop link in a new tab', () => {
+    renderAt(ROUTES.about)
+    const shopLinks = screen
+      .getAllByRole('link')
+      .filter((link) => link.getAttribute('href')?.startsWith(ROUTES.shop))
+    expect(shopLinks.length).toBeGreaterThan(0)
+    shopLinks.forEach((link) => {
+      expect(link).toHaveAttribute('target', '_blank')
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+    })
+  })
+
   it('opens the mobile menu and closes it with Escape, returning focus', async () => {
     const { user } = renderAt(ROUTES.investors)
     const toggle = screen.getByRole('button', { name: 'Menu' })
@@ -54,7 +66,7 @@ describe('SiteHeader', () => {
 
 describe('SiteFooter', () => {
   it('lists every footer column with working links and the company contact', () => {
-    renderAt(ROUTES.whereToBuy)
+    renderAt(ROUTES.onsiteOutlets)
     const footer = screen.getByRole('contentinfo')
     FOOTER_COLUMNS.forEach((column) => {
       const columnNav = within(footer).getByRole('navigation', { name: column.title })

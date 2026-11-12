@@ -9,15 +9,19 @@ import {
   TIMETABLE,
   type Milestone,
 } from './data'
+import { ABBREVIATIONS, ADVANTAGES_PLACEHOLDER, COMPETITIVE_ADVANTAGES } from './content/sections'
 import { IrSection, SectionHead } from './Section'
+import { InfoList } from './Tabs'
 
-/** IPO structure: share allocation, indicative timetable and use of proceeds. */
+const ADVANTAGES_HEADING_ID = 'ir-advantages-title'
+
+/** IPO centre: share allocation, timetable, use of proceeds, competitive advantages and abbreviations. */
 export function IpoSection() {
   return (
-    <IrSection id="ipo" className="sec--tinted">
+    <IrSection id="ipo">
       <SectionHead
         sectionId="ipo"
-        eyebrow="Initial Public Offering"
+        eyebrow="IPO Centre"
         title="Structure & use of proceeds."
         intro="Up to 29.6% of our enlarged issued share capital of 450.0 million shares will be offered to investors."
       />
@@ -32,6 +36,29 @@ export function IpoSection() {
           </ul>
         </div>
         <ProceedsCard />
+      </div>
+      <div className="ipo-more">
+        <div className="card reveal">
+          <h3 id={ADVANTAGES_HEADING_ID}>Competitive advantages</h3>
+          <ol className="adv" aria-labelledby={ADVANTAGES_HEADING_ID}>
+            {COMPETITIVE_ADVANTAGES.map((advantage) => (
+              <li key={advantage.title}>
+                <b>{advantage.title}</b>
+                <p>{advantage.description}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="note">
+            A summary of our strengths: <Ph>{ADVANTAGES_PLACEHOLDER}</Ph>
+          </p>
+        </div>
+        <div className="card reveal">
+          <h3>Disclaimer & abbreviations</h3>
+          <InfoList entries={ABBREVIATIONS} className="info--abbr" />
+          <p className="note">
+            <a href="#ir-disclaimer">Read the full disclaimer</a> before making any investment decision.
+          </p>
+        </div>
       </div>
     </IrSection>
   )

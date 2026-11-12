@@ -97,11 +97,7 @@
 .shop .trade h2 {
   font-size: 48px;
   color: #fff;
-  margin: 12px 0 16px;
-}
-
-.shop .trade .eyebrow {
-  color: var(--saffron);
+  margin: 0 0 16px;
 }
 
 .shop .trade__lede {
@@ -130,8 +126,8 @@
 
 /* ---------- Footer ---------- */
 .shop .shop-foot {
-  background: var(--ink);
-  color: #d9c8b8;
+  background: var(--brand);
+  color: var(--brand-tint);
   padding: 30px 0;
   font-size: 15px;
 }
@@ -142,7 +138,6 @@
   gap: 8px 24px;
   justify-content: space-between;
   font-size: 13px;
-  opacity: 0.7;
 }
 
 .shop .shop-foot a:hover {

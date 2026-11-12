@@ -1,3 +1,5 @@
+import { Ph } from '../../components/text'
+import { HIGHLIGHTS } from './content/sections'
 import { MD_QUOTE } from './data'
 import { IrSection, SectionHead } from './Section'
 
@@ -32,6 +34,18 @@ export function Overview() {
           </figcaption>
         </figure>
       </div>
+      <ul className="hl" aria-label="IR highlights">
+        {HIGHLIGHTS.map((highlight) => (
+          <li key={highlight.label} className="hl-card reveal">
+            <p className="eyebrow">{highlight.label}</p>
+            <b className="hl-title">{highlight.title}</b>
+            <span className="hl-meta">{highlight.isMetaPlaceholder ? <Ph>{highlight.meta}</Ph> : highlight.meta}</span>
+            <a className="hl-link" href={highlight.href}>
+              {highlight.cta} <span aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
     </IrSection>
   )
 }

@@ -5,7 +5,7 @@ import { IrSection, SectionHead } from './Section'
 /** Leadership grid: the Managing Director's card spans two columns, then senior management and placeholders. */
 export function Board() {
   return (
-    <IrSection id="board" className="sec--tinted">
+    <IrSection id="board" className="sec--tinted sec--flush">
       <SectionHead sectionId="board" eyebrow="Leadership" title="Board & key senior management." />
       <ul className="people">
         <li className="pp pp--lead reveal">

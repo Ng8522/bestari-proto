@@ -8,17 +8,28 @@ import { ROUTES } from '../../content/site'
 
 const [RETAIL, FOOD_SERVICE, INTERNATIONAL] = DISTRIBUTOR_GROUPS
 
-function renderPage() {
+function renderPage(path: string = ROUTES.onsiteOutlets) {
   const user = userEvent.setup()
   render(
-    <MemoryRouter initialEntries={[ROUTES.whereToBuy]}>
+    <MemoryRouter initialEntries={[path]}>
       <AppRoutes />
     </MemoryRouter>,
   )
   return { user }
 }
 
-describe('Where to buy page', () => {
+describe('Onsite Outlets page', () => {
+  it('is titled Onsite Outlets', () => {
+    renderPage()
+    expect(screen.getByText('Onsite Outlets', { selector: '.eyebrow' })).toBeInTheDocument()
+    expect(document.title).toMatch(/^Onsite Outlets/)
+  })
+
+  it('still opens from the old /where-to-buy link', () => {
+    renderPage(ROUTES.legacyWhereToBuy)
+    expect(screen.getByRole('heading', { level: 1, name: 'Find Bestari near you.' })).toBeInTheDocument()
+  })
+
   it('shows retail distributors first, with tappable phone numbers', () => {
     renderPage()
     expect(screen.getByRole('heading', { level: 1, name: 'Find Bestari near you.' })).toBeInTheDocument()

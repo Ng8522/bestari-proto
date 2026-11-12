@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react'
-import { headingId, type SectionId } from './data'
+import { headingId, type PageSectionId } from './data'
 
 interface IrSectionProps {
-  id: SectionId
+  id: PageSectionId
   /** Extra modifiers, e.g. 'sec--tinted' (cream-2 background) or 'sec--flush' (no top padding). */
   className?: string
   children: ReactNode
@@ -18,7 +18,7 @@ export function IrSection({ id, className, children }: IrSectionProps) {
 }
 
 interface SectionHeadProps {
-  sectionId: SectionId
+  sectionId: PageSectionId
   eyebrow: string
   title: string
   intro?: string

@@ -3,30 +3,25 @@
  * Anything flagged `isPlaceholder` is a dashed .ph placeholder in the handoff: it renders with <Ph> and must be
  * replaced from the registered prospectus before launch. Never fill those in by guesswork.
  */
-import { COMPANY } from '../../content/site'
+import { IR_SECTIONS } from '../../content/site'
 
-export interface SectionLink {
-  id: string
-  label: string
-}
-
-/** In-page sections, in page order (sub-nav and scroll spy). */
-export const SECTIONS = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'ipo', label: 'IPO' },
-  { id: 'financials', label: 'Financials' },
-  { id: 'shareholding', label: 'Shareholding' },
-  { id: 'board', label: 'Board & Management' },
-  { id: 'documents', label: 'Documents' },
-  { id: 'contact', label: 'IR Contact' },
-] as const satisfies readonly SectionLink[]
+/** In-page sections, in page order (sub-nav and scroll spy). Defined in site.ts so the header dropdown shares them. */
+export const SECTIONS = IR_SECTIONS
 
 export type SectionId = (typeof SECTIONS)[number]['id']
+
+/**
+ * Sections without their own sub-nav link: each follows its group (board after corporate info, shareholding after
+ * stock info), so the scroll spy keeps that group highlighted while they are on screen.
+ */
+export type SubSectionId = 'board' | 'shareholding'
+
+export type PageSectionId = SectionId | SubSectionId
 
 export const SECTION_IDS: readonly SectionId[] = SECTIONS.map((section) => section.id)
 
 /** Id of the heading that names a section (used for aria-labelledby). */
-export function headingId(id: SectionId | 'hero' | 'glance'): string {
+export function headingId(id: PageSectionId | 'hero' | 'glance'): string {
   return `ir-${id}-title`
 }
 
@@ -288,7 +283,7 @@ export const BOARD_MEMBERS: readonly BoardMember[] = [
 export const BOARD_NOTE =
   'The full board, with independent non-executive directors and committee composition, will be updated from the registered prospectus.'
 
-/* Documents & corporate directory */
+/* Documents (the lists themselves live in content/sections.ts and content/financials.ts) */
 
 export interface IrDocument {
   title: string
@@ -297,58 +292,6 @@ export interface IrDocument {
   /** No files are published yet; add the URL when the document is available. */
   href?: string
 }
-
-export type DocumentTabId = 'ipo' | 'financials' | 'governance'
-
-export interface DocumentTab {
-  id: DocumentTabId
-  label: string
-  documents: readonly IrDocument[]
-}
-
-export const DOCUMENT_TABS: readonly DocumentTab[] = [
-  {
-    id: 'ipo',
-    label: 'IPO',
-    documents: [
-      { title: 'Prospectus: Initial Public Offering', meta: '6 Jul 2026 (exposure, updated 2 Oct 2026)', format: 'PDF' },
-      { title: 'SC approval announcement', meta: '23 Oct 2026', format: 'PDF' },
-      { title: 'Investor presentation', meta: 'TBA', format: 'PDF' },
-    ],
-  },
-  {
-    id: 'financials',
-    label: 'Financials',
-    documents: [
-      { title: 'Accountants’ report FY2022–FY2025', meta: 'In prospectus', format: 'PDF' },
-      { title: 'Quarterly results', meta: 'After listing', format: '—' },
-      { title: 'Annual report', meta: 'After listing', format: '—' },
-    ],
-  },
-  {
-    id: 'governance',
-    label: 'Governance',
-    documents: [
-      { title: 'Board Charter', meta: 'TBA', format: 'PDF' },
-      { title: 'Terms of Reference: Audit & Risk Committee', meta: 'TBA', format: 'PDF' },
-      { title: 'Anti-Bribery & Corruption Policy', meta: 'TBA', format: 'PDF' },
-      { title: 'Whistleblowing Policy', meta: 'TBA', format: 'PDF' },
-    ],
-  },
-]
-
-export interface DirectoryEntry {
-  label: string
-  value: string
-}
-
-export const DIRECTORY: readonly DirectoryEntry[] = [
-  { label: 'Principal adviser, sole underwriter & sole placement agent', value: 'RHB Investment Bank Berhad' },
-  { label: 'Share registrar', value: 'Boardroom Share Registrars Sdn Bhd' },
-  { label: 'Listing sought', value: 'Main Market, Bursa Malaysia Securities Berhad' },
-  { label: 'Shariah status', value: 'Shariah-compliant (SC Shariah Advisory Council)' },
-  { label: 'Headquarters', value: COMPANY.addressLines.join(' ') },
-]
 
 /* IR contact */
 

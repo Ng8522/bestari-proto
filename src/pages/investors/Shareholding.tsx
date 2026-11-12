@@ -24,7 +24,7 @@ const DONUT_LABEL = `Shareholding after the IPO: ${HOLDERS.map((holder) => `${ho
 /** Post-IPO shareholding donut, with the owners of the selling shareholder. */
 export function Shareholding() {
   return (
-    <IrSection id="shareholding" className="sec--flush">
+    <IrSection id="shareholding" className="sec--tinted sec--flush">
       <div className="card reveal">
         <div className="sharegrid">
           <div className="donut" role="img" aria-label={DONUT_LABEL} style={{ background: donutGradient(HOLDERS) }}>

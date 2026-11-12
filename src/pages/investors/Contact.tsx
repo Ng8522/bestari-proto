@@ -15,7 +15,8 @@ export type EnquiryErrors = Partial<Record<'name' | 'email', string>>
 const EMPTY_ENQUIRY: EnquiryValues = { name: '', email: '', enquiry: '' }
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-function emailError(email: string): string | undefined {
+/** Shared by the enquiry form and the news alerts sign-up. */
+export function emailError(email: string): string | undefined {
   const value = email.trim()
   if (!value) return 'Please enter your email address.'
   return EMAIL_PATTERN.test(value) ? undefined : 'Please enter a valid email address.'
@@ -44,7 +45,9 @@ export function Contact() {
         </div>
         <EnquiryForm />
       </div>
-      <p className="disc">{IR_DISCLAIMER}</p>
+      <p className="disc" id="ir-disclaimer">
+        {IR_DISCLAIMER}
+      </p>
     </IrSection>
   )
 }

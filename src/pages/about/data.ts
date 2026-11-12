@@ -214,5 +214,5 @@ export const ALSO_LIKE: readonly AlsoLikeCard[] = [
     label: 'IPO, board & financials',
     background: 'var(--brand-deep)',
   },
-  { href: ROUTES.shop, eyebrow: 'shop.bestarifood.com', label: 'Shop our products', background: 'var(--brand)' },
+  { href: ROUTES.shop, eyebrow: 'Shop Today', label: 'Shop our products', background: 'var(--brand)' },
 ]

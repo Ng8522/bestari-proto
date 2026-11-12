@@ -1,5 +1,6 @@
 import { useCallback, useId, useRef, useState } from 'react'
 import { MenuIcon, useDismiss } from '../../components/chrome'
+import { NavDropdown } from '../../components/NavDropdown'
 import { SmartLink } from '../../components/routing'
 import { LOGO, SHOP_CTA } from '../../content/site'
 import { HEADER_LINKS, HEADER_SCRIM_OFFSET_PX, HEADER_SOLID_RATIO } from './data'
@@ -43,13 +44,20 @@ export function HomeHeader() {
         </button>
         <nav className="menu" id={menuId} aria-label="Main" data-open={isMenuOpen}>
           <ul>
-            {HEADER_LINKS.map((link) => (
-              <li key={link.href}>
+            {HEADER_LINKS.map((link) => {
+              const headerLink = (
                 <SmartLink href={link.href} onClick={closeMenu}>
                   {link.label}
                 </SmartLink>
-              </li>
-            ))}
+              )
+              return link.children ? (
+                <NavDropdown key={link.href} label={link.label} links={link.children} onNavigate={closeMenu}>
+                  {headerLink}
+                </NavDropdown>
+              ) : (
+                <li key={link.href}>{headerLink}</li>
+              )
+            })}
           </ul>
           <SmartLink className="btn shop shop--menu" href={SHOP_CTA.href} onClick={closeMenu}>
             {SHOP_CTA.label} <span className="arr" aria-hidden="true">→</span>

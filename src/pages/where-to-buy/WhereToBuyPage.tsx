@@ -16,7 +16,7 @@ const KEY_STEPS: Record<string, (index: number, count: number) => number> = {
 
 /** Distributor finder (real data from the current site), styled in the handoff's visual language. */
 export function WhereToBuyPage() {
-  useDocumentTitle('Where to buy')
+  useDocumentTitle('Onsite Outlets')
   const rootRef = useRef<HTMLDivElement>(null)
   useScrollReveal(rootRef)
   const [activeId, setActiveId] = useState<GroupId>(DISTRIBUTOR_GROUPS[0].id)
@@ -36,7 +36,7 @@ export function WhereToBuyPage() {
     <div className="wtb" ref={rootRef}>
       <section className="wtb__hero">
         <div className="wrap">
-          <p className="eyebrow reveal">Where to buy</p>
+          <p className="eyebrow reveal">Onsite Outlets</p>
           <h1 className="reveal">Find Bestari near you.</h1>
           <p className="wtb__lede reveal">
             Bestari reaches shops and kitchens through distributors across Malaysia and abroad. Choose how you buy.

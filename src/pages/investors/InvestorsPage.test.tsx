@@ -17,6 +17,8 @@ function renderPage() {
 }
 
 const region = (name: string | RegExp) => screen.getByRole('region', { name })
+/** The page also has a news alerts form with Name and Email fields, so enquiry queries are scoped. */
+const enquiry = () => within(screen.getByRole('form', { name: 'Investor enquiry' }))
 
 afterEach(() => {
   vi.restoreAllMocks()
@@ -129,38 +131,6 @@ describe('Investor Relations page', () => {
     independents.forEach((name) => expect(name).toHaveClass('ph'))
   })
 
-  it('switches document tabs on click', async () => {
-    const { user } = renderPage()
-    expect(screen.getByRole('tab', { name: 'IPO' })).toHaveAttribute('aria-selected', 'true')
-    expect(screen.getByRole('tabpanel')).toHaveTextContent('Prospectus: Initial Public Offering')
-
-    await user.click(screen.getByRole('tab', { name: 'Financials' }))
-    const panel = screen.getByRole('tabpanel')
-    expect(panel).toHaveAccessibleName('Financials')
-    expect(within(panel).getByText('Quarterly results')).toBeInTheDocument()
-    expect(within(panel).getByText('Accountants’ report FY2022–FY2025')).toBeInTheDocument()
-  })
-
-  it('moves between document tabs with the arrow, Home and End keys', async () => {
-    const { user } = renderPage()
-    const ipoTab = screen.getByRole('tab', { name: 'IPO' })
-    ipoTab.focus()
-
-    await user.keyboard('{ArrowRight}')
-    expect(screen.getByRole('tab', { name: 'Financials' })).toHaveFocus()
-    expect(screen.getByRole('tab', { name: 'Financials' })).toHaveAttribute('aria-selected', 'true')
-
-    await user.keyboard('{End}')
-    expect(screen.getByRole('tab', { name: 'Governance' })).toHaveFocus()
-    expect(screen.getByRole('tabpanel')).toHaveTextContent('Whistleblowing Policy')
-
-    await user.keyboard('{Home}')
-    expect(ipoTab).toHaveAttribute('aria-selected', 'true')
-
-    await user.keyboard('{ArrowLeft}')
-    expect(screen.getByRole('tab', { name: 'Governance' })).toHaveFocus()
-  })
-
   it('lists the corporate directory and keeps the IR email a placeholder', () => {
     renderPage()
     expect(screen.getByText('RHB Investment Bank Berhad')).toBeInTheDocument()
@@ -173,13 +143,13 @@ describe('Investor Relations page', () => {
     await user.click(screen.getByRole('button', { name: /Send enquiry/ }))
     expect(screen.getByText('Please enter your name.')).toBeInTheDocument()
     expect(screen.getByText('Please enter your email address.')).toBeInTheDocument()
-    expect(screen.getByRole('textbox', { name: 'Name' })).toHaveFocus()
+    expect(enquiry().getByRole('textbox', { name: 'Name' })).toHaveFocus()
 
-    await user.type(screen.getByRole('textbox', { name: 'Name' }), 'Aisyah')
-    await user.type(screen.getByRole('textbox', { name: 'Email' }), 'not-an-email')
+    await user.type(enquiry().getByRole('textbox', { name: 'Name' }), 'Aisyah')
+    await user.type(enquiry().getByRole('textbox', { name: 'Email' }), 'not-an-email')
     await user.click(screen.getByRole('button', { name: /Send enquiry/ }))
 
-    const email = screen.getByRole('textbox', { name: 'Email' })
+    const email = enquiry().getByRole('textbox', { name: 'Email' })
     expect(email).toHaveAttribute('aria-invalid', 'true')
     expect(email).toHaveAccessibleDescription('Please enter a valid email address.')
     expect(email).toHaveFocus()
@@ -191,8 +161,8 @@ describe('Investor Relations page', () => {
     vi.stubGlobal('fetch', fetchMock)
     const { user } = renderPage()
 
-    await user.type(screen.getByRole('textbox', { name: 'Name' }), 'Aisyah')
-    await user.type(screen.getByRole('textbox', { name: 'Email' }), 'aisyah@example.com')
+    await user.type(enquiry().getByRole('textbox', { name: 'Name' }), 'Aisyah')
+    await user.type(enquiry().getByRole('textbox', { name: 'Email' }), 'aisyah@example.com')
     await user.type(screen.getByRole('textbox', { name: 'Your enquiry' }), 'When is the listing?')
     await user.click(screen.getByRole('button', { name: /Send enquiry/ }))
 

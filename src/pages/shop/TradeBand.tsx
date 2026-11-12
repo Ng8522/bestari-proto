@@ -8,7 +8,6 @@ export function TradeBand() {
       <div className="wrap">
         <div className="trade__box">
           <div>
-            <p className="eyebrow">Bulk · F&amp;B · Resellers</p>
             <h2 id="shop-trade-title">Cooking for a crowd?</h2>
             <p className="trade__lede">
               Restaurants, caterers, warung and resellers can order carton quantities at trade pricing, with dedicated
