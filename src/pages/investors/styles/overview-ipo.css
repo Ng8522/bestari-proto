@@ -24,7 +24,7 @@
 
 .ir .sec-head h2 {
   font-size: clamp(38px, 3.8vw, 54px);
-  color: var(--maroon);
+  color: var(--brand);
   margin-top: 12px;
 }
 
@@ -74,7 +74,7 @@
 }
 
 .ir .quote {
-  background: var(--maroon);
+  background: var(--brand);
   color: #fff;
   border: 0;
   display: flex;
@@ -97,7 +97,7 @@
 }
 
 .ir .quote figcaption span {
-  color: #f1d6c4;
+  color: var(--brand-tint);
   font-size: 14px;
 }
 
@@ -204,7 +204,7 @@
 
 .ir .chip--done {
   background: #dcebdf;
-  color: var(--green);
+  color: var(--brand);
 }
 
 .ir .uses {
@@ -225,7 +225,7 @@
   font-family: var(--serif);
   font-weight: 400;
   font-size: 28px;
-  color: var(--maroon);
+  color: var(--brand);
   display: block;
 }
 

@@ -1,7 +1,7 @@
 import { MD_QUOTE } from './data'
 import { IrSection, SectionHead } from './Section'
 
-/** Company description beside the maroon Managing Director quote card. */
+/** Company description beside the green Managing Director quote card. */
 export function Overview() {
   return (
     <IrSection id="overview">

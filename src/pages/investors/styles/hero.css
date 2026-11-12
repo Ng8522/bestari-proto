@@ -7,7 +7,7 @@
 
 /* ---------- Hero ---------- */
 .ir .irh {
-  background: var(--green-deep);
+  background: var(--brand-deep);
   color: #fff;
   padding: 70px 0 0;
 }
@@ -33,7 +33,7 @@
 }
 
 .ir .irh-lede {
-  color: #cfe3d5;
+  color: var(--brand-tint);
   font-size: 18px;
   max-width: 560px;
 }

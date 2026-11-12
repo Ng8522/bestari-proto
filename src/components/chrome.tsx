@@ -29,7 +29,18 @@ export function useDismiss(
   }, [isOpen, close, containerRef, toggleRef])
 }
 
-/** Sticky inner-page header from the handoff's site.js: logo, centred links, maroon "Shop online". */
+/** Three-line "hamburger" glyph for the mobile menu toggles; it turns into an X while the menu is open. */
+export function MenuIcon() {
+  return (
+    <span className="burger" aria-hidden="true">
+      <span />
+      <span />
+      <span />
+    </span>
+  )
+}
+
+/** Sticky inner-page header from the handoff's site.js: logo, centred links, green "Shop online". */
 export function SiteHeader() {
   const [isMenuOpen, setMenuOpen] = useState(false)
   const headerRef = useRef<HTMLElement>(null)
@@ -48,11 +59,12 @@ export function SiteHeader() {
           type="button"
           className="nav__toggle"
           ref={toggleRef}
+          aria-label="Menu"
           aria-expanded={isMenuOpen}
           aria-controls={menuId}
           onClick={() => setMenuOpen((open) => !open)}
         >
-          Menu
+          <MenuIcon />
         </button>
         <nav className="nav__menu" id={menuId} aria-label="Main" data-open={isMenuOpen}>
           <ul className="nav__links">
@@ -64,11 +76,11 @@ export function SiteHeader() {
               </li>
             ))}
           </ul>
-          <Link className="btn btn-maroon nav__shop" to={SHOP_CTA.href} onClick={closeMenu}>
+          <Link className="btn btn-brand nav__shop" to={SHOP_CTA.href} onClick={closeMenu}>
             {SHOP_CTA.label} <span className="arr" aria-hidden="true">→</span>
           </Link>
         </nav>
-        <Link className="btn btn-maroon nav__shop" to={SHOP_CTA.href}>
+        <Link className="btn btn-brand nav__shop" to={SHOP_CTA.href}>
           {SHOP_CTA.label} <span className="arr" aria-hidden="true">→</span>
         </Link>
       </div>

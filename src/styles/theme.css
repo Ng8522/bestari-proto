@@ -3,12 +3,13 @@
  * Page-specific styles live next to each page (src/pages/<page>/<page>.css), scoped under the page's root class.
  */
 :root {
-  --maroon: #7e1b1e;
-  --maroon-deep: #5a1013;
+  /* Corporate colour: Pantone 342 C. --brand-deep is its shade for hovers and dark bands,
+     --brand-tint the soft text colour used on brand-coloured sections. */
+  --brand: #006747;
+  --brand-deep: #004a33;
+  --brand-tint: #dcebe1;
   --saffron: #f2ae2e;
   --saffron-soft: #fbe3a8;
-  --green: #1e6a3e;
-  --green-deep: #134a2b;
   --cream: #fbf5ea;
   --cream-2: #f4ead6;
   --ink: #2a1a14;
@@ -73,7 +74,7 @@ p {
   text-wrap: pretty;
 }
 
-/* A two-tone ring stays visible on cream, maroon, saffron and green sections alike. */
+/* A two-tone ring stays visible on cream, brand-green and saffron sections alike. */
 :focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 2px;
@@ -121,7 +122,7 @@ p {
   font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--maroon);
+  color: var(--brand);
 }
 
 /* Buttons */
@@ -145,13 +146,13 @@ p {
   transform: translateY(-2px);
 }
 
-.btn-maroon {
-  background: var(--maroon);
+.btn-brand {
+  background: var(--brand);
   color: #fff;
 }
 
-.btn-maroon:hover {
-  background: var(--maroon-deep);
+.btn-brand:hover {
+  background: var(--brand-deep);
 }
 
 .btn-saffron {
@@ -177,10 +178,10 @@ p {
   font-family: var(--mono);
   font-size: 0.82em;
   background: repeating-linear-gradient(135deg, rgba(242, 174, 46, 0.22) 0 6px, rgba(242, 174, 46, 0.1) 6px 12px);
-  border: 1px dashed rgba(126, 27, 30, 0.35);
+  border: 1px dashed rgba(0, 103, 71, 0.35);
   padding: 1px 8px;
   border-radius: 4px;
-  color: var(--maroon-deep);
+  color: var(--brand-deep);
   white-space: nowrap;
 }
 
@@ -234,7 +235,7 @@ p {
   right: 0;
   bottom: 0;
   height: 2px;
-  background: var(--maroon);
+  background: var(--brand);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.25s;
@@ -256,15 +257,68 @@ p {
 
 .nav__toggle {
   display: none;
+  width: 44px;
   height: 44px;
-  padding: 0 18px;
+  padding: 0;
   margin-left: auto;
-  border: 1.5px solid var(--ink);
-  border-radius: 999px;
+  border: 0;
   background: transparent;
-  font-weight: 700;
-  font-size: 14px;
+  color: var(--ink);
   cursor: pointer;
+}
+
+/* Hamburger glyph shared by both headers' mobile toggles; the lines fold into an X when expanded. */
+.burger {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 16px;
+  margin: auto;
+}
+
+.burger > span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition:
+    transform 0.25s ease,
+    opacity 0.2s ease,
+    top 0.25s ease;
+}
+
+.burger > span:nth-child(1) {
+  top: 0;
+}
+
+.burger > span:nth-child(2) {
+  top: 7px;
+}
+
+.burger > span:nth-child(3) {
+  top: 14px;
+}
+
+[aria-expanded='true'] > .burger > span:nth-child(1) {
+  top: 7px;
+  transform: rotate(45deg);
+}
+
+[aria-expanded='true'] > .burger > span:nth-child(2) {
+  opacity: 0;
+}
+
+[aria-expanded='true'] > .burger > span:nth-child(3) {
+  top: 7px;
+  transform: rotate(-45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .burger > span {
+    transition: none;
+  }
 }
 
 /* Footer */

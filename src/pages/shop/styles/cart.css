@@ -78,7 +78,7 @@
 .shop .ship__fill {
   display: block;
   height: 100%;
-  background: var(--green);
+  background: var(--brand);
   transition: width 0.4s;
 }
 

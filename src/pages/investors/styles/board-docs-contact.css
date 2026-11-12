@@ -137,8 +137,8 @@
 }
 
 .ir a.doc-link:hover {
-  border-color: var(--maroon);
-  color: var(--maroon);
+  border-color: var(--brand);
+  color: var(--brand);
 }
 
 .ir .dir dl {
@@ -162,7 +162,7 @@
 
 /* ---------- IR contact ---------- */
 .ir .contact {
-  background: var(--maroon);
+  background: var(--brand);
   color: #fff;
   border-radius: 32px;
   padding: 50px 56px;
@@ -178,11 +178,11 @@
 }
 
 .ir .contact .eyebrow {
-  color: var(--saffron);
+  color: var(--saffron-soft);
 }
 
 .ir .contact-lede {
-  color: #f1d6c4;
+  color: var(--brand-tint);
   margin-top: 12px;
 }
 
@@ -214,7 +214,7 @@
 
 .ir .contact input::placeholder,
 .ir .contact textarea::placeholder {
-  color: #f1d6c4;
+  color: var(--brand-tint);
 }
 
 .ir .contact [aria-invalid='true'] {

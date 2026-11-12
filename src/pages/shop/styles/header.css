@@ -8,20 +8,16 @@
 
 /* ---------- Utility bar ---------- */
 .shop .shop-util {
-  background: var(--maroon-deep);
-  color: #f6dcc0;
+  background: var(--brand-deep);
+  color: var(--brand-tint);
   font-size: 13px;
 }
 
 .shop .shop-util__inner {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   height: 38px;
-}
-
-.shop .shop-util__ph {
-  color: #fff;
 }
 
 .shop .shop-util__links {
@@ -61,16 +57,6 @@
 .shop .shop-nav__logo img {
   height: 58px;
   width: auto;
-}
-
-.shop .shop-nav__badge {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--green);
-  background: #e3f0e7;
-  border-radius: 999px;
-  padding: 4px 10px;
-  white-space: nowrap;
 }
 
 .shop .shop-nav__search {
@@ -141,7 +127,7 @@
 }
 
 .shop .shop-cartbtn {
-  background: var(--maroon);
+  background: var(--brand);
   color: #fff;
   border: 0;
 }

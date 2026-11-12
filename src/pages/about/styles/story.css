@@ -3,7 +3,7 @@
 /* 3 Origin */
 .about .origin {
   overflow: hidden;
-  background: var(--maroon);
+  background: var(--brand);
   color: #fff;
 }
 
@@ -18,7 +18,7 @@
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: var(--maroon-deep);
+  background: var(--brand-deep);
 }
 
 .about .origin .yr b {
@@ -49,7 +49,7 @@
   font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #f1d6c4;
+  color: var(--brand-tint);
 }
 
 .about .origin .tx {
@@ -60,7 +60,7 @@
 }
 
 .about .origin .eyebrow {
-  color: var(--saffron);
+  color: var(--saffron-soft);
 }
 
 .about .origin h2 {
@@ -72,7 +72,7 @@
   max-width: 540px;
   margin-bottom: 16px;
   font-size: 18px;
-  color: #f1d6c4;
+  color: var(--brand-tint);
 }
 
 .about .origin .psst {
@@ -90,7 +90,7 @@
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--saffron);
+  color: var(--saffron-soft);
 }
 
 .about .origin .psst p {
@@ -126,12 +126,12 @@
   margin-top: 14px;
   font-size: clamp(44px, 4.6vw, 72px);
   line-height: 0.95;
-  color: var(--maroon);
+  color: var(--brand);
 }
 
 .about .hist .hd h2 em {
   font-style: normal;
-  color: var(--green);
+  color: var(--brand);
 }
 
 .about .hist .prog {
@@ -146,7 +146,7 @@
   display: block;
   width: 0;
   height: 100%;
-  background: var(--maroon);
+  background: var(--brand);
 }
 
 .about .rail {
@@ -200,9 +200,9 @@
 }
 
 .about .yc.fut {
-  border: 2px dashed var(--maroon);
+  border: 2px dashed var(--brand);
   background: transparent;
-  color: var(--maroon);
+  color: var(--brand);
 }
 
 .about .yc .tag {
@@ -240,7 +240,7 @@
 .about .trio {
   padding: 120px 0;
   overflow: hidden;
-  background: var(--green-deep);
+  background: var(--brand-deep);
   color: #fff;
 }
 
@@ -293,7 +293,7 @@
 .about .trio p {
   margin-bottom: 28px;
   font-size: 17px;
-  color: #cfe3d5;
+  color: var(--brand-tint);
 }
 
 .about .trio .rows {
@@ -308,7 +308,7 @@
   padding: 16px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.16);
   font-size: 15px;
-  color: #cfe3d5;
+  color: var(--brand-tint);
 }
 
 .about .trio .rows b {

@@ -17,7 +17,7 @@
   margin-top: 14px;
   font-size: clamp(44px, 4.6vw, 72px);
   line-height: 0.95;
-  color: var(--maroon);
+  color: var(--brand);
 }
 
 .about .people .hint {
@@ -128,7 +128,7 @@
 }
 
 .about .nx .eyebrow {
-  color: var(--saffron);
+  color: var(--saffron-soft);
 }
 
 .about .nx h3 {

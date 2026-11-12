@@ -44,7 +44,7 @@ export function IntroDoors() {
   )
 }
 
-/** 04 Our Purpose (maroon): statement, certification strip and the three pillars. */
+/** 04 Our Purpose (green): statement, certification strip and the three pillars. */
 export function Purpose() {
   return (
     <section className="purpose">
@@ -111,29 +111,6 @@ export function Latest() {
           {NEWS.map((item) => (
             <NewsCard key={item.title} item={item} />
           ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/** 07 Careers band: saffron box with the "makan" watermark. */
-export function Careers() {
-  return (
-    <section className="careers" id="careers">
-      <div className="wrap">
-        <div className="box">
-          <div>
-            <div className="eyebrow">Careers</div>
-            <h2>Grow with a proudly Malaysian food company.</h2>
-            <p>Join the team that has been making Malaysian kitchens mudah dan sedap since 2004.</p>
-          </div>
-          <a className="btn btn-maroon" href={PLACEHOLDER_LINKS.openings}>
-            View openings <span className="arr" aria-hidden="true">→</span>
-          </a>
-          <div className="big" aria-hidden="true">
-            makan
-          </div>
         </div>
       </div>
     </section>

@@ -77,14 +77,15 @@ describe('Home page', () => {
     expect(screen.getByRole('link', { name: /Your pantry, delivered/ })).toHaveAttribute('href', ROUTES.shop)
   })
 
-  it('leads the news with the IPO story and anchors the careers band', () => {
+  it('leads the news with the IPO story and has no careers band', () => {
     renderHome()
     const news = document.getElementById('latest')
     expect(news).not.toBeNull()
     const ipoCard = within(news as HTMLElement).getByRole('link', { name: /SC approval for Main Market listing/ })
     expect(ipoCard).toHaveAttribute('href', ROUTES.investors)
     expect(ipoCard).toHaveClass('ipo')
-    expect(document.getElementById('careers')).toHaveTextContent('Grow with a proudly Malaysian food company.')
+    expect(document.getElementById('careers')).toBeNull()
+    expect(screen.queryByRole('link', { name: 'Careers' })).toBeNull()
   })
 })
 

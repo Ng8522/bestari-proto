@@ -20,8 +20,9 @@
     font-size: 44px;
   }
 
+  /* The utility bar holds only desktop links now, so hide the whole strip. */
   .shop .shop-nav__search,
-  .shop .shop-util__links {
+  .shop .shop-util {
     display: none;
   }
 
@@ -41,14 +42,6 @@
   .shop .perks li:last-child {
     border: 0;
   }
-
-  .shop .shop-util__inner {
-    height: auto;
-    min-height: 38px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    line-height: 1.4;
-  }
 }
 
 @media (max-width: 600px) {
@@ -59,10 +52,6 @@
 
   .shop .shop-nav__logo img {
     height: 44px;
-  }
-
-  .shop .shop-nav__badge {
-    display: none;
   }
 
   .shop .banner {

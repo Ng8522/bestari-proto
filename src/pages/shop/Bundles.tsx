@@ -32,7 +32,7 @@ export function Bundles({ onAdd }: BundlesProps) {
                 </span>
                 <button
                   type="button"
-                  className="btn btn-maroon bc__add"
+                  className="btn btn-brand bc__add"
                   aria-label={`Add ${bundle.name} bundle to cart`}
                   onClick={() => onAdd(bundleLine(bundle))}
                 >

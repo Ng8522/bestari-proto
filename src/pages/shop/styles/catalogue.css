@@ -15,7 +15,7 @@
 
 .shop .cat-head__title {
   font-size: 48px;
-  color: var(--maroon);
+  color: var(--brand);
   margin-top: 10px;
 }
 
@@ -51,7 +51,7 @@
 }
 
 .shop .filters button:hover {
-  border-color: var(--maroon);
+  border-color: var(--brand);
 }
 
 .shop .filters button.on {
@@ -114,7 +114,7 @@
 }
 
 .shop .pc__badge--n {
-  background: var(--green);
+  background: var(--brand);
   color: #fff;
 }
 
@@ -163,8 +163,8 @@
 }
 
 .shop .sizes__chip.on {
-  border-color: var(--maroon);
-  background: var(--maroon);
+  border-color: var(--brand);
+  background: var(--brand);
   color: #fff;
 }
 
@@ -180,7 +180,7 @@
 .shop .price {
   font-family: var(--serif);
   font-size: 24px;
-  color: var(--maroon);
+  color: var(--brand);
 }
 
 .shop .add {
@@ -197,7 +197,7 @@
 }
 
 .shop .add:hover {
-  background: var(--maroon);
+  background: var(--brand);
   transform: rotate(90deg);
 }
 

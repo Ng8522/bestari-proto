@@ -1,18 +1,13 @@
 import { useId, useRef, type RefObject } from 'react'
 import { Link } from 'react-router'
 import { COMPANY, LOGO, ROUTES } from '../../content/site'
-import { FREE_DELIVERY_THRESHOLD } from './data'
 import { useSlashShortcut } from './hooks'
 
-/** Maroon strip above the shop nav: free-delivery note and links back to the corporate site. */
+/** Green strip above the shop nav: links back to the corporate site. */
 export function UtilityBar() {
   return (
     <div className="shop-util">
       <div className="wrap shop-util__inner">
-        <span>
-          Free delivery in Peninsular Malaysia for orders above RM
-          <span className="ph shop-util__ph">{FREE_DELIVERY_THRESHOLD}</span>
-        </span>
         <nav className="shop-util__links" aria-label="Bestari sites">
           <Link to={ROUTES.home}>
             <span aria-hidden="true">← </span>bestarifood.com
@@ -38,7 +33,7 @@ interface ShopNavProps {
   cartDrawerId: string
 }
 
-/** Sticky shop nav: logo, subdomain badge, search ("/" focuses it), Sign in and Cart. */
+/** Sticky shop nav: logo, search ("/" focuses it), Sign in and Cart. */
 export function ShopNav(props: ShopNavProps) {
   const { query, onQueryChange, cartCount, isBadgePopping, isCartOpen, onOpenCart, onSignIn } = props
   const searchRef = useRef<HTMLInputElement>(null)
@@ -52,7 +47,6 @@ export function ShopNav(props: ShopNavProps) {
         <Link className="shop-nav__logo" to={ROUTES.home}>
           <img src={LOGO.src} alt={LOGO.alt} width="97" height="58" />
         </Link>
-        <span className="shop-nav__badge">shop.bestarifood.com</span>
         <div className="shop-nav__search" role="search">
           <label className="shop-search" htmlFor={searchId}>
             <span className="visually-hidden">Search products</span>

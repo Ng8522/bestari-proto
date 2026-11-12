@@ -19,12 +19,12 @@
 
 .home .intro h2 {
   font-size: clamp(40px, 4vw, 60px);
-  color: var(--maroon);
+  color: var(--brand);
 }
 
 .home .intro h2 em {
   font-style: normal;
-  color: var(--green);
+  color: var(--brand);
 }
 
 .home .intro p {

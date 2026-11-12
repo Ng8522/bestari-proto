@@ -30,7 +30,7 @@ export function validateEnquiry(values: EnquiryValues): EnquiryErrors {
   }
 }
 
-/** Maroon IR contact block with the enquiry form, then the legal disclaimer. */
+/** Green IR contact block with the enquiry form, then the legal disclaimer. */
 export function Contact() {
   return (
     <IrSection id="contact" className="sec--flush">

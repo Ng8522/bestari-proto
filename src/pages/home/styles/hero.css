@@ -11,10 +11,10 @@
   transition: background 0.3s, padding 0.3s;
 }
 
-/* Scrolled but still over the hero: a maroon bar so the cream slogan slides under it instead of
+/* Scrolled but still over the hero: a green bar so the cream slogan slides under it instead of
    through the white links. Must stay above .solid, which overrides it past the hero. */
 .home .hdr.scrolled {
-  background: rgba(126, 27, 30, 0.96);
+  background: rgba(0, 103, 71, 0.96);
   backdrop-filter: blur(12px);
   padding: 10px 0;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 24px rgba(42, 26, 20, 0.18);
@@ -86,7 +86,7 @@
 }
 
 .home .hdr.solid .shop {
-  background: var(--maroon);
+  background: var(--brand);
   color: #fff;
 }
 
@@ -101,7 +101,7 @@
   height: 100vh;
   min-height: 700px;
   max-height: 1000px;
-  background: var(--maroon);
+  background: var(--brand);
   color: var(--cream);
   position: relative;
   overflow: hidden;
@@ -113,7 +113,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 55%, #9a2a26 0, transparent 60%);
+  background: radial-gradient(circle at 50% 55%, #1a8a63 0, transparent 60%);
 }
 
 .home .slogan .words {
@@ -160,7 +160,7 @@
 }
 
 .home .slogan .chip.g {
-  background: var(--green);
+  background: var(--brand);
 }
 
 .home .slogan .chip img {
@@ -240,5 +240,5 @@
   font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #f1d6c4;
+  color: var(--brand-tint);
 }

@@ -3,7 +3,7 @@ import { useDocumentTitle } from '../../components/routing'
 import { BrandCarousel } from './BrandCarousel'
 import { HomeHeader } from './HomeHeader'
 import { RecipeVideos } from './RecipeVideos'
-import { Careers, IntroDoors, Latest, Purpose } from './sections'
+import { IntroDoors, Latest, Purpose } from './sections'
 import { SloganHero } from './SloganHero'
 import './home.css'
 
@@ -24,7 +24,6 @@ export function HomePage() {
         <Purpose />
         <RecipeVideos />
         <Latest />
-        <Careers />
       </main>
       <SiteFooter />
     </div>

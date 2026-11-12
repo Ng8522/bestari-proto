@@ -25,7 +25,7 @@ export const HERO_LINES = { first: 'We are', second: 'Bestari.' } as const
 
 export const HERO_CAPTIONS: readonly string[] = ['About us', 'Mudah dan sedap · Since 2004', 'Let’s makan together']
 
-/** A run of the purpose statement. Highlighted runs are maroon. */
+/** A run of the purpose statement. Highlighted runs are green. */
 export interface PurposeSegment {
   text: string
   isHighlight?: boolean
@@ -68,7 +68,7 @@ export const HISTORY_CARDS: readonly HistoryCard[] = [
     label: 'Grow',
     title: 'From one mix to a full pantry',
     body: 'Curry premixes, salted egg, tempura, chicken stock, batters, desserts and pantry staples join the family.',
-    background: 'var(--maroon)',
+    background: 'var(--brand)',
     image: 'p-curry-meat.png',
   },
   {
@@ -84,7 +84,7 @@ export const HISTORY_CARDS: readonly HistoryCard[] = [
     label: 'Today',
     title: 'Category leader',
     body: 'Our coating mix leads its category in Malaysia, and is a favourite with homes and the HORECA industry.',
-    background: 'var(--green)',
+    background: 'var(--brand-deep)',
     image: 'p-chickenstock-1kg.png',
   },
   {
@@ -135,7 +135,7 @@ export const BUSINESS_PANELS: readonly BusinessPanel[] = [
     number: '01',
     title: 'Food premixes',
     body: 'Seasoned flour, seasoning and food base premixes, blended in precise proportions. Sold in retail packs and larger commercial packs.',
-    background: 'var(--maroon)',
+    background: 'var(--brand)',
     image: 'p-flour-mala-520g.png',
   },
   {
@@ -151,7 +151,7 @@ export const BUSINESS_PANELS: readonly BusinessPanel[] = [
     number: '03',
     title: 'Processing equipment',
     body: 'Supply of food processing and production equipment to food manufacturers.',
-    background: 'var(--green)',
+    background: 'var(--brand-deep)',
     photoPlaceholder: '[ processing equipment photo ]',
   },
   {
@@ -194,11 +194,11 @@ export interface Leader {
 }
 
 export const LEADERS: readonly Leader[] = [
-  { name: 'Lai Kok Siong', role: 'Managing Director', background: 'var(--maroon)' },
-  { name: 'Gabriel Lai Yung-Yao', role: 'Head of Sales & Marketing', background: 'var(--green)' },
+  { name: 'Lai Kok Siong', role: 'Managing Director', background: 'var(--brand)' },
+  { name: 'Gabriel Lai Yung-Yao', role: 'Head of Sales & Marketing', background: 'var(--brand-deep)' },
   { name: 'Gary Lai Yung-Hui', role: 'Head of Production', background: '#C8861A' },
   { name: 'Fong Zhoon Zhien', role: 'Title per prospectus', isRolePlaceholder: true, background: 'var(--ink)' },
-  { name: 'Chang Kok Leong', role: 'Title per prospectus', isRolePlaceholder: true, background: 'var(--maroon-deep)' },
+  { name: 'Chang Kok Leong', role: 'Title per prospectus', isRolePlaceholder: true, background: 'var(--brand)' },
 ]
 
 /** "You may also like" card: `label` is the card title. */
@@ -212,7 +212,7 @@ export const ALSO_LIKE: readonly AlsoLikeCard[] = [
     href: ROUTES.investors,
     eyebrow: 'Investor Relations',
     label: 'IPO, board & financials',
-    background: 'var(--green-deep)',
+    background: 'var(--brand-deep)',
   },
-  { href: ROUTES.shop, eyebrow: 'shop.bestarifood.com', label: 'Shop our products', background: 'var(--maroon)' },
+  { href: ROUTES.shop, eyebrow: 'shop.bestarifood.com', label: 'Shop our products', background: 'var(--brand)' },
 ]

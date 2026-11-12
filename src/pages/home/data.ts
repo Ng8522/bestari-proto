@@ -15,7 +15,7 @@ export const HEADER_LINKS: LinkItem[] = [
 /** The header turns solid once the page has scrolled this share of the viewport height. */
 export const HEADER_SOLID_RATIO = 0.85
 
-/** Scrolling more than this many pixels gives the header a maroon backdrop over the hero, so the slogan never shows through the links. */
+/** Scrolling more than this many pixels gives the header a green backdrop over the hero, so the slogan never shows through the links. */
 export const HEADER_SCRIM_OFFSET_PX = 8
 
 // ---------- Slogan hero ----------
@@ -74,7 +74,7 @@ export const DOORS: Door[] = [
     title: 'SC approved · Main Market IPO',
     cta: 'IPO details',
     image: { src: asset('p-curry-meat.png'), alt: '' },
-    background: 'var(--green-deep)',
+    background: 'var(--brand-deep)',
   },
   {
     href: ROUTES.shop,
@@ -82,7 +82,7 @@ export const DOORS: Door[] = [
     title: 'Your pantry, delivered',
     cta: 'Shop now',
     image: { src: asset('p-flour-mala-520g.png'), alt: '' },
-    background: 'var(--maroon)',
+    background: 'var(--brand)',
   },
 ]
 
@@ -184,5 +184,4 @@ export const NEWS: NewsItem[] = [
 /** Destinations the handoff left as "#". */
 export const PLACEHOLDER_LINKS = {
   allNews: '#',
-  openings: '#',
 } as const

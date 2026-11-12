@@ -111,7 +111,7 @@ function CartSummary({ amount, onCheckout }: CartSummaryProps) {
         <span>{formatRM(amount)}</span>
       </div>
       <p className="pay">{PAYMENT_METHODS}</p>
-      <button type="button" className="btn btn-maroon checkout" onClick={onCheckout}>
+      <button type="button" className="btn btn-brand checkout" onClick={onCheckout}>
         Checkout <span className="arr" aria-hidden="true">→</span>
       </button>
     </div>

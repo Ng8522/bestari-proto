@@ -63,7 +63,6 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     links: [
       { label: 'About us', href: ROUTES.about },
       { label: 'Our journey', href: `${ROUTES.about}#journey` },
-      { label: 'Careers', href: `${ROUTES.home}#careers` },
       { label: 'Contact', href: COMPANY.email.href },
     ],
   },

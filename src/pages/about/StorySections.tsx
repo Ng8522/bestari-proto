@@ -2,7 +2,7 @@ import { SmartLink } from '../../components/routing'
 import { asset, CERT_STRIP } from '../../content/site'
 import { ALSO_LIKE, HQ_STATS, TRIO_ROWS, TRIO_WORDS } from './data'
 
-/** 03 Maroon origin split: a giant "2004" with the flagship pack, beside the founding story. */
+/** 03 Green origin split: a giant "2004" with the flagship pack, beside the founding story. */
 export function OriginSection() {
   return (
     <section className="origin" aria-labelledby="origin-title">

@@ -24,7 +24,7 @@ interface SectionHeadProps {
   intro?: string
 }
 
-/** Eyebrow + maroon H2 on the left, optional intro paragraph on the right (the handoff's .sh). */
+/** Eyebrow + green H2 on the left, optional intro paragraph on the right (the handoff's .sh). */
 export function SectionHead({ sectionId, eyebrow, title, intro }: SectionHeadProps) {
   return (
     <div className="sec-head">

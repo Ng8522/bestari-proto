@@ -5,7 +5,7 @@ interface PromoHeroProps {
   onAddPromo: () => void
 }
 
-/** Maroon Mala banner (2fr) with two side tiles (1fr), then the trust strip. */
+/** Green Mala banner (2fr) with two side tiles (1fr), then the trust strip. */
 export function PromoHero({ onAddPromo }: PromoHeroProps) {
   return (
     <section className="phero" aria-label="Featured">

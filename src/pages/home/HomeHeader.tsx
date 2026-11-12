@@ -1,14 +1,14 @@
 import { useCallback, useId, useRef, useState } from 'react'
-import { useDismiss } from '../../components/chrome'
+import { MenuIcon, useDismiss } from '../../components/chrome'
 import { SmartLink } from '../../components/routing'
 import { LOGO, SHOP_CTA } from '../../content/site'
 import { HEADER_LINKS, HEADER_SCRIM_OFFSET_PX, HEADER_SOLID_RATIO } from './data'
 import { useScrolledPast } from './useHomeMotion'
 
 /**
- * The home page's own fixed header: transparent at the very top of the slogan hero, a maroon bar
+ * The home page's own fixed header: transparent at the very top of the slogan hero, a green bar
  * once the page starts scrolling (so the slogan slides under the links), and solid cream past 85%
- * of the viewport. At 900px and below the links fold into a "Menu" disclosure.
+ * of the viewport. At 900px and below the links fold into a hamburger-menu disclosure.
  */
 export function HomeHeader() {
   const isScrolled = useScrolledPast(0, HEADER_SCRIM_OFFSET_PX)
@@ -34,11 +34,12 @@ export function HomeHeader() {
           type="button"
           className="toggle"
           ref={toggleRef}
+          aria-label="Menu"
           aria-expanded={isMenuOpen}
           aria-controls={menuId}
           onClick={() => setMenuOpen((open) => !open)}
         >
-          Menu
+          <MenuIcon />
         </button>
         <nav className="menu" id={menuId} aria-label="Main" data-open={isMenuOpen}>
           <ul>

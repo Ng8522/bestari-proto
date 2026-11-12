@@ -1,8 +1,8 @@
-/* Home: 04 purpose, 05 recipe videos, 06 latest and 07 careers. */
+/* Home: 04 purpose, 05 recipe videos and 06 latest. */
 
 /* ---------- 04 Our Purpose ---------- */
 .home .purpose {
-  background: var(--maroon);
+  background: var(--brand);
   color: #fff;
   padding: 100px 0;
   position: relative;
@@ -18,7 +18,7 @@
 }
 
 .home .purpose .eyebrow {
-  color: var(--saffron);
+  color: var(--saffron-soft);
 }
 
 .home .purpose h2 {
@@ -32,7 +32,7 @@
 }
 
 .home .purpose p {
-  color: #f1d6c4;
+  color: var(--brand-tint);
   font-size: 18px;
   max-width: 560px;
 }
@@ -74,7 +74,7 @@
 
 .home .pillar span {
   font-size: 14px;
-  color: #f1d6c4;
+  color: var(--brand-tint);
 }
 
 .home .purpose .cert {
@@ -107,12 +107,12 @@
 }
 
 .home .vids .eyebrow {
-  color: var(--green);
+  color: var(--brand);
 }
 
 .home .vids h2 {
   font-size: clamp(40px, 4vw, 56px);
-  color: var(--green-deep);
+  color: var(--brand-deep);
   margin-top: 12px;
 }
 
@@ -162,11 +162,11 @@
 }
 
 .home .vi:hover {
-  border-color: var(--green);
+  border-color: var(--brand);
 }
 
 .home .vi.on {
-  border-color: var(--green);
+  border-color: var(--brand);
   background: #eef5f0;
 }
 
@@ -238,12 +238,12 @@
 
 .home .latest h2 {
   font-size: 44px;
-  color: var(--maroon);
+  color: var(--brand);
 }
 
 .home .latest .all {
   font-weight: 700;
-  color: var(--maroon);
+  color: var(--brand);
 }
 
 .home .lrow {
@@ -265,7 +265,7 @@
 }
 
 .home .lc:hover {
-  border-color: var(--maroon);
+  border-color: var(--brand);
   transform: translateY(-3px);
 }
 
@@ -296,56 +296,12 @@
 }
 
 .home .lc.ipo .im {
-  background: var(--green-deep);
+  background: var(--brand-deep);
   display: grid;
   place-items: center;
   color: var(--saffron);
   font-family: var(--serif);
   font-size: 34px;
-}
-
-/* ---------- 07 Careers ---------- */
-.home .careers {
-  padding: 20px 0 0;
-}
-
-.home .careers .wrap {
-  max-width: 1440px;
-}
-
-.home .careers .box {
-  border-radius: 32px;
-  background: var(--saffron);
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 40px;
-  align-items: center;
-  padding: 50px 56px;
-  position: relative;
-  overflow: hidden;
-}
-
-.home .careers h2 {
-  font-size: clamp(36px, 3.6vw, 52px);
-  color: var(--maroon-deep);
-  max-width: 700px;
-  margin-top: 12px;
-}
-
-.home .careers p {
-  margin-top: 12px;
-  max-width: 560px;
-}
-
-.home .careers .big {
-  position: absolute;
-  right: -30px;
-  bottom: -60px;
-  font-family: var(--serif);
-  font-size: 220px;
-  color: rgba(126, 27, 30, 0.08);
-  line-height: 1;
-  pointer-events: none;
 }
 
 /* The design's `<footer style="margin-top:90px">`. */

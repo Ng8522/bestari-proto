@@ -95,7 +95,7 @@ export const ALLOCATION: readonly AllocationTranche[] = [
     description: 'Institutional & selected investors, incl. Bumiputera investors approved by MITI',
     amount: 'up to 100.0m',
     weight: 100,
-    color: 'var(--green-deep)',
+    color: 'var(--brand-deep)',
   },
   {
     id: 'public',
@@ -103,7 +103,7 @@ export const ALLOCATION: readonly AllocationTranche[] = [
     description: 'Retail offering: Malaysian public',
     amount: '22.5m',
     weight: 22.5,
-    color: 'var(--maroon)',
+    color: 'var(--brand)',
   },
   {
     id: 'pink',
@@ -177,7 +177,7 @@ export interface ChartSeries {
 
 export const FINANCIAL_SERIES: readonly ChartSeries[] = [
   { key: 'revenue', label: 'Revenue', color: 'var(--saffron)' },
-  { key: 'netProfit', label: 'Net profit', color: 'var(--maroon)' },
+  { key: 'netProfit', label: 'Net profit', color: 'var(--brand)' },
 ]
 
 export interface ChartValue {
@@ -203,7 +203,7 @@ export const FINANCIAL_YEARS: readonly FinancialYear[] = [
   },
 ]
 
-export type KpiTone = 'green' | 'maroon' | 'saffron'
+export type KpiTone = 'deep' | 'brand' | 'saffron'
 
 export interface Kpi {
   label: string
@@ -213,8 +213,8 @@ export interface Kpi {
 }
 
 export const KPIS: readonly Kpi[] = [
-  { label: 'FY2025 revenue', value: 'RM175.3m', detail: 'Up 9.1% from RM160.7m in FY2024', tone: 'green' },
-  { label: 'FY2025 net profit', value: 'RM31.0m', detail: 'Up 87.6% from RM16.5m in FY2024', tone: 'maroon' },
+  { label: 'FY2025 revenue', value: 'RM175.3m', detail: 'Up 9.1% from RM160.7m in FY2024', tone: 'deep' },
+  { label: 'FY2025 net profit', value: 'RM31.0m', detail: 'Up 87.6% from RM16.5m in FY2024', tone: 'brand' },
   {
     label: 'Dividend policy',
     value: 'Up to 30%',
@@ -237,7 +237,7 @@ export interface Holder {
 export const POST_IPO_SHARES = '450.0m'
 
 export const HOLDERS: readonly Holder[] = [
-  { name: 'Core Perpetual Sdn Bhd', percent: 70.4, chartColor: 'var(--maroon)', textColor: 'var(--maroon)' },
+  { name: 'Core Perpetual Sdn Bhd', percent: 70.4, chartColor: 'var(--brand)', textColor: 'var(--brand)' },
   { name: 'Public investors', percent: 29.6, chartColor: 'var(--saffron)', textColor: '#C8861A' },
 ]
 

@@ -7,7 +7,7 @@ interface GradientStops {
   end: number
 }
 
-/** conic-gradient with one segment per holder, e.g. "var(--maroon) 0% 70.4%, var(--saffron) 70.4% 100%". */
+/** conic-gradient with one segment per holder, e.g. "var(--brand) 0% 70.4%, var(--saffron) 70.4% 100%". */
 export function donutGradient(holders: readonly Holder[]): string {
   const { stops } = holders.reduce<GradientStops>(
     (acc, holder) => {

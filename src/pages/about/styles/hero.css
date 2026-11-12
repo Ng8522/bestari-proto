@@ -24,7 +24,7 @@
   line-height: 0.85;
   letter-spacing: -0.03em;
   text-align: center;
-  color: var(--maroon-deep);
+  color: var(--brand-deep);
 }
 
 .about .ah h1 .s1,
@@ -33,7 +33,7 @@
 }
 
 .about .ah h1 .s2 {
-  color: var(--maroon);
+  color: var(--brand);
 }
 
 /* Letters rise from 50% (no tilt) on this page; timing and stagger come from .lr__ch in theme.css. */
@@ -56,13 +56,13 @@
   font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--maroon-deep);
+  color: var(--brand-deep);
 }
 
 .about .pk {
   position: absolute;
   z-index: 2;
-  filter: drop-shadow(0 26px 26px rgba(90, 16, 19, 0.3));
+  filter: drop-shadow(0 26px 26px rgba(0, 74, 51, 0.3));
   opacity: 0;
   animation: about-pop 0.8s cubic-bezier(0.3, 1.4, 0.5, 1) forwards;
 }
@@ -164,7 +164,7 @@
 }
 
 .about .purpose .big .hl {
-  color: var(--maroon);
+  color: var(--brand);
 }
 
 .about .purpose .big .word {
