@@ -1,0 +1,199 @@
+/*
+ * Investor Resources: calendar dates, the news alerts form extras, the calculator assumptions, the FAQ accordion
+ * and the terms of use. The alerts form and calculator also use .mini-form, .check and .calc-* (styles/sections.css).
+ */
+
+.ir .rs-note a,
+.ir .alerts-privacy a,
+.ir .faq-answer a,
+.ir .terms-toc a {
+  color: var(--brand);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.ir .rs-bullets {
+  display: grid;
+  gap: 10px;
+  padding-left: 20px;
+  color: var(--ink-2);
+}
+
+/* ---------- Corporate calendar ---------- */
+.ir .cal-date {
+  font-family: var(--mono);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* ---------- News alerts ---------- */
+.ir .alert-types {
+  display: grid;
+  gap: 8px;
+  margin: 6px 0 0;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.ir .alert-types legend {
+  padding: 0 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ir .mini-form .alert-types .check {
+  margin-top: 0;
+  color: var(--ink);
+}
+
+.ir .alerts-privacy {
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.ir .alerts-done {
+  display: grid;
+  gap: 8px;
+}
+
+.ir .alert-list {
+  display: grid;
+  gap: 14px;
+}
+
+.ir .alert-list dt {
+  font-weight: 700;
+  color: var(--brand-deep);
+}
+
+.ir .alert-list dd {
+  margin-top: 2px;
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+/* ---------- FAQ accordion ---------- */
+.ir .faq {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.ir .faq-item {
+  border-bottom: 1px solid var(--line);
+}
+
+.ir .faq-item summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 4px;
+  font-weight: 600;
+  font-size: 17px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.ir .faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.ir .faq-item summary::after {
+  content: '+';
+  flex-shrink: 0;
+  font-family: var(--mono);
+  font-size: 20px;
+  line-height: 1;
+  color: var(--brand);
+}
+
+.ir .faq-item[open] summary::after {
+  content: '−';
+}
+
+.ir .faq-item summary:hover {
+  color: var(--brand);
+}
+
+.ir .faq-answer {
+  display: grid;
+  gap: 10px;
+  padding: 0 4px 20px;
+  color: var(--ink-2);
+  max-width: 72ch;
+}
+
+/* ---------- Terms of use ---------- */
+.ir .terms-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.ir .card.terms-toc {
+  position: sticky;
+  top: 120px;
+  padding: 24px;
+}
+
+.ir .terms-toc ol {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  padding-left: 20px;
+  font-size: 14px;
+}
+
+.ir .terms {
+  display: grid;
+  gap: 20px;
+}
+
+.ir .terms-list {
+  display: grid;
+  gap: 26px;
+  padding-left: 24px;
+}
+
+.ir .terms-list > li::marker {
+  font-family: var(--serif);
+  color: var(--brand);
+}
+
+.ir .terms-list section {
+  display: grid;
+  gap: 10px;
+  scroll-margin-top: 150px;
+}
+
+.ir .card.terms h3 {
+  font-size: 20px;
+}
+
+.ir .terms-list p {
+  color: var(--ink-2);
+  max-width: 75ch;
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 900px) {
+  .ir .terms-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ir .card.terms-toc {
+    position: static;
+  }
+}
+
+@media (max-width: 560px) {
+  .ir .faq-item summary {
+    font-size: 16px;
+  }
+
+  .ir .terms-list {
+    padding-left: 20px;
+  }
+}

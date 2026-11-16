@@ -4,7 +4,10 @@ import { ScrollManager } from './components/routing'
 import { ROUTES } from './content/site'
 import { AboutPage } from './pages/about/AboutPage'
 import { HomePage } from './pages/home/HomePage'
-import { InvestorsPage } from './pages/investors/InvestorsPage'
+import { IrHomePage } from './pages/investors/home/IrHomePage'
+import { IrLayout } from './pages/investors/IrLayout'
+import { IrSectionIndex, IrSubPage } from './pages/investors/IrSubPage'
+import { IrContactPage } from './pages/investors/sections/contact/ContactPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 import { ShopPage } from './pages/shop/ShopPage'
 import { SustainabilityPage } from './pages/sustainability/SustainabilityPage'
@@ -21,7 +24,12 @@ export function AppRoutes() {
         <Route path={ROUTES.shop} element={<ShopPage />} />
         <Route element={<Layout />}>
           <Route path={ROUTES.about} element={<AboutPage />} />
-          <Route path={ROUTES.investors} element={<InvestorsPage />} />
+          <Route path={ROUTES.investors} element={<IrLayout />}>
+            <Route index element={<IrHomePage />} />
+            <Route path="contact" element={<IrContactPage />} />
+            <Route path=":section" element={<IrSectionIndex />} />
+            <Route path=":section/:page" element={<IrSubPage />} />
+          </Route>
           <Route path={ROUTES.onsiteOutlets} element={<WhereToBuyPage />} />
           <Route path={ROUTES.legacyWhereToBuy} element={<Navigate to={ROUTES.onsiteOutlets} replace />} />
           <Route path={ROUTES.sustainability} element={<SustainabilityPage />} />

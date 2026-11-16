@@ -1,0 +1,176 @@
+/* Reports & Presentations: annual report year cards (with a CSS cover), prospectus rows. Phone layout at the end. */
+
+/* ---------- Annual report year cards ---------- */
+.ir .ar-years {
+  list-style: none;
+  display: grid;
+  gap: 24px;
+}
+
+.ir .card.ar-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.ir .ar-card > article {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+}
+
+.ir .ar-cover {
+  position: relative;
+  display: grid;
+  align-content: end;
+  gap: 6px;
+  min-height: 300px;
+  padding: 24px 22px;
+  color: var(--cream);
+  background:
+    radial-gradient(circle at 85% 12%, var(--saffron) 0 34px, transparent 35px),
+    linear-gradient(160deg, var(--brand) 0%, var(--brand-deep) 70%);
+}
+
+.ir .ar-cover::before {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(251, 245, 234, 0.35);
+  border-radius: 14px;
+}
+
+.ir .ar-cover-brand {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--saffron-soft);
+}
+
+.ir .ar-cover-title {
+  font-family: var(--serif);
+  font-size: 28px;
+  line-height: 1.05;
+}
+
+.ir .ar-cover-year {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--brand-tint);
+}
+
+.ir .ar-body {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+  padding: 28px 32px;
+}
+
+.ir .ar-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px 16px;
+}
+
+.ir .ar-card .ar-body h3 {
+  font-size: 24px;
+}
+
+.ir .ar-docs {
+  list-style: none;
+  display: grid;
+}
+
+.ir .ar-docs li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+
+.ir .ar-docs li > div {
+  display: grid;
+  gap: 2px;
+}
+
+.ir .ar-docs small {
+  color: var(--ink-2);
+  font-size: 13px;
+}
+
+.ir .ar-format {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--ink-2);
+}
+
+.ir .ar-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+}
+
+.ir .ar-links a,
+.ir .rp-note a {
+  color: var(--brand);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- Prospectus documents ---------- */
+.ir .pr-doc {
+  display: grid;
+  gap: 2px;
+}
+
+.ir .pr-doc small {
+  font-weight: 400;
+  color: var(--ink-2);
+  font-size: 13px;
+}
+
+.ir .pr-action {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--brand);
+  color: var(--brand);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ir .pr-action:hover {
+  background: var(--brand);
+  color: var(--cream);
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 700px) {
+  .ir .ar-card > article {
+    grid-template-columns: 1fr;
+  }
+
+  .ir .ar-cover {
+    min-height: 160px;
+  }
+}
+
+@media (max-width: 560px) {
+  .ir .ar-body {
+    padding: 22px 20px;
+  }
+
+  .ir .ar-docs li {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .ir .ar-docs li .ar-format {
+    display: none;
+  }
+}

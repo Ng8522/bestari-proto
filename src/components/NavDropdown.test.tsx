@@ -3,7 +3,8 @@ import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router'
 import { AppRoutes } from '../App'
-import { IR_SECTIONS, ROUTES } from '../content/site'
+import { IR_NAV, sectionHref } from '../content/ir-nav'
+import { ROUTES } from '../content/site'
 
 function renderAt(path: string) {
   const user = userEvent.setup()
@@ -26,10 +27,8 @@ describe('Investor Relations header dropdown', () => {
     expect(panel).not.toBeNull()
 
     const links = within(panel as HTMLElement).getAllByRole('link')
-    expect(links.map((link) => link.textContent)).toEqual(IR_SECTIONS.map((section) => section.label))
-    IR_SECTIONS.forEach((section, index) =>
-      expect(links[index]).toHaveAttribute('href', `${ROUTES.investors}#${section.id}`),
-    )
+    expect(links.map((link) => link.textContent)).toEqual(IR_NAV.map((section) => section.label))
+    IR_NAV.forEach((section, index) => expect(links[index]).toHaveAttribute('href', sectionHref(section)))
     expect(within(nav).getByRole('link', { name: 'Investor Relations' })).toHaveAttribute('href', ROUTES.investors)
   })
 
@@ -59,10 +58,10 @@ describe('Investor Relations header dropdown', () => {
     const toggle = within(nav).getByRole('button', { name: 'Investor Relations sections' })
     await user.click(toggle)
 
-    await user.click(within(nav).getByRole('link', { name: 'Financials' }))
+    await user.click(within(nav).getByRole('link', { name: 'Financial Info' }))
     expect(toggle).toHaveAttribute('aria-expanded', 'false')
     expect(menuToggle).toHaveAttribute('aria-expanded', 'false')
-    expect(document.title).toBe('Investor Relations | Bestari Food Berhad')
+    expect(document.title).toBe('Financial Highlights · Financial Info | Bestari Food Berhad')
   })
 
   it('closes when the page is clicked elsewhere', async () => {

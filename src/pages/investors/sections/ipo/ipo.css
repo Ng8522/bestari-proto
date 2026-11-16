@@ -1,0 +1,253 @@
+/* IPO Centre pages: the important-notice gate, then the page parts. Every selector is scoped under .ir. */
+
+/* ---------- Important notice gate ---------- */
+.ir .ipo-gate {
+  display: grid;
+  gap: 14px;
+  max-width: 920px;
+  border-top: 6px solid var(--saffron);
+}
+
+.ir .ipo-gate-body {
+  display: grid;
+  gap: 12px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: var(--cream);
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.ir .ipo-gate-confirm {
+  font-weight: 600;
+}
+
+.ir .ipo-gate-actions,
+.ir .ipo-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ir .ipo-gate-actions .btn-ghost,
+.ir .ipo-links .btn-ghost {
+  color: var(--brand);
+}
+
+/* The unlocked page keeps the article's spacing; focus lands here after "I agree". */
+.ir .ipo-content {
+  display: grid;
+  gap: 24px;
+}
+
+.ir .ipo-content:focus {
+  outline: none;
+}
+
+/* ---------- Shared parts ---------- */
+.ir .ipo-content .panel > .note {
+  margin-top: 0;
+}
+
+.ir .ipo-content .panel p a:not(.btn) {
+  color: var(--brand);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* The last row of the table is its total. */
+.ir .ipo-total-last tbody tr:last-child th,
+.ir .ipo-total-last tbody tr:last-child td {
+  font-weight: 700;
+  border-top: 2px solid var(--ink);
+}
+
+.ir .ipo-alloc .alloc-bar {
+  margin: 0;
+}
+
+.ir .ipo-parties {
+  margin-top: 0;
+}
+
+.ir .ipo-parties dd + dd {
+  margin-top: 0;
+}
+
+/* ---------- Numbered steps and lists ---------- */
+.ir .ipo-steps {
+  display: grid;
+  gap: 14px;
+  list-style: none;
+  counter-reset: ipo-step;
+}
+
+.ir .ipo-steps li {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  column-gap: 10px;
+  counter-increment: ipo-step;
+}
+
+.ir .ipo-steps li::before {
+  content: counter(ipo-step, decimal-leading-zero);
+  grid-row: span 2;
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--brand);
+}
+
+.ir .ipo-steps p {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.ir .ipo-step-meta {
+  margin-left: 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.ir .ipo-checklist {
+  display: grid;
+  gap: 10px;
+  padding-left: 22px;
+}
+
+/* ---------- Cards: strengths, routes to market, application channels ---------- */
+.ir .ipo-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  gap: 16px;
+  list-style: none;
+}
+
+.ir .ipo-card,
+.ir .ipo-channel,
+.ir .ipo-routes li {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding: 20px 22px;
+  border-radius: 20px;
+  background: var(--cream);
+}
+
+.ir .ipo-card-num {
+  font-family: var(--serif);
+  font-size: 28px;
+  line-height: 1;
+  color: var(--brand);
+}
+
+.ir .ipo-card h4,
+.ir .ipo-channel h4,
+.ir .ipo-routes h4 {
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.ir .ipo-card p,
+.ir .ipo-channel p,
+.ir .ipo-routes p {
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.ir .ipo-channels {
+  list-style: none;
+}
+
+.ir .ipo-routes {
+  display: grid;
+  gap: 14px;
+  list-style: none;
+}
+
+.ir .ipo-card p.ipo-route-channel,
+.ir .ipo-channel p.ipo-route-channel,
+.ir .ipo-routes p.ipo-route-channel {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.ir .ipo-segments {
+  display: grid;
+  list-style: none;
+}
+
+.ir .ipo-segments li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.ir .ipo-segments li > div {
+  display: grid;
+}
+
+.ir .ipo-segments small {
+  color: var(--ink-2);
+  font-size: 13px;
+}
+
+.ir .ipo-segment-pct {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--brand);
+  white-space: nowrap;
+}
+
+/* ---------- FAQ ---------- */
+.ir .ipo-faq {
+  display: grid;
+}
+
+.ir .ipo-faq details {
+  border-bottom: 1px solid var(--line);
+}
+
+.ir .ipo-faq summary {
+  padding: 14px 0;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ir .ipo-faq details p {
+  padding-bottom: 16px;
+  color: var(--ink-2);
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 560px) {
+  .ir .ipo-gate-actions .btn {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+
+  .ir .ipo-gate-body {
+    padding: 16px;
+  }
+
+  /* Tranche names do not fit the thin bar segments; the legend below names them. */
+  .ir .ipo-alloc .alloc-bar span {
+    display: none;
+  }
+
+  .ir .ipo-segments li {
+    align-items: flex-start;
+  }
+}

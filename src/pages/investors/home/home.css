@@ -1,0 +1,204 @@
+/* IR Home: widgets row, key figures, section directory and the alerts / contact band. */
+.ir .ir-home {
+  display: grid;
+  gap: 40px;
+  padding-block: 48px 24px;
+}
+
+.ir .home-head h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(26px, 3vw, 36px);
+  color: var(--brand);
+}
+
+.ir .home-head p {
+  margin-top: 6px;
+  color: var(--ink-2);
+}
+
+.ir .ov-stack {
+  display: grid;
+  gap: 20px;
+  align-content: start;
+}
+
+.ir .ov-stack .eyebrow {
+  margin-bottom: 10px;
+}
+
+/* ---------- Widgets ---------- */
+.ir .widgets {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.ir .widget {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ir .widget h3 {
+  font-size: 24px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--saffron);
+}
+
+.ir .widget-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.ir .widget-list li {
+  display: grid;
+  gap: 2px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.ir .widget-list time,
+.ir .widget-date {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.ir .widget-list a {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.ir .widget-list a:hover {
+  color: var(--brand);
+  text-decoration: underline;
+}
+
+.ir .widget-list small {
+  color: var(--ink-2);
+}
+
+.ir .widget-empty {
+  color: var(--ink-2);
+  font-size: 15px;
+  flex: 1;
+}
+
+.ir .widget-more {
+  margin-top: auto;
+  font-weight: 600;
+  color: var(--brand);
+}
+
+/* ---------- Section directory ---------- */
+.ir .directory {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ir .directory-card {
+  padding: 22px;
+}
+
+.ir .directory-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--brand-deep);
+}
+
+.ir .directory-head .ir-icon {
+  width: 26px;
+  height: 26px;
+  color: var(--brand);
+}
+
+.ir .directory-pages {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.ir .directory-pages a {
+  color: var(--ink-2);
+}
+
+.ir .directory-pages a:hover {
+  color: var(--brand);
+  text-decoration: underline;
+}
+
+/* ---------- Alerts + contact band ---------- */
+.ir .home-cta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.ir .cta-card {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 28px;
+  border-radius: 24px;
+  background: var(--brand);
+  color: var(--cream);
+}
+
+.ir .cta-card--light {
+  background: var(--saffron-soft);
+  color: var(--ink);
+}
+
+.ir .cta-card p {
+  opacity: 0.9;
+}
+
+.ir .cta-card .btn {
+  justify-self: start;
+  margin-top: 6px;
+}
+
+.ir .cta-card a:not(.btn) {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 1000px) {
+  .ir .widgets {
+    grid-template-columns: 1fr;
+  }
+
+  .ir .directory {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .ir .ir-home {
+    gap: 28px;
+    padding-block: 32px 16px;
+  }
+
+  .ir .directory,
+  .ir .home-cta {
+    grid-template-columns: 1fr;
+  }
+
+  .ir .cta-card {
+    padding: 22px;
+  }
+}

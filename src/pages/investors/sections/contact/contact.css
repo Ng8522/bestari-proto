@@ -1,0 +1,74 @@
+/* IR Contact page: the green IR block (styles/board-docs-contact.css) plus the details list and contact cards. */
+.ir .contact {
+  align-items: start;
+}
+
+.ir .contact-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(26px, 3vw, 36px);
+  margin-top: 8px;
+}
+
+.ir .contact-details {
+  display: grid;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.ir .contact-details dt {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--saffron-soft);
+}
+
+.ir .contact-details dd {
+  margin-top: 2px;
+  color: #fff;
+}
+
+.ir .contact-details a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.ir .contact-details .ph {
+  color: #fff;
+}
+
+.ir .enquiry-form label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand-tint);
+}
+
+.ir .contact select {
+  font: inherit;
+  font-size: 15px;
+  border: 0;
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.ir .contact select option {
+  color: var(--ink);
+}
+
+.ir .contact-address {
+  display: grid;
+  gap: 2px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+@media (max-width: 560px) {
+  .ir .contact {
+    padding: 28px 22px;
+    border-radius: 24px;
+  }
+}

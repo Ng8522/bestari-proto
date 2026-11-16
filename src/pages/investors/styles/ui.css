@@ -1,0 +1,396 @@
+/*
+ * Investor Relations UI kit (ui/*.tsx): panels, notices, key-figure tiles, tables, document actions, filters,
+ * the Annual / Quarterly switch, pagination, bar chart and donut. Phone layouts at the end.
+ */
+
+/* ---------- Panel & notice ---------- */
+.ir .panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  align-content: start;
+  min-width: 0;
+}
+
+.ir .panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px 20px;
+}
+
+.ir .panel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.ir .panel .card-sub {
+  margin-top: 4px;
+}
+
+.ir .grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.ir .grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.ir .notice {
+  display: grid;
+  gap: 4px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  border-left: 4px solid var(--brand);
+  background: var(--brand-tint);
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.ir .notice--pending {
+  border-left-color: var(--saffron);
+  background: var(--saffron-soft);
+}
+
+.ir .notice-title {
+  font-weight: 700;
+}
+
+.ir .notice a {
+  color: var(--brand-deep);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- Key-figure tiles ---------- */
+.ir .stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.ir .stat {
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: var(--cream);
+  border: 1px solid var(--line);
+}
+
+.ir .stat dt {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.ir .stat dd {
+  display: grid;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.ir .stat dd b {
+  font-size: 22px;
+  color: var(--brand-deep);
+  line-height: 1.2;
+}
+
+.ir .stat dd small {
+  color: var(--ink-2);
+  font-size: 13px;
+}
+
+.ir .pending {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--cream-2);
+  color: var(--ink-2);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---------- Tables ---------- */
+.ir .ir-table th,
+.ir .ir-table td {
+  white-space: normal;
+  vertical-align: top;
+}
+
+.ir .ir-table thead th {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  background: var(--cream);
+}
+
+.ir .ir-table tbody th {
+  font-weight: 600;
+}
+
+.ir .ir-table .al-left {
+  text-align: left;
+}
+
+.ir .ir-table .al-right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.ir .ir-table .al-center {
+  text-align: center;
+}
+
+.ir .ir-table tr.is-total th,
+.ir .ir-table tr.is-total td {
+  font-weight: 700;
+  border-top: 2px solid var(--ink);
+}
+
+.ir .table-caption {
+  caption-side: top;
+  text-align: left;
+  padding-bottom: 8px;
+  font-weight: 600;
+}
+
+.ir .doc-actions {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.ir .doc-actions a {
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--brand);
+  color: var(--brand);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ir .doc-actions a:hover {
+  background: var(--brand);
+  color: var(--cream);
+}
+
+/* ---------- Filters ---------- */
+.ir .filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px 14px;
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--cream);
+}
+
+.ir .filter-field {
+  display: grid;
+  gap: 4px;
+  min-width: 150px;
+  flex: 1 1 150px;
+}
+
+.ir .filter-field label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.ir .filter-field select,
+.ir .filter-field input {
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  font: inherit;
+  color: var(--ink);
+}
+
+.ir .panel-actions .filter-field {
+  flex: 0 0 auto;
+}
+
+.ir .filter-reset {
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ir .filter-reset:hover {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.ir .result-count {
+  color: var(--ink-2);
+  font-size: 14px;
+}
+
+/* ---------- Segmented switch ---------- */
+.ir .segmented {
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 999px;
+  background: var(--cream-2);
+}
+
+.ir .segmented button {
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.ir .segmented button[aria-pressed='true'] {
+  background: var(--saffron);
+  color: var(--ink);
+}
+
+/* ---------- Pagination ---------- */
+.ir .pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.ir .pagination button {
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: #fff;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.ir .pagination button[aria-current='page'] {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: var(--cream);
+}
+
+.ir .pagination button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* ---------- Bar chart ---------- */
+.ir .bar-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ir .bc-grid line {
+  stroke: var(--line);
+}
+
+.ir .bc-grid text,
+.ir .bc-label {
+  fill: var(--ink-2);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.ir .bc-value {
+  fill: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ir .bc-bar--tba rect {
+  fill: var(--cream);
+  stroke: var(--ink-2);
+  stroke-dasharray: 5 4;
+}
+
+/* ---------- Donut ---------- */
+.ir .donut-wrap {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.ir .donut-wrap .donut {
+  width: 220px;
+  height: 220px;
+}
+
+.ir .donut-legend {
+  display: grid;
+  gap: 12px;
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 900px) {
+  .ir .grid-2,
+  .ir .grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .ir .stat-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ir .stat dd b {
+    font-size: 18px;
+  }
+
+  .ir .filter-field {
+    flex-basis: 100%;
+  }
+
+  .ir .filter-reset {
+    width: 100%;
+  }
+
+  .ir .donut-wrap {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .ir .donut-wrap .donut {
+    width: 180px;
+    height: 180px;
+  }
+
+  .ir .bc-grid text,
+  .ir .bc-label {
+    font-size: 15px;
+  }
+
+  .ir .bc-value {
+    font-size: 16px;
+  }
+}

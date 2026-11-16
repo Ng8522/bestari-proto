@@ -3,25 +3,8 @@
  * Anything flagged `isPlaceholder` is a dashed .ph placeholder in the handoff: it renders with <Ph> and must be
  * replaced from the registered prospectus before launch. Never fill those in by guesswork.
  */
-import { IR_SECTIONS } from '../../content/site'
-
-/** In-page sections, in page order (sub-nav and scroll spy). Defined in site.ts so the header dropdown shares them. */
-export const SECTIONS = IR_SECTIONS
-
-export type SectionId = (typeof SECTIONS)[number]['id']
-
-/**
- * Sections without their own sub-nav link: each follows its group (board after corporate info, shareholding after
- * stock info), so the scroll spy keeps that group highlighted while they are on screen.
- */
-export type SubSectionId = 'board' | 'shareholding'
-
-export type PageSectionId = SectionId | SubSectionId
-
-export const SECTION_IDS: readonly SectionId[] = SECTIONS.map((section) => section.id)
-
-/** Id of the heading that names a section (used for aria-labelledby). */
-export function headingId(id: PageSectionId | 'hero' | 'glance'): string {
+/** Id of the heading that names a hero block (used for aria-labelledby). */
+export function headingId(id: 'hero' | 'glance'): string {
   return `ir-${id}-title`
 }
 
@@ -157,46 +140,7 @@ export const PROCEEDS: readonly ProceedsUse[] = [
   { number: '04', title: 'Listing expenses', description: 'Pay the estimated costs of the IPO and listing exercise.' },
 ]
 
-/** Placeholder until the prospectus RM and % breakdown is confirmed. */
-export const PROCEEDS_BREAKDOWN_PLACEHOLDER = 'add amounts & %'
-
-/* Financials (RM million, financial years ended 31 December; source: draft prospectus) */
-
-export type SeriesKey = 'revenue' | 'netProfit'
-
-export interface ChartSeries {
-  key: SeriesKey
-  label: string
-  color: string
-}
-
-export const FINANCIAL_SERIES: readonly ChartSeries[] = [
-  { key: 'revenue', label: 'Revenue', color: 'var(--saffron)' },
-  { key: 'netProfit', label: 'Net profit', color: 'var(--brand)' },
-]
-
-export interface ChartValue {
-  /** RM million. */
-  amount: number
-  /** Bar height as a % of the chart, copied from the handoff's data-h. */
-  heightPct: number
-}
-
-export interface FinancialYear {
-  label: string
-  values: Record<SeriesKey, ChartValue>
-}
-
-export const FINANCIAL_YEARS: readonly FinancialYear[] = [
-  {
-    label: 'FY2024',
-    values: { revenue: { amount: 160.69, heightPct: 91.6 }, netProfit: { amount: 16.54, heightPct: 9.4 } },
-  },
-  {
-    label: 'FY2025',
-    values: { revenue: { amount: 175.32, heightPct: 100 }, netProfit: { amount: 31.03, heightPct: 17.7 } },
-  },
-]
+/* Key figures (financial years ended 31 December; source: draft prospectus) */
 
 export type KpiTone = 'deep' | 'brand' | 'saffron'
 
@@ -220,21 +164,7 @@ export const KPIS: readonly Kpi[] = [
 
 /* Shareholding after the IPO */
 
-export interface Holder {
-  name: string
-  percent: number
-  /** Donut segment colour. */
-  chartColor: string
-  /** Colour of the percentage in the heading (darker than the chart colour where needed for contrast). */
-  textColor: string
-}
-
 export const POST_IPO_SHARES = '450.0m'
-
-export const HOLDERS: readonly Holder[] = [
-  { name: 'Core Perpetual Sdn Bhd', percent: 70.4, chartColor: 'var(--brand)', textColor: 'var(--brand)' },
-  { name: 'Public investors', percent: 29.6, chartColor: 'var(--saffron)', textColor: '#C8861A' },
-]
 
 export interface Owner {
   name: string
@@ -250,40 +180,7 @@ export const CORE_PERPETUAL_OWNERS: readonly Owner[] = [
   { name: 'Lai Jia Maine', percent: 10 },
 ]
 
-/* Board & key senior management */
-
-export interface BoardLead {
-  title: string
-  name: string
-  summary: string
-}
-
-export const BOARD_LEAD: BoardLead = {
-  title: 'Managing Director',
-  name: 'Lai Kok Siong',
-  summary: 'Leads the Group’s strategy and its growth in food premixes.',
-}
-
-export interface BoardMember {
-  name: string
-  role: string
-  /** Which line is still a placeholder to be filled from the registered prospectus. */
-  placeholder?: 'name' | 'role'
-}
-
-export const BOARD_MEMBERS: readonly BoardMember[] = [
-  { name: 'Gabriel Lai Yung-Yao', role: 'Head of Sales & Marketing' },
-  { name: 'Gary Lai Yung-Hui', role: 'Head of Production' },
-  { name: 'Fong Zhoon Zhien', role: 'Title per prospectus', placeholder: 'role' },
-  { name: 'Chang Kok Leong', role: 'Title per prospectus', placeholder: 'role' },
-  { name: 'Independent Director', role: 'Name per prospectus', placeholder: 'name' },
-  { name: 'Independent Director', role: 'Name per prospectus', placeholder: 'name' },
-]
-
-export const BOARD_NOTE =
-  'The full board, with independent non-executive directors and committee composition, will be updated from the registered prospectus.'
-
-/* Documents (the lists themselves live in content/sections.ts and content/financials.ts) */
+/* Documents */
 
 export interface IrDocument {
   title: string
