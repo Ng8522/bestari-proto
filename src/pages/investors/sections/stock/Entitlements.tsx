@@ -3,10 +3,13 @@ import { DIVIDEND_POLICY } from '../../content/sections'
 import { DataTable, type Column } from '../../ui/DataTable'
 import { FilterBar, SelectField, type Option } from '../../ui/Filters'
 import { Notice, Panel } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { ALL, entitlementYears, filterEntitlements, type EntitlementCriteria } from './calc'
 import { ENTITLEMENT_TYPE_LABELS, ENTITLEMENTS, KEY_DATES, type Entitlement, type EntitlementType } from './content'
 import { todayIso } from './dates'
 import { formatIsoDate } from './format'
+
+type EntitlementTab = 'policy' | 'declared' | 'key-dates'
 
 const ALL_CRITERIA: EntitlementCriteria = { year: ALL, type: ALL }
 
@@ -37,12 +40,15 @@ const ENTITLEMENT_COLUMNS: readonly Column<Entitlement>[] = [
 
 /** Stock Info › Entitlements: the dividend policy and every declared entitlement with its key dates. */
 export function Entitlements(): ReactElement {
+  return <SectionTabs tabs={ENTITLEMENT_TABS} />
+}
+
+function DeclaredEntitlements(): ReactElement {
   const [criteria, setCriteria] = useState<EntitlementCriteria>(ALL_CRITERIA)
   const rows = filterEntitlements(ENTITLEMENTS, criteria)
 
   return (
     <>
-      <DividendPolicy />
       <Panel title="Declared entitlements" sub="Newest first">
         <FilterBar label="Filter entitlements" onReset={() => setCriteria(ALL_CRITERIA)}>
           <SelectField
@@ -65,15 +71,16 @@ export function Entitlements(): ReactElement {
           columns={ENTITLEMENT_COLUMNS}
           rows={rows}
           rowKey={(row) => row.id}
-          emptyMessage={ENTITLEMENTS.length === 0 ? 'No entitlements declared yet.' : 'No entitlements match these filters.'}
+          emptyMessage={
+            ENTITLEMENTS.length === 0 ? 'No entitlements declared yet.' : 'No entitlements match these filters.'
+          }
           minWidth={860}
         />
       </Panel>
       <Notice tone="pending">
-        Bestari Food Berhad is not listed yet. Each dividend or other entitlement is added here when it is announced
-        to Bursa Malaysia.
+        Bestari Food Berhad is not listed yet. Each dividend or other entitlement is added here when it is announced to
+        Bursa Malaysia.
       </Notice>
-      <KeyDates />
     </>
   )
 }
@@ -103,3 +110,9 @@ function KeyDates(): ReactElement {
     </Panel>
   )
 }
+
+const ENTITLEMENT_TABS: readonly SectionTab<EntitlementTab>[] = [
+  { id: 'policy', label: 'Dividend policy', content: <DividendPolicy /> },
+  { id: 'declared', label: 'Declared entitlements', content: <DeclaredEntitlements /> },
+  { id: 'key-dates', label: 'Key dates', content: <KeyDates /> },
+]

@@ -3,6 +3,7 @@ import { IPO_TERMS, PROCEEDS_TIMEFRAMES } from '../../content/prospectus'
 import { PROCEEDS, PROCEEDS_SOURCE } from '../../data'
 import { DataTable, type Column } from '../../ui/DataTable'
 import { Notice, Panel } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { SourceNote } from './parts'
 
 interface ProceedsRow {
@@ -48,52 +49,72 @@ const STATUS_COLUMNS: readonly Column<ProceedsRow>[] = [
   { key: 'deadline', header: 'Intended timeframe', render: (row) => row.timeframe },
 ]
 
+type ProceedsTab = 'utilisation' | 'facility' | 'status'
+
 /** Utilisation of Proceeds: the planned uses of the public issue money, and (after listing) progress against them. */
 export function IpoProceedsPage() {
+  return <SectionTabs tabs={PROCEEDS_TABS} />
+}
+
+function Utilisation() {
   return (
-    <>
-      <Panel title="Utilisation of proceeds" sub={PROCEEDS_SOURCE}>
-        <div className="ipo-total-last">
-          <DataTable
-            caption="Planned utilisation of the public issue proceeds"
-            columns={PROCEEDS_COLUMNS}
-            rows={PROCEEDS_ROWS}
-            rowKey={(row) => row.purpose}
-            minWidth={820}
-          />
-        </div>
-        <SourceNote>
-          The draft leaves the amounts and percentages blank; they will be added from the registered prospectus.
-        </SourceNote>
-      </Panel>
-      <div className="grid-2">
-        <Panel title="The new production facility">
-          <p>{descriptionOf('New production facility')}</p>
-          <p>
-            The new facility will support a planned move into ingredient processing and a wider product range. The
-            machinery and equipment budget covers: {descriptionOf('Machinery & equipment').toLowerCase()}
-          </p>
-        </Panel>
-        <Panel title="Offer for sale">
-          <p>
-            The offer for sale ({IPO_TERMS.offerForSale.toLowerCase()}) is made by the selling shareholder,{' '}
-            {IPO_TERMS.sellingShareholder}. The money from those shares goes to the selling shareholder, not to the
-            Group, so only the public issue ({IPO_TERMS.publicIssue}) funds the plans above.
-          </p>
-        </Panel>
-      </div>
-      <Panel title="Status of utilisation" sub="Proposed against actual use, RM’000">
-        <Notice tone="pending">
-          Progress on the use of proceeds is reported after listing, in our quarterly results. It will be shown here.
-        </Notice>
+    <Panel title="Utilisation of proceeds" sub={PROCEEDS_SOURCE}>
+      <div className="ipo-total-last">
         <DataTable
-          caption="Status of utilisation of proceeds"
-          columns={STATUS_COLUMNS}
-          rows={PROCEEDS_ROWS.slice(0, PROCEEDS.length)}
+          caption="Planned utilisation of the public issue proceeds"
+          columns={PROCEEDS_COLUMNS}
+          rows={PROCEEDS_ROWS}
           rowKey={(row) => row.purpose}
-          minWidth={640}
+          minWidth={820}
         />
-      </Panel>
-    </>
+      </div>
+      <SourceNote>
+        The draft leaves the amounts and percentages blank; they will be added from the registered prospectus.
+      </SourceNote>
+    </Panel>
   )
 }
+
+function FacilityAndOffer() {
+  return (
+    <div className="grid-2">
+      <Panel title="The new production facility">
+        <p>{descriptionOf('New production facility')}</p>
+        <p>
+          The new facility will support a planned move into ingredient processing and a wider product range. The
+          machinery and equipment budget covers: {descriptionOf('Machinery & equipment').toLowerCase()}
+        </p>
+      </Panel>
+      <Panel title="Offer for sale">
+        <p>
+          The offer for sale ({IPO_TERMS.offerForSale.toLowerCase()}) is made by the selling shareholder,{' '}
+          {IPO_TERMS.sellingShareholder}. The money from those shares goes to the selling shareholder, not to the
+          Group, so only the public issue ({IPO_TERMS.publicIssue}) funds the plans under the Utilisation tab.
+        </p>
+      </Panel>
+    </div>
+  )
+}
+
+function UtilisationStatus() {
+  return (
+    <Panel title="Status of utilisation" sub="Proposed against actual use, RM’000">
+      <Notice tone="pending">
+        Progress on the use of proceeds is reported after listing, in our quarterly results. It will be shown here.
+      </Notice>
+      <DataTable
+        caption="Status of utilisation of proceeds"
+        columns={STATUS_COLUMNS}
+        rows={PROCEEDS_ROWS.slice(0, PROCEEDS.length)}
+        rowKey={(row) => row.purpose}
+        minWidth={640}
+      />
+    </Panel>
+  )
+}
+
+const PROCEEDS_TABS: readonly SectionTab<ProceedsTab>[] = [
+  { id: 'utilisation', label: 'Utilisation', content: <Utilisation /> },
+  { id: 'facility', label: 'Facility & offer', content: <FacilityAndOffer /> },
+  { id: 'status', label: 'Status', content: <UtilisationStatus /> },
+]

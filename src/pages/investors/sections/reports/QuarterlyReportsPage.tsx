@@ -5,6 +5,7 @@ import { FINANCIAL_YEAR_LABELS } from '../../content/prospectus'
 import { DataTable, type Column } from '../../ui/DataTable'
 import { SelectField, Segmented } from '../../ui/Filters'
 import { Notice, Panel, Pending } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { QUARTERLY_VIEWS, QUARTERLY_YEAR_OPTIONS, type QuarterlyView } from './content'
 import {
   FINANCIAL_YEAR_END,
@@ -16,6 +17,7 @@ import {
 } from './reporting'
 
 type QuarterlyYear = (typeof QUARTERLY_YEAR_OPTIONS)[number]['value']
+type QuarterlyTab = 'results' | 'deadlines'
 
 const NO_VALUE = '—'
 const MONTHS_PER_QUARTER = 3
@@ -49,11 +51,6 @@ const DEADLINE_COLUMNS: readonly Column<Quarter>[] = [
 
 /** Reports & Presentations › Quarterly Reports: results by financial year, per quarter or year to date. */
 export function QuarterlyReportsPage() {
-  const [year, setYear] = useState<QuarterlyYear>(QUARTERLY_YEAR_OPTIONS[0].value)
-  const [view, setView] = useState<QuarterlyView>('individual')
-  const yearLabel = QUARTERLY_YEAR_OPTIONS.find((option) => option.value === year)?.label ?? ''
-  const viewCaption = QUARTERLY_VIEWS.find((option) => option.value === view)?.caption ?? ''
-
   return (
     <>
       <Notice tone="pending" title="Results are published after listing">
@@ -61,37 +58,58 @@ export function QuarterlyReportsPage() {
         {QUARTERLY_REPORT_MONTHS} months of the quarter end. The first financial year we report depends on the
         listing date.
       </Notice>
-      <Panel
-        title="Quarterly results"
-        sub="Revenue and profit after tax in RM’000; earnings per share (EPS) in sen."
-        actions={
-          <>
-            <SelectField id="ir-quarterly-year" label="Financial year" value={year} options={QUARTERLY_YEAR_OPTIONS} onChange={setYear} />
-            <Segmented label="Results period" options={QUARTERLY_VIEWS} value={view} onChange={setView} />
-          </>
-        }
-      >
-        <DataTable
-          caption={`Quarterly results: ${yearLabel}, ${viewCaption}`}
-          columns={resultColumns(view)}
-          rows={QUARTERS}
-          rowKey={(quarter) => quarter.id}
-          minWidth={760}
-        />
-        <p className="note rp-note">
-          {view === 'cumulative'
-            ? 'Cumulative figures add up the quarters from the start of the financial year to the period end.'
-            : 'Individual-quarter figures cover the three months to each quarter end.'}{' '}
-          Audited figures for {FINANCIAL_YEAR_LABELS[0]} to {FINANCIAL_YEAR_LABELS[FINANCIAL_YEAR_LABELS.length - 1]}{' '}
-          are under <Link to={irPath('financial-info', 'statements')}>Financial Statements</Link>.
-        </p>
-      </Panel>
-      <Panel
-        title="When results are announced"
-        sub={`Our financial year ends on ${FINANCIAL_YEAR_END}. Deadlines under the Bursa Malaysia Main Market Listing Requirements.`}
-      >
-        <DataTable caption="Quarterly results announcement deadlines" columns={DEADLINE_COLUMNS} rows={QUARTERS} rowKey={(quarter) => quarter.id} minWidth={420} />
-      </Panel>
+      <SectionTabs tabs={QUARTERLY_TABS} />
     </>
   )
 }
+
+function QuarterlyResults() {
+  const [year, setYear] = useState<QuarterlyYear>(QUARTERLY_YEAR_OPTIONS[0].value)
+  const [view, setView] = useState<QuarterlyView>('individual')
+  const yearLabel = QUARTERLY_YEAR_OPTIONS.find((option) => option.value === year)?.label ?? ''
+  const viewCaption = QUARTERLY_VIEWS.find((option) => option.value === view)?.caption ?? ''
+
+  return (
+    <Panel
+      title="Quarterly results"
+      sub="Revenue and profit after tax in RM’000; earnings per share (EPS) in sen."
+      actions={
+        <>
+          <SelectField id="ir-quarterly-year" label="Financial year" value={year} options={QUARTERLY_YEAR_OPTIONS} onChange={setYear} />
+          <Segmented label="Results period" options={QUARTERLY_VIEWS} value={view} onChange={setView} />
+        </>
+      }
+    >
+      <DataTable
+        caption={`Quarterly results: ${yearLabel}, ${viewCaption}`}
+        columns={resultColumns(view)}
+        rows={QUARTERS}
+        rowKey={(quarter) => quarter.id}
+        minWidth={760}
+      />
+      <p className="note rp-note">
+        {view === 'cumulative'
+          ? 'Cumulative figures add up the quarters from the start of the financial year to the period end.'
+          : 'Individual-quarter figures cover the three months to each quarter end.'}{' '}
+        Audited figures for {FINANCIAL_YEAR_LABELS[0]} to {FINANCIAL_YEAR_LABELS[FINANCIAL_YEAR_LABELS.length - 1]}{' '}
+        are under <Link to={irPath('financial-info', 'statements')}>Financial Statements</Link>.
+      </p>
+    </Panel>
+  )
+}
+
+function AnnouncementDeadlines() {
+  return (
+    <Panel
+      title="When results are announced"
+      sub={`Our financial year ends on ${FINANCIAL_YEAR_END}. Deadlines under the Bursa Malaysia Main Market Listing Requirements.`}
+    >
+      <DataTable caption="Quarterly results announcement deadlines" columns={DEADLINE_COLUMNS} rows={QUARTERS} rowKey={(quarter) => quarter.id} minWidth={420} />
+    </Panel>
+  )
+}
+
+const QUARTERLY_TABS: readonly SectionTab<QuarterlyTab>[] = [
+  { id: 'results', label: 'Quarterly results', content: <QuarterlyResults /> },
+  { id: 'deadlines', label: 'Announcement dates', content: <AnnouncementDeadlines /> },
+]

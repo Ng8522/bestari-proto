@@ -3,6 +3,7 @@ import { COMPANY } from '../../../../content/site'
 import { CORPORATE_DIRECTORY } from '../../content/prospectus'
 import { IR_EMAIL_PLACEHOLDER } from '../../data'
 import { PAGE_TITLE_ID, PageHeader, Panel } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { EnquiryForm } from './EnquiryForm'
 import './contact.css'
 
@@ -44,48 +45,66 @@ export function IrContactPage() {
   return (
     <article className="wrap wrap--wide ir-page" aria-labelledby={PAGE_TITLE_ID}>
       <PageHeader title="Talk to our IR team" intro="Contact us for any matter relating to investor relations." />
-      <div className="contact reveal">
-        <div>
-          <p className="eyebrow">Investor relations</p>
-          <h3 className="contact-title">{COMPANY.name}</h3>
-          <dl className="contact-details">
-            <div>
-              <dt>Contact person</dt>
-              <dd>
-                <Ph>Name per company</Ph>
-              </dd>
-            </div>
-            <div>
-              <dt>Telephone</dt>
-              <dd>
-                <a href={COMPANY.phone.href}>{COMPANY.phone.label}</a>
-              </dd>
-            </div>
-            <div>
-              <dt>Email</dt>
-              <dd>
-                <Ph>{IR_EMAIL_PLACEHOLDER}</Ph>
-              </dd>
-            </div>
-            <div>
-              <dt>Head office</dt>
-              <dd>{COMPANY.addressLines.join(' ')}</dd>
-            </div>
-          </dl>
-        </div>
-        <EnquiryForm />
-      </div>
-      <div className="grid-2">
-        {OTHER_CONTACTS.map((card) => (
-          <Panel key={card.title} title={card.title} sub={card.role}>
-            <address className="contact-address">
-              {card.lines.map((line) => (
-                <span key={line}>{line}</span>
-              ))}
-            </address>
-          </Panel>
-        ))}
-      </div>
+      <SectionTabs tabs={CONTACT_TABS} />
     </article>
   )
 }
+
+function IrTeam() {
+  return (
+    <div className="contact reveal">
+      <div>
+        <p className="eyebrow">Investor relations</p>
+        <h3 className="contact-title">{COMPANY.name}</h3>
+        <dl className="contact-details">
+          <div>
+            <dt>Contact person</dt>
+            <dd>
+              <Ph>Name per company</Ph>
+            </dd>
+          </div>
+          <div>
+            <dt>Telephone</dt>
+            <dd>
+              <a href={COMPANY.phone.href}>{COMPANY.phone.label}</a>
+            </dd>
+          </div>
+          <div>
+            <dt>Email</dt>
+            <dd>
+              <Ph>{IR_EMAIL_PLACEHOLDER}</Ph>
+            </dd>
+          </div>
+          <div>
+            <dt>Head office</dt>
+            <dd>{COMPANY.addressLines.join(' ')}</dd>
+          </div>
+        </dl>
+      </div>
+      <EnquiryForm />
+    </div>
+  )
+}
+
+function OtherContacts() {
+  return (
+    <div className="grid-2">
+      {OTHER_CONTACTS.map((card) => (
+        <Panel key={card.title} title={card.title} sub={card.role}>
+          <address className="contact-address">
+            {card.lines.map((line) => (
+              <span key={line}>{line}</span>
+            ))}
+          </address>
+        </Panel>
+      ))}
+    </div>
+  )
+}
+
+type ContactTab = 'ir-team' | 'others'
+
+const CONTACT_TABS: readonly SectionTab<ContactTab>[] = [
+  { id: 'ir-team', label: 'IR team', content: <IrTeam /> },
+  { id: 'others', label: 'Registrar & advisers', content: <OtherContacts /> },
+]

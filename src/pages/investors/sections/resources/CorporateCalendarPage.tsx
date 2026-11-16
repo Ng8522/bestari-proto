@@ -4,6 +4,7 @@ import { MILESTONE_LABELS } from '../../data'
 import { DataTable, type Column } from '../../ui/DataTable'
 import { FilterBar, SelectField } from '../../ui/Filters'
 import { Notice, Panel } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { FINANCIAL_YEAR_END } from '../reports/reporting'
 import {
   CALENDAR_ROWS,
@@ -42,8 +43,35 @@ const RECURRING_COLUMNS: readonly Column<RecurringDate>[] = [
   { key: 'basis', header: 'Set by', render: (row) => row.basis },
 ]
 
+type CalendarTab = 'key-dates' | 'regular-dates'
+
 /** Investor Resources › Corporate Calendar: IPO milestones and shareholder dates, by year and status. */
 export function CorporateCalendarPage() {
+  return (
+    <>
+      <Notice tone="pending" title="More dates after listing">
+        Once we are listed, this calendar will add each results announcement, general meeting and entitlement date
+        as we announce it to Bursa Malaysia.
+      </Notice>
+      <SectionTabs tabs={CALENDAR_TABS} />
+    </>
+  )
+}
+
+function RegularDates() {
+  return (
+    <Panel title="Regular dates after listing" sub={`The time limits every Main Market company works to, counted from our ${FINANCIAL_YEAR_END} year end.`}>
+      <DataTable caption="Regular reporting dates" columns={RECURRING_COLUMNS} rows={RECURRING_DATES} rowKey={(row) => row.event} minWidth={620} />
+    </Panel>
+  )
+}
+
+const CALENDAR_TABS: readonly SectionTab<CalendarTab>[] = [
+  { id: 'key-dates', label: 'Key dates', content: <KeyDates /> },
+  { id: 'regular-dates', label: 'Regular dates', content: <RegularDates /> },
+]
+
+function KeyDates() {
   const [year, setYear] = useState<YearFilter>('all')
   const [status, setStatus] = useState<StatusFilter>('all')
   const rows = filterCalendar(CALENDAR_ROWS, year, status)
@@ -54,31 +82,22 @@ export function CorporateCalendarPage() {
   }
 
   return (
-    <>
-      <Panel title="Key dates" sub="IPO milestones and shareholder dates. Dates shown as TBA are confirmed in the registered prospectus or announced to Bursa Malaysia.">
-        <FilterBar label="Filter the corporate calendar" onReset={reset}>
-          <SelectField id="ir-calendar-year" label="Year" value={year} options={YEAR_OPTIONS} onChange={setYear} />
-          <SelectField id="ir-calendar-status" label="Status" value={status} options={STATUS_OPTIONS} onChange={setStatus} />
-        </FilterBar>
-        <p className="result-count" role="status">
-          {rows.length} {rows.length === 1 ? 'event' : 'events'}
-        </p>
-        <DataTable
-          caption="Corporate calendar"
-          columns={EVENT_COLUMNS}
-          rows={rows}
-          rowKey={(row) => row.event}
-          emptyMessage="No events match these filters."
-          minWidth={680}
-        />
-      </Panel>
-      <Panel title="Regular dates after listing" sub={`The time limits every Main Market company works to, counted from our ${FINANCIAL_YEAR_END} year end.`}>
-        <DataTable caption="Regular reporting dates" columns={RECURRING_COLUMNS} rows={RECURRING_DATES} rowKey={(row) => row.event} minWidth={620} />
-      </Panel>
-      <Notice tone="pending" title="More dates after listing">
-        Once we are listed, this calendar will add each results announcement, general meeting and entitlement date
-        as we announce it to Bursa Malaysia.
-      </Notice>
-    </>
+    <Panel title="Key dates" sub="IPO milestones and shareholder dates. Dates shown as TBA are confirmed in the registered prospectus or announced to Bursa Malaysia.">
+      <FilterBar label="Filter the corporate calendar" onReset={reset}>
+        <SelectField id="ir-calendar-year" label="Year" value={year} options={YEAR_OPTIONS} onChange={setYear} />
+        <SelectField id="ir-calendar-status" label="Status" value={status} options={STATUS_OPTIONS} onChange={setStatus} />
+      </FilterBar>
+      <p className="result-count" role="status">
+        {rows.length} {rows.length === 1 ? 'event' : 'events'}
+      </p>
+      <DataTable
+        caption="Corporate calendar"
+        columns={EVENT_COLUMNS}
+        rows={rows}
+        rowKey={(row) => row.event}
+        emptyMessage="No events match these filters."
+        minWidth={680}
+      />
+    </Panel>
   )
 }

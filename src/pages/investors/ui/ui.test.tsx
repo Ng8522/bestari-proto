@@ -1,12 +1,14 @@
 import { describe, expect, it } from 'vitest'
 import { render, renderHook, screen, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { MemoryRouter } from 'react-router'
 import { BarChart, niceMax } from './BarChart'
 import { DataTable, DocTable } from './DataTable'
 import { Donut, donutGradient } from './Donut'
 import { FilterBar, InputField, Segmented, SelectField, isWithinRange } from './Filters'
 import { Pagination, usePagination } from './Pagination'
-import { Notice, Panel, StatGrid } from './PageParts'
+import { Notice, PageHeader, Panel, StatGrid } from './PageParts'
+import { SectionTabs } from './SectionTabs'
 import { emailError } from './validation'
 
 describe('niceMax', () => {
@@ -167,6 +169,59 @@ describe('page parts', () => {
     expect(screen.getByText('TBA')).toHaveClass('ph')
   })
 })
+
+describe('SectionTabs', () => {
+  it('shows one section at a time, named by the page title, and moves with the arrow keys', async () => {
+    const user = userEvent.setup()
+    render(
+      <MemoryRouter>
+        <PageHeader title="Reports" />
+        <SectionTabs tabs={SECTION_TABS} />
+      </MemoryRouter>,
+    )
+    expect(screen.getByRole('tablist', { name: 'Reports' })).toHaveClass('tabs-line')
+    expect(screen.getByText('Annual body')).toBeVisible()
+    expect(screen.getByText('Quarterly body')).not.toBeVisible()
+
+    await user.click(screen.getByRole('tab', { name: 'Annual' }))
+    await user.keyboard('{ArrowRight}')
+    expect(screen.getByRole('tab', { name: 'Quarterly' })).toHaveAttribute('aria-selected', 'true')
+    expect(screen.getByRole('tab', { name: 'Quarterly' })).toHaveFocus()
+    expect(screen.getByRole('tabpanel', { name: 'Quarterly' })).toHaveTextContent('Quarterly body')
+    expect(screen.getByText('Annual body')).not.toBeVisible()
+  })
+
+  it('opens the tab holding the element named in the URL hash', () => {
+    render(
+      <MemoryRouter initialEntries={['/reports#q-notes']}>
+        <PageHeader title="Reports" />
+        <SectionTabs tabs={SECTION_TABS} />
+      </MemoryRouter>,
+    )
+    expect(screen.getByRole('tab', { name: 'Quarterly' })).toHaveAttribute('aria-selected', 'true')
+    expect(screen.getByText('Quarterly body')).toBeVisible()
+  })
+
+  it('follows the tab chosen by the page when controlled', async () => {
+    const user = userEvent.setup()
+    const picks: string[] = []
+    render(
+      <MemoryRouter>
+        <PageHeader title="Reports" />
+        <SectionTabs tabs={SECTION_TABS} activeId="quarterly" onActiveChange={(id) => picks.push(id)} />
+      </MemoryRouter>,
+    )
+    expect(screen.getByText('Quarterly body')).toBeVisible()
+    await user.click(screen.getByRole('tab', { name: 'Annual' }))
+    expect(picks).toEqual(['annual'])
+    expect(screen.getByText('Quarterly body')).toBeVisible()
+  })
+})
+
+const SECTION_TABS = [
+  { id: 'annual', label: 'Annual', content: <p>Annual body</p> },
+  { id: 'quarterly', label: 'Quarterly', content: <p id="q-notes">Quarterly body</p> },
+] as const
 
 describe('emailError', () => {
   it.each([

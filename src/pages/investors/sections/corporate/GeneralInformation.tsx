@@ -5,6 +5,7 @@ import { irPath } from '../../../../content/ir-nav'
 import { COMPANY } from '../../../../content/site'
 import { CORPORATE_DIRECTORY, PROSPECTUS_SOURCE, type DirectoryEntry } from '../../content/prospectus'
 import { Panel } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { AboutGroup, BusinessActivities } from './AboutGroup'
 
 interface DirectoryRow {
@@ -40,34 +41,48 @@ const DIRECTORY_ROWS: readonly DirectoryRow[] = [
   ...CONTACT_ROWS,
 ]
 
+type GeneralTab = 'directory' | 'about'
+
 /** Corporate Info › General Information: the corporate directory, what the Group does and its activities. */
 export function GeneralInformation(): ReactElement {
+  return <SectionTabs tabs={GENERAL_TABS} />
+}
+
+function CorporateDirectory() {
   return (
-    <>
-      <Panel title="Corporate directory" sub={`Source: ${PROSPECTUS_SOURCE}.`}>
-        <dl className="corp-dir">
-          {DIRECTORY_ROWS.map((row) => (
-            <div key={row.label} className="corp-dir-row">
-              <dt>{row.label}</dt>
-              <dd>{row.value}</dd>
-            </div>
-          ))}
-        </dl>
-        <p className="note">
-          Dashed values are confirmed at listing or in the registered prospectus, and will be updated here.
-        </p>
-      </Panel>
-      <div className="grid-2">
-        <Panel title="About the Group">
-          <AboutGroup />
-        </Panel>
-        <Panel title="Business activities" sub="Through the Group’s subsidiaries">
-          <BusinessActivities />
-          <Link className="corp-more" to={irPath('corporate-info', 'corporate-structure')}>
-            See the corporate structure <span aria-hidden="true">→</span>
-          </Link>
-        </Panel>
-      </div>
-    </>
+    <Panel title="Corporate directory" sub={`Source: ${PROSPECTUS_SOURCE}.`}>
+      <dl className="corp-dir">
+        {DIRECTORY_ROWS.map((row) => (
+          <div key={row.label} className="corp-dir-row">
+            <dt>{row.label}</dt>
+            <dd>{row.value}</dd>
+          </div>
+        ))}
+      </dl>
+      <p className="note">
+        Dashed values are confirmed at listing or in the registered prospectus, and will be updated here.
+      </p>
+    </Panel>
   )
 }
+
+function AboutTheGroup() {
+  return (
+    <div className="grid-2">
+      <Panel title="About the Group">
+        <AboutGroup />
+      </Panel>
+      <Panel title="Business activities" sub="Through the Group’s subsidiaries">
+        <BusinessActivities />
+        <Link className="corp-more" to={irPath('corporate-info', 'corporate-structure')}>
+          See the corporate structure <span aria-hidden="true">→</span>
+        </Link>
+      </Panel>
+    </div>
+  )
+}
+
+const GENERAL_TABS: readonly SectionTab<GeneralTab>[] = [
+  { id: 'directory', label: 'Corporate directory', content: <CorporateDirectory /> },
+  { id: 'about', label: 'About the Group', content: <AboutTheGroup /> },
+]

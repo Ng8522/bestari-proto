@@ -3,6 +3,7 @@ import { CORE_PERPETUAL_OWNERS, POST_IPO_SHARES, type Owner } from '../../data'
 import { DataTable, type Column } from '../../ui/DataTable'
 import { Donut, type DonutSlice } from '../../ui/Donut'
 import { Panel } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { SourceNote } from './parts'
 
 const HOLDING_COLOURS: readonly string[] = ['var(--brand)', 'var(--saffron)', 'var(--ink-2)']
@@ -56,41 +57,55 @@ const OWNER_COLUMNS: readonly Column<Owner>[] = [
   { key: 'percent', header: '% of Core Perpetual', render: (owner) => owner.percent, align: 'right' },
 ]
 
+type ShareholdingTab = 'after-ipo' | 'owners'
+
 /** Shareholding Structure: who owns Bestari Food Berhad after the IPO, and who owns the selling shareholder. */
 export function IpoShareholdingPage() {
+  return <SectionTabs tabs={SHAREHOLDING_TABS} />
+}
+
+function AfterIpo() {
   return (
-    <>
-      <Panel title="Shareholding after the IPO" sub={`Percentage of the enlarged share capital of ${IPO_TERMS.enlargedShares}`}>
-        <Donut
-          label="Shareholding after the IPO"
-          slices={HOLDING_SLICES}
-          centre={
-            <span>
-              <b>{POST_IPO_SHARES}</b>shares post-IPO
-            </span>
-          }
-        />
-        <div className="ipo-total-last">
-          <DataTable
-            caption="Shareholding after the IPO"
-            columns={HOLDING_COLUMNS}
-            rows={HOLDING_ROWS}
-            rowKey={(row) => row.label}
-            minWidth={520}
-          />
-        </div>
-        <SourceNote>Final figures will be in the registered prospectus.</SourceNote>
-      </Panel>
-      <Panel title={`Shareholders of ${IPO_TERMS.sellingShareholder}`} sub="The major shareholder and selling shareholder">
+    <Panel title="Shareholding after the IPO" sub={`Percentage of the enlarged share capital of ${IPO_TERMS.enlargedShares}`}>
+      <Donut
+        label="Shareholding after the IPO"
+        slices={HOLDING_SLICES}
+        centre={
+          <span>
+            <b>{POST_IPO_SHARES}</b>shares post-IPO
+          </span>
+        }
+      />
+      <div className="ipo-total-last">
         <DataTable
-          caption={`Shareholders of ${IPO_TERMS.sellingShareholder}`}
-          columns={OWNER_COLUMNS}
-          rows={CORE_PERPETUAL_OWNERS}
-          rowKey={(owner) => owner.name}
+          caption="Shareholding after the IPO"
+          columns={HOLDING_COLUMNS}
+          rows={HOLDING_ROWS}
+          rowKey={(row) => row.label}
           minWidth={520}
         />
-        <SourceNote />
-      </Panel>
-    </>
+      </div>
+      <SourceNote>Final figures will be in the registered prospectus.</SourceNote>
+    </Panel>
   )
 }
+
+function SellingShareholderOwners() {
+  return (
+    <Panel title={`Shareholders of ${IPO_TERMS.sellingShareholder}`} sub="The major shareholder and selling shareholder">
+      <DataTable
+        caption={`Shareholders of ${IPO_TERMS.sellingShareholder}`}
+        columns={OWNER_COLUMNS}
+        rows={CORE_PERPETUAL_OWNERS}
+        rowKey={(owner) => owner.name}
+        minWidth={520}
+      />
+      <SourceNote />
+    </Panel>
+  )
+}
+
+const SHAREHOLDING_TABS: readonly SectionTab<ShareholdingTab>[] = [
+  { id: 'after-ipo', label: 'After the IPO', content: <AfterIpo /> },
+  { id: 'owners', label: 'Selling shareholder', content: <SellingShareholderOwners /> },
+]

@@ -4,6 +4,7 @@ import { CORE_PERPETUAL_OWNERS, POST_IPO_SHARES, type Owner } from '../../data'
 import { DataTable, type Column } from '../../ui/DataTable'
 import { Donut, type DonutSlice } from '../../ui/Donut'
 import { Notice, Panel, Pending } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { distributionTotal } from './calc'
 import { DISTRIBUTION, FIRST_RECORD, FIVE_PERCENT_SHARES, SHARES_IN_ISSUE, type DistributionRow } from './content'
 import { formatCount, formatPercent, orDash } from './format'
@@ -23,8 +24,14 @@ const OWNER_COLUMNS: readonly Column<Owner>[] = [
   { key: 'percent', header: '% of Core Perpetual', render: (owner) => `${owner.percent}%`, align: 'right' },
 ]
 
+type DistributionTab = 'size' | 'listing'
+
 /** Stock Info › Distribution of Shareholdings: holders by size of holding, and the shareholding on listing. */
 export function ShareholdingsDistribution(): ReactElement {
+  return <SectionTabs tabs={DISTRIBUTION_TABS} />
+}
+
+function SizeOfHoldings(): ReactElement {
   return (
     <>
       <Panel title="Analysis by size of holdings" sub="From the record of depositors">
@@ -40,23 +47,28 @@ export function ShareholdingsDistribution(): ReactElement {
       <Notice tone="pending">
         We publish this analysis after the first record of depositors following listing, and in every annual report.
       </Notice>
-      <div className="grid-2">
-        <Panel title="Shareholding on listing" sub={`Of ${POST_IPO_SHARES} shares, after the IPO`}>
-          <Donut label="Shareholding on listing" slices={LISTING_SLICES} centre={`${POST_IPO_SHARES} shares`} />
-          <p className="note">Source: {PROSPECTUS_SOURCE}.</p>
-        </Panel>
-        <Panel title={`Shareholders of ${IPO_TERMS.sellingShareholder}`} sub="Our substantial shareholder on listing">
-          <DataTable
-            caption={`Shareholders of ${IPO_TERMS.sellingShareholder}`}
-            columns={OWNER_COLUMNS}
-            rows={CORE_PERPETUAL_OWNERS}
-            rowKey={(owner) => owner.name}
-            minWidth={320}
-          />
-          <p className="note">Source: {PROSPECTUS_SOURCE}.</p>
-        </Panel>
-      </div>
     </>
+  )
+}
+
+function ShareholdingOnListing(): ReactElement {
+  return (
+    <div className="grid-2">
+      <Panel title="Shareholding on listing" sub={`Of ${POST_IPO_SHARES} shares, after the IPO`}>
+        <Donut label="Shareholding on listing" slices={LISTING_SLICES} centre={`${POST_IPO_SHARES} shares`} />
+        <p className="note">Source: {PROSPECTUS_SOURCE}.</p>
+      </Panel>
+      <Panel title={`Shareholders of ${IPO_TERMS.sellingShareholder}`} sub="Our substantial shareholder on listing">
+        <DataTable
+          caption={`Shareholders of ${IPO_TERMS.sellingShareholder}`}
+          columns={OWNER_COLUMNS}
+          rows={CORE_PERPETUAL_OWNERS}
+          rowKey={(owner) => owner.name}
+          minWidth={320}
+        />
+        <p className="note">Source: {PROSPECTUS_SOURCE}.</p>
+      </Panel>
+    </div>
   )
 }
 
@@ -100,3 +112,8 @@ function DistributionLine({ row, isTotal = false }: { row: DistributionRow; isTo
     </tr>
   )
 }
+
+const DISTRIBUTION_TABS: readonly SectionTab<DistributionTab>[] = [
+  { id: 'size', label: 'Size of holdings', content: <SizeOfHoldings /> },
+  { id: 'listing', label: 'Shareholding on listing', content: <ShareholdingOnListing /> },
+]

@@ -3,40 +3,55 @@ import { Tabs, type TabItem } from '../../Tabs'
 import { BarChart } from '../../ui/BarChart'
 import { DataTable, type Column } from '../../ui/DataTable'
 import { Panel, StatGrid, type Stat } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { SourceNote } from '../ipo/parts'
 import { INCOME_LINES, LATEST_INDEX, LATEST_YEAR, MARGIN_LABELS, MARGIN_LINES, SHORT_LABELS, YEARS, YEAR_RANGE, marginsOf } from './figures'
 import { cagrPct, formatGrowth, formatPct, formatRmMillion, formatThousands, growthPct, toMillions } from './metrics'
 
 const CHARTS_TITLE_ID = 'fin-highlights-charts-title'
 
+type HighlightsTab = 'key-figures' | 'summary' | 'latest'
+
 /** Annual highlights: a chart per metric, the three-year table and the latest year's key figures. */
 export function AnnualHighlights() {
+  return <SectionTabs tabs={HIGHLIGHT_TABS} />
+}
+
+function KeyFigures() {
   return (
-    <>
-      <section className="card panel" aria-labelledby={CHARTS_TITLE_ID}>
-        <div className="panel-head">
-          <div>
-            <h3 id={CHARTS_TITLE_ID}>Key figures by year</h3>
-            <p className="card-sub">RM million, financial years ended 31 December</p>
-          </div>
+    <section className="card panel" aria-labelledby={CHARTS_TITLE_ID}>
+      <div className="panel-head">
+        <div>
+          <h3 id={CHARTS_TITLE_ID}>Key figures by year</h3>
+          <p className="card-sub">RM million, financial years ended 31 December</p>
         </div>
-        <Tabs idPrefix="fin-highlights" labelledBy={CHARTS_TITLE_ID} tabs={METRIC_TABS} />
-        <SourceNote />
-      </section>
-      <Panel title={`Three-year summary, ${YEAR_RANGE}`} sub="RM’000 unless stated">
-        <DataTable
-          caption={`Financial highlights, ${YEAR_RANGE}`}
-          columns={SUMMARY_COLUMNS}
-          rows={SUMMARY_ROWS}
-          rowKey={(row) => row.label}
-          minWidth={520}
-        />
-        <SourceNote>Margins are worked out from the figures above; earnings per share is on the enlarged 450.0 million shares.</SourceNote>
-      </Panel>
-      <Panel title={`${LATEST_YEAR} at a glance`} sub={`Compared with ${YEARS[LATEST_INDEX - 1]}`}>
-        <StatGrid stats={latestYearStats()} label={`${LATEST_YEAR} key figures`} />
-      </Panel>
-    </>
+      </div>
+      <Tabs idPrefix="fin-highlights" labelledBy={CHARTS_TITLE_ID} tabs={METRIC_TABS} />
+      <SourceNote />
+    </section>
+  )
+}
+
+function ThreeYearSummary() {
+  return (
+    <Panel title={`Three-year summary, ${YEAR_RANGE}`} sub="RM’000 unless stated">
+      <DataTable
+        caption={`Financial highlights, ${YEAR_RANGE}`}
+        columns={SUMMARY_COLUMNS}
+        rows={SUMMARY_ROWS}
+        rowKey={(row) => row.label}
+        minWidth={520}
+      />
+      <SourceNote>Margins are worked out from the figures above; earnings per share is on the enlarged 450.0 million shares.</SourceNote>
+    </Panel>
+  )
+}
+
+function LatestYear() {
+  return (
+    <Panel title={`${LATEST_YEAR} at a glance`} sub={`Compared with ${YEARS[LATEST_INDEX - 1]}`}>
+      <StatGrid stats={latestYearStats()} label={`${LATEST_YEAR} key figures`} />
+    </Panel>
   )
 }
 
@@ -111,3 +126,9 @@ function latestYearStats(): Stat[] {
     { label: 'Earnings per share', value: `${EPS_SEN[LATEST_INDEX].toFixed(1)} sen`, detail: `${EPS_SEN[prior].toFixed(1)} sen in ${YEARS[prior]}` },
   ]
 }
+
+const HIGHLIGHT_TABS: readonly SectionTab<HighlightsTab>[] = [
+  { id: 'key-figures', label: 'Key figures', content: <KeyFigures /> },
+  { id: 'summary', label: 'Three-year summary', content: <ThreeYearSummary /> },
+  { id: 'latest', label: 'Latest year', content: <LatestYear /> },
+]

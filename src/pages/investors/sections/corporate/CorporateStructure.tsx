@@ -3,6 +3,7 @@ import { COMPANY } from '../../../../content/site'
 import { PROSPECTUS_SOURCE, SUBSIDIARIES, type Subsidiary } from '../../content/prospectus'
 import { DataTable, type Column } from '../../ui/DataTable'
 import { Notice, Panel } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { groupSubsidiaries, structureOwners, type SubsidiaryGroup } from './content'
 
 const INTEREST_NOTE =
@@ -17,12 +18,27 @@ const SUBSIDIARY_COLUMNS: readonly Column<Subsidiary>[] = [
 
 /** Corporate Info › Corporate Structure: the group chart, then every subsidiary in a table. */
 export function CorporateStructure(): ReactElement {
+  return <SectionTabs tabs={STRUCTURE_TABS} />
+}
+
+type StructureTab = 'chart' | 'subsidiaries'
+
+const InterestNotice = () => <Notice title="About these interests">{INTEREST_NOTE}</Notice>
+
+function GroupStructure() {
   return (
     <>
       <Panel title="Group structure" sub="After the IPO and the pre-IPO acquisitions">
         <OrgChart groups={groupSubsidiaries()} />
       </Panel>
-      <Notice title="About these interests">{INTEREST_NOTE}</Notice>
+      <InterestNotice />
+    </>
+  )
+}
+
+function Subsidiaries() {
+  return (
+    <>
       <Panel title="Subsidiaries" sub={`Source: ${PROSPECTUS_SOURCE}.`}>
         <DataTable
           caption={`Subsidiaries of ${COMPANY.name}`}
@@ -32,9 +48,15 @@ export function CorporateStructure(): ReactElement {
           minWidth={620}
         />
       </Panel>
+      <InterestNotice />
     </>
   )
 }
+
+const STRUCTURE_TABS: readonly SectionTab<StructureTab>[] = [
+  { id: 'chart', label: 'Group structure', content: <GroupStructure /> },
+  { id: 'subsidiaries', label: 'Subsidiaries', content: <Subsidiaries /> },
+]
 
 interface OrgChartProps {
   groups: readonly SubsidiaryGroup[]

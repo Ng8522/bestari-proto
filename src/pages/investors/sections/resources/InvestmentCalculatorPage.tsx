@@ -1,11 +1,15 @@
 import { useRef, useState } from 'react'
+import { flushSync } from 'react-dom'
 import { SHARES_PER_LOT, calculateInvestment, type CalculatorFields, type InvestmentInput } from '../../calculator'
 import { DataTable, type Column } from '../../ui/DataTable'
 import { Notice, Panel } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { formatCount, formatPercent, formatPrice, formatRinggit } from './format'
 import { EMPTY_CALCULATOR_FIELDS, InvestmentCalculator } from './InvestmentCalculator'
 
 const SEN_PER_RINGGIT = 100
+
+type CalculatorTab = 'calculator' | 'example'
 
 /** Hypothetical figures for the worked example: not our IPO price, which is not fixed yet, nor a forecast. */
 const EXAMPLE: InvestmentInput = { lots: 10, buyPrice: 1, sellPrice: 1.1, dividendSen: 3 }
@@ -66,44 +70,61 @@ const ASSUMPTIONS: readonly string[] = [
 /** Investor Resources › Investment Calculator: the calculator, its assumptions and a worked example. */
 export function InvestmentCalculatorPage() {
   const [fields, setFields] = useState<CalculatorFields>(EMPTY_CALCULATOR_FIELDS)
+  const [activeTab, setActiveTab] = useState<CalculatorTab>('calculator')
   const calculatorRef = useRef<HTMLDivElement>(null)
 
+  /** Fills the calculator, brings its tab forward (the example lives in another tab) and focuses its first field. */
   function applyExample(): void {
-    setFields(EXAMPLE_FIELDS)
+    flushSync(() => {
+      setFields(EXAMPLE_FIELDS)
+      setActiveTab('calculator')
+    })
     calculatorRef.current?.querySelector('input')?.focus()
   }
 
+  const tabs: readonly SectionTab<CalculatorTab>[] = [
+    {
+      id: 'calculator',
+      label: 'Calculator',
+      content: (
+        <div className="grid-2">
+          <Panel title="Calculate your return" sub="Enter your holding to see the gross gain or loss.">
+            <div ref={calculatorRef}>
+              <InvestmentCalculator fields={fields} onChange={setFields} />
+            </div>
+          </Panel>
+          <Panel title="Assumptions">
+            <ul className="rs-bullets">
+              {ASSUMPTIONS.map((assumption) => (
+                <li key={assumption}>{assumption}</li>
+              ))}
+            </ul>
+          </Panel>
+        </div>
+      ),
+    },
+    { id: 'example', label: 'Worked example', content: <WorkedExample onUse={applyExample} /> },
+  ]
+
+  return <SectionTabs tabs={tabs} activeId={activeTab} onActiveChange={setActiveTab} />
+}
+
+function WorkedExample({ onUse }: { onUse: () => void }) {
   return (
-    <>
-      <div className="grid-2">
-        <Panel title="Calculate your return" sub="Enter your holding to see the gross gain or loss.">
-          <div ref={calculatorRef}>
-            <InvestmentCalculator fields={fields} onChange={setFields} />
-          </div>
-        </Panel>
-        <Panel title="Assumptions">
-          <ul className="rs-bullets">
-            {ASSUMPTIONS.map((assumption) => (
-              <li key={assumption}>{assumption}</li>
-            ))}
-          </ul>
-        </Panel>
-      </div>
-      <Panel
-        title="Worked example"
-        sub={`${EXAMPLE.lots} lots bought at ${formatPrice(EXAMPLE.buyPrice)}, sold at ${formatPrice(EXAMPLE.sellPrice)}, with ${EXAMPLE.dividendSen} sen of dividends per share.`}
-        actions={
-          <button type="button" className="filter-reset" onClick={applyExample}>
-            Use these figures
-          </button>
-        }
-      >
-        <DataTable caption="Worked example" columns={STEP_COLUMNS} rows={exampleSteps(EXAMPLE)} rowKey={(step) => step.label} minWidth={520} />
-        <Notice tone="pending">
-          These prices are hypothetical, for illustration only. They are not our IPO price, which has not been fixed,
-          nor a forecast of our share price or dividends. This calculator is not investment advice.
-        </Notice>
-      </Panel>
-    </>
+    <Panel
+      title="Worked example"
+      sub={`${EXAMPLE.lots} lots bought at ${formatPrice(EXAMPLE.buyPrice)}, sold at ${formatPrice(EXAMPLE.sellPrice)}, with ${EXAMPLE.dividendSen} sen of dividends per share.`}
+      actions={
+        <button type="button" className="filter-reset" onClick={onUse}>
+          Use these figures
+        </button>
+      }
+    >
+      <DataTable caption="Worked example" columns={STEP_COLUMNS} rows={exampleSteps(EXAMPLE)} rowKey={(step) => step.label} minWidth={520} />
+      <Notice tone="pending">
+        These prices are hypothetical, for illustration only. They are not our IPO price, which has not been fixed,
+        nor a forecast of our share price or dividends. This calculator is not investment advice.
+      </Notice>
+    </Panel>
   )
 }

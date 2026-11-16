@@ -5,34 +5,43 @@ import { PROCEEDS_TIMEFRAMES, SEGMENT_REVENUE } from '../../content/prospectus'
 import { ADVANTAGES_PLACEHOLDER, COMPETITIVE_ADVANTAGES } from '../../content/sections'
 import { PROCEEDS } from '../../data'
 import { Panel } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { LATEST_INDEX, LATEST_YEAR } from '../financial/figures'
 import { formatPct, segmentShares } from '../financial/metrics'
 import { ROUTES_TO_MARKET } from './content'
 import { SourceNote } from './parts'
 
+type StrengthsTab = 'strengths' | 'model' | 'growth'
+
 /** Competitive Strengths: what sets the Group apart, how it sells, and the growth plans the IPO pays for. */
 export function IpoStrengthsPage() {
+  return <SectionTabs tabs={STRENGTHS_TABS} />
+}
+
+function StrengthsPanel() {
   return (
-    <>
-      <Panel title="Our competitive strengths" sub={<>Summarised from the company overview: <Ph>{ADVANTAGES_PLACEHOLDER}</Ph></>}>
-        <ol className="ipo-cards">
-          {COMPETITIVE_ADVANTAGES.map((advantage, index) => (
-            <li key={advantage.title} className="ipo-card">
-              <span className="ipo-card-num" aria-hidden="true">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <h4>{advantage.title}</h4>
-              <p>{advantage.description}</p>
-            </li>
-          ))}
-        </ol>
-      </Panel>
-      <div className="grid-2">
-        <BusinessModelPanel />
-        <WhatWeSellPanel />
-      </div>
-      <GrowthPlansPanel />
-    </>
+    <Panel title="Our competitive strengths" sub={<>Summarised from the company overview: <Ph>{ADVANTAGES_PLACEHOLDER}</Ph></>}>
+      <ol className="ipo-cards">
+        {COMPETITIVE_ADVANTAGES.map((advantage, index) => (
+          <li key={advantage.title} className="ipo-card">
+            <span className="ipo-card-num" aria-hidden="true">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <h4>{advantage.title}</h4>
+            <p>{advantage.description}</p>
+          </li>
+        ))}
+      </ol>
+    </Panel>
+  )
+}
+
+function BusinessModel() {
+  return (
+    <div className="grid-2">
+      <BusinessModelPanel />
+      <WhatWeSellPanel />
+    </div>
   )
 }
 
@@ -100,3 +109,9 @@ function GrowthPlansPanel() {
     </Panel>
   )
 }
+
+const STRENGTHS_TABS: readonly SectionTab<StrengthsTab>[] = [
+  { id: 'strengths', label: 'Strengths', content: <StrengthsPanel /> },
+  { id: 'model', label: 'Business model', content: <BusinessModel /> },
+  { id: 'growth', label: 'Growth plans', content: <GrowthPlansPanel /> },
+]

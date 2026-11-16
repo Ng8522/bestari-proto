@@ -4,6 +4,7 @@ import { BarChart } from '../../ui/BarChart'
 import { DataTable, type Column } from '../../ui/DataTable'
 import { SelectField, type Option } from '../../ui/Filters'
 import { Panel } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { SourceNote } from '../ipo/parts'
 import { buildCommentary } from './commentary'
 import {
@@ -18,33 +19,45 @@ import {
 } from './figures'
 import { cagrPct, formatGrowth, formatPct, formatPoints, growthSeries, pointChange } from './metrics'
 
+type PerformanceTab = 'growth' | 'margins' | 'commentary'
+
 /** Financial Performance: growth, margins and a commentary, all computed from the prospectus figures. */
 export function FinancialPerformancePage() {
   return (
     <div className="fin-page">
-      <Panel title="Year-on-year growth" sub="Change in each line from the year before">
-        <DataTable
-          caption={`Year-on-year growth, ${YEAR_RANGE}`}
-          columns={GROWTH_COLUMNS}
-          rows={INCOME_LINES}
-          rowKey={(line) => line}
-          minWidth={560}
-        />
-        <SourceNote>Growth rates are worked out from the RM’000 figures.</SourceNote>
-      </Panel>
-      <MarginTrendPanel />
-      <Panel title="Commentary" sub="What the figures show">
-        <div className="fin-commentary">
-          {buildCommentary().map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-        </div>
-        <p className="note">
-          This commentary describes the figures only. The reasons for the movements are discussed in the management’s
-          discussion and analysis in the prospectus.
-        </p>
-      </Panel>
+      <SectionTabs tabs={PERFORMANCE_TABS} />
     </div>
+  )
+}
+
+function YearOnYearGrowth() {
+  return (
+    <Panel title="Year-on-year growth" sub="Change in each line from the year before">
+      <DataTable
+        caption={`Year-on-year growth, ${YEAR_RANGE}`}
+        columns={GROWTH_COLUMNS}
+        rows={INCOME_LINES}
+        rowKey={(line) => line}
+        minWidth={560}
+      />
+      <SourceNote>Growth rates are worked out from the RM’000 figures.</SourceNote>
+    </Panel>
+  )
+}
+
+function CommentaryPanel() {
+  return (
+    <Panel title="Commentary" sub="What the figures show">
+      <div className="fin-commentary">
+        {buildCommentary().map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+      </div>
+      <p className="note">
+        This commentary describes the figures only. The reasons for the movements are discussed in the management’s
+        discussion and analysis in the prospectus.
+      </p>
+    </Panel>
   )
 }
 
@@ -120,3 +133,9 @@ function MarginTrendPanel() {
     </Panel>
   )
 }
+
+const PERFORMANCE_TABS: readonly SectionTab<PerformanceTab>[] = [
+  { id: 'growth', label: 'Year-on-year growth', content: <YearOnYearGrowth /> },
+  { id: 'margins', label: 'Margin trend', content: <MarginTrendPanel /> },
+  { id: 'commentary', label: 'Commentary', content: <CommentaryPanel /> },
+]

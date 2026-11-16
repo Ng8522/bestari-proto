@@ -5,6 +5,7 @@ import { IPO_TERMS } from '../../content/prospectus'
 import { MILESTONE_LABELS, TIMETABLE, type Milestone } from '../../data'
 import { DataTable, type Column } from '../../ui/DataTable'
 import { Notice, Panel, StatGrid, type Stat } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { IPO_STAGES } from './content'
 import { SourceNote } from './parts'
 
@@ -35,8 +36,14 @@ function timetableStats(): Stat[] {
   ]
 }
 
+type TimetableTab = 'timetable' | 'stages'
+
 /** IPO Timetable: every milestone with its date and status, and what happens at each stage. */
 export function IpoTimetablePage() {
+  return <SectionTabs tabs={TIMETABLE_TABS} />
+}
+
+function IndicativeTimetable() {
   return (
     <>
       <Panel title="Indicative timetable" sub="Dates still to be confirmed are marked TBA">
@@ -56,20 +63,30 @@ export function IpoTimetablePage() {
           the registered prospectus.
         </p>
       </Notice>
-      <Panel title="What happens at each stage" sub="How a Main Market IPO generally runs in Malaysia">
-        <ol className="ipo-steps">
-          {IPO_STAGES.map((stage) => (
-            <li key={stage.title}>
-              <b>{stage.title}</b>
-              <p>{stage.description}</p>
-            </li>
-          ))}
-        </ol>
-        <p className="note">
-          The registered prospectus sets out the exact steps and dates. See{' '}
-          <Link to={irPath('ipo-centre', 'how-to-apply')}>How to Apply</Link> for the ways to apply.
-        </p>
-      </Panel>
     </>
   )
 }
+
+function Stages() {
+  return (
+    <Panel title="What happens at each stage" sub="How a Main Market IPO generally runs in Malaysia">
+      <ol className="ipo-steps">
+        {IPO_STAGES.map((stage) => (
+          <li key={stage.title}>
+            <b>{stage.title}</b>
+            <p>{stage.description}</p>
+          </li>
+        ))}
+      </ol>
+      <p className="note">
+        The registered prospectus sets out the exact steps and dates. See{' '}
+        <Link to={irPath('ipo-centre', 'how-to-apply')}>How to Apply</Link> for the ways to apply.
+      </p>
+    </Panel>
+  )
+}
+
+const TIMETABLE_TABS: readonly SectionTab<TimetableTab>[] = [
+  { id: 'timetable', label: 'Timetable', content: <IndicativeTimetable /> },
+  { id: 'stages', label: 'Stages', content: <Stages /> },
+]

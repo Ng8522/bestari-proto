@@ -5,6 +5,7 @@ import { irPath } from '../../../../content/ir-nav'
 import { CORPORATE_DIRECTORY, FINANCIAL_YEAR_LABELS, PROSPECTUS_SOURCE } from '../../content/prospectus'
 import { DocActions } from '../../ui/DataTable'
 import { Notice, Panel, Pending } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { ANNUAL_REPORT_YEARS, type AnnualReportYear } from './content'
 import { ANNUAL_REPORT_MONTHS, FINANCIAL_YEAR_END, deadlineAfterYearEnd } from './reporting'
 
@@ -12,6 +13,8 @@ const AUDITORS = CORPORATE_DIRECTORY.find((entry) => entry.label.startsWith('Aud
 const FIRST_AUDITED_YEAR = FINANCIAL_YEAR_LABELS[0]
 const LATEST_AUDITED_YEAR = FINANCIAL_YEAR_LABELS[FINANCIAL_YEAR_LABELS.length - 1]
 const REPORT_DUE = deadlineAfterYearEnd(ANNUAL_REPORT_MONTHS)
+
+type AnnualTab = 'reports' | 'audited'
 
 /** Reports & Presentations › Annual Reports: one card per financial year, each with its set of documents. */
 export function AnnualReportsPage() {
@@ -23,23 +26,34 @@ export function AnnualReportsPage() {
         end; ours is {FINANCIAL_YEAR_END}, so each report is due by the end of {REPORT_DUE.month}
         {REPORT_DUE.isFollowingYear ? ' of the following year' : ''}.
       </Notice>
-      <ul className="ar-years" aria-label="Annual reports by financial year">
-        {ANNUAL_REPORT_YEARS.map((year) => (
-          <AnnualReportCard key={year.id} year={year} />
-        ))}
-      </ul>
-      <Panel title="Audited figures before listing" sub={`Source: ${PROSPECTUS_SOURCE}.`}>
-        <p>
-          Until our first annual report, the Group’s audited financial information for {FIRST_AUDITED_YEAR} to{' '}
-          {LATEST_AUDITED_YEAR} is in the prospectus
-          {AUDITORS ? `, reported on by ${AUDITORS} as reporting accountants` : ''}.
-        </p>
-        <p className="ar-links">
-          <Link to={irPath('financial-info', 'highlights')}>Financial highlights</Link>
-          <Link to={irPath('reports', 'prospectus')}>Prospectus documents</Link>
-        </p>
-      </Panel>
+      <SectionTabs tabs={ANNUAL_TABS} />
     </>
+  )
+}
+
+function AnnualReportList() {
+  return (
+    <ul className="ar-years" aria-label="Annual reports by financial year">
+      {ANNUAL_REPORT_YEARS.map((year) => (
+        <AnnualReportCard key={year.id} year={year} />
+      ))}
+    </ul>
+  )
+}
+
+function AuditedFigures() {
+  return (
+    <Panel title="Audited figures before listing" sub={`Source: ${PROSPECTUS_SOURCE}.`}>
+      <p>
+        Until our first annual report, the Group’s audited financial information for {FIRST_AUDITED_YEAR} to{' '}
+        {LATEST_AUDITED_YEAR} is in the prospectus
+        {AUDITORS ? `, reported on by ${AUDITORS} as reporting accountants` : ''}.
+      </p>
+      <p className="ar-links">
+        <Link to={irPath('financial-info', 'highlights')}>Financial highlights</Link>
+        <Link to={irPath('reports', 'prospectus')}>Prospectus documents</Link>
+      </p>
+    </Panel>
   )
 }
 
@@ -88,3 +102,8 @@ function AnnualReportCover({ yearLabel }: { yearLabel?: string }) {
     </div>
   )
 }
+
+const ANNUAL_TABS: readonly SectionTab<AnnualTab>[] = [
+  { id: 'reports', label: 'Annual reports', content: <AnnualReportList /> },
+  { id: 'audited', label: 'Audited figures', content: <AuditedFigures /> },
+]

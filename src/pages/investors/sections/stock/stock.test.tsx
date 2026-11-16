@@ -31,6 +31,11 @@ function renderPage(page: string) {
   return { user, main: within(screen.getByRole('article')) }
 }
 
+const tabLabels = (main: ReturnType<typeof renderPage>['main'], page: string): (string | null)[] =>
+  within(main.getByRole('tablist', { name: page }))
+    .getAllByRole('tab')
+    .map((tab) => tab.textContent)
+
 const columnNames = (table: HTMLElement): string[] =>
   within(table)
     .getAllByRole('columnheader')
@@ -41,6 +46,8 @@ describe('Stock Info › Price Ticker', () => {
     const { main } = renderPage('price-ticker')
 
     expect(main.getByRole('heading', { level: 2, name: 'Price Ticker' })).toBeInTheDocument()
+    expect(tabLabels(main, 'Price Ticker')).toEqual(['Latest quote', 'Counter information'])
+    expect(main.queryByRole('heading', { level: 3, name: 'Counter information' })).not.toBeInTheDocument()
     expect(main.getByRole('heading', { level: 3, name: 'Bestari Food Berhad' })).toBeInTheDocument()
     expect(main.getByText('Last done (RM)')).toBeInTheDocument()
     expect(main.getByText('Change (RM / %)')).toBeInTheDocument()
@@ -49,8 +56,11 @@ describe('Stock Info › Price Ticker', () => {
     expect(main.getByRole('note')).toHaveTextContent('Not trading yet')
   })
 
-  it('lists the counter details, with unconfirmed codes as placeholders', () => {
-    const { main } = renderPage('price-ticker')
+  it('lists the counter details, with unconfirmed codes as placeholders', async () => {
+    const { user, main } = renderPage('price-ticker')
+
+    await user.click(main.getByRole('tab', { name: 'Counter information' }))
+    expect(main.getByRole('heading', { level: 3, name: 'Counter information' })).toBeVisible()
 
     COUNTER_INFO.forEach((entry) => expect(main.getByText(entry.label)).toBeInTheDocument())
     expect(main.getByText('450,000,000')).toBeInTheDocument()
@@ -148,7 +158,9 @@ describe('Stock Info › Distribution of Shareholdings', () => {
     const { main } = renderPage('shareholdings-distribution')
 
     expect(main.getByRole('heading', { level: 2, name: 'Distribution of Shareholdings' })).toBeInTheDocument()
-    expect(main.getByText('First record of depositors after listing')).toBeInTheDocument()
+    expect(tabLabels(main, 'Distribution of Shareholdings')).toEqual(['Size of holdings', 'Shareholding on listing'])
+    expect(main.getByText('First record of depositors after listing')).toBeVisible()
+    expect(main.queryByRole('img', { name: /Shareholding on listing/ })).not.toBeInTheDocument()
     const table = main.getByRole('table', { name: 'Distribution of shareholdings by size of holdings' })
     expect(columnNames(table)).toEqual(['Size of holdings', 'No. of holders', '% of holders', 'No. of shares', '% of shares'])
     HOLDING_BANDS.forEach((band) => expect(within(table).getByRole('rowheader', { name: band })).toBeInTheDocument())
@@ -157,8 +169,10 @@ describe('Stock Info › Distribution of Shareholdings', () => {
     expect(main.getByText(/5% of issued shares is 22,500,000 shares/)).toBeInTheDocument()
   })
 
-  it('shows the shareholding on listing and the shareholders of Core Perpetual', () => {
-    const { main } = renderPage('shareholdings-distribution')
+  it('shows the shareholding on listing and the shareholders of Core Perpetual', async () => {
+    const { user, main } = renderPage('shareholdings-distribution')
+
+    await user.click(main.getByRole('tab', { name: 'Shareholding on listing' }))
 
     expect(main.getByRole('img', { name: /Shareholding on listing: Core Perpetual Sdn Bhd 70.4%/ })).toBeInTheDocument()
     const owners = main.getByRole('table', { name: 'Shareholders of Core Perpetual Sdn Bhd' })
@@ -170,14 +184,17 @@ describe('Stock Info › Distribution of Shareholdings', () => {
 })
 
 describe('Stock Info › Top 30 Shareholders', () => {
-  it('shows the empty top-30 table and the substantial shareholder on listing', () => {
-    const { main } = renderPage('top-30-shareholders')
+  it('shows the empty top-30 table and the substantial shareholder on listing', async () => {
+    const { user, main } = renderPage('top-30-shareholders')
 
     expect(main.getByRole('heading', { level: 2, name: 'Top 30 Shareholders' })).toBeInTheDocument()
+    expect(tabLabels(main, 'Top 30 Shareholders')).toEqual(['Thirty largest', 'Substantial shareholder'])
+    expect(main.queryByRole('heading', { level: 3, name: 'Substantial shareholder on listing' })).not.toBeInTheDocument()
     const table = main.getByRole('table', { name: 'Top 30 shareholders' })
     expect(columnNames(table)).toEqual(['No.', 'Name', 'No. of shares', '% of issued shares'])
     expect(within(table).getByText(/first record of depositors after listing/)).toBeInTheDocument()
-    expect(main.getByRole('heading', { level: 3, name: 'Substantial shareholder on listing' })).toBeInTheDocument()
+    await user.click(main.getByRole('tab', { name: 'Substantial shareholder' }))
+    expect(main.getByRole('heading', { level: 3, name: 'Substantial shareholder on listing' })).toBeVisible()
     expect(main.getByText('Core Perpetual Sdn Bhd')).toBeInTheDocument()
     expect(main.getByText('70.4%')).toBeInTheDocument()
     expect(main.getByText('316.8 million')).toBeInTheDocument()
@@ -189,11 +206,14 @@ describe('Stock Info › Top 30 Shareholders', () => {
 })
 
 describe('Stock Info › Entitlements', () => {
-  it('shows the dividend policy, the entitlement columns and the key dates', () => {
-    const { main } = renderPage('entitlements')
+  it('shows the dividend policy, the entitlement columns and the key dates', async () => {
+    const { user, main } = renderPage('entitlements')
 
     expect(main.getByRole('heading', { level: 2, name: 'Entitlements' })).toBeInTheDocument()
-    expect(main.getByText(DIVIDEND_POLICY)).toBeInTheDocument()
+    expect(tabLabels(main, 'Entitlements')).toEqual(['Dividend policy', 'Declared entitlements', 'Key dates'])
+    expect(main.getByText(DIVIDEND_POLICY)).toBeVisible()
+    expect(main.queryByRole('table', { name: 'Dividends and other entitlements' })).not.toBeInTheDocument()
+    await user.click(main.getByRole('tab', { name: 'Declared entitlements' }))
     const table = main.getByRole('table', { name: 'Dividends and other entitlements' })
     expect(columnNames(table)).toEqual([
       'Announced',
@@ -205,11 +225,13 @@ describe('Stock Info › Entitlements', () => {
       'Rate',
     ])
     expect(within(table).getByText('No entitlements declared yet.')).toBeInTheDocument()
-    KEY_DATES.forEach((entry) => expect(main.getByText(entry.meaning)).toBeInTheDocument())
+    await user.click(main.getByRole('tab', { name: 'Key dates' }))
+    KEY_DATES.forEach((entry) => expect(main.getByText(entry.meaning)).toBeVisible())
   })
 
   it('filters by year and entitlement type, and resets', async () => {
     const { user, main } = renderPage('entitlements')
+    await user.click(main.getByRole('tab', { name: 'Declared entitlements' }))
     const year = main.getByLabelText('Year')
     const type = main.getByLabelText('Entitlement type')
 

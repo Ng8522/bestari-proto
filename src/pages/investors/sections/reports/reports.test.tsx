@@ -30,6 +30,14 @@ function renderPage(pageSlug: string) {
   return { user, page: screen.getByRole('article', { name }) }
 }
 
+/** The page's section tabs, named by the page title. */
+function tabLabels(pageSlug: string): (string | null)[] {
+  const tabList = screen.getByRole('tablist', { name: pageLabel(pageSlug) })
+  return within(tabList)
+    .getAllByRole('tab')
+    .map((tab) => tab.textContent)
+}
+
 function bodyRows(table: HTMLElement): HTMLElement[] {
   return within(table).getAllByRole('row').slice(1)
 }
@@ -44,6 +52,7 @@ describe('reporting deadlines', () => {
 describe('Annual Reports', () => {
   it('shows the first annual report after listing with its four documents, all pending', () => {
     const { page } = renderPage('annual-reports')
+    expect(tabLabels('annual-reports')).toEqual(['Annual reports', 'Audited figures'])
     expect(within(page).getByRole('note')).toHaveTextContent('No annual report published yet')
     expect(within(page).getByRole('note')).toHaveTextContent('by the end of April of the following year')
 
@@ -57,8 +66,11 @@ describe('Annual Reports', () => {
     expect(within(card).queryByRole('link')).toBeNull()
   })
 
-  it('points to the audited figures in the prospectus until then', () => {
-    const { page } = renderPage('annual-reports')
+  it('points to the audited figures in the prospectus until then', async () => {
+    const { user, page } = renderPage('annual-reports')
+    expect(within(page).queryByRole('region', { name: 'Audited figures before listing' })).not.toBeInTheDocument()
+    await user.click(within(page).getByRole('tab', { name: 'Audited figures' }))
+    expect(within(page).queryByRole('list', { name: 'Annual reports by financial year' })).not.toBeInTheDocument()
     const panel = within(page).getByRole('region', { name: 'Audited figures before listing' })
     expect(panel).toHaveTextContent('FY2023 to FY2025')
     expect(panel).toHaveTextContent('Baker Tilly Monteiro Heng PLT')
@@ -69,6 +81,7 @@ describe('Annual Reports', () => {
 describe('Quarterly Reports', () => {
   it('lists the four quarters of a 31 December year with empty values and pending reports', () => {
     const { page } = renderPage('quarterly-reports')
+    expect(tabLabels('quarterly-reports')).toEqual(['Quarterly results', 'Announcement dates'])
     expect(within(page).getByRole('note')).toHaveTextContent('Results are published after listing')
     expect(within(page).getByLabelText('Financial year')).toHaveValue('first')
 
@@ -108,8 +121,10 @@ describe('Quarterly Reports', () => {
     expect(within(page).getByRole('table', { name: /individual quarters/ })).toHaveTextContent('31 Dec (3 months)')
   })
 
-  it('shows when each quarter’s results are due', () => {
-    const { page } = renderPage('quarterly-reports')
+  it('shows when each quarter’s results are due', async () => {
+    const { user, page } = renderPage('quarterly-reports')
+    expect(within(page).queryByRole('table', { name: 'Quarterly results announcement deadlines' })).not.toBeInTheDocument()
+    await user.click(within(page).getByRole('tab', { name: 'Announcement dates' }))
     const table = within(page).getByRole('table', { name: 'Quarterly results announcement deadlines' })
     expect(bodyRows(table).map((row) => within(row).getAllByRole('cell')[1].textContent)).toEqual([
       'End of May',
@@ -123,6 +138,8 @@ describe('Quarterly Reports', () => {
 describe('Circulars', () => {
   it('shows an empty document table that filters by category', async () => {
     const { user, page } = renderPage('circulars')
+    expect(tabLabels('circulars')).toEqual(['Circulars & statements', 'What a circular covers'])
+    expect(within(page).queryByRole('region', { name: 'What a circular can cover' })).not.toBeInTheDocument()
     const table = within(page).getByRole('table', { name: 'Circulars and statements to shareholders' })
     expect(table).toHaveTextContent('No circulars or statements to shareholders have been issued yet.')
     expect(within(page).getByRole('status')).toHaveTextContent('0 documents')
@@ -136,12 +153,17 @@ describe('Circulars', () => {
       'href',
       irPath('governance', 'shareholders-meeting'),
     )
+
+    await user.click(within(page).getByRole('tab', { name: 'What a circular covers' }))
+    expect(within(page).getByRole('region', { name: 'What a circular can cover' })).toBeVisible()
+    expect(within(page).queryByRole('table', { name: 'Circulars and statements to shareholders' })).not.toBeInTheDocument()
   })
 })
 
 describe('Prospectus', () => {
   it('links the exposure draft to the SC website without a download link', () => {
     const { page } = renderPage('prospectus')
+    expect(tabLabels('prospectus')).toEqual(['Prospectus documents', 'Dates & parties'])
     const table = within(page).getByRole('table', { name: 'Prospectus documents' })
     const draftRow = within(table).getByRole('rowheader', { name: /Draft prospectus \(exposure draft\)/ }).closest('tr')
     expect(draftRow).toHaveTextContent('6 Jul 2026 (updated 2 Oct 2026)')
@@ -167,9 +189,25 @@ describe('Prospectus', () => {
   })
 })
 
+describe('Prospectus key dates', () => {
+  it('lists the dates and parties under their own tab', async () => {
+    const { user, page } = renderPage('prospectus')
+    expect(within(page).queryByRole('region', { name: 'Key dates & parties' })).not.toBeInTheDocument()
+    await user.click(within(page).getByRole('tab', { name: 'Dates & parties' }))
+    const panel = within(page).getByRole('region', { name: 'Key dates & parties' })
+    expect(panel).toBeVisible()
+    expect(panel).toHaveTextContent('SC approval')
+    expect(panel).toHaveTextContent('Registered prospectus')
+  })
+})
+
 describe('Analyst Coverage', () => {
   it('shows the coverage table, its filter and an empty state', async () => {
     const { user, page } = renderPage('analyst-coverage')
+    expect(tabLabels('analyst-coverage')).toEqual(['Coverage summary', 'Research reports'])
+    expect(within(page).getByLabelText('Analyst coverage summary')).toHaveTextContent('None yet')
+    expect(within(page).queryByRole('table', { name: 'Analyst research reports on Bestari Food Berhad' })).not.toBeInTheDocument()
+    await user.click(within(page).getByRole('tab', { name: 'Research reports' }))
     const table = within(page).getByRole('table', { name: 'Analyst research reports on Bestari Food Berhad' })
     expect(within(table).getAllByRole('columnheader').map((header) => header.textContent)).toEqual([
       'Research house',
@@ -180,7 +218,6 @@ describe('Analyst Coverage', () => {
       'Report',
     ])
     expect(table).toHaveTextContent('No research house covers Bestari Food Berhad yet.')
-    expect(within(page).getByLabelText('Analyst coverage summary')).toHaveTextContent('None yet')
 
     await user.selectOptions(within(page).getByLabelText('Recommendation'), 'buy')
     expect(within(page).getByLabelText('Recommendation')).toHaveValue('buy')
@@ -190,11 +227,14 @@ describe('Analyst Coverage', () => {
 })
 
 describe('Corporate Presentations', () => {
-  it('lists the investor presentation as coming soon and no results briefings yet', () => {
-    const { page } = renderPage('presentations')
+  it('lists the investor presentation as coming soon and no results briefings yet', async () => {
+    const { user, page } = renderPage('presentations')
+    expect(tabLabels('presentations')).toEqual(['Investor presentations', 'Results briefings'])
     const investor = within(page).getByRole('table', { name: 'Investor presentations' })
     expect(within(investor).getByRole('rowheader', { name: 'Investor presentation' })).toBeInTheDocument()
     expect(within(investor).getByText('Coming soon')).toBeInTheDocument()
+    expect(within(page).queryByRole('table', { name: 'Results briefing presentations' })).not.toBeInTheDocument()
+    await user.click(within(page).getByRole('tab', { name: 'Results briefings' }))
     expect(within(page).getByRole('table', { name: 'Results briefing presentations' })).toHaveTextContent(
       'No results briefings yet.',
     )

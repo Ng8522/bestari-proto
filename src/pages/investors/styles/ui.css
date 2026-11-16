@@ -3,6 +3,88 @@
  * the Annual / Quarterly switch, pagination, bar chart and donut. Phone layouts at the end.
  */
 
+/* ---------- Section tabs (ui/SectionTabs.tsx): one section of a sub-page at a time ---------- */
+.ir .section-tabs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 22px;
+  min-width: 0;
+}
+
+.ir .tabs-line {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  /* The grey rule sits under the tabs; the active tab's border paints over it. */
+  box-shadow: inset 0 -2px 0 var(--line);
+}
+
+.ir .tabs-line::-webkit-scrollbar {
+  display: none;
+}
+
+/* Faded edges where more tabs are scrolled out of view (set by SectionTabs on narrow screens). */
+.ir .tabs-line[data-more-end] {
+  mask-image: linear-gradient(to right, #000 calc(100% - 56px), transparent);
+}
+
+.ir .tabs-line[data-more-start] {
+  mask-image: linear-gradient(to left, #000 calc(100% - 56px), transparent);
+}
+
+.ir .tabs-line[data-more-start][data-more-end] {
+  mask-image: linear-gradient(to right, transparent, #000 56px, #000 calc(100% - 56px), transparent);
+}
+
+.ir .tabs-line button {
+  flex: none;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 16px 11px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  color: var(--ink-2);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.ir .tabs-line button:hover {
+  color: var(--ink);
+}
+
+.ir .tabs-line button[aria-selected='true'] {
+  color: var(--brand);
+  border-bottom-color: var(--brand);
+}
+
+.ir .tabs-line button:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: -4px;
+  border-radius: 8px 8px 0 0;
+}
+
+.ir .tab-panel--line {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  min-width: 0;
+}
+
+/* display: grid above would otherwise override the hidden attribute. */
+.ir .tab-panel--line[hidden] {
+  display: none;
+}
+
+.ir .tab-panel--line:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 6px;
+  border-radius: 12px;
+}
+
 /* ---------- Panel & notice ---------- */
 .ir .panel {
   display: grid;

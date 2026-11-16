@@ -4,6 +4,7 @@ import { EPS_SEN, INCOME_STATEMENT, SC_EXPOSURE_URL } from '../../content/prospe
 import { DataTable, DocTable, type Column } from '../../ui/DataTable'
 import { Segmented, type Option } from '../../ui/Filters'
 import { Panel } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { ExternalLink, SourceNote } from '../ipo/parts'
 import {
   CASH_FLOW_LINES,
@@ -24,11 +25,21 @@ const STATEMENT_OPTIONS: readonly Option<StatementId>[] = [
   { value: 'cashflow', label: 'Cash flows' },
 ]
 
+type StatementsTab = 'statements' | 'sources'
+
 /** Financial Statements: the income statement from the prospectus, and the layouts of the other two statements. */
 export function FinancialStatementsPage() {
-  const [statement, setStatement] = useState<StatementId>('income')
   return (
     <div className="fin-page">
+      <SectionTabs tabs={STATEMENTS_TABS} />
+    </div>
+  )
+}
+
+function StatementsTabContent() {
+  const [statement, setStatement] = useState<StatementId>('income')
+  return (
+    <>
       <div className="fin-switch">
         <Segmented label="Statement" options={STATEMENT_OPTIONS} value={statement} onChange={setStatement} />
       </div>
@@ -39,8 +50,7 @@ export function FinancialStatementsPage() {
       {statement === 'cashflow' && (
         <LayoutStatement title="Statement of cash flows" sub="RM’000, financial years ended 31 December" lines={CASH_FLOW_LINES} />
       )}
-      <SourceDocuments />
-    </div>
+    </>
   )
 }
 
@@ -128,3 +138,8 @@ function SourceDocuments() {
     </Panel>
   )
 }
+
+const STATEMENTS_TABS: readonly SectionTab<StatementsTab>[] = [
+  { id: 'statements', label: 'Statements', content: <StatementsTabContent /> },
+  { id: 'sources', label: 'Source documents', content: <SourceDocuments /> },
+]

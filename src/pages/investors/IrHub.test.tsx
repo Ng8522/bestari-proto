@@ -106,19 +106,32 @@ describe('Investor Relations hub', () => {
 })
 
 describe('IR Home', () => {
-  it('shows the hero, the three widgets, key figures and every section', () => {
-    renderAt(IR_BASE)
+  it('shows the hero, then the widgets, key figures and every section one tab at a time', async () => {
+    const { user } = renderAt(IR_BASE)
     expect(screen.getByRole('heading', { level: 1, name: /going public/ })).toBeInTheDocument()
+    const tabList = screen.getByRole('tablist', { name: 'Investor updates' })
+    expect(within(tabList).getAllByRole('tab').map((tab) => tab.textContent)).toEqual([
+      'Latest updates',
+      'Company snapshot',
+      'Explore IR',
+    ])
     for (const name of ['Bursa Announcements', 'Media News', 'Corporate Calendar']) {
-      expect(screen.getByRole('region', { name })).toBeInTheDocument()
+      expect(screen.getByRole('region', { name })).toBeVisible()
     }
-    expect(screen.getByText('RM175.3m')).toBeInTheDocument()
-    expect(screen.getByText('Up 87.6% on FY2024')).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: 'Company snapshot' })).not.toBeInTheDocument()
+
+    await user.click(screen.getByRole('tab', { name: 'Company snapshot' }))
+    expect(screen.getByText('RM175.3m')).toBeVisible()
+    expect(screen.getByText('Up 87.6% on FY2024')).toBeVisible()
+    expect(screen.queryByRole('region', { name: 'Media News' })).not.toBeInTheDocument()
+
+    await user.click(screen.getByRole('tab', { name: 'Explore IR' }))
     const directory = screen.getByRole('list', { name: 'Investor Relations sections' })
     expect(within(directory).getByRole('link', { name: 'Top 30 Shareholders' })).toHaveAttribute(
       'href',
       irPath('stock-info', 'top-30-shareholders'),
     )
+    expect(screen.getByRole('region', { name: 'News alerts' })).toBeVisible()
     expect(screen.queryByRole('navigation', { name: 'Previous and next IR pages' })).not.toBeInTheDocument()
   })
 
@@ -132,12 +145,17 @@ describe('IR Home', () => {
 })
 
 describe('IR Contact', () => {
-  it('lists the registrar, issuing house and adviser', () => {
-    renderAt(irPath('contact'))
+  it('shows the IR team first, and the registrar, issuing house and adviser under their own tab', async () => {
+    const { user } = renderAt(irPath('contact'))
     expect(screen.getByRole('heading', { level: 1, name: 'IR Contact' })).toBeInTheDocument()
-    expect(screen.getByText('Boardroom Share Registrars Sdn Bhd')).toBeInTheDocument()
-    expect(screen.getByText('Malaysian Issuing House Sdn Bhd')).toBeInTheDocument()
-    expect(screen.getByText('RHB Investment Bank Berhad')).toBeInTheDocument()
+    expect(screen.getByRole('tab', { name: 'IR team' })).toHaveAttribute('aria-selected', 'true')
+    expect(screen.getByRole('button', { name: /Send enquiry/ })).toBeVisible()
+    expect(screen.getByText('Boardroom Share Registrars Sdn Bhd')).not.toBeVisible()
+
+    await user.click(screen.getByRole('tab', { name: 'Registrar & advisers' }))
+    expect(screen.getByText('Boardroom Share Registrars Sdn Bhd')).toBeVisible()
+    expect(screen.getByText('Malaysian Issuing House Sdn Bhd')).toBeVisible()
+    expect(screen.getByText('RHB Investment Bank Berhad')).toBeVisible()
   })
 
   it('asks for a name and a valid email, then thanks the visitor', async () => {

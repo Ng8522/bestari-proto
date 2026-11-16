@@ -4,6 +4,7 @@ import { IPO_TERMS, SC_EXPOSURE_URL } from '../../content/prospectus'
 import { ALLOCATION, ALLOCATION_TOTAL, IPO_GLANCE } from '../../data'
 import { DataTable, type Column } from '../../ui/DataTable'
 import { Notice, Panel, StatGrid } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { directoryLines, KEY_PARTY_LABELS, OFFER_STRUCTURE, type OfferRow } from './content'
 import { ExternalLink, SourceNote } from './parts'
 
@@ -13,14 +14,25 @@ const OFFER_COLUMNS: readonly Column<OfferRow>[] = [
   { key: 'detail', header: 'Details', render: (row) => row.detail },
 ]
 
+type OverviewTab = 'glance' | 'offer' | 'parties' | 'prospectus'
+
 /** IPO Overview: the IPO at a glance, its structure, the allocation, the parties and the approval. */
 export function IpoOverviewPage() {
+  return <SectionTabs tabs={OVERVIEW_TABS} />
+}
+
+function GlancePanel() {
+  return (
+    <Panel title="IPO at a glance" sub="Main Market of Bursa Malaysia Securities Berhad">
+      <StatGrid stats={IPO_GLANCE} label="IPO key figures" />
+      <SourceNote>The retail price and listing date will be in the registered prospectus.</SourceNote>
+    </Panel>
+  )
+}
+
+function OfferStructure() {
   return (
     <>
-      <Panel title="IPO at a glance" sub="Main Market of Bursa Malaysia Securities Berhad">
-        <StatGrid stats={IPO_GLANCE} label="IPO key figures" />
-        <SourceNote>The retail price and listing date will be in the registered prospectus.</SourceNote>
-      </Panel>
       <Panel title="Offer structure" sub="How the IPO shares are made up and who they are offered to">
         <div className="ipo-total-last">
           <DataTable
@@ -33,10 +45,14 @@ export function IpoOverviewPage() {
         </div>
         <SourceNote />
       </Panel>
-      <div className="grid-2">
-        <AllocationPanel />
-        <KeyPartiesPanel />
-      </div>
+      <AllocationPanel />
+    </>
+  )
+}
+
+function ApprovalAndProspectus() {
+  return (
+    <>
       <Notice title="Approval">
         <p>
           The Securities Commission Malaysia (SC) approved the IPO on 23 Oct 2026, and Bestari Food Berhad’s shares are
@@ -113,3 +129,10 @@ function ProspectusPanel() {
     </Panel>
   )
 }
+
+const OVERVIEW_TABS: readonly SectionTab<OverviewTab>[] = [
+  { id: 'glance', label: 'At a glance', content: <GlancePanel /> },
+  { id: 'offer', label: 'Offer & allocation', content: <OfferStructure /> },
+  { id: 'parties', label: 'Key parties', content: <KeyPartiesPanel /> },
+  { id: 'prospectus', label: 'Approval & prospectus', content: <ApprovalAndProspectus /> },
+]

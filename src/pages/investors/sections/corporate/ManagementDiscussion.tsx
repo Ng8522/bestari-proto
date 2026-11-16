@@ -6,6 +6,7 @@ import { PROCEEDS_TIMEFRAMES, PROSPECTUS_SOURCE } from '../../content/prospectus
 import { KPIS, PROCEEDS, PROCEEDS_SOURCE, type ProceedsUse } from '../../data'
 import { DataTable, type Column } from '../../ui/DataTable'
 import { Notice, Panel, StatGrid } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { AboutGroup, BusinessActivities } from './AboutGroup'
 import { FinancialReview } from './FinancialReview'
 import { SegmentReview } from './SegmentReview'
@@ -20,6 +21,8 @@ const PLAN_COLUMNS: readonly Column<ProceedsUse>[] = [
   { key: 'amount', header: 'Amount (RM)', render: () => <Ph>Per prospectus</Ph>, align: 'right' },
 ]
 
+type MdaTab = 'overview' | 'financial' | 'segments' | 'dividend' | 'plans'
+
 /** Corporate Info › Management Discussion & Analysis, prepared from the draft prospectus until the first annual report. */
 export function ManagementDiscussion(): ReactElement {
   return (
@@ -28,19 +31,21 @@ export function ManagementDiscussion(): ReactElement {
         This review is prepared from the draft prospectus and covers the financial years it reports. Our full management
         discussion and analysis will be published with our first annual report after listing.
       </Notice>
-      <div className="grid-2">
-        <Panel title="Business overview">
-          <AboutGroup />
-        </Panel>
-        <Panel title="Business activities" sub="Revenue by activity is analysed below">
-          <BusinessActivities />
-        </Panel>
-      </div>
-      <FinancialReview />
-      <SegmentReview />
-      <DividendPolicy />
-      <Plans />
+      <SectionTabs tabs={MDA_TABS} />
     </>
+  )
+}
+
+function BusinessOverview() {
+  return (
+    <div className="grid-2">
+      <Panel title="Business overview">
+        <AboutGroup />
+      </Panel>
+      <Panel title="Business activities" sub="Revenue by activity is set out under Segment review">
+        <BusinessActivities />
+      </Panel>
+    </div>
   )
 }
 
@@ -82,3 +87,11 @@ function Plans() {
     </Panel>
   )
 }
+
+const MDA_TABS: readonly SectionTab<MdaTab>[] = [
+  { id: 'overview', label: 'Business overview', content: <BusinessOverview /> },
+  { id: 'financial', label: 'Financial review', content: <FinancialReview /> },
+  { id: 'segments', label: 'Segment review', content: <SegmentReview /> },
+  { id: 'dividend', label: 'Dividend policy', content: <DividendPolicy /> },
+  { id: 'plans', label: 'Plans & proceeds', content: <Plans /> },
+]

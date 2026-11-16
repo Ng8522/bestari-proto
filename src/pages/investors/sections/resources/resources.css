@@ -5,8 +5,7 @@
 
 .ir .rs-note a,
 .ir .alerts-privacy a,
-.ir .faq-answer a,
-.ir .terms-toc a {
+.ir .faq-answer a {
   color: var(--brand);
   font-weight: 600;
   text-decoration: underline;
@@ -125,27 +124,6 @@
 }
 
 /* ---------- Terms of use ---------- */
-.ir .terms-layout {
-  display: grid;
-  grid-template-columns: 260px minmax(0, 1fr);
-  gap: 24px;
-  align-items: start;
-}
-
-.ir .card.terms-toc {
-  position: sticky;
-  top: 120px;
-  padding: 24px;
-}
-
-.ir .terms-toc ol {
-  display: grid;
-  gap: 8px;
-  margin-top: 12px;
-  padding-left: 20px;
-  font-size: 14px;
-}
-
 .ir .terms {
   display: grid;
   gap: 20px;
@@ -178,16 +156,6 @@
 }
 
 /* ---------- Phone ---------- */
-@media (max-width: 900px) {
-  .ir .terms-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .ir .card.terms-toc {
-    position: static;
-  }
-}
-
 @media (max-width: 560px) {
   .ir .faq-item summary {
     font-size: 16px;

@@ -39,6 +39,11 @@ const SAMPLE_MEETINGS: readonly GeneralMeeting[] = [
   { type: 'EGM', title: 'EGM', isoDate: '2028-02-01', date: '1 Feb 2028', time: '10.00am', venue: 'Online', documents: [] },
 ]
 
+function expectTabs(pageSlug: string, labels: readonly string[]): void {
+  const tabList = screen.getByRole('tablist', { name: pageLabel(pageSlug) })
+  expect(within(tabList).getAllByRole('tab').map((tab) => tab.textContent)).toEqual(labels)
+}
+
 describe('Governance content', () => {
   it('filters documents by category', () => {
     expect(filterDocuments(GOVERNANCE_DOCUMENTS, 'all')).toHaveLength(13)
@@ -67,8 +72,11 @@ describe('Governance content', () => {
 
 describe('Governance pages', () => {
   it('Policy Disclosures lists every document as coming soon and filters by category', async () => {
+    const user = userEvent.setup()
     renderPage('policy-disclosures')
-    expect(screen.getByText('Posted on listing')).toBeInTheDocument()
+    expect(screen.getByText('Posted on listing')).toBeVisible()
+    expectTabs('policy-disclosures', ['Governance documents', 'Document categories'])
+    expect(screen.queryByRole('list', { name: 'Document categories' })).not.toBeInTheDocument()
     const table = screen.getByRole('table', { name: 'Governance documents' })
     expect(within(table).getAllByRole('row')).toHaveLength(GOVERNANCE_DOCUMENTS.length + 1)
     expect(within(table).getAllByText('Coming soon')).toHaveLength(GOVERNANCE_DOCUMENTS.length)
@@ -83,10 +91,17 @@ describe('Governance pages', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Reset' }))
     expect(category).toHaveValue('all')
     expect(within(table).getAllByRole('row')).toHaveLength(GOVERNANCE_DOCUMENTS.length + 1)
+
+    await user.click(screen.getByRole('tab', { name: 'Document categories' }))
+    const categories = screen.getByRole('list', { name: 'Document categories' })
+    expect(within(categories).getAllByRole('listitem').length).toBeGreaterThan(0)
   })
 
-  it('Board Committees shows each committee with its chair, and the board composition', () => {
+  it('Board Committees shows each committee with its chair, and the board composition', async () => {
+    const user = userEvent.setup()
     renderPage('board-committees')
+    expectTabs('board-committees', ['Committees', 'Board composition'])
+    expect(screen.queryByRole('table', { name: 'Board of Directors' })).not.toBeInTheDocument()
     const audit = screen.getByRole('region', { name: 'Audit and Risk Management Committee' })
     expect(within(audit).getByText('Ow Yin Yee')).toBeInTheDocument()
     expect(within(audit).getByText('Per prospectus')).toHaveClass('ph')
@@ -96,6 +111,9 @@ describe('Governance pages', () => {
     const nomination = screen.getByRole('region', { name: 'Nomination and Remuneration Committee' })
     expect(within(nomination).getByText('Low Chin Ann @ Han Chin Ann')).toBeInTheDocument()
 
+    expect(screen.getByRole('note')).toHaveTextContent(/Committee members are confirmed/)
+
+    await user.click(screen.getByRole('tab', { name: 'Board composition' }))
     const board = screen.getByRole('table', { name: 'Board of Directors' })
     expect(within(board).getAllByRole('row')).toHaveLength(DIRECTORS.length + 1)
     const chairRow = within(board).getByRole('row', { name: /Badrulnizam Bin Bahaman/ })
@@ -104,8 +122,11 @@ describe('Governance pages', () => {
   })
 
   it('Shareholders Meeting has an empty archive with year and type filters, and the meeting papers', async () => {
+    const user = userEvent.setup()
     renderPage('shareholders-meeting')
-    expect(screen.getByText('First AGM after listing')).toBeInTheDocument()
+    expect(screen.getByText('First AGM after listing')).toBeVisible()
+    expectTabs('shareholders-meeting', ['General meetings', 'Meeting papers', 'Taking part'])
+    expect(screen.queryByRole('region', { name: 'Papers for each meeting' })).not.toBeInTheDocument()
     const table = screen.getByRole('table', { name: 'General meetings' })
     for (const header of ['Meeting', 'Date', 'Time', 'Venue', 'Documents']) {
       expect(within(table).getByRole('columnheader', { name: header })).toBeInTheDocument()
@@ -125,9 +146,16 @@ describe('Governance pages', () => {
     expect(year).toHaveValue('all')
     expect(screen.getByLabelText('Meeting type')).toHaveValue('all')
 
+    await user.click(screen.getByRole('tab', { name: 'Meeting papers' }))
     const papers = screen.getByRole('region', { name: 'Papers for each meeting' })
     for (const paper of ['Notice of meeting', 'Form of proxy', 'Administrative guide', 'Minutes', 'Poll results']) {
       expect(within(papers).getByText(paper)).toBeInTheDocument()
+    }
+
+    await user.click(screen.getByRole('tab', { name: 'Taking part' }))
+    const steps = screen.getByRole('region', { name: 'Taking part in a general meeting' })
+    for (const step of ['Read the notice', 'Attend or appoint a proxy', 'Vote']) {
+      expect(within(steps).getByText(step)).toBeVisible()
     }
   })
 })

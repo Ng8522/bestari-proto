@@ -5,6 +5,7 @@ import { irPath } from '../../../../content/ir-nav'
 import { DIRECTORS, PROSPECTUS_SOURCE, type Director } from '../../content/prospectus'
 import { DataTable, type Column } from '../../ui/DataTable'
 import { Notice, Panel, Pending } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { CATEGORY_LABELS, boardComposition } from '../corporate/content'
 import { COMMITTEES, committeeChair, type Committee } from './content'
 
@@ -27,7 +28,12 @@ const BOARD_COLUMNS: readonly Column<Director>[] = [
 
 /** Governance › Board Committees: a card per committee, then the Board's composition. */
 export function BoardCommittees(): ReactElement {
-  const board = boardComposition(DIRECTORS)
+  return <SectionTabs tabs={COMMITTEE_TABS} />
+}
+
+type CommitteeTab = 'committees' | 'board'
+
+function Committees() {
   return (
     <>
       <div className="grid-2">
@@ -40,15 +46,26 @@ export function BoardCommittees(): ReactElement {
         committee typically does; each committee’s own terms of reference will be
         published under <Link to={irPath('governance', 'policy-disclosures')}>Policy Disclosures</Link> on listing.
       </Notice>
-      <Panel
-        title="Board composition"
-        sub={`${board.independent} of ${board.total} directors are independent non-executive directors. Source: ${PROSPECTUS_SOURCE}.`}
-      >
-        <DataTable caption="Board of Directors" columns={BOARD_COLUMNS} rows={DIRECTORS} rowKey={(director) => director.name} />
-      </Panel>
     </>
   )
 }
+
+function BoardComposition() {
+  const board = boardComposition(DIRECTORS)
+  return (
+    <Panel
+      title="Board composition"
+      sub={`${board.independent} of ${board.total} directors are independent non-executive directors. Source: ${PROSPECTUS_SOURCE}.`}
+    >
+      <DataTable caption="Board of Directors" columns={BOARD_COLUMNS} rows={DIRECTORS} rowKey={(director) => director.name} />
+    </Panel>
+  )
+}
+
+const COMMITTEE_TABS: readonly SectionTab<CommitteeTab>[] = [
+  { id: 'committees', label: 'Committees', content: <Committees /> },
+  { id: 'board', label: 'Board composition', content: <BoardComposition /> },
+]
 
 interface CommitteeCardProps {
   committee: Committee

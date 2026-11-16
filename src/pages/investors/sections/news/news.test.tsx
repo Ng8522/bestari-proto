@@ -35,10 +35,13 @@ function renderPage(page: string) {
 const ARTICLES = { one: 'article', many: 'articles' }
 
 describe('News Centre › Bursa Announcements', () => {
-  it('shows the filters, the announcement columns and the start-on-listing empty state', () => {
-    const { main } = renderPage('bursa-announcements')
+  it('shows the filters, the announcement columns and the start-on-listing empty state', async () => {
+    const { user, main } = renderPage('bursa-announcements')
 
     expect(main.getByRole('heading', { level: 2, name: 'Bursa Announcements' })).toBeInTheDocument()
+    const tabList = main.getByRole('tablist', { name: 'Bursa Announcements' })
+    expect(within(tabList).getAllByRole('tab').map((tab) => tab.textContent)).toEqual(['Announcements', 'Categories'])
+    expect(main.queryByRole('region', { name: 'What each category covers' })).not.toBeInTheDocument()
     expect(main.getByRole('note')).toHaveTextContent('Announcements start on listing')
     const table = main.getByRole('table', { name: 'Announcements to Bursa Malaysia' })
     expect(within(table).getAllByRole('columnheader').map((header) => header.textContent)).toEqual([
@@ -53,6 +56,7 @@ describe('News Centre › Bursa Announcements', () => {
       'All',
       ...ANNOUNCEMENT_CATEGORIES,
     ])
+    await user.click(main.getByRole('tab', { name: 'Categories' }))
     const guide = within(main.getByRole('region', { name: 'What each category covers' }))
     ANNOUNCEMENT_CATEGORIES.forEach((name) => {
       expect(guide.getByText(name)).toBeInTheDocument()
@@ -83,12 +87,19 @@ describe('News Centre › Bursa Announcements', () => {
 })
 
 describe('News Centre › Press Releases', () => {
-  it('shows that no press releases are out yet, then the completed milestones', () => {
-    const { main } = renderPage('press-releases')
+  it('shows that no press releases are out yet, then the completed milestones', async () => {
+    const { user, main } = renderPage('press-releases')
 
     expect(main.getByRole('heading', { level: 2, name: 'Press Releases' })).toBeInTheDocument()
-    expect(main.getByText(/We have not issued any press releases yet/)).toBeInTheDocument()
+    const tabList = main.getByRole('tablist', { name: 'Press Releases' })
+    expect(within(tabList).getAllByRole('tab').map((tab) => tab.textContent)).toEqual([
+      'Press releases',
+      'Corporate milestones',
+    ])
+    expect(main.getByText(/We have not issued any press releases yet/)).toBeVisible()
     expect(main.getByRole('link', { name: 'Media News' })).toHaveAttribute('href', irPath('news', 'media-news'))
+    expect(main.queryByRole('list', { name: 'Completed corporate milestones' })).not.toBeInTheDocument()
+    await user.click(main.getByRole('tab', { name: 'Corporate milestones' }))
     expect(main.getByRole('heading', { level: 3, name: 'Corporate milestones' })).toBeInTheDocument()
     expect(main.getByText(/These are not press releases/)).toBeInTheDocument()
 

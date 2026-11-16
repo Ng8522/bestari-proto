@@ -33,6 +33,11 @@ function renderPage(pageSlug: string): void {
   expect(screen.getByRole('heading', { level: 2, name: pageLabel(pageSlug) })).toBeInTheDocument()
 }
 
+function expectTabs(pageSlug: string, labels: readonly string[]): void {
+  const tabList = screen.getByRole('tablist', { name: pageLabel(pageSlug) })
+  expect(within(tabList).getAllByRole('tab').map((tab) => tab.textContent)).toEqual(labels)
+}
+
 describe('Corporate Info content', () => {
   it('works out the board composition from the directors', () => {
     expect(boardComposition(DIRECTORS)).toMatchObject({ total: 6, executive: 2, independent: 4, women: 2 })
@@ -79,8 +84,10 @@ describe('Corporate Info content', () => {
 })
 
 describe('Corporate Info pages', () => {
-  it('General Information lists the corporate directory, the Group and its activities', () => {
+  it('General Information lists the corporate directory, the Group and its activities', async () => {
+    const user = userEvent.setup()
     renderPage('general-information')
+    expectTabs('general-information', ['Corporate directory', 'About the Group'])
     const directory = screen.getByRole('region', { name: 'Corporate directory' })
     expect(within(directory).getByText('Company name')).toBeInTheDocument()
     expect(within(directory).getByText('Assigned at listing')).toHaveClass('ph')
@@ -93,17 +100,17 @@ describe('Corporate Info pages', () => {
       'href',
       'mailto:enquiry@bestarifood.com',
     )
-    expect(screen.getByRole('heading', { level: 3, name: 'About the Group' })).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { level: 3, name: 'About the Group' })).not.toBeInTheDocument()
+    await user.click(screen.getByRole('tab', { name: 'About the Group' }))
+    expect(screen.getByRole('heading', { level: 3, name: 'About the Group' })).toBeVisible()
     expect(screen.getByText('Spare parts & maintenance services')).toBeInTheDocument()
   })
 
   it('Directors’ Profile shows the board composition and a card per director with a full profile', async () => {
+    const user = userEvent.setup()
     renderPage('directors-profile')
-    const composition = screen.getByRole('region', { name: 'Board composition' })
-    expect(within(composition).getByText('4 (66.7%)')).toBeInTheDocument()
-    expect(within(composition).getByText('2 (33.3%)')).toBeInTheDocument()
-    expect(within(composition).getByText('52.5 years')).toBeInTheDocument()
-
+    expectTabs('directors-profile', ['Directors', 'Board composition'])
+    expect(screen.queryByRole('region', { name: 'Board composition' })).not.toBeInTheDocument()
     const board = screen.getByRole('list', { name: 'Board of Directors' })
     expect(within(board).getAllByRole('article')).toHaveLength(DIRECTORS.length)
     const owCard = within(board).getByRole('article', { name: 'Ow Yin Yee' })
@@ -115,16 +122,26 @@ describe('Corporate Info pages', () => {
     const summary = within(owCard).getByText('Full profile', { exact: false })
     const details = summary.closest('details')
     expect(details).not.toHaveAttribute('open')
-    await userEvent.click(summary)
+    await user.click(summary)
     expect(details).toHaveAttribute('open')
     expect(within(owCard).getByText('MBA, Universiti Malaya')).toBeInTheDocument()
 
     const mdCard = within(board).getByRole('article', { name: 'Lai Kok Siong' })
     expect(within(mdCard).getByText('Per registered prospectus')).toHaveClass('ph')
+
+    await user.click(screen.getByRole('tab', { name: 'Board composition' }))
+    const composition = screen.getByRole('region', { name: 'Board composition' })
+    expect(within(composition).getByText('4 (66.7%)')).toBeVisible()
+    expect(within(composition).getByText('2 (33.3%)')).toBeVisible()
+    expect(within(composition).getByText('52.5 years')).toBeVisible()
+    expect(screen.queryByRole('list', { name: 'Board of Directors' })).not.toBeInTheDocument()
   })
 
-  it('Key Management Team shows a card per manager and marks board members', () => {
+  it('Key Management Team shows a card per manager and marks board members', async () => {
+    const user = userEvent.setup()
     renderPage('key-management')
+    expectTabs('key-management', ['Management team', 'At a glance'])
+    expect(screen.queryByRole('region', { name: 'The team at a glance' })).not.toBeInTheDocument()
     const team = screen.getByRole('list', { name: 'Key senior management' })
     expect(within(team).getAllByRole('article')).toHaveLength(KEY_MANAGEMENT.length)
     const cfo = within(team).getByRole('article', { name: 'Fong Zhoon Zhien' })
@@ -133,10 +150,16 @@ describe('Corporate Info pages', () => {
     expect(within(cfo).queryByText('Board member')).not.toBeInTheDocument()
     const md = within(team).getByRole('article', { name: 'Lai Kok Siong' })
     expect(within(md).getByText('Board member')).toBeInTheDocument()
+
+    await user.click(screen.getByRole('tab', { name: 'At a glance' }))
+    expect(screen.getByRole('region', { name: 'The team at a glance' })).toBeVisible()
   })
 
-  it('Corporate Structure draws the org chart and lists every subsidiary', () => {
+  it('Corporate Structure draws the org chart and lists every subsidiary', async () => {
+    const user = userEvent.setup()
     renderPage('corporate-structure')
+    expectTabs('corporate-structure', ['Group structure', 'Subsidiaries'])
+    expect(screen.queryByRole('table', { name: 'Subsidiaries of Bestari Food Berhad' })).not.toBeInTheDocument()
     const owners = screen.getByRole('list', { name: 'Shareholders after the IPO' })
     expect(within(owners).getByText('Core Perpetual Sdn Bhd')).toBeInTheDocument()
     expect(within(owners).getByText('70.4%')).toBeInTheDocument()
@@ -144,42 +167,66 @@ describe('Corporate Info pages', () => {
     expect(within(groups).getAllByRole('heading', { level: 4 })).toHaveLength(3)
     expect(within(groups).getAllByText('100%')).toHaveLength(SUBSIDIARIES.length)
 
+    expect(screen.getByRole('note')).toHaveTextContent(/once the pre-IPO acquisitions of the subsidiaries are completed/)
+
+    await user.click(screen.getByRole('tab', { name: 'Subsidiaries' }))
     const table = screen.getByRole('table', { name: 'Subsidiaries of Bestari Food Berhad' })
     expect(within(table).getAllByRole('row')).toHaveLength(SUBSIDIARIES.length + 1)
     expect(within(table).getByRole('rowheader', { name: 'Synerchem (S)' })).toBeInTheDocument()
     expect(screen.getByRole('note')).toHaveTextContent(/once the pre-IPO acquisitions of the subsidiaries are completed/)
   })
 
-  it('Chairman’s Statement shows the Chairman, the pending statement and the MD’s quote', () => {
+  it('Chairman’s Statement shows the Chairman, the pending statement and the MD’s quote', async () => {
+    const user = userEvent.setup()
     renderPage('chairmans-statement')
+    expectTabs('chairmans-statement', ['The Chairman', 'From the MD', 'Statement archive'])
     expect(screen.getByRole('article', { name: 'Badrulnizam Bin Bahaman' })).toBeInTheDocument()
     expect(screen.getByText(/first annual report after listing/, { selector: '.notice div' })).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { level: 3, name: 'From the Managing Director' })).not.toBeInTheDocument()
+    await user.click(screen.getByRole('tab', { name: 'From the MD' }))
     const quote = screen.getByRole('heading', { level: 3, name: 'From the Managing Director' }).closest('section')
     expect(quote).not.toBeNull()
     expect(within(quote as HTMLElement).getByText(/stronger platform/)).toBeInTheDocument()
     expect(within(quote as HTMLElement).getByText('Managing Director, Bestari Food Berhad')).toBeInTheDocument()
+    await user.click(screen.getByRole('tab', { name: 'Statement archive' }))
     const archive = screen.getByRole('table', { name: 'Chairman’s statements by financial year' })
     expect(within(archive).getByText(/No statements yet/)).toBeInTheDocument()
   })
 
-  it('Management Discussion & Analysis computes the review and switches segment units', async () => {
+  it('Management Discussion & Analysis shows one section per tab, computes the review and switches segment units', async () => {
+    const user = userEvent.setup()
     renderPage('management-discussion')
-    expect(screen.getByText('Prepared from the draft prospectus')).toBeInTheDocument()
-    expect(screen.getByText('Revenue CAGR, FY2023–FY2025')).toBeInTheDocument()
-    expect(screen.getByText('12.8%')).toBeInTheDocument()
+    expect(screen.getByText('Prepared from the draft prospectus')).toBeVisible()
+    const tabList = screen.getByRole('tablist', { name: pageLabel('management-discussion') })
+    expect(within(tabList).getAllByRole('tab').map((tab) => tab.textContent)).toEqual([
+      'Business overview',
+      'Financial review',
+      'Segment review',
+      'Dividend policy',
+      'Plans & proceeds',
+    ])
+    expect(screen.getByRole('region', { name: 'Business overview' })).toBeVisible()
+    expect(screen.queryByRole('table', { name: /Income statement highlights/ })).not.toBeInTheDocument()
 
+    await user.click(screen.getByRole('tab', { name: 'Financial review' }))
+    expect(screen.queryByRole('region', { name: 'Business overview' })).not.toBeInTheDocument()
+    expect(screen.getByText('Revenue CAGR, FY2023–FY2025')).toBeVisible()
+    expect(screen.getByText('12.8%')).toBeVisible()
     const review = screen.getByRole('table', { name: /Income statement highlights/ })
     const revenueRow = within(review).getByRole('row', { name: /Revenue \(RM’000\)/ })
     expect(within(revenueRow).getByText('175,323')).toBeInTheDocument()
 
+    await user.click(screen.getByRole('tab', { name: 'Segment review' }))
     expect(screen.getByRole('table', { name: 'Revenue by business activity (RM’000)' })).toBeInTheDocument()
-    await userEvent.click(screen.getByRole('button', { name: '% of revenue' }))
+    await user.click(screen.getByRole('button', { name: '% of revenue' }))
     expect(screen.getByRole('button', { name: '% of revenue' })).toHaveAttribute('aria-pressed', 'true')
     const shares = screen.getByRole('table', { name: /Revenue by business activity \(% of/ })
     expect(within(shares).getByRole('row', { name: /Total revenue/ })).toHaveTextContent('100.0%')
-
     expect(screen.getByRole('table', { name: /Revenue by market/ })).toHaveTextContent('Domestic (Malaysia)')
-    expect(screen.getByText('Up to 30%')).toBeInTheDocument()
-    expect(screen.getByText(/Bandar Industrial Zone, Banting/)).toBeInTheDocument()
+
+    await user.click(screen.getByRole('tab', { name: 'Dividend policy' }))
+    expect(screen.getByText('Up to 30%')).toBeVisible()
+    await user.click(screen.getByRole('tab', { name: 'Plans & proceeds' }))
+    expect(screen.getByText(/Bandar Industrial Zone, Banting/)).toBeVisible()
   })
 })

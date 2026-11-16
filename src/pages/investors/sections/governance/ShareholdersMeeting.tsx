@@ -2,6 +2,7 @@ import { useState, type ReactElement } from 'react'
 import { DataTable, DocActions, type Column } from '../../ui/DataTable'
 import { FilterBar, SelectField, type Option } from '../../ui/Filters'
 import { Notice, Panel } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import {
   GENERAL_MEETINGS,
   MEETING_DOCUMENT_TYPES,
@@ -74,36 +75,43 @@ export function ShareholdersMeeting(): ReactElement {
     setType(ALL)
   }
 
+  const meetingsPanel = (
+    <Panel title="General meetings" sub="Annual and extraordinary general meetings of Bestari Food Berhad">
+      <FilterBar label="Filter general meetings" onReset={reset}>
+        <SelectField id="gm-year" label="Year" value={year} options={YEAR_OPTIONS} onChange={setYear} />
+        <SelectField id="gm-type" label="Meeting type" value={type} options={TYPE_OPTIONS} onChange={setType} />
+      </FilterBar>
+      <p className="result-count" aria-live="polite">
+        {meetings.length} {meetings.length === 1 ? 'meeting' : 'meetings'} found
+      </p>
+      <DataTable
+        caption="General meetings"
+        columns={MEETING_COLUMNS}
+        rows={meetings}
+        rowKey={(meeting) => `${meeting.isoDate}-${meeting.type}`}
+        emptyMessage={emptyMessage(year, type)}
+        minWidth={720}
+      />
+    </Panel>
+  )
+  const tabs: readonly SectionTab<MeetingTab>[] = [
+    { id: 'meetings', label: 'General meetings', content: meetingsPanel },
+    { id: 'papers', label: 'Meeting papers', content: <MeetingPapers /> },
+    { id: 'taking-part', label: 'Taking part', content: <TakingPart /> },
+  ]
+
   return (
     <>
       <Notice tone="pending" title="First AGM after listing">
         Our first annual general meeting will be held after listing. The notice, form of proxy and other papers for
         each meeting will be posted here, and announced to Bursa Malaysia.
       </Notice>
-      <Panel title="General meetings" sub="Annual and extraordinary general meetings of Bestari Food Berhad">
-        <FilterBar label="Filter general meetings" onReset={reset}>
-          <SelectField id="gm-year" label="Year" value={year} options={YEAR_OPTIONS} onChange={setYear} />
-          <SelectField id="gm-type" label="Meeting type" value={type} options={TYPE_OPTIONS} onChange={setType} />
-        </FilterBar>
-        <p className="result-count" aria-live="polite">
-          {meetings.length} {meetings.length === 1 ? 'meeting' : 'meetings'} found
-        </p>
-        <DataTable
-          caption="General meetings"
-          columns={MEETING_COLUMNS}
-          rows={meetings}
-          rowKey={(meeting) => `${meeting.isoDate}-${meeting.type}`}
-          emptyMessage={emptyMessage(year, type)}
-          minWidth={720}
-        />
-      </Panel>
-      <div className="grid-2">
-        <MeetingPapers />
-        <TakingPart />
-      </div>
+      <SectionTabs tabs={tabs} />
     </>
   )
 }
+
+type MeetingTab = 'meetings' | 'papers' | 'taking-part'
 
 function MeetingPapers() {
   return (

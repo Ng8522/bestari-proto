@@ -4,6 +4,7 @@ import { irPath } from '../../../../content/ir-nav'
 import { MD_QUOTE } from '../../data'
 import { DataTable, type Column } from '../../ui/DataTable'
 import { Notice, Panel } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { directorProfile, findChairman } from './content'
 import { PersonCard } from './PersonCard'
 
@@ -42,41 +43,65 @@ const STATEMENT_TOPICS: readonly string[] = [
 
 /** Corporate Info › Chairman's Statement: the Chairman, when the first statement comes, and the MD's IPO message. */
 export function ChairmansStatement(): ReactElement {
-  const chairman = findChairman()
   return (
     <>
       <Notice tone="pending" title="First statement after listing">
         Our Chairman’s first statement to shareholders will be published with our first annual report after listing.{' '}
         <Link to={irPath('reports', 'annual-reports')}>Go to annual reports</Link>
       </Notice>
-      <div className="grid-2">
-        {chairman && <PersonCard profile={directorProfile(chairman)} />}
-        <Panel title="What the statement covers" sub="Each year’s statement typically reviews:">
-          <ul className="corp-bullets">
-            {STATEMENT_TOPICS.map((topic) => (
-              <li key={topic}>{topic}</li>
-            ))}
-          </ul>
-        </Panel>
-      </div>
-      <Panel title="From the Managing Director" sub="On the planned listing. This is not the Chairman’s statement.">
-        <figure className="card quote corp-quote">
-          <blockquote>{MD_QUOTE.text}</blockquote>
-          <figcaption>
-            <b>{MD_QUOTE.name}</b>
-            <span>{MD_QUOTE.title}</span>
-          </figcaption>
-        </figure>
-      </Panel>
-      <Panel title="Statement archive">
-        <DataTable
-          caption="Chairman’s statements by financial year"
-          columns={STATEMENT_COLUMNS}
-          rows={STATEMENTS}
-          rowKey={(record) => record.financialYear}
-          emptyMessage="No statements yet. The first will appear here with our first annual report after listing."
-        />
-      </Panel>
+      <SectionTabs tabs={STATEMENT_TABS} />
     </>
   )
 }
+
+type StatementTab = 'chairman' | 'md' | 'archive'
+
+function ChairmanAndTopics() {
+  const chairman = findChairman()
+  return (
+    <div className="grid-2">
+      {chairman && <PersonCard profile={directorProfile(chairman)} />}
+      <Panel title="What the statement covers" sub="Each year’s statement typically reviews:">
+        <ul className="corp-bullets">
+          {STATEMENT_TOPICS.map((topic) => (
+            <li key={topic}>{topic}</li>
+          ))}
+        </ul>
+      </Panel>
+    </div>
+  )
+}
+
+function FromTheMd() {
+  return (
+    <Panel title="From the Managing Director" sub="On the planned listing. This is not the Chairman’s statement.">
+      <figure className="card quote corp-quote">
+        <blockquote>{MD_QUOTE.text}</blockquote>
+        <figcaption>
+          <b>{MD_QUOTE.name}</b>
+          <span>{MD_QUOTE.title}</span>
+        </figcaption>
+      </figure>
+    </Panel>
+  )
+}
+
+function StatementArchive() {
+  return (
+    <Panel title="Statement archive">
+      <DataTable
+        caption="Chairman’s statements by financial year"
+        columns={STATEMENT_COLUMNS}
+        rows={STATEMENTS}
+        rowKey={(record) => record.financialYear}
+        emptyMessage="No statements yet. The first will appear here with our first annual report after listing."
+      />
+    </Panel>
+  )
+}
+
+const STATEMENT_TABS: readonly SectionTab<StatementTab>[] = [
+  { id: 'chairman', label: 'The Chairman', content: <ChairmanAndTopics /> },
+  { id: 'md', label: 'From the MD', content: <FromTheMd /> },
+  { id: 'archive', label: 'Statement archive', content: <StatementArchive /> },
+]

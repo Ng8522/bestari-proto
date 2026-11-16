@@ -5,6 +5,7 @@ import { CORPORATE_DIRECTORY, IPO_TERMS, PROSPECTUS_SOURCE } from '../../content
 import { InfoList } from '../../Tabs'
 import { DataTable, type Column } from '../../ui/DataTable'
 import { Notice, Panel, Pending } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import {
   DRAFT_POSTED,
   DRAFT_UPDATED,
@@ -60,6 +61,8 @@ const COLUMNS: readonly Column<ProspectusRow>[] = [
   { key: 'action', header: 'View', render: (row) => <ActionCell action={row.action} title={row.title} />, align: 'right' },
 ]
 
+type ProspectusTab = 'documents' | 'dates'
+
 /** Reports & Presentations › Prospectus: the registered prospectus (at launch), the SC approval and the draft. */
 export function ProspectusPage() {
   return (
@@ -69,16 +72,32 @@ export function ProspectusPage() {
         shares. The exposure draft is unregistered and incomplete: its figures and terms may change, and it is not an
         offer or invitation to buy securities. {IPO_TERMS.approvalNote}
       </Notice>
-      <Panel title="Prospectus documents" sub="Newest first.">
-        <DataTable caption="Prospectus documents" columns={COLUMNS} rows={PROSPECTUS_ROWS} rowKey={(row) => row.title} minWidth={680} />
-        <p className="note">
-          The draft opens on the SC’s prospectus exposure page in a new tab; we do not host a copy. The registered
-          prospectus will be available to view and download here when applications open.
-        </p>
-      </Panel>
-      <Panel title="Key dates & parties" sub={`Source: ${PROSPECTUS_SOURCE}.`}>
-        <InfoList entries={DRAFT_FACTS} className="info--grid" />
-      </Panel>
+      <SectionTabs tabs={PROSPECTUS_TABS} />
     </>
   )
 }
+
+function ProspectusDocuments() {
+  return (
+    <Panel title="Prospectus documents" sub="Newest first.">
+      <DataTable caption="Prospectus documents" columns={COLUMNS} rows={PROSPECTUS_ROWS} rowKey={(row) => row.title} minWidth={680} />
+      <p className="note">
+        The draft opens on the SC’s prospectus exposure page in a new tab; we do not host a copy. The registered
+        prospectus will be available to view and download here when applications open.
+      </p>
+    </Panel>
+  )
+}
+
+function KeyDates() {
+  return (
+    <Panel title="Key dates & parties" sub={`Source: ${PROSPECTUS_SOURCE}.`}>
+      <InfoList entries={DRAFT_FACTS} className="info--grid" />
+    </Panel>
+  )
+}
+
+const PROSPECTUS_TABS: readonly SectionTab<ProspectusTab>[] = [
+  { id: 'documents', label: 'Prospectus documents', content: <ProspectusDocuments /> },
+  { id: 'dates', label: 'Dates & parties', content: <KeyDates /> },
+]

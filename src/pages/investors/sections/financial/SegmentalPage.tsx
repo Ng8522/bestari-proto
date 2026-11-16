@@ -4,50 +4,58 @@ import { DataTable, type Column } from '../../ui/DataTable'
 import { Donut, type DonutSlice } from '../../ui/Donut'
 import { SelectField } from '../../ui/Filters'
 import { Panel } from '../../ui/PageParts'
+import { SectionTabs, type SectionTab } from '../../ui/SectionTabs'
 import { SourceNote } from '../ipo/parts'
 import { LATEST_YEAR, YEARS, YEAR_OPTIONS, YEAR_RANGE, type YearLabel } from './figures'
 import { formatPct, formatRmMillion, formatThousands, percentOf, segmentShares, segmentTotal } from './metrics'
 
 const SEGMENT_COLOURS: readonly string[] = ['var(--brand)', 'var(--saffron)', 'var(--ink-2)', 'var(--saffron-soft)']
 
+type SegmentalTab = 'mix' | 'revenue' | 'market'
+
 /** Segmental Analysis: revenue by business segment (with a year picker) and by market. */
 export function SegmentalAnalysisPage() {
-  const [year, setYear] = useState<YearLabel>(LATEST_YEAR)
   return (
     <div className="fin-page">
-      <SegmentMixPanel year={year} onYearChange={setYear} />
-      <Panel title={`Segment revenue, ${YEAR_RANGE}`} sub="RM’000, and each segment’s share of revenue">
-        <div className="fin-total-last">
-          <DataTable
-            caption={`Revenue by business segment, ${YEAR_RANGE}`}
-            columns={SEGMENT_COLUMNS}
-            rows={SEGMENT_ROWS}
-            rowKey={(row) => row.name}
-            minWidth={760}
-          />
-        </div>
-        <SourceNote>Shares are worked out from the RM’000 figures. Breakdown lines are already inside their segment.</SourceNote>
-      </Panel>
-      <Panel title="Revenue by market" sub="Share of revenue (%)">
-        <DataTable
-          caption={`Revenue by market, ${YEAR_RANGE}`}
-          columns={MARKET_COLUMNS}
-          rows={MARKET_ROWS}
-          rowKey={(row) => row.market}
-          minWidth={480}
-        />
-        <SourceNote />
-      </Panel>
+      <SectionTabs tabs={SEGMENTAL_TABS} />
     </div>
   )
 }
 
-interface SegmentMixPanelProps {
-  year: YearLabel
-  onYearChange: (year: YearLabel) => void
+function SegmentRevenue() {
+  return (
+    <Panel title={`Segment revenue, ${YEAR_RANGE}`} sub="RM’000, and each segment’s share of revenue">
+      <div className="fin-total-last">
+        <DataTable
+          caption={`Revenue by business segment, ${YEAR_RANGE}`}
+          columns={SEGMENT_COLUMNS}
+          rows={SEGMENT_ROWS}
+          rowKey={(row) => row.name}
+          minWidth={760}
+        />
+      </div>
+      <SourceNote>Shares are worked out from the RM’000 figures. Breakdown lines are already inside their segment.</SourceNote>
+    </Panel>
+  )
 }
 
-function SegmentMixPanel({ year, onYearChange }: SegmentMixPanelProps) {
+function RevenueByMarket() {
+  return (
+    <Panel title="Revenue by market" sub="Share of revenue (%)">
+      <DataTable
+        caption={`Revenue by market, ${YEAR_RANGE}`}
+        columns={MARKET_COLUMNS}
+        rows={MARKET_ROWS}
+        rowKey={(row) => row.market}
+        minWidth={480}
+      />
+      <SourceNote />
+    </Panel>
+  )
+}
+
+function SegmentMixPanel() {
+  const [year, onYearChange] = useState<YearLabel>(LATEST_YEAR)
   const yearIndex = YEARS.indexOf(year)
   const total = segmentTotal(SEGMENT_REVENUE, yearIndex)
   const slices: DonutSlice[] = segmentShares(SEGMENT_REVENUE, yearIndex).map((share, index) => ({
@@ -136,3 +144,9 @@ const MARKET_COLUMNS: readonly Column<MarketRow>[] = [
   })),
 ]
 
+
+const SEGMENTAL_TABS: readonly SectionTab<SegmentalTab>[] = [
+  { id: 'mix', label: 'Revenue mix', content: <SegmentMixPanel /> },
+  { id: 'revenue', label: 'Segment revenue', content: <SegmentRevenue /> },
+  { id: 'market', label: 'By market', content: <RevenueByMarket /> },
+]
