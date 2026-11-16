@@ -9,6 +9,8 @@ import { IrLayout } from './pages/investors/IrLayout'
 import { IrSectionIndex, IrSubPage } from './pages/investors/IrSubPage'
 import { IrContactPage } from './pages/investors/sections/contact/ContactPage'
 import { NotFoundPage } from './pages/NotFoundPage'
+import { ProductDetailPage } from './pages/products/ProductDetailPage'
+import { ProductsPage } from './pages/products/ProductsPage'
 import { ShopPage } from './pages/shop/ShopPage'
 import { SustainabilityPage } from './pages/sustainability/SustainabilityPage'
 import { WhereToBuyPage } from './pages/where-to-buy/WhereToBuyPage'
@@ -24,6 +26,8 @@ export function AppRoutes() {
         <Route path={ROUTES.shop} element={<ShopPage />} />
         <Route element={<Layout />}>
           <Route path={ROUTES.about} element={<AboutPage />} />
+          <Route path={ROUTES.products} element={<ProductsPage />} />
+          <Route path={`${ROUTES.products}/:slug`} element={<ProductDetailPage />} />
           <Route path={ROUTES.investors} element={<IrLayout />}>
             <Route index element={<IrHomePage />} />
             <Route path="contact" element={<IrContactPage />} />

@@ -22,6 +22,7 @@ export function asset(file: string): string {
 export const ROUTES = {
   home: '/',
   about: '/about-us',
+  products: '/products',
   investors: IR_BASE,
   shop: '/shop',
   onsiteOutlets: '/onsite-outlets',
@@ -59,6 +60,7 @@ export const IR_MENU: readonly LinkItem[] = IR_NAV.map((section) => ({ label: se
 export const MAIN_NAV: NavItem[] = [
   { label: 'Home', href: ROUTES.home },
   { label: 'About Us', href: ROUTES.about },
+  { label: 'Products', href: ROUTES.products },
   { label: 'Investor Relations', href: ROUTES.investors, children: IR_MENU },
   { label: 'Sustainability', href: ROUTES.sustainability },
 ]
@@ -92,6 +94,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
   {
     title: 'Shop',
     links: [
+      { label: 'Our products', href: ROUTES.products },
       { label: 'Shop Today', href: ROUTES.shop },
       { label: 'Onsite Outlets', href: ROUTES.onsiteOutlets },
       { label: 'Bulk / F&B', href: `${ROUTES.shop}#trade` },

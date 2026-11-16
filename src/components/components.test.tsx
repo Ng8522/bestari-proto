@@ -24,6 +24,7 @@ describe('SiteHeader', () => {
     const nav = screen.getByRole('navigation', { name: 'Main' })
     expect(within(nav).getByRole('link', { name: 'About Us' })).toHaveAttribute('aria-current', 'page')
     expect(within(nav).getByRole('link', { name: 'Home' })).not.toHaveAttribute('aria-current')
+    expect(within(nav).getByRole('link', { name: 'Products' })).toHaveAttribute('href', ROUTES.products)
     expect(within(nav).getByRole('link', { name: 'Investor Relations' })).toHaveAttribute('href', ROUTES.investors)
     expect(within(nav).getByRole('link', { name: /Shop online/ })).toHaveAttribute('href', ROUTES.shop)
   })

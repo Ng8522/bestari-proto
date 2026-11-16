@@ -95,6 +95,7 @@ describe('Home header', () => {
     const nav = screen.getByRole('navigation', { name: 'Main' })
     expect(within(nav).getByRole('link', { name: 'Our Brands' })).toHaveAttribute('href', '#brands')
     expect(within(nav).getByRole('link', { name: 'About Us' })).toHaveAttribute('href', ROUTES.about)
+    expect(within(nav).getByRole('link', { name: 'Products' })).toHaveAttribute('href', ROUTES.products)
     expect(within(nav).getByRole('link', { name: 'Investor Relations' })).toHaveAttribute('href', ROUTES.investors)
     expect(within(nav).getByRole('link', { name: 'Sustainability' })).toHaveAttribute('href', ROUTES.sustainability)
     expect(within(nav).queryByRole('link', { name: 'News' })).not.toBeInTheDocument()

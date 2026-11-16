@@ -64,6 +64,7 @@
   font-weight: 700;
   font-size: 15px;
   color: #fff;
+  white-space: nowrap;
   transition: background 0.2s, color 0.2s;
 }
 

@@ -8,6 +8,7 @@ import { asset, IR_MENU, ROUTES, type ImageAsset, type NavItem } from '../../con
 export const HEADER_LINKS: NavItem[] = [
   { label: 'Our Brands', href: '#brands' },
   { label: 'About Us', href: ROUTES.about },
+  { label: 'Products', href: ROUTES.products },
   { label: 'Investor Relations', href: ROUTES.investors, children: IR_MENU },
   { label: 'Sustainability', href: ROUTES.sustainability },
 ]

@@ -1,4 +1,20 @@
-/* Home: 900px and 600px breakpoints, then reduced motion. Must stay last. */
+/* Home: 1180px, 900px and 600px breakpoints, then reduced motion. Must stay last. */
+
+/* ---------- ≤1180px: the five header links still fit on one line until the menu folds at 900px ---------- */
+@media (max-width: 1180px) {
+  .home .hdr .wrap {
+    gap: 16px;
+  }
+
+  .home .hdr ul {
+    gap: 2px;
+  }
+
+  .home .hdr ul a {
+    padding: 10px 11px;
+    font-size: 14px;
+  }
+}
 
 /* ---------- ≤900px: the design's single-column breakpoint ---------- */
 @media (max-width: 900px) {

@@ -1,0 +1,512 @@
+/* Products (ProductsPage) and product pages (ProductDetailPage), in the handoff's visual language. */
+
+/* ---------- Products: hero, category tabs, cards, where to buy ---------- */
+.prod__hero {
+  padding: 90px 0 30px;
+}
+
+.prod__hero h1 {
+  max-width: 15ch;
+  margin: 14px 0 18px;
+  font-size: clamp(44px, 6vw, 84px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--brand);
+}
+
+.prod__lede {
+  max-width: 58ch;
+  font-size: 19px;
+  color: var(--ink-2);
+}
+
+.prod__range {
+  padding: 20px 0 80px;
+}
+
+/* Category tabs (Tabs, pill variant). */
+.prod .tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.prod .tabs button {
+  height: 44px;
+  padding: 0 18px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  font: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.prod .tabs button:hover {
+  border-color: var(--ink);
+}
+
+.prod .tabs button[aria-selected='true'] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.prod .tab-panel {
+  border-radius: 16px;
+}
+
+.prod__cta {
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+  margin-bottom: 90px;
+  padding: 56px;
+  border-radius: 32px;
+  background: var(--brand);
+  color: var(--cream);
+}
+
+.prod__cta h2 {
+  font-size: clamp(34px, 4vw, 52px);
+}
+
+.prod__cta p {
+  max-width: 52ch;
+  opacity: 0.85;
+}
+
+/* On the green band the brand button would vanish, so it turns saffron. */
+.prod__cta .btn-brand {
+  background: var(--saffron);
+  color: var(--ink);
+}
+
+/* ---------- Product cards (shared) ---------- */
+.prod-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: 18px;
+  list-style: none;
+}
+
+.prod-card {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.prod-card:hover {
+  box-shadow: 0 20px 40px rgba(42, 26, 20, 0.1);
+  transform: translateY(-2px);
+}
+
+.prod-card__media {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  padding: 22px;
+  background: var(--cream-2);
+}
+
+.prod-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 18px rgba(42, 26, 20, 0.18));
+  transition: transform 0.3s var(--ease-out);
+}
+
+.prod-card:hover .prod-card__media img {
+  transform: scale(1.04);
+}
+
+.prod-card__body {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  padding: 18px 20px 20px;
+}
+
+.prod-card__cat {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.prod-card__name {
+  font-size: 20px;
+  line-height: 1.15;
+}
+
+.prod-card__zh {
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.prod-card__count {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--brand);
+}
+
+.prod-buy {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ---------- Product page ---------- */
+.pd {
+  padding: 28px 0 90px;
+}
+
+.pd__crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.pd__crumbs li + li::before {
+  content: '/';
+  margin-right: 6px;
+  opacity: 0.5;
+}
+
+.pd__crumbs a {
+  font-weight: 600;
+  color: var(--brand);
+}
+
+.pd__crumbs a:hover {
+  text-decoration: underline;
+}
+
+/* Photo on the left; names, pack picker and details on the right. */
+.pd__main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'media head'
+    'media details';
+  gap: 26px 56px;
+  align-items: start;
+  margin-top: 26px;
+}
+
+.pd__head {
+  grid-area: head;
+}
+
+.pd__head h1 {
+  margin: 12px 0 10px;
+  font-size: clamp(34px, 4.2vw, 56px);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  color: var(--brand);
+}
+
+.pd__names {
+  display: grid;
+  gap: 2px;
+  font-size: 17px;
+  color: var(--ink-2);
+}
+
+.pd__media {
+  grid-area: media;
+  position: sticky;
+  top: calc(var(--nav-h) + 20px);
+  display: grid;
+  /* A fixed track, so the photo's width: min(100%, …) resolves against the column, not the image. */
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  margin: 0;
+}
+
+.pd__photo {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  padding: clamp(24px, 5vw, 56px);
+  border-radius: 32px;
+  background: var(--cream-2);
+}
+
+.pd__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 22px 28px rgba(42, 26, 20, 0.2));
+}
+
+.pd__media figcaption {
+  font-size: 13px;
+  text-align: center;
+  color: var(--ink-2);
+}
+
+.pd__details {
+  grid-area: details;
+  display: grid;
+  gap: 26px;
+  min-width: 0;
+}
+
+.pd__packs {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.pd__packs legend {
+  margin-bottom: 12px;
+  padding: 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.pd__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pd__chip {
+  position: relative;
+  cursor: pointer;
+}
+
+/* The radio stays focusable and clickable on top of its chip; the chip draws its state. */
+.pd__chip input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.pd__chip span {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 16px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.pd__chip:hover span {
+  border-color: var(--ink);
+}
+
+.pd__chip input:checked + span {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.pd__chip input:focus-visible + span {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px var(--saffron);
+}
+
+.pd__spec {
+  padding: 26px 28px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+}
+
+.pd__spec h2 {
+  font-size: 26px;
+}
+
+.pd__local {
+  margin-top: 4px;
+  color: var(--ink-2);
+}
+
+.pd__rows {
+  display: grid;
+  margin-top: 14px;
+}
+
+.pd__rows > div {
+  display: grid;
+  grid-template-columns: minmax(120px, 38%) 1fr;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+
+.pd__rows dt {
+  padding-top: 2px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.pd__rows dd {
+  font-weight: 600;
+}
+
+.pd__note {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.pd__more {
+  margin-top: 90px;
+}
+
+.pd__more-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 16px;
+  margin-bottom: 22px;
+}
+
+.pd__more-head h2 {
+  font-size: clamp(30px, 3.4vw, 44px);
+}
+
+.pd__all {
+  font-weight: 700;
+  color: var(--brand);
+}
+
+.pd__all:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Tablet and phone ---------- */
+@media (max-width: 900px) {
+  .prod__hero {
+    padding: 56px 0 20px;
+  }
+
+  .prod__lede {
+    font-size: 17px;
+  }
+
+  .prod__range {
+    padding-bottom: 56px;
+  }
+
+  .prod__cta {
+    margin-bottom: 60px;
+    padding: 36px 24px;
+    border-radius: 24px;
+  }
+
+  .pd__main {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-template-areas:
+      'head'
+      'media'
+      'details';
+    gap: 22px;
+  }
+
+  .pd__media {
+    position: static;
+  }
+
+  .pd__photo {
+    width: min(100%, 420px);
+    justify-self: center;
+  }
+
+  .pd__spec {
+    padding: 20px;
+  }
+
+  .pd__rows > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+
+  .pd__more {
+    margin-top: 60px;
+  }
+}
+
+@media (max-width: 560px) {
+  .prod-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .prod-card {
+    border-radius: 18px;
+  }
+
+  .prod-card__media {
+    padding: 14px;
+  }
+
+  .prod-card__body {
+    padding: 14px;
+  }
+
+  .prod-card__name {
+    font-size: 16px;
+  }
+
+  .prod .tabs button {
+    height: 40px;
+    padding: 0 14px;
+    font-size: 14px;
+  }
+}
+
+/* High-contrast mode drops background fills, so the chosen tab and pack get an outline instead. */
+@media (forced-colors: active) {
+  .prod .tabs button[aria-selected='true'],
+  .pd__chip input:checked + span {
+    outline: 3px solid CanvasText;
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prod-card,
+  .prod-card__media img {
+    transition: none;
+  }
+
+  .prod-card:hover,
+  .prod-card:hover .prod-card__media img {
+    transform: none;
+  }
+}
