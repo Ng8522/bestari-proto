@@ -12,6 +12,8 @@ export default defineConfig(({ command, isPreview }) => ({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./src/test/setup.ts'],
+    /* The IR tests render the whole app per page and run user flows; 5s timed out on a busy machine. */
+    testTimeout: 15_000,
     css: false,
     coverage: {
       provider: 'v8',

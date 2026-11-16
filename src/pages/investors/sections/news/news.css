@@ -1,0 +1,86 @@
+/* News Centre sub-pages: category guide, media list. Phone layouts at the end. */
+
+/* ---------- Bursa announcements ---------- */
+.ir .cat-guide {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 28px;
+}
+
+.ir .cat-guide > div {
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.ir .cat-guide dt {
+  font-weight: 700;
+  color: var(--brand-deep);
+}
+
+.ir .cat-guide dd {
+  margin-top: 4px;
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+/* ---------- Media news ---------- */
+.ir .media-list {
+  list-style: none;
+}
+
+.ir .media-item {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.ir .media-item:first-child {
+  padding-top: 0;
+}
+
+.ir .media-item:last-child {
+  border: 0;
+}
+
+.ir .media-headline {
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.ir .media-headline:hover {
+  color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.ir .media-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+/* ---------- Press releases ---------- */
+.ir .milestones .tt {
+  margin-top: 0;
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 560px) {
+  .ir .cat-guide {
+    grid-template-columns: 1fr;
+  }
+
+  .ir .media-item {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}

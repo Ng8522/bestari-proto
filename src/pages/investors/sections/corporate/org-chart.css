@@ -1,0 +1,205 @@
+/*
+ * Corporate Info › Corporate Structure: the group org chart (shareholders → holding company → subsidiaries by
+ * activity). Three activity columns on wide screens; one stacked column on tablets and phones. Scoped under .ir.
+ */
+
+.ir .org-chart {
+  display: grid;
+  justify-items: center;
+  margin: 0;
+}
+
+.ir .oc-tier {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ir .oc-box {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  max-width: 420px;
+  padding: 14px 20px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+  text-align: center;
+}
+
+.ir .oc-box small {
+  color: var(--ink-2);
+  font-size: 13px;
+}
+
+.ir .oc-box--public {
+  border-style: dashed;
+  background: var(--cream);
+}
+
+.ir .oc-pct {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand-deep);
+}
+
+.ir .oc-box--root {
+  padding: 18px 26px;
+  border-color: var(--brand);
+  background: var(--brand);
+  color: #fff;
+}
+
+.ir .oc-box--root b {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.ir .oc-box--root small {
+  color: var(--brand-tint);
+}
+
+.ir .oc-link {
+  display: block;
+  width: 2px;
+  height: 28px;
+  background: var(--ink-2);
+  opacity: 0.45;
+}
+
+.ir .oc-groups {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+  margin: 0;
+  padding: 24px 0 0;
+  list-style: none;
+}
+
+/* The bus line joining the three activity columns. */
+.ir .oc-groups::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: calc((100% - 32px) / 6);
+  right: calc((100% - 32px) / 6);
+  border-top: 2px solid var(--ink-2);
+  opacity: 0.45;
+}
+
+.ir .oc-group {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 14px;
+  border-radius: 18px;
+  background: var(--cream);
+}
+
+.ir .oc-group::before {
+  content: '';
+  position: absolute;
+  top: -24px;
+  left: calc(50% - 1px);
+  width: 2px;
+  height: 24px;
+  background: var(--ink-2);
+  opacity: 0.45;
+}
+
+.ir .oc-group h4 {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--brand-deep);
+}
+
+.ir .oc-subs {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ir .oc-sub {
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--saffron);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.ir .oc-sub small {
+  color: var(--ink-2);
+  font-size: 13px;
+}
+
+.ir .oc-sub-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  margin-top: 4px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--brand-deep);
+}
+
+/* ---------- Tablet and phone ---------- */
+@media (max-width: 760px) {
+  .ir .oc-groups {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-top: 0;
+  }
+
+  .ir .oc-groups::before {
+    display: none;
+  }
+
+  .ir .oc-group {
+    margin-top: 24px;
+  }
+
+  .ir .oc-groups > .oc-group:first-child {
+    margin-top: 0;
+  }
+
+  .ir .oc-groups > .oc-group:first-child::before {
+    display: none;
+  }
+
+  .ir .oc-tier {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ir .oc-box {
+    max-width: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .ir .oc-box--root {
+    padding: 16px 18px;
+  }
+
+  .ir .oc-box--root b {
+    font-size: 20px;
+  }
+}

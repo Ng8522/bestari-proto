@@ -1,0 +1,197 @@
+/* Stock Info sub-pages: price ticker card, filter labels, chart frame, key-date list. Phone layouts at the end. */
+
+/* ---------- Price ticker ---------- */
+.ir .ticker-card .panel-head {
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.ir .ticker-card h3 {
+  font-family: var(--serif);
+  font-size: 28px;
+  color: var(--brand-deep);
+}
+
+.ir .ticker-quote {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  text-align: right;
+}
+
+.ir .ticker-quote dt {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.ir .ticker-price {
+  font-family: var(--serif);
+  font-size: 56px;
+  line-height: 1.05;
+  color: var(--brand-deep);
+}
+
+.ir .ticker-change {
+  margin-top: 6px;
+  font-family: var(--mono);
+  font-size: 20px;
+  color: var(--ink-2);
+}
+
+.ir .ticker-updated {
+  color: var(--ink-2);
+  font-size: 14px;
+}
+
+.ir .ticker-info {
+  margin-top: 0;
+}
+
+/* ---------- Filters ---------- */
+.ir .filter-field--switch {
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+.ir .filter-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* Also used by the News Centre's announcement filters. */
+.ir .range-error {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border-left: 4px solid var(--saffron);
+  background: var(--saffron-soft);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ---------- Chart frame ---------- */
+.ir .chart-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ir .chart-controls .segmented {
+  flex-wrap: wrap;
+}
+
+.ir .chart-frame svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  background: var(--cream);
+}
+
+.ir .cf-grid line {
+  stroke: var(--line);
+}
+
+.ir .chart-frame--volume .cf-grid line {
+  stroke-dasharray: 4 4;
+}
+
+.ir .cf-axis {
+  fill: var(--ink-2);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.ir .cf-message {
+  fill: var(--brand-deep);
+  font-family: var(--serif);
+  font-size: 20px;
+}
+
+/* ---------- Shareholdings ---------- */
+.ir .as-at {
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+/* ---------- Entitlements ---------- */
+.ir .policy-lede {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.35;
+  color: var(--brand-deep);
+}
+
+.ir .key-dates {
+  display: grid;
+  gap: 14px;
+}
+
+.ir .key-dates > div {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.ir .key-dates > div:last-child {
+  padding-bottom: 0;
+  border: 0;
+}
+
+.ir .key-dates dt {
+  font-weight: 700;
+}
+
+.ir .key-dates dd {
+  color: var(--ink-2);
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 560px) {
+  .ir .ticker-card h3 {
+    font-size: 22px;
+  }
+
+  .ir .ticker-quote {
+    text-align: left;
+    gap: 8px 24px;
+  }
+
+  .ir .ticker-price {
+    font-size: 40px;
+  }
+
+  .ir .ticker-change {
+    font-size: 16px;
+  }
+
+  .ir .filter-field--switch {
+    flex-basis: 100%;
+  }
+
+  .ir .chart-controls .segmented button {
+    padding: 8px 12px;
+  }
+
+  .ir .cf-axis {
+    font-size: 16px;
+  }
+
+  .ir .cf-message {
+    font-size: 24px;
+  }
+
+  .ir .key-dates > div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}

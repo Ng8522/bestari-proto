@@ -1,7 +1,6 @@
 import { useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import { Ph } from '../../components/text'
 import type { InfoEntry } from './content/sections'
-import type { IrDocument } from './data'
 
 const KEY_STEPS: Record<string, (index: number, count: number) => number> = {
   ArrowRight: (index, count) => (index + 1) % count,
@@ -103,50 +102,5 @@ export function InfoList({ entries, className }: InfoListProps) {
         </div>
       ))}
     </dl>
-  )
-}
-
-interface DocListProps {
-  documents: readonly IrDocument[]
-  emptyMessage?: string
-  /** Accessible name for the list, when no heading names it. */
-  label?: string
-}
-
-export function DocList({ documents, emptyMessage, label }: DocListProps) {
-  if (documents.length === 0) return <EmptyState>{emptyMessage}</EmptyState>
-  return (
-    <ul className="doc-list" aria-label={label}>
-      {documents.map((doc) => (
-        <DocumentRow key={doc.title} doc={doc} />
-      ))}
-    </ul>
-  )
-}
-
-function DocumentRow({ doc }: { doc: IrDocument }) {
-  const label = (
-    <>
-      {doc.format} <span aria-hidden="true">↓</span>
-    </>
-  )
-  return (
-    <li className="doc">
-      <div>
-        {doc.title}
-        <small>{doc.meta}</small>
-      </div>
-      {doc.href ? (
-        <a className="doc-link" href={doc.href} aria-label={`Download ${doc.title} (${doc.format})`}>
-          {label}
-        </a>
-      ) : (
-        // No file is published yet: same pill, but not a dead link.
-        <span className="doc-link">
-          {label}
-          <span className="visually-hidden"> (not yet available)</span>
-        </span>
-      )}
-    </li>
   )
 }

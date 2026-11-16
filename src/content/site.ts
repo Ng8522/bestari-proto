@@ -2,6 +2,7 @@
  * Site-wide content from the design handoff (design_handoff_bestari_website/README.md, theme.css, site.js).
  * Page-specific data lives in each page folder.
  */
+import { IR_BASE, IR_NAV, irPath, sectionHref } from './ir-nav'
 
 export interface LinkItem {
   label: string
@@ -21,7 +22,7 @@ export function asset(file: string): string {
 export const ROUTES = {
   home: '/',
   about: '/about-us',
-  investors: '/investor-relations',
+  investors: IR_BASE,
   shop: '/shop',
   onsiteOutlets: '/onsite-outlets',
   /** Old URL for Onsite Outlets, kept so shared links still land on the page. */
@@ -51,25 +52,8 @@ export interface NavItem extends LinkItem {
   children?: readonly LinkItem[]
 }
 
-/** Investor Relations sections, in page order: the IR sub-nav, its scroll spy and the header dropdown. */
-export const IR_SECTIONS = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'corporate', label: 'Corporate Info' },
-  { id: 'ipo', label: 'IPO Centre' },
-  { id: 'governance', label: 'Governance' },
-  { id: 'financials', label: 'Financials' },
-  { id: 'stock', label: 'Stock Info' },
-  { id: 'news', label: 'News Centre' },
-  { id: 'reports', label: 'Reports' },
-  { id: 'resources', label: 'Resources' },
-  { id: 'contact', label: 'IR Contact' },
-] as const satisfies readonly { id: string; label: string }[]
-
-/** The header's Investor Relations dropdown: one link per IR section. */
-export const IR_MENU: readonly LinkItem[] = IR_SECTIONS.map((section) => ({
-  label: section.label,
-  href: `${ROUTES.investors}#${section.id}`,
-}))
+/** The header's Investor Relations dropdown: one link per IR section (IR_NAV in ir-nav.ts). */
+export const IR_MENU: readonly LinkItem[] = IR_NAV.map((section) => ({ label: section.label, href: sectionHref(section) }))
 
 /** Inner-page header links (site.js). */
 export const MAIN_NAV: NavItem[] = [
@@ -99,10 +83,10 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
   {
     title: 'Investors',
     links: [
-      { label: 'IPO', href: `${ROUTES.investors}#ipo` },
-      { label: 'Financials', href: `${ROUTES.investors}#financials` },
-      { label: 'Board & management', href: `${ROUTES.investors}#board` },
-      { label: 'IR contact', href: `${ROUTES.investors}#contact` },
+      { label: 'IPO Centre', href: irPath('ipo-centre', 'overview') },
+      { label: 'Financial info', href: irPath('financial-info', 'highlights') },
+      { label: 'Board of directors', href: irPath('corporate-info', 'directors-profile') },
+      { label: 'IR contact', href: irPath('contact') },
     ],
   },
   {

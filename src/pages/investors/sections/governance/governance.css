@@ -1,0 +1,178 @@
+/*
+ * Governance & Meetings pages: document categories, committee cards, the meetings table and meeting papers.
+ * Every selector is scoped under .ir. Phone layouts at the end.
+ */
+
+/* ---------- Policy disclosures ---------- */
+.ir .gov-categories {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ir .gov-category {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+.ir .card.gov-category h3 {
+  font-size: 20px;
+}
+
+.ir .gov-category p {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.ir .gov-category small {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--brand-deep);
+}
+
+/* ---------- Board committees ---------- */
+.ir .gov-facts {
+  display: grid;
+  margin: 0;
+}
+
+.ir .gov-facts > div {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) minmax(0, 2fr);
+  gap: 4px 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.ir .gov-facts > div:first-child {
+  border-top: 1px solid var(--line);
+}
+
+.ir .gov-facts dt {
+  padding-top: 2px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.ir .gov-facts dd {
+  display: grid;
+  gap: 2px;
+  justify-items: start;
+  margin: 0;
+  font-weight: 600;
+}
+
+.ir .gov-facts small,
+.ir .gov-cell-sub {
+  display: block;
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.ir .gov-subhead {
+  margin-bottom: 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.ir .gov-bullets {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 20px;
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.ir .gov-bullets li::marker {
+  color: var(--saffron);
+}
+
+/* ---------- Shareholders meeting ---------- */
+.ir .gov-meeting-docs {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ir .gov-meeting-docs li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 12px;
+}
+
+.ir .gov-papers {
+  display: grid;
+  margin: 0;
+}
+
+.ir .gov-papers > div {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.ir .gov-papers > div:last-child {
+  border-bottom: 0;
+}
+
+.ir .gov-papers dt {
+  font-weight: 600;
+}
+
+.ir .gov-papers dd {
+  margin: 2px 0 0;
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.ir .gov-steps {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.ir .gov-steps li {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  column-gap: 8px;
+  counter-increment: step;
+}
+
+.ir .gov-steps li::before {
+  content: counter(step, decimal-leading-zero);
+  grid-row: span 2;
+  font-family: var(--serif);
+  font-size: 20px;
+  color: var(--brand);
+}
+
+.ir .gov-steps span {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 560px) {
+  .ir .gov-facts > div {
+    grid-template-columns: 1fr;
+  }
+
+  .ir .card.gov-category h3 {
+    font-size: 19px;
+  }
+}

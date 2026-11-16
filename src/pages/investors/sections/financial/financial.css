@@ -1,0 +1,89 @@
+/* Financial Info pages. Every selector is scoped under .ir. */
+
+.ir .fin-page {
+  display: grid;
+  gap: 24px;
+}
+
+.ir .fin-page .panel > .note {
+  margin-top: 0;
+}
+
+.ir .fin-page .panel p a {
+  color: var(--brand);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Annual / Quarterly and statement switches sit on their own row above the panels. */
+.ir .fin-switch {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ir .fin-switch .segmented {
+  flex-wrap: wrap;
+  border-radius: 22px;
+}
+
+.ir .fin-chart-note {
+  color: var(--ink-2);
+  font-size: 15px;
+}
+
+.ir .fin-chart-note b {
+  color: var(--ink);
+}
+
+.ir .fin-commentary {
+  display: grid;
+  gap: 12px;
+  max-width: 78ch;
+}
+
+/* Statement rows: subtotals in bold, section headings in small capitals. */
+.ir .fin-row-total {
+  font-weight: 700;
+}
+
+.ir .fin-row-heading {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.ir .fin-segment {
+  display: grid;
+}
+
+.ir .fin-segment small {
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.ir .fin-segment--sub {
+  padding-left: 16px;
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* The last row of the table is its total. */
+.ir .fin-total-last tbody tr:last-child th,
+.ir .fin-total-last tbody tr:last-child td {
+  font-weight: 700;
+  border-top: 2px solid var(--ink);
+}
+
+@media (max-width: 560px) {
+  .ir .fin-switch .segmented {
+    width: 100%;
+  }
+
+  .ir .fin-switch .segmented button {
+    flex: 1 1 auto;
+  }
+}

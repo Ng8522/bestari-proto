@@ -1,0 +1,339 @@
+/*
+ * Investor Relations hub chrome: the title band, price strip, icon menu, sub-page tabs, page header and the
+ * previous / next pager. Phone layouts at the end (menus scroll sideways instead of wrapping).
+ */
+
+/* The menu lists also carry .wrap, which sets their side gutters: only drop the bullets. */
+.ir .ir-menu-list,
+.ir .ir-tabs-list {
+  list-style: none;
+}
+
+.ir .crumbs ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- Title band (every IR page but IR Home) ---------- */
+.ir .ir-band {
+  background: var(--brand-deep);
+  color: var(--cream);
+  padding: 40px 0 44px;
+}
+
+.ir .ir-band .eyebrow {
+  color: var(--saffron);
+  margin-top: 18px;
+}
+
+.ir .ir-band h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(32px, 4.4vw, 52px);
+  line-height: 1.05;
+  margin-top: 8px;
+}
+
+.ir .crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--brand-tint);
+}
+
+.ir .crumbs li + li::before {
+  content: '/';
+  margin-right: 6px;
+  opacity: 0.5;
+}
+
+.ir .crumbs a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(220, 235, 225, 0.4);
+}
+
+.ir .crumbs [aria-current] {
+  color: var(--cream);
+  font-weight: 600;
+}
+
+/* ---------- Price strip ---------- */
+.ir .ir-ticker {
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 13px;
+}
+
+.ir .ir-ticker-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 22px;
+  padding-block: 11px;
+}
+
+.ir .ir-ticker-name {
+  font-family: var(--mono);
+  letter-spacing: 0.08em;
+  color: var(--saffron);
+}
+
+.ir .ir-ticker-field b {
+  font-family: var(--mono);
+  margin-left: 4px;
+}
+
+.ir .ir-ticker-status {
+  margin-left: auto;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(242, 174, 46, 0.16);
+  color: var(--saffron-soft);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ir .ir-ticker .ph {
+  color: var(--cream);
+  border-color: rgba(251, 245, 234, 0.4);
+}
+
+/* ---------- Icon menu ---------- */
+.ir .ir-menu {
+  background: var(--cream);
+  border-bottom: 1px solid var(--line);
+}
+
+.ir .ir-menu-list {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 4px;
+  padding-block: 12px;
+}
+
+.ir .ir-menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  padding: 12px 6px;
+  border-radius: 14px;
+  color: var(--ink-2);
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  transition: background 0.2s var(--ease-out), color 0.2s var(--ease-out);
+}
+
+.ir .ir-menu-item:hover {
+  background: var(--cream-2);
+  color: var(--ink);
+}
+
+.ir .ir-menu-item[aria-current] {
+  background: var(--brand);
+  color: var(--cream);
+}
+
+.ir .ir-icon {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- Sub-page tabs ---------- */
+.ir .ir-tabs {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 5;
+}
+
+.ir .ir-tabs-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-block: 10px;
+}
+
+.ir .ir-tabs-list a {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.ir .ir-tabs-list a:hover {
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.ir .ir-tabs-list a[aria-current='page'] {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+/* ---------- Page body ---------- */
+.ir .ir-page {
+  padding-block: 44px 24px;
+  display: grid;
+  /* minmax(0, …) lets wide tables scroll inside their own box instead of widening the page. */
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+
+.ir .pg-head h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(26px, 3vw, 36px);
+  color: var(--brand);
+  line-height: 1.1;
+}
+
+.ir .pg-intro {
+  margin-top: 8px;
+  color: var(--ink-2);
+  max-width: 68ch;
+}
+
+/* ---------- Previous / next pager ---------- */
+.ir .ir-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 12px 36px;
+}
+
+.ir .ir-pager-link {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  max-width: 48%;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+  transition: border-color 0.2s var(--ease-out);
+}
+
+.ir .ir-pager-link:hover {
+  border-color: var(--brand);
+}
+
+.ir .ir-pager-link small {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.ir .ir-pager-link b {
+  color: var(--brand);
+}
+
+.ir .ir-pager-link--next {
+  text-align: right;
+  margin-left: auto;
+}
+
+.ir > .disc {
+  padding-bottom: 56px;
+}
+
+/* ---------- Tablet: the icon menu scrolls sideways ---------- */
+@media (max-width: 1100px) {
+  .ir .ir-menu-list {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+
+  .ir .ir-menu-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ir .ir-menu-list > li {
+    flex: 0 0 104px;
+    scroll-snap-align: center;
+  }
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 560px) {
+  .ir .ir-band {
+    padding: 24px 0 28px;
+  }
+
+  .ir .ir-band .eyebrow {
+    margin-top: 12px;
+  }
+
+  .ir .ir-ticker-row {
+    gap: 6px 14px;
+    font-size: 12px;
+  }
+
+  .ir .ir-ticker-board,
+  .ir .ir-ticker-field:nth-of-type(n + 3) {
+    display: none;
+  }
+
+  .ir .ir-ticker-status {
+    margin-left: 0;
+  }
+
+  .ir .ir-menu-list > li {
+    flex-basis: 88px;
+  }
+
+  .ir .ir-menu-item {
+    font-size: 11.5px;
+    padding: 10px 4px;
+  }
+
+  .ir .ir-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ir .ir-tabs-list {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .ir .ir-tabs-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ir .ir-page {
+    padding-block: 28px 16px;
+    gap: 18px;
+  }
+
+  .ir .ir-pager {
+    flex-direction: column;
+  }
+
+  .ir .ir-pager-link {
+    max-width: none;
+  }
+}

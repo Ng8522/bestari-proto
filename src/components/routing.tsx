@@ -24,6 +24,15 @@ export function SmartLink({ href, ...props }: SmartLinkProps) {
   return <a href={href} {...newTab} {...props} />
 }
 
+/** decodeURIComponent that returns the raw text for a malformed escape (e.g. "#%E0%A4%A") instead of throwing. */
+export function safeDecode(value: string): string {
+  try {
+    return decodeURIComponent(value)
+  } catch {
+    return value
+  }
+}
+
 /**
  * Router navigation keeps the old scroll position by default. Start each new page at the top,
  * or at the section named in the hash (e.g. "/#recipes" from another page).
@@ -36,7 +45,7 @@ export function ScrollManager() {
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
       return
     }
-    const target = document.getElementById(decodeURIComponent(hash.slice(1)))
+    const target = document.getElementById(safeDecode(hash.slice(1)))
     if (target && typeof target.scrollIntoView === 'function') target.scrollIntoView({ block: 'start' })
   }, [pathname, hash])
 
