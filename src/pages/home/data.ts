@@ -10,7 +10,6 @@ export const HEADER_LINKS: NavItem[] = [
   { label: 'About Us', href: ROUTES.about },
   { label: 'Investor Relations', href: ROUTES.investors, children: IR_MENU },
   { label: 'Sustainability', href: ROUTES.sustainability },
-  { label: 'News', href: '#latest' },
 ]
 
 /** The header turns solid once the page has scrolled this share of the viewport height. */

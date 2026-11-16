@@ -90,13 +90,14 @@ describe('Home page', () => {
 })
 
 describe('Home header', () => {
-  it('links the brands, corporate pages, news and the shop', () => {
+  it('links the brands, corporate pages and the shop, with no News link', () => {
     renderHome()
     const nav = screen.getByRole('navigation', { name: 'Main' })
     expect(within(nav).getByRole('link', { name: 'Our Brands' })).toHaveAttribute('href', '#brands')
     expect(within(nav).getByRole('link', { name: 'About Us' })).toHaveAttribute('href', ROUTES.about)
     expect(within(nav).getByRole('link', { name: 'Investor Relations' })).toHaveAttribute('href', ROUTES.investors)
-    expect(within(nav).getByRole('link', { name: 'News' })).toHaveAttribute('href', '#latest')
+    expect(within(nav).getByRole('link', { name: 'Sustainability' })).toHaveAttribute('href', ROUTES.sustainability)
+    expect(within(nav).queryByRole('link', { name: 'News' })).not.toBeInTheDocument()
     const shopLinks = within(screen.getByRole('banner')).getAllByRole('link', { name: /Shop online/ })
     shopLinks.forEach((link) => expect(link).toHaveAttribute('href', ROUTES.shop))
   })
