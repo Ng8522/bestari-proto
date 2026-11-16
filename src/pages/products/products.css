@@ -109,17 +109,23 @@
   transform: translateY(-2px);
 }
 
+/*
+ * Pack photos come in different shapes (square, portrait). The photo is pinned inside a square box, so a tall
+ * photo can never stretch its card: some browsers ignore height: 100% on an image inside an aspect-ratio box.
+ */
 .prod-card__media {
-  display: grid;
-  place-items: center;
+  position: relative;
   aspect-ratio: 1;
-  padding: 22px;
+  overflow: hidden;
   background: var(--cream-2);
 }
 
 .prod-card__media img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  padding: 22px;
   object-fit: contain;
   filter: drop-shadow(0 14px 18px rgba(42, 26, 20, 0.18));
   transition: transform 0.3s var(--ease-out);
@@ -239,18 +245,21 @@
   margin: 0;
 }
 
+/* Same pinned-photo box as the cards, so portrait packs keep the square. */
 .pd__photo {
-  display: grid;
-  place-items: center;
+  position: relative;
   aspect-ratio: 1;
-  padding: clamp(24px, 5vw, 56px);
+  overflow: hidden;
   border-radius: 32px;
   background: var(--cream-2);
 }
 
 .pd__photo img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  padding: clamp(24px, 5vw, 56px);
   object-fit: contain;
   filter: drop-shadow(0 22px 28px rgba(42, 26, 20, 0.2));
 }
@@ -471,7 +480,7 @@
     border-radius: 18px;
   }
 
-  .prod-card__media {
+  .prod-card__media img {
     padding: 14px;
   }
 
