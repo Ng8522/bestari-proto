@@ -101,12 +101,34 @@
   }
 }
 
-/* ---------- ≤600px: phone refinements (the design only roughed in mobile) ---------- */
-@media (max-width: 600px) {
-  .home .slogan .w {
-    font-size: clamp(72px, 22vw, 120px);
+/* ---------- Phones and portrait tablets: side lanes would squeeze the slogan, so the packs move
+   to a row above and a row below it, each pack still in a cell of its own ---------- */
+@media (max-width: 600px), (max-width: 900px) and (orientation: portrait) {
+  .home .slogan {
+    --slogan-top: 100px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'f1 f2'
+      'words words'
+      'f3 f4'
+      'foot foot';
+    row-gap: 12px;
   }
 
+  /* The slogan's row now takes its height from the slogan, so only its width can be contained. */
+  .home .slogan .words {
+    container-type: inline-size;
+  }
+
+  .home .slogan .w,
+  .home .slogan .mid {
+    font-size: 25cqw;
+  }
+}
+
+/* ---------- ≤600px: phone refinements (the design only roughed in mobile) ---------- */
+@media (max-width: 600px) {
   .home .slogan .foot-l .tag {
     display: none;
   }

@@ -98,7 +98,16 @@
 }
 
 /* ---------- 01 Slogan hero ---------- */
+/* The packs must never sit under the slogan, the captions or the header, so nothing here is
+   absolutely positioned: a grid gives each pack its own cell in a side lane, the slogan gets the
+   centre column and the captions get their own row. The packs shrink to fit their cell and the
+   slogan shrinks to fit the centre column (container query units), so they cannot meet at any
+   viewport size. The portrait/phone layout (packs above and below the slogan) is in responsive.css. */
 .home .slogan {
+  /* Clears the fixed header (94px tall over the hero). */
+  --slogan-top: 108px;
+  /* Room each side of a lane for the mouse parallax (up to 15px) to move a pack without touching the slogan. */
+  --slogan-gap: clamp(16px, 1.8vw, 28px);
   height: 100vh;
   min-height: 700px;
   max-height: 1000px;
@@ -107,7 +116,14 @@
   position: relative;
   overflow: hidden;
   display: grid;
-  place-items: center;
+  grid-template-columns: clamp(110px, 18vw, 290px) minmax(0, 1fr) clamp(110px, 18vw, 290px);
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) auto;
+  grid-template-areas:
+    'f1 words f2'
+    'f3 words f4'
+    'foot foot foot';
+  column-gap: var(--slogan-gap);
+  padding: var(--slogan-top) max(clamp(16px, 2.5vw, 40px), calc((100% - 1680px) / 2)) 26px;
 }
 
 .home .slogan::before {
@@ -117,45 +133,57 @@
   background: radial-gradient(circle at 50% 55%, #1a8a63 0, transparent 60%);
 }
 
+/* A size container, so the letters below can be sized from the cell they must fit in. */
 .home .slogan .words {
+  grid-area: words;
   position: relative;
   z-index: 3;
+  container-type: size;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
   text-align: center;
   font-family: var(--serif);
   line-height: 0.86;
   letter-spacing: -0.02em;
-  margin-top: 40px;
+}
+
+/* "Mudah" (the widest word) is about 3.7em wide and the whole slogan about 2.2em tall,
+   so 26cqw / 40cqh always leave it inside the centre column. */
+.home .slogan .w,
+.home .slogan .mid {
+  font-size: min(26cqw, 40cqh);
 }
 
 .home .slogan .w {
   display: block;
-  font-size: clamp(120px, 19vw, 300px);
 }
 
 .home .slogan .mid {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(16px, 2vw, 32px);
+  gap: 0.1em;
   margin: 0.04em 0;
 }
 
 .home .slogan .mid em {
   font-style: italic;
-  font-size: clamp(60px, 8vw, 128px);
+  font-size: 0.42em;
   color: var(--saffron);
   opacity: 0;
   animation: home-up 0.9s 0.55s var(--ease-out) forwards;
 }
 
 .home .slogan .chip {
-  width: clamp(90px, 10vw, 160px);
-  height: clamp(60px, 6.4vw, 104px);
+  flex: none;
+  width: 0.53em;
+  height: 0.34em;
   border-radius: 999px;
   background: var(--saffron);
   display: grid;
   place-items: center;
-  overflow: hidden;
   opacity: 0;
   animation: home-up 0.9s 0.7s var(--ease-out) forwards;
 }
@@ -164,16 +192,25 @@
   background: var(--brand);
 }
 
+/* The whole packshot sits inside the pill (tilted, it still clears the pill's edges), so none of it is cut off. */
 .home .slogan .chip img {
-  height: 130%;
+  /* In em (the pill is 0.34em tall), because a % height would resolve against the pill's grid row, not the pill. */
+  height: 0.28em;
   width: auto;
-  transform: translateY(10%) rotate(-8deg);
-  filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.3));
+  transform: rotate(-8deg);
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));
 }
 
+/* Each pack fills its own grid cell (a size container); the image is held to 66% of the cell
+   so that, tilted up to 16deg (slot tilt plus bob), it still stays inside the cell. */
 .home .slogan .fl {
-  position: absolute;
+  position: relative;
   z-index: 2;
+  min-width: 0;
+  min-height: 0;
+  container-type: size;
+  display: grid;
+  place-items: center;
   filter: drop-shadow(0 30px 30px rgba(0, 0, 0, 0.35));
   transition: transform 0.4s ease-out;
   opacity: 0;
@@ -181,39 +218,30 @@
 }
 
 .home .slogan .fl img {
-  width: 100%;
+  width: auto;
+  height: auto;
+  max-width: 66cqw;
+  max-height: 66cqh;
   animation: home-bob 7s ease-in-out infinite;
 }
 
 .home .slogan .f1 {
-  width: 15vw;
-  max-width: 230px;
-  left: 5%;
-  top: 16%;
+  grid-area: f1;
   rotate: -14deg;
 }
 
 .home .slogan .f2 {
-  width: 13vw;
-  max-width: 200px;
-  right: 6%;
-  top: 14%;
+  grid-area: f2;
   rotate: 12deg;
 }
 
 .home .slogan .f3 {
-  width: 14vw;
-  max-width: 220px;
-  left: 9%;
-  bottom: 6%;
+  grid-area: f3;
   rotate: 10deg;
 }
 
 .home .slogan .f4 {
-  width: 15vw;
-  max-width: 230px;
-  right: 8%;
-  bottom: 5%;
+  grid-area: f4;
   rotate: -10deg;
 }
 
@@ -223,16 +251,16 @@
 }
 
 .home .slogan .foot-l {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 30px;
+  grid-area: foot;
+  position: relative;
   z-index: 4;
+  padding-top: 12px;
 }
 
 /* The design's centred scroll cue (mouse icon) was removed at the client's request, leaving the two captions at either end. */
 .home .slogan .foot-l .wrap {
-  max-width: 1440px;
+  max-width: none;
+  padding: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
