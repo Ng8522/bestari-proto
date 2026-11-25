@@ -1,4 +1,4 @@
-/* Home: 1180px, 900px and 600px breakpoints, then reduced motion. Must stay last. */
+/* Home: 1180px, 900px and 600px breakpoints. Must stay last. */
 
 /* ---------- ≤1180px: the five header links still fit on one line until the menu folds at 900px ---------- */
 @media (max-width: 1180px) {
@@ -17,10 +17,7 @@
 
 /* ---------- ≤900px: the design's single-column breakpoint ---------- */
 @media (max-width: 900px) {
-  .home .purpose .wrap,
   .home .vgrid,
-  .home .intro .line,
-  .home .doors,
   .home .lrow {
     grid-template-columns: 1fr;
   }
@@ -103,88 +100,6 @@
 
 /* ---------- ≤600px: phone refinements (the design only roughed in mobile) ---------- */
 @media (max-width: 600px) {
-  .home .intro .line {
-    gap: 20px;
-    margin-bottom: 32px;
-  }
-
-  .home .door {
-    padding: 24px;
-  }
-
-  /* Carousel: stack heading, pack and info in normal flow so nothing overlaps on a short, narrow screen. */
-  .home .hero {
-    height: auto;
-    min-height: 0;
-    max-height: none;
-    display: flex;
-    flex-direction: column;
-    padding: 110px 0 40px;
-  }
-
-  .home .hero .bhead,
-  .home .hero .info {
-    position: relative;
-    top: auto;
-    bottom: auto;
-  }
-
-  .home .hero .bhead .wrap,
-  .home .hero .info .wrap {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-  }
-
-  .home .hero .slides {
-    position: relative;
-    inset: auto;
-    height: 340px;
-  }
-
-  .home .hero .slide img {
-    height: min(36vh, 280px);
-  }
-
-  .home .hero .ctrl {
-    flex-wrap: wrap;
-    row-gap: 20px;
-    white-space: normal;
-  }
-
-  .home .hero .dots,
-  .home .hero .ctrl .btn {
-    margin-left: 0;
-  }
-
-  .home .hero .arrow {
-    width: 48px;
-    height: 48px;
-  }
-
-  .home .purpose {
-    padding: 72px 0;
-  }
-
-  .home .purpose .wrap {
-    gap: 40px;
-  }
-
-  .home .purpose .cert {
-    max-width: 100%;
-  }
-
-  .home .purpose .cert img {
-    height: auto;
-    max-height: 56px;
-  }
-
-  .home .pillar {
-    grid-template-columns: 48px 1fr;
-    gap: 14px;
-    padding: 18px;
-  }
-
   .home .vids {
     padding: 72px 0 24px;
   }
@@ -196,12 +111,5 @@
   .home .lc {
     grid-template-columns: 100px 1fr;
     gap: 16px;
-  }
-}
-
-/* The handoff's production rule: no bobbing, fading-in or marquee motion when reduced motion is asked for. */
-@media (prefers-reduced-motion: reduce) {
-  .home .hero .mq div {
-    animation: none;
   }
 }

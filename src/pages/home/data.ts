@@ -4,6 +4,7 @@
  */
 import { asset, IR_MENU, ROUTES, type ImageAsset, type NavItem } from '../../content/site'
 import { productPath } from '../products/catalogue'
+import { PRODUCT_CATEGORIES, type ProductCategoryId } from '../products/data'
 
 /** Centre links of the transparent home header. */
 export const HEADER_LINKS: NavItem[] = [
@@ -94,77 +95,37 @@ export const HERO_SLIDES: readonly HeroSlide[] = [
   },
 ]
 
-// ---------- Intro doors ----------
+// ---------- Intro band ----------
 
-export interface Door {
-  href: string
-  eyebrow: string
-  title: string
-  cta: string
-  image: ImageAsset
-  /** A solid colour turns the door into a packshot door; without it the image fills the card. */
-  background?: string
+export const INTRO_PHOTO: ImageAsset = {
+  src: asset('about-1.jpg'),
+  alt: 'Two cooks slicing aubergine and preparing whole spices on a white kitchen counter',
 }
 
-export const DOORS: Door[] = [
-  {
-    href: ROUTES.about,
-    eyebrow: 'Our Story',
-    title: 'The playful sous chef',
-    cta: 'About Bestari',
-    image: { src: asset('about-1.jpg'), alt: '' },
-  },
-  {
-    href: ROUTES.investors,
-    eyebrow: 'Investor Relations',
-    title: 'SC approved · Main Market IPO',
-    cta: 'IPO details',
-    image: { src: asset('p-curry-meat.png'), alt: '' },
-    background: 'var(--brand-deep)',
-  },
-  {
-    href: ROUTES.shop,
-    eyebrow: 'Shop Today',
-    title: 'Your pantry, delivered',
-    cta: 'Shop now',
-    image: { src: asset('p-flour-mala-520g.png'), alt: '' },
-    background: 'var(--brand)',
-  },
-]
+// ---------- Product ranges ----------
 
-// ---------- Brands carousel ----------
-
-export interface BrandSlide {
+export interface ProductRange {
+  id: ProductCategoryId
+  label: string
+  /** One pack shot that stands for the range. */
   image: string
-  /** Section background while the slide is showing. */
-  bg: string
-  eyebrow: string
-  name: string
-  nameZh: string
-  /** Outline word repeated in the marquee behind the pack. */
-  marquee: string
+  href: string
 }
 
-export const BRAND_SLIDES: BrandSlide[] = [
-  { image: asset('p-flour-original-1kg.png'), bg: '#E89A1C', eyebrow: 'Our original · Since 2004', name: 'Multipurpose Crispy Frying Flour Mix', nameZh: '多用途香脆炸粉', marquee: 'RANGUP' },
-  { image: asset('p-curry-meat.png'), bg: '#7E1B1E', eyebrow: 'Instant premix', name: 'Instant Curry Powder Premix', nameZh: '速煮咖喱粉料', marquee: 'KARI' },
-  { image: asset('p-saltedegg-800g.png'), bg: '#C8861A', eyebrow: 'Golden & creamy', name: 'Golden Salted Egg Seasoning', nameZh: '金沙咸蛋粉', marquee: 'TELUR MASIN' },
-  { image: asset('p-tempura-500g.png'), bg: '#2A1A14', eyebrow: 'Light & crispy', name: 'Tempura', nameZh: '天妇罗粉', marquee: 'TEMPURA' },
-  { image: asset('p-chickenstock-1kg.png'), bg: '#1E6A3E', eyebrow: 'Kitchen essential', name: 'Chicken Stock', nameZh: '鸡精调料粉', marquee: 'STOK AYAM' },
-  { image: asset('p-rasasedap-230g.png'), bg: '#B5261E', eyebrow: 'All-in-one', name: 'Rasa Sedap All-in-One Seasoning', nameZh: '多用途全一调味料', marquee: 'RASA SEDAP' },
-  { image: asset('p-banana-1kg.png'), bg: '#2E7D4A', eyebrow: 'Minum petang', name: 'Banana Fritter Batter', nameZh: '香脆炸香蕉粉', marquee: 'PISANG GORENG' },
-  { image: asset('p-cucur.png'), bg: '#5A1013', eyebrow: 'Kuih favourite', name: 'Cucur', nameZh: '马来炸糕', marquee: 'CUCUR' },
-  { image: asset('p-custard.png'), bg: '#D19A1E', eyebrow: 'Sweet treats', name: 'Custard', nameZh: '吉士粉', marquee: 'KASTARD' },
-  { image: asset('p-salt.png'), bg: '#134A2B', eyebrow: 'Pantry staple', name: 'Iodised Himalayan Rock Salt', nameZh: '喜马拉雅含碘岩盐', marquee: 'GARAM' },
-]
+const RANGE_PACKS: Record<ProductCategoryId, string> = {
+  frying: 'p-flour-original-1kg.png',
+  seasoning: 'p-rasasedap-230g.png',
+  dessert: 'p-custard.png',
+  pantry: 'p-salt.png',
+}
 
-export const CAROUSEL = {
-  autoplayMs: 5500,
-  swipeThresholdPx: 60,
-  storageKey: 'bestari_hero',
-  /** The marquee repeats the word 8 times so the -50% loop is seamless. */
-  marqueeRepeats: 8,
-} as const
+/** The products page's four categories, in its order and with its names. */
+export const PRODUCT_RANGES: readonly ProductRange[] = PRODUCT_CATEGORIES.map((category) => ({
+  id: category.id,
+  label: category.label,
+  image: asset(RANGE_PACKS[category.id]),
+  href: ROUTES.products,
+}))
 
 // ---------- Purpose ----------
 

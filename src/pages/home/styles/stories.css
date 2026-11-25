@@ -1,100 +1,9 @@
-/* Home: 04 purpose, 05 recipe videos and 06 latest. */
-
-/* ---------- 04 Our Purpose ---------- */
-.home .purpose {
-  background: var(--brand);
-  color: #fff;
-  padding: 100px 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.home .purpose .wrap {
-  max-width: 1440px;
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 80px;
-  align-items: center;
-}
-
-.home .purpose .eyebrow {
-  color: var(--saffron-soft);
-}
-
-.home .purpose h2 {
-  font-size: var(--fs-serif-xl);
-  margin: 16px 0 24px;
-}
-
-.home .purpose h2 em {
-  font-style: normal;
-  color: var(--saffron);
-}
-
-.home .purpose p {
-  color: var(--brand-tint);
-  font-size: var(--fs-sans-lg);
-  max-width: 560px;
-}
-
-.home .pillars {
-  display: grid;
-  gap: 14px;
-}
-
-.home .pillar {
-  display: grid;
-  grid-template-columns: 64px 1fr;
-  gap: 20px;
-  align-items: center;
-  padding: 22px 24px;
-  border-radius: 0;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: background 0.3s;
-}
-
-.home .pillar:hover {
-  background: rgba(255, 255, 255, 0.13);
-}
-
-.home .pillar b {
-  font-family: var(--serif);
-  font-weight: var(--display-weight);
-  font-stretch: var(--display-stretch);
-  text-transform: uppercase;
-  font-size: var(--fs-serif-lg);
-  color: var(--saffron);
-  line-height: 1;
-}
-
-.home .pillar h3 {
-  font-family: var(--sans);
-  font-weight: 700;
-  font-size: var(--fs-sans-lg);
-}
-
-.home .pillar span {
-  font-size: var(--fs-sans-sm);
-  color: var(--brand-tint);
-}
-
-.home .purpose .cert {
-  margin-top: 34px;
-  background: #fff;
-  border-radius: 0;
-  padding: 14px 20px;
-  display: inline-block;
-}
-
-.home .purpose .cert img {
-  height: 56px;
-  width: auto;
-}
+/* Home: 05 recipe videos and 07 latest. The bands before and between them are in bands.css. */
 
 /* ---------- 05 Recipe videos ---------- */
+/* Same rhythm as the bands around it: a centred title over the player. */
 .home .vids {
-  padding: 100px 0 30px;
+  padding-block: clamp(72px, 9vw, 128px) 30px;
 }
 
 .home .vids .wrap {
@@ -103,9 +12,9 @@
 
 .home .vids .head {
   display: flex;
-  justify-content: space-between;
-  align-items: end;
-  margin-bottom: 28px;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 .home .vids .eyebrow {
@@ -113,7 +22,7 @@
 }
 
 .home .vids h2 {
-  font-size: var(--fs-serif-xl);
+  font-size: var(--fs-serif-2xl);
   color: var(--brand-deep);
   margin-top: 12px;
 }

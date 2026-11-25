@@ -1,0 +1,236 @@
+/* Home: the one-message bands (bands.tsx). Each band is full width with one centred title, a line or two of
+   text, one button or one row of links, and one big visual; the grounds alternate white, light, 342C and deep green. */
+.home .band {
+  padding-block: clamp(72px, 9vw, 128px);
+  text-align: center;
+}
+
+.home .band > .wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.home .band h2 {
+  max-width: 24ch;
+  font-size: var(--fs-serif-2xl);
+}
+
+.home .band .lead {
+  max-width: 40em;
+  font-size: var(--fs-sans-lg);
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.home .band--white {
+  background: var(--cream);
+}
+
+.home .band--light {
+  background: var(--cream-2);
+}
+
+.home .band--brand {
+  background: var(--brand);
+  color: #fff;
+}
+
+.home .band--deep {
+  background: var(--brand-deep);
+  color: #fff;
+}
+
+.home .band--brand .eyebrow,
+.home .band--deep .eyebrow {
+  color: var(--saffron);
+}
+
+.home .band--brand .lead,
+.home .band--deep .lead {
+  color: var(--brand-tint);
+}
+
+/* ---------- 02 Intro ---------- */
+.home .band__photo {
+  width: 100%;
+  max-width: 1120px;
+  height: auto;
+  aspect-ratio: 1024 / 445;
+  margin-top: 16px;
+  object-fit: cover;
+}
+
+/* ---------- 03 Product ranges ---------- */
+.home .ranges {
+  width: 100%;
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  list-style: none;
+}
+
+.home .range {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px 20px 28px;
+  background: var(--cream);
+  transition: transform 0.2s var(--ease-out), box-shadow 0.2s;
+}
+
+.home .range:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0, 103, 71, 0.12);
+}
+
+.home .range img {
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
+.home .range h3 {
+  font-size: var(--fs-serif-md);
+}
+
+.home .range .go {
+  margin-top: auto;
+  font-size: var(--fs-sans-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+/* ---------- 04 Promises ---------- */
+.home .promises {
+  width: 100%;
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  list-style: none;
+}
+
+.home .promises li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding-top: 24px;
+  border-top: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.home .promises b {
+  font-family: var(--serif);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  font-size: var(--fs-serif-lg);
+  font-variant-numeric: tabular-nums;
+  color: var(--saffron);
+}
+
+.home .promises h3 {
+  font-size: var(--fs-serif-lg);
+}
+
+.home .promises p {
+  max-width: 26em;
+  color: var(--brand-tint);
+}
+
+.home .band .cert {
+  margin-top: 16px;
+  padding: 16px 24px;
+  background: #fff;
+}
+
+.home .band .cert img {
+  height: 56px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* ---------- 06 Going public ---------- */
+.home .figures {
+  width: 100%;
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* Each figure reads value first, label under it. */
+.home .figures div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 8px;
+  padding-top: 20px;
+  border-top: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.home .figures dd {
+  font-family: var(--serif);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  font-size: var(--fs-serif-lg);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
+}
+
+.home .figures dt {
+  font-size: var(--fs-mono-sm);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand-tint);
+}
+
+/* ---------- Tablets and phones ---------- */
+@media (max-width: 900px) {
+  .home .ranges,
+  .home .figures {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home .promises {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .home .ranges {
+    gap: 12px;
+  }
+
+  .home .range {
+    padding: 20px 12px;
+  }
+
+  .home .range h3 {
+    font-size: var(--fs-serif-sm);
+  }
+
+  .home .band .cert img {
+    height: auto;
+    max-height: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home .range {
+    transition: none;
+  }
+
+  .home .range:hover {
+    transform: none;
+  }
+}

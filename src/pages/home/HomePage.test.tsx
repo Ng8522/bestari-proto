@@ -1,10 +1,11 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router'
 import { AppRoutes } from '../../App'
 import { ROUTES } from '../../content/site'
-import { BRAND_SLIDES, CAROUSEL, HEADER_SCRIM_OFFSET_PX, RECIPE_VIDEOS } from './data'
+import { PRODUCT_CATEGORIES } from '../products/data'
+import { HEADER_SCRIM_OFFSET_PX, RECIPE_VIDEOS } from './data'
 
 function renderHome() {
   const user = userEvent.setup()
@@ -16,38 +17,8 @@ function renderHome() {
   return { user }
 }
 
-function getCarousel(): HTMLElement {
-  return screen.getByRole('region', { name: 'Our Brands' })
-}
-
-/** The visible slide group, its counter and its product name must all agree. */
-function expectSlide(position: number) {
-  const carousel = getCarousel()
-  const slide = BRAND_SLIDES[position - 1]
-  expect(within(carousel).getByRole('group')).toHaveAccessibleName(`${position} of ${BRAND_SLIDES.length}`)
-  expect(within(carousel).getByText(`${String(position).padStart(2, '0')} / 10`)).toBeInTheDocument()
-  expect(within(carousel).getByRole('heading', { level: 3 })).toHaveTextContent(slide.name)
-  expect(carousel).toHaveStyle({ backgroundColor: slide.bg })
-}
-
 function setScrollY(value: number) {
   Object.defineProperty(window, 'scrollY', { configurable: true, writable: true, value })
-}
-
-function stubReducedMotion() {
-  vi.stubGlobal(
-    'matchMedia',
-    vi.fn((query: string) => ({
-      matches: query.includes('prefers-reduced-motion'),
-      media: query,
-      onchange: null,
-      addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
-      addListener: vi.fn(),
-      removeListener: vi.fn(),
-      dispatchEvent: vi.fn(() => false),
-    })),
-  )
 }
 
 afterEach(() => {
@@ -71,11 +42,40 @@ describe('Home page', () => {
     expect(document.title).toBe('Bestari Food Berhad | Mudah dan Sedap!')
   })
 
-  it('links the three doors to About, Investor Relations and the shop', () => {
+  it('tells the story in one-message bands, with no brand carousel or door cards', () => {
     renderHome()
-    expect(screen.getByRole('link', { name: /The playful sous chef/ })).toHaveAttribute('href', ROUTES.about)
-    expect(screen.getByRole('link', { name: /SC approved · Main Market IPO/ })).toHaveAttribute('href', ROUTES.investors)
-    expect(screen.getByRole('link', { name: /Your pantry, delivered/ })).toHaveAttribute('href', ROUTES.shop)
+    const titles = screen.getAllByRole('heading', { level: 2 }).map((heading) => heading.textContent)
+    expect(titles).toEqual(
+      expect.arrayContaining([
+        'Mudah & sedap since 2004.',
+        'Kitchen essentials, from batter to seasoning.',
+        'Good food brings people together.',
+        'Bestari Food Berhad is going public.',
+      ]),
+    )
+    const intro = document.getElementById('about') as HTMLElement
+    expect(within(intro).getByRole('link', { name: /Our story/ })).toHaveAttribute('href', ROUTES.about)
+    expect(screen.queryByRole('region', { name: 'Our Brands' })).toBeNull()
+    expect(document.querySelector('.home .door')).toBeNull()
+  })
+
+  it('shows the four product ranges as tiles that open the products page', () => {
+    renderHome()
+    const ranges = within(document.getElementById('products') as HTMLElement).getAllByRole('link')
+    expect(ranges).toHaveLength(PRODUCT_CATEGORIES.length)
+    ranges.forEach((link, index) => {
+      expect(link).toHaveTextContent(PRODUCT_CATEGORIES[index].label)
+      expect(link).toHaveAttribute('href', ROUTES.products)
+    })
+  })
+
+  it('shows only the settled IPO figures and one way into Investor Relations', () => {
+    renderHome()
+    const ipo = document.getElementById('ipo') as HTMLElement
+    expect(within(ipo).getByText('Up to 133.32m')).toBeInTheDocument()
+    expect(within(ipo).getByText('450.0m shares')).toBeInTheDocument()
+    expect(within(ipo).queryByText('TBA')).toBeNull()
+    expect(within(ipo).getByRole('link', { name: /Go to Investor Relations/ })).toHaveAttribute('href', ROUTES.investors)
   })
 
   it('leads the news with the IPO story and has no careers band', () => {
@@ -144,129 +144,6 @@ describe('Home header', () => {
     await user.keyboard('{Escape}')
     expect(toggle).toHaveAttribute('aria-expanded', 'false')
     expect(toggle).toHaveFocus()
-  })
-})
-
-describe('Brands carousel', () => {
-  it('is announced as a carousel of labelled slides', () => {
-    renderHome()
-    const carousel = getCarousel()
-    expect(carousel).toHaveAttribute('id', 'brands')
-    expect(carousel).toHaveAttribute('aria-roledescription', 'carousel')
-    expect(within(carousel).getAllByRole('group', { hidden: true })).toHaveLength(BRAND_SLIDES.length)
-    expectSlide(1)
-    expect(within(carousel).getByRole('img', { name: BRAND_SLIDES[0].name })).toBeInTheDocument()
-    expect(within(carousel).getByRole('link', { name: /Buy now/ })).toHaveAttribute('href', ROUTES.shop)
-  })
-
-  it('moves with the arrows, wrapping at both ends, and remembers the slide', async () => {
-    const { user } = renderHome()
-    await user.click(screen.getByRole('button', { name: 'Next slide' }))
-    expectSlide(2)
-    expect(window.localStorage.getItem(CAROUSEL.storageKey)).toBe('1')
-
-    await user.click(screen.getByRole('button', { name: 'Previous slide' }))
-    await user.click(screen.getByRole('button', { name: 'Previous slide' }))
-    expectSlide(10)
-    await user.click(screen.getByRole('button', { name: 'Next slide' }))
-    expectSlide(1)
-  })
-
-  it('jumps to a slide from its dot and marks that dot current', async () => {
-    const { user } = renderHome()
-    const dot = screen.getByRole('button', { name: `Show slide 5 of 10: ${BRAND_SLIDES[4].name}` })
-    await user.click(dot)
-    expectSlide(5)
-    expect(dot).toHaveAttribute('aria-current', 'true')
-    expect(screen.getByRole('button', { name: /Show slide 1 of 10/ })).not.toHaveAttribute('aria-current')
-  })
-
-  it('supports arrow, Home and End keys while focus is inside', async () => {
-    const { user } = renderHome()
-    act(() => screen.getByRole('button', { name: 'Next slide' }).focus())
-
-    await user.keyboard('{ArrowRight}{ArrowRight}')
-    expectSlide(3)
-    await user.keyboard('{ArrowLeft}')
-    expectSlide(2)
-    await user.keyboard('{End}')
-    expectSlide(10)
-    await user.keyboard('{Home}')
-    expectSlide(1)
-  })
-
-  it('changes slide on a swipe longer than 60px only', () => {
-    renderHome()
-    const carousel = getCarousel()
-    fireEvent.pointerDown(carousel, { clientX: 400 })
-    fireEvent.pointerUp(carousel, { clientX: 300 })
-    expectSlide(2)
-
-    fireEvent.pointerDown(carousel, { clientX: 300 })
-    fireEvent.pointerUp(carousel, { clientX: 340 })
-    expectSlide(2)
-
-    fireEvent.pointerDown(carousel, { clientX: 200 })
-    fireEvent.pointerUp(carousel, { clientX: 300 })
-    expectSlide(1)
-  })
-
-  it('autoplays every 5.5s, restarts the countdown after a move and pauses on hover', () => {
-    vi.useFakeTimers()
-    renderHome()
-    act(() => vi.advanceTimersByTime(CAROUSEL.autoplayMs))
-    expectSlide(2)
-
-    act(() => vi.advanceTimersByTime(4000))
-    fireEvent.click(screen.getByRole('button', { name: 'Next slide' }))
-    expectSlide(3)
-    act(() => vi.advanceTimersByTime(4000))
-    expectSlide(3)
-    act(() => vi.advanceTimersByTime(1500))
-    expectSlide(4)
-
-    const carousel = getCarousel()
-    fireEvent.pointerOver(carousel)
-    act(() => vi.advanceTimersByTime(CAROUSEL.autoplayMs * 2))
-    expectSlide(4)
-
-    fireEvent.pointerOut(carousel, { relatedTarget: document.body })
-    act(() => vi.advanceTimersByTime(CAROUSEL.autoplayMs))
-    expectSlide(5)
-  })
-
-  it('does not autoplay or scroll the marquee when reduced motion is requested', () => {
-    stubReducedMotion()
-    vi.useFakeTimers()
-    renderHome()
-    act(() => vi.advanceTimersByTime(CAROUSEL.autoplayMs * 3))
-    expectSlide(1)
-    expect(getCarousel().querySelector('.mq')).toHaveClass('mq--still')
-  })
-
-  it('restores the saved slide from localStorage', () => {
-    window.localStorage.setItem(CAROUSEL.storageKey, '3')
-    renderHome()
-    expectSlide(4)
-  })
-
-  it.each(['42', '-1', '2.5', 'abc', ''])('ignores an invalid saved slide (%j)', (stored) => {
-    window.localStorage.setItem(CAROUSEL.storageKey, stored)
-    renderHome()
-    expectSlide(1)
-  })
-
-  it('still works when storage is blocked', async () => {
-    vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
-      throw new Error('blocked')
-    })
-    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
-      throw new Error('blocked')
-    })
-    const { user } = renderHome()
-    expectSlide(1)
-    await user.click(screen.getByRole('button', { name: 'Next slide' }))
-    expectSlide(2)
   })
 })
 

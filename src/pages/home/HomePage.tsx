@@ -1,9 +1,9 @@
 import { SiteFooter } from '../../components/chrome'
 import { useDocumentTitle } from '../../components/routing'
-import { BrandCarousel } from './BrandCarousel'
 import { HomeHeader } from './HomeHeader'
 import { RecipeVideos } from './RecipeVideos'
-import { IntroDoors, Latest, Purpose } from './sections'
+import { IntroBand, IpoBand, ProductRanges, PromiseBand } from './bands'
+import { Latest } from './sections'
 import { HeroSlider } from './HeroSlider'
 import './home.css'
 
@@ -19,10 +19,11 @@ export function HomePage() {
       <HomeHeader />
       <main id="main">
         <HeroSlider />
-        <IntroDoors />
-        <BrandCarousel />
-        <Purpose />
+        <IntroBand />
+        <ProductRanges />
+        <PromiseBand />
         <RecipeVideos />
+        <IpoBand />
         <Latest />
       </main>
       <SiteFooter />
