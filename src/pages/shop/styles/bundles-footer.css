@@ -17,7 +17,7 @@
 }
 
 .shop .bundles h2 {
-  font-size: 48px;
+  font-size: var(--fs-serif-xl);
   color: var(--brand-deep);
   margin: 12px 0 36px;
 }
@@ -53,12 +53,12 @@
 }
 
 .shop .bc h3 {
-  font-size: 28px;
+  font-size: var(--fs-serif-md);
 }
 
 .shop .bc > p {
   color: var(--ink-2);
-  font-size: 15px;
+  font-size: var(--fs-sans-sm);
 }
 
 .shop .bc__row {
@@ -70,7 +70,8 @@
 
 .shop .bc__was {
   color: var(--ink-2);
-  font-size: 14px;
+  font-family: var(--sans);
+  font-size: var(--fs-sans-sm);
   margin-left: 8px;
 }
 
@@ -95,7 +96,7 @@
 }
 
 .shop .trade h2 {
-  font-size: 48px;
+  font-size: var(--fs-serif-xl);
   color: #fff;
   margin: 0 0 16px;
 }
@@ -129,7 +130,7 @@
   background: var(--brand);
   color: var(--brand-tint);
   padding: 30px 0;
-  font-size: 15px;
+  font-size: var(--fs-sans-sm);
 }
 
 .shop .shop-foot__bottom {
@@ -137,7 +138,7 @@
   flex-wrap: wrap;
   gap: 8px 24px;
   justify-content: space-between;
-  font-size: 13px;
+  font-size: var(--fs-sans-xs);
 }
 
 .shop .shop-foot a:hover {

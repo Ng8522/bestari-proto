@@ -98,7 +98,7 @@
   display: block;
   padding: 9px 14px;
   border-radius: 9px;
-  font-size: 14.5px;
+  font-size: var(--fs-sans-sm);
   font-weight: 600;
   color: var(--ink);
   white-space: nowrap;
@@ -202,7 +202,6 @@
   .home .hdr .dd .dd__menu a {
     padding: 8px 14px;
     border-radius: 0;
-    font-size: 15.5px;
   }
 
   .dd .dd__menu a:hover,

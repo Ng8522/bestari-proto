@@ -39,7 +39,7 @@
   left: 50%;
   transform: translateX(-50%);
   font-family: var(--mono);
-  font-size: 13px;
+  font-size: var(--fs-mono-md);
   font-weight: 500;
   white-space: nowrap;
 }
@@ -51,14 +51,14 @@
   padding: 14px 20px 0;
   text-align: center;
   font-family: var(--mono);
-  font-size: 13px;
+  font-size: var(--fs-mono-md);
   color: var(--ink-2);
 }
 
 .ir .chart-key {
   display: flex;
   gap: 20px;
-  font-size: 14px;
+  font-size: var(--fs-sans-sm);
   margin-top: 14px;
 }
 
@@ -97,7 +97,7 @@
 
 .ir .kpi-label {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--fs-mono-xs);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   opacity: 0.8;
@@ -106,14 +106,14 @@
 .ir .kpi-value {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: 46px;
+  font-size: var(--fs-serif-xl);
   display: block;
   line-height: 1.1;
   margin-top: 6px;
 }
 
 .ir .kpi p {
-  font-size: 14px;
+  font-size: var(--fs-sans-sm);
   opacity: 0.85;
 }
 
@@ -148,7 +148,7 @@
   text-align: center;
   z-index: 2;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--fs-mono-sm);
   color: var(--ink-2);
 }
 
@@ -156,12 +156,12 @@
   display: block;
   font-family: var(--serif);
   font-weight: 400;
-  font-size: 36px;
+  font-size: var(--fs-serif-lg);
   color: var(--ink);
 }
 
 .ir .share-title {
-  font-size: 34px;
+  font-size: var(--fs-serif-lg);
   margin: 10px 0 16px;
 }
 
@@ -186,12 +186,12 @@
 .ir .owners b {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: 26px;
+  font-size: var(--fs-serif-md);
   color: var(--brand);
   display: block;
 }
 
 .ir .owners span {
-  font-size: 13px;
+  font-size: var(--fs-sans-xs);
   color: var(--ink-2);
 }

@@ -22,7 +22,7 @@
 }
 
 .home .purpose h2 {
-  font-size: clamp(40px, 4.2vw, 64px);
+  font-size: var(--fs-serif-xl);
   margin: 16px 0 24px;
 }
 
@@ -33,7 +33,7 @@
 
 .home .purpose p {
   color: var(--brand-tint);
-  font-size: 18px;
+  font-size: var(--fs-sans-lg);
   max-width: 560px;
 }
 
@@ -61,7 +61,7 @@
 .home .pillar b {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: 34px;
+  font-size: var(--fs-serif-lg);
   color: var(--saffron);
   line-height: 1;
 }
@@ -69,11 +69,11 @@
 .home .pillar h3 {
   font-family: var(--sans);
   font-weight: 700;
-  font-size: 18px;
+  font-size: var(--fs-sans-lg);
 }
 
 .home .pillar span {
-  font-size: 14px;
+  font-size: var(--fs-sans-sm);
   color: var(--brand-tint);
 }
 
@@ -111,7 +111,7 @@
 }
 
 .home .vids h2 {
-  font-size: clamp(40px, 4vw, 56px);
+  font-size: var(--fs-serif-xl);
   color: var(--brand-deep);
   margin-top: 12px;
 }
@@ -202,7 +202,7 @@
 
 .home .vi .kind {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--fs-mono-xs);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -216,7 +216,7 @@
   line-height: 1.08;
   letter-spacing: -0.01em;
   text-wrap: balance;
-  font-size: 20px;
+  font-size: var(--fs-serif-sm);
   margin-top: 4px;
 }
 
@@ -237,7 +237,7 @@
 }
 
 .home .latest h2 {
-  font-size: 44px;
+  font-size: var(--fs-serif-xl);
   color: var(--brand);
 }
 
@@ -284,14 +284,14 @@
 
 .home .lc .label {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--fs-mono-xs);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-2);
 }
 
 .home .lc h3 {
-  font-size: 21px;
+  font-size: var(--fs-serif-sm);
   margin-top: 6px;
 }
 
@@ -301,7 +301,7 @@
   place-items: center;
   color: var(--saffron);
   font-family: var(--serif);
-  font-size: 34px;
+  font-size: var(--fs-serif-lg);
 }
 
 /* The design's `<footer style="margin-top:90px">`. */

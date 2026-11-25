@@ -15,7 +15,7 @@
 
 .about .people h2 {
   margin-top: 14px;
-  font-size: clamp(44px, 4.6vw, 72px);
+  font-size: var(--fs-serif-xl);
   line-height: 0.95;
   color: var(--brand);
 }
@@ -25,7 +25,7 @@
   align-items: center;
   gap: 10px;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--fs-mono-sm);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -39,7 +39,7 @@
   border-radius: 50%;
   background: var(--ink);
   color: #fff;
-  font-size: 11px;
+  font-size: var(--fs-mono-xs);
   font-style: normal;
 }
 
@@ -77,7 +77,7 @@
   overflow: hidden;
   border-radius: 28px;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--fs-mono-sm);
   color: rgba(255, 255, 255, 0.75);
 }
 
@@ -90,11 +90,11 @@
 
 .about .pc h3 {
   margin-top: 16px;
-  font-size: 26px;
+  font-size: var(--fs-serif-md);
 }
 
 .about .pc span {
-  font-size: 14px;
+  font-size: var(--fs-sans-sm);
   color: var(--ink-2);
 }
 
@@ -133,7 +133,7 @@
 
 .about .nx h3 {
   margin-top: 10px;
-  font-size: 40px;
+  font-size: var(--fs-serif-lg);
   line-height: 1;
 }
 
@@ -146,7 +146,7 @@
   border-radius: 50%;
   background: #fff;
   color: var(--ink);
-  font-size: 20px;
+  font-size: var(--fs-sans-lg);
   transition: transform 0.3s;
 }
 

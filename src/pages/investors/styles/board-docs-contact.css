@@ -21,7 +21,7 @@
   display: grid;
   place-items: center;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--fs-mono-sm);
   color: var(--ink-2);
 }
 
@@ -30,12 +30,12 @@
 }
 
 .ir .pp-name {
-  font-size: 22px;
+  font-size: var(--fs-serif-sm);
 }
 
 /* Also styles the lead card's eyebrow, as the handoff's ".pp span" rule does. */
 .ir .pp-role {
-  font-size: 14px;
+  font-size: var(--fs-sans-sm);
   color: var(--ink-2);
   display: block;
   margin-top: 4px;
@@ -45,7 +45,6 @@
 .ir .pp-name .ph,
 .ir .pp-role .ph {
   display: block;
-  font-size: inherit;
 }
 
 .ir .pp--lead {
@@ -66,7 +65,7 @@
 }
 
 .ir .pp--lead .pp-name {
-  font-size: 32px;
+  font-size: var(--fs-serif-lg);
   margin-top: 8px;
 }
 
@@ -85,7 +84,7 @@
 
 .ir .tabs button {
   font: inherit;
-  font-size: 14px;
+  font-size: var(--fs-sans-sm);
   font-weight: 600;
   height: 38px;
   padding: 0 16px;
@@ -122,14 +121,14 @@
 .ir .doc small {
   display: block;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--fs-mono-xs);
   color: var(--ink-2);
   margin-top: 4px;
 }
 
 .ir .doc-link {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--fs-mono-sm);
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 6px 12px;
@@ -149,7 +148,7 @@
 
 .ir .dir dt {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--fs-mono-xs);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -173,7 +172,7 @@
 }
 
 .ir .contact h2 {
-  font-size: 46px;
+  font-size: var(--fs-serif-xl);
   margin-top: 12px;
 }
 
@@ -204,7 +203,7 @@
 .ir .contact input,
 .ir .contact textarea {
   font: inherit;
-  font-size: 15px;
+  font-size: var(--fs-sans-sm);
   border: 0;
   border-radius: 14px;
   padding: 14px 16px;
@@ -226,7 +225,7 @@
 }
 
 .ir .field-error {
-  font-size: 13px;
+  font-size: var(--fs-sans-xs);
   color: var(--saffron-soft);
 }
 
@@ -235,11 +234,11 @@
 }
 
 .ir .contact-thanks {
-  font-size: 18px;
+  font-size: var(--fs-sans-lg);
 }
 
 .ir .disc {
-  font-size: 13px;
+  font-size: var(--fs-sans-xs);
   color: var(--ink-2);
   margin-top: 22px;
   max-width: 980px;

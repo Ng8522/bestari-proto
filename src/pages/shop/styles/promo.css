@@ -44,7 +44,7 @@
 }
 
 .shop .banner h1 {
-  font-size: 68px;
+  font-size: var(--fs-serif-2xl);
   max-width: 520px;
   margin: 14px 0 18px;
 }
@@ -99,12 +99,12 @@
 }
 
 .shop .mini__title {
-  font-size: 30px;
+  font-size: var(--fs-serif-lg);
   max-width: 200px;
 }
 
 .shop .mini p {
-  font-size: 14px;
+  font-size: var(--fs-sans-sm);
   max-width: 190px;
   margin-top: 6px;
 }
@@ -147,10 +147,10 @@
 
 .shop .perks b {
   display: block;
-  font-size: 15px;
+  font-size: var(--fs-sans-sm);
 }
 
 .shop .perks span {
-  font-size: 13px;
+  font-size: var(--fs-sans-xs);
   color: var(--ink-2);
 }

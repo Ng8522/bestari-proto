@@ -5,7 +5,7 @@
 
 .wtb__hero h1 {
   margin: 14px 0 18px;
-  font-size: clamp(48px, 6vw, 88px);
+  font-size: var(--fs-serif-2xl);
   line-height: 0.95;
   letter-spacing: -0.02em;
   color: var(--brand);
@@ -13,7 +13,7 @@
 
 .wtb__lede {
   max-width: 56ch;
-  font-size: 19px;
+  font-size: var(--fs-sans-lg);
   color: var(--ink-2);
 }
 
@@ -38,7 +38,7 @@
   border-radius: 999px;
   background: #fff;
   font-weight: 700;
-  font-size: 15px;
+  font-size: var(--fs-sans-sm);
   cursor: pointer;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
@@ -55,7 +55,7 @@
 
 .wtb__count {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--fs-mono-sm);
   font-weight: 500;
   opacity: 0.7;
 }
@@ -89,12 +89,12 @@
 }
 
 .wtb__name {
-  font-size: 24px;
+  font-size: var(--fs-serif-md);
 }
 
 .wtb__address {
   color: var(--ink-2);
-  font-size: 15px;
+  font-size: var(--fs-sans-sm);
   line-height: 1.5;
 }
 
@@ -114,7 +114,7 @@
 .wtb__note {
   margin-top: 22px;
   font-family: var(--mono);
-  font-size: 13px;
+  font-size: var(--fs-mono-md);
   color: var(--ink-2);
 }
 
@@ -130,7 +130,7 @@
 }
 
 .wtb__cta h2 {
-  font-size: clamp(36px, 4vw, 56px);
+  font-size: var(--fs-serif-xl);
 }
 
 .wtb__cta p {

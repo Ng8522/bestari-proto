@@ -26,7 +26,7 @@
   z-index: 1;
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(160px, 18vw, 300px);
+  font-size: var(--fs-serif-4xl);
   line-height: 1;
   color: var(--saffron);
 }
@@ -46,7 +46,7 @@
   top: 40px;
   left: 40px;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--fs-mono-sm);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--brand-tint);
@@ -65,13 +65,13 @@
 
 .about .origin h2 {
   margin: 16px 0 26px;
-  font-size: clamp(44px, 4.6vw, 72px);
+  font-size: var(--fs-serif-xl);
 }
 
 .about .origin p {
   max-width: 540px;
   margin-bottom: 16px;
-  font-size: 18px;
+  font-size: var(--fs-sans-lg);
   color: var(--brand-tint);
 }
 
@@ -86,7 +86,7 @@
 .about .origin .psst h3 {
   margin-bottom: 8px;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--fs-mono-sm);
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -95,7 +95,7 @@
 
 .about .origin .psst p {
   margin: 0;
-  font-size: 16px;
+  font-size: var(--fs-sans-md);
   color: #fff;
 }
 
@@ -124,7 +124,7 @@
 
 .about .hist .hd h2 {
   margin-top: 14px;
-  font-size: clamp(44px, 4.6vw, 72px);
+  font-size: var(--fs-serif-xl);
   line-height: 0.95;
   color: var(--brand);
 }
@@ -175,18 +175,18 @@
 
 .about .yc .y {
   font-family: var(--serif);
-  font-size: 96px;
+  font-size: var(--fs-serif-3xl);
   line-height: 0.9;
 }
 
 .about .yc h3 {
   margin-bottom: 10px;
-  font-size: 30px;
+  font-size: var(--fs-serif-lg);
 }
 
 .about .yc p {
   max-width: 330px;
-  font-size: 15px;
+  font-size: var(--fs-sans-sm);
   opacity: 0.92;
 }
 
@@ -213,7 +213,7 @@
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.2);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--fs-mono-xs);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -258,7 +258,7 @@
 }
 
 .about .stack div {
-  font-size: clamp(90px, 11vw, 180px);
+  font-size: var(--fs-serif-3xl);
   cursor: default;
   transition: color 0.3s, transform 0.3s;
   transform-origin: left;
@@ -287,12 +287,12 @@
 
 .about .trio h3 {
   margin: 12px 0 18px;
-  font-size: 34px;
+  font-size: var(--fs-serif-lg);
 }
 
 .about .trio p {
   margin-bottom: 28px;
-  font-size: 17px;
+  font-size: var(--fs-sans-md);
   color: var(--brand-tint);
 }
 
@@ -307,14 +307,14 @@
   gap: 18px;
   padding: 16px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.16);
-  font-size: 15px;
+  font-size: var(--fs-sans-sm);
   color: var(--brand-tint);
 }
 
 .about .trio .rows b {
   padding-top: 3px;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--fs-mono-sm);
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;

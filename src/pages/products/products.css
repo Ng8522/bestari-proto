@@ -8,7 +8,7 @@
 .prod__hero h1 {
   max-width: 15ch;
   margin: 14px 0 18px;
-  font-size: clamp(44px, 6vw, 84px);
+  font-size: var(--fs-serif-2xl);
   line-height: 0.95;
   letter-spacing: -0.02em;
   color: var(--brand);
@@ -16,7 +16,7 @@
 
 .prod__lede {
   max-width: 58ch;
-  font-size: 19px;
+  font-size: var(--fs-sans-lg);
   color: var(--ink-2);
 }
 
@@ -40,7 +40,7 @@
   background: #fff;
   font: inherit;
   font-weight: 700;
-  font-size: 15px;
+  font-size: var(--fs-sans-sm);
   cursor: pointer;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
@@ -71,7 +71,7 @@
 }
 
 .prod__cta h2 {
-  font-size: clamp(34px, 4vw, 52px);
+  font-size: var(--fs-serif-xl);
 }
 
 .prod__cta p {
@@ -144,25 +144,25 @@
 
 .prod-card__cat {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--fs-mono-xs);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--brand);
 }
 
 .prod-card__name {
-  font-size: 20px;
+  font-size: var(--fs-serif-sm);
   line-height: 1.15;
 }
 
 .prod-card__zh {
-  font-size: 14px;
+  font-size: var(--fs-sans-sm);
   color: var(--ink-2);
 }
 
 .prod-card__count {
   margin-top: 4px;
-  font-size: 14px;
+  font-size: var(--fs-sans-sm);
   font-weight: 700;
   color: var(--brand);
 }
@@ -183,7 +183,7 @@
   flex-wrap: wrap;
   gap: 6px;
   list-style: none;
-  font-size: 14px;
+  font-size: var(--fs-sans-sm);
   color: var(--ink-2);
 }
 
@@ -221,7 +221,7 @@
 
 .pd__head h1 {
   margin: 12px 0 10px;
-  font-size: clamp(34px, 4.2vw, 56px);
+  font-size: var(--fs-serif-xl);
   line-height: 1.02;
   letter-spacing: -0.015em;
   color: var(--brand);
@@ -230,7 +230,7 @@
 .pd__names {
   display: grid;
   gap: 2px;
-  font-size: 17px;
+  font-size: var(--fs-sans-md);
   color: var(--ink-2);
 }
 
@@ -265,7 +265,7 @@
 }
 
 .pd__media figcaption {
-  font-size: 13px;
+  font-size: var(--fs-sans-xs);
   text-align: center;
   color: var(--ink-2);
 }
@@ -288,7 +288,7 @@
   margin-bottom: 12px;
   padding: 0;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--fs-mono-sm);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -322,7 +322,7 @@
   border: 1.5px solid var(--line);
   border-radius: 999px;
   background: #fff;
-  font-size: 14px;
+  font-size: var(--fs-sans-sm);
   font-weight: 700;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
@@ -351,7 +351,7 @@
 }
 
 .pd__spec h2 {
-  font-size: 26px;
+  font-size: var(--fs-serif-md);
 }
 
 .pd__local {
@@ -375,7 +375,7 @@
 .pd__rows dt {
   padding-top: 2px;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--fs-mono-sm);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -387,7 +387,7 @@
 
 .pd__note {
   margin-top: 12px;
-  font-size: 14px;
+  font-size: var(--fs-sans-sm);
   color: var(--ink-2);
 }
 
@@ -405,7 +405,7 @@
 }
 
 .pd__more-head h2 {
-  font-size: clamp(30px, 3.4vw, 44px);
+  font-size: var(--fs-serif-lg);
 }
 
 .pd__all {
@@ -424,7 +424,7 @@
   }
 
   .prod__lede {
-    font-size: 17px;
+    font-size: var(--fs-sans-md);
   }
 
   .prod__range {
@@ -488,14 +488,9 @@
     padding: 14px;
   }
 
-  .prod-card__name {
-    font-size: 16px;
-  }
-
   .prod .tabs button {
     height: 40px;
     padding: 0 14px;
-    font-size: 14px;
   }
 }
 

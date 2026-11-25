@@ -87,10 +87,6 @@
   .ir .contact {
     padding: 36px 24px;
   }
-
-  .ir .contact h2 {
-    font-size: 38px;
-  }
 }
 
 /* Reduced motion: the bars and sub-nav pills change state without animating. */

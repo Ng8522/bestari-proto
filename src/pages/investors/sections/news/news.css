@@ -20,7 +20,7 @@
 .ir .cat-guide dd {
   margin-top: 4px;
   color: var(--ink-2);
-  font-size: 15px;
+  font-size: var(--fs-sans-sm);
 }
 
 /* ---------- Media news ---------- */
@@ -46,7 +46,7 @@
 
 .ir .media-headline {
   font-weight: 600;
-  font-size: 17px;
+  font-size: var(--fs-sans-md);
   line-height: 1.4;
   color: var(--ink);
   overflow-wrap: anywhere;
@@ -64,7 +64,7 @@
   align-items: center;
   gap: 8px 12px;
   margin-top: 8px;
-  font-size: 13px;
+  font-size: var(--fs-sans-xs);
   color: var(--ink-2);
 }
 

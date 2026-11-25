@@ -20,7 +20,7 @@
 .about .ah h1 {
   position: relative;
   z-index: 3;
-  font-size: clamp(110px, 15vw, 240px);
+  font-size: var(--fs-serif-4xl);
   line-height: 0.85;
   letter-spacing: -0.03em;
   text-align: center;
@@ -53,7 +53,7 @@
   display: flex;
   justify-content: space-between;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--fs-mono-sm);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--brand-deep);
@@ -157,7 +157,7 @@
 .about .purpose .big {
   max-width: 1240px;
   font-family: var(--serif);
-  font-size: clamp(36px, 4.2vw, 64px);
+  font-size: var(--fs-serif-xl);
   line-height: 1.12;
   color: var(--ink);
   text-wrap: balance;

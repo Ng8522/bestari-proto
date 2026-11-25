@@ -18,6 +18,25 @@
   --serif: 'Young Serif', Georgia, serif;
   --sans: 'Figtree', system-ui, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Type scale. The site uses only the three families above, and every font-size comes from
+     its family's steps below. Serif steps of 28px and up are fluid, so they need no phone overrides. */
+  --fs-serif-4xl: clamp(96px, 16vw, 256px); /* giant display words */
+  --fs-serif-3xl: clamp(72px, 9vw, 128px); /* display numbers and stacked words */
+  --fs-serif-2xl: clamp(44px, 5.6vw, 80px); /* page titles */
+  --fs-serif-xl: clamp(36px, 4.2vw, 56px); /* section titles, headline figures */
+  --fs-serif-lg: clamp(28px, 2.8vw, 36px); /* sub-section titles, stats */
+  --fs-serif-md: 26px; /* card titles, quotes, prices */
+  --fs-serif-sm: 20px; /* small titles, list numbers */
+  --fs-sans-xs: 13px; /* captions, meta, fine print */
+  --fs-sans-sm: 15px; /* UI: nav, buttons, tables, card text */
+  --fs-sans-md: 17px; /* body copy */
+  --fs-sans-lg: 20px; /* lead paragraphs */
+  --fs-mono-xs: 11px; /* table heads, small labels */
+  --fs-mono-sm: 12px; /* eyebrows, chips, dates */
+  --fs-mono-md: 13px; /* counters, figures, placeholders */
+  --fs-mono-lg: 20px; /* large data figures */
+
   --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
   --nav-h: 76px;
 }
@@ -36,7 +55,7 @@ body {
   font-family: var(--sans);
   color: var(--ink);
   background: var(--cream);
-  font-size: 17px;
+  font-size: var(--fs-sans-md);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -119,7 +138,7 @@ p {
 
 .eyebrow {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--fs-mono-sm);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--brand);
@@ -134,7 +153,7 @@ p {
   padding: 0 26px;
   border-radius: 999px;
   font-weight: 700;
-  font-size: 15px;
+  font-size: var(--fs-sans-sm);
   border: 0;
   cursor: pointer;
   font-family: var(--sans);
@@ -176,7 +195,7 @@ p {
 /* Placeholder content that must be replaced before launch */
 .ph {
   font-family: var(--mono);
-  font-size: 0.82em;
+  font-size: var(--fs-mono-md);
   background: repeating-linear-gradient(135deg, rgba(242, 174, 46, 0.22) 0 6px, rgba(242, 174, 46, 0.1) 6px 12px);
   border: 1px dashed rgba(0, 103, 71, 0.35);
   padding: 1px 8px;
@@ -218,7 +237,7 @@ p {
   gap: 30px;
   list-style: none;
   font-weight: 600;
-  font-size: 15px;
+  font-size: var(--fs-sans-sm);
 }
 
 .nav__links a {
@@ -326,7 +345,7 @@ p {
   background: var(--brand);
   color: var(--brand-tint);
   padding: 56px 0 26px;
-  font-size: 15px;
+  font-size: var(--fs-sans-sm);
 }
 
 .foot__grid {
@@ -337,7 +356,7 @@ p {
 
 .foot__heading {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--fs-mono-sm);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--saffron-soft);
@@ -370,7 +389,7 @@ p {
 
 .foot__address {
   max-width: 340px;
-  font-size: 14px;
+  font-size: var(--fs-sans-sm);
 }
 
 .foot__certs {
@@ -389,7 +408,7 @@ p {
   flex-wrap: wrap;
   gap: 8px 24px;
   justify-content: space-between;
-  font-size: 13px;
+  font-size: var(--fs-sans-xs);
 }
 
 /* Scroll reveal (useScrollReveal adds .in) */
@@ -453,7 +472,7 @@ p {
   .nav__links {
     flex-direction: column;
     gap: 4px;
-    font-size: 17px;
+    font-size: var(--fs-sans-md);
   }
 
   .nav__links a {

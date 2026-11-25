@@ -15,7 +15,7 @@
 
 .about .biz h2 {
   margin-top: 14px;
-  font-size: clamp(44px, 4.6vw, 72px);
+  font-size: var(--fs-serif-xl);
   line-height: 0.95;
   color: var(--brand);
 }
@@ -51,19 +51,19 @@
 
 .about .pn .k {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--fs-mono-sm);
   opacity: 0.8;
 }
 
 .about .pn h3 {
-  font-size: 32px;
+  font-size: var(--fs-serif-lg);
   line-height: 1;
 }
 
 .about .pn p {
   max-width: 380px;
   margin-top: 12px;
-  font-size: 16px;
+  font-size: var(--fs-sans-md);
   opacity: 0;
   transform: translateY(10px);
   transition: all 0.4s;
@@ -103,7 +103,7 @@
   border: 1.5px dashed rgba(255, 255, 255, 0.5);
   border-radius: 24px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--fs-mono-xs);
   text-align: center;
   opacity: 0;
   transition: opacity 0.4s;
@@ -163,13 +163,13 @@
   align-items: center;
   gap: 60px;
   font-family: var(--serif);
-  font-size: 44px;
+  font-size: var(--fs-serif-xl);
 }
 
 .about .mq li::after {
   content: '✺';
   content: '✺' / '';
-  font-size: 28px;
+  font-size: var(--fs-serif-md);
   color: var(--saffron);
 }
 
@@ -214,7 +214,7 @@
   place-items: center;
   background: repeating-linear-gradient(135deg, var(--cream-2) 0 12px, var(--cream) 12px 24px);
   font-family: var(--mono);
-  font-size: 13px;
+  font-size: var(--fs-mono-md);
   color: var(--ink-2);
 }
 
@@ -231,12 +231,12 @@
   display: block;
   font-family: var(--serif);
   font-weight: 400;
-  font-size: 26px;
+  font-size: var(--fs-serif-md);
   color: var(--brand);
 }
 
 .about .hq .tile .lbl span {
-  font-size: 13px;
+  font-size: var(--fs-sans-xs);
   color: var(--ink-2);
 }
 
@@ -252,7 +252,7 @@
 
 .about .hq h2 {
   margin: 14px 0 18px;
-  font-size: clamp(40px, 4vw, 60px);
+  font-size: var(--fs-serif-xl);
   line-height: 1;
   color: var(--brand);
 }
@@ -287,13 +287,13 @@
   display: block;
   font-family: var(--serif);
   font-weight: 400;
-  font-size: 40px;
+  font-size: var(--fs-serif-lg);
   line-height: 1;
   color: var(--ink);
 }
 
 .about .hq .stats span {
-  font-size: 13px;
+  font-size: var(--fs-sans-xs);
   color: var(--ink-2);
 }
 

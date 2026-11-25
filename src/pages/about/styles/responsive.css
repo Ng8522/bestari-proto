@@ -56,10 +56,6 @@
 }
 
 @media (max-width: 600px) {
-  .about .ah h1 {
-    font-size: clamp(64px, 24vw, 110px);
-  }
-
   .about .ah .sub {
     bottom: 24px;
   }
@@ -71,10 +67,6 @@
     text-align: center;
   }
 
-  .about .origin .yr b {
-    font-size: clamp(110px, 34vw, 160px);
-  }
-
   .about .origin .tx {
     padding: 64px 20px;
   }
@@ -84,21 +76,9 @@
     padding: 26px;
   }
 
-  .about .yc .y {
-    font-size: 72px;
-  }
-
-  .about .yc h3 {
-    font-size: 26px;
-  }
-
   .about .yc .tag {
     top: 26px;
     right: 26px;
-  }
-
-  .about .stack div {
-    font-size: clamp(64px, 21vw, 90px);
   }
 
   .about .pn .ph-i {
@@ -114,17 +94,9 @@
     padding: 30px 24px;
   }
 
-  .about .hq .stats b {
-    font-size: 30px;
-  }
-
   .about .nx {
     min-height: 180px;
     padding: 30px 26px;
-  }
-
-  .about .nx h3 {
-    font-size: 30px;
   }
 }
 

@@ -14,14 +14,14 @@
 }
 
 .shop .cat-head__title {
-  font-size: 48px;
+  font-size: var(--fs-serif-xl);
   color: var(--brand);
   margin-top: 10px;
 }
 
 .shop .sort {
   font: inherit;
-  font-size: 14px;
+  font-size: var(--fs-sans-sm);
   height: 44px;
   border-radius: 999px;
   border: 1px solid var(--line);
@@ -39,7 +39,7 @@
 .shop .filters button {
   white-space: nowrap;
   font: inherit;
-  font-size: 14px;
+  font-size: var(--fs-sans-sm);
   font-weight: 600;
   height: 42px;
   padding: 0 18px;
@@ -104,7 +104,7 @@
   top: 14px;
   left: 14px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--fs-mono-xs);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 5px 10px;
@@ -129,12 +129,12 @@
 .shop .pc__name {
   font-family: var(--sans);
   font-weight: 700;
-  font-size: 17px;
+  font-size: var(--fs-sans-md);
   line-height: 1.3;
 }
 
 .shop .pc__zh {
-  font-size: 13px;
+  font-size: var(--fs-sans-xs);
   color: var(--ink-2);
 }
 
@@ -148,7 +148,7 @@
   white-space: nowrap;
   font: inherit;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: var(--fs-mono-sm);
   padding: 5px 10px;
   border-radius: 8px;
   border: 1px solid var(--line);
@@ -179,7 +179,7 @@
 
 .shop .price {
   font-family: var(--serif);
-  font-size: 24px;
+  font-size: var(--fs-serif-md);
   color: var(--brand);
 }
 
@@ -191,7 +191,7 @@
   border: 0;
   background: var(--ink);
   color: #fff;
-  font-size: 22px;
+  font-size: var(--fs-sans-lg);
   cursor: pointer;
   transition: background 0.2s, transform 0.2s;
 }
@@ -206,7 +206,7 @@
 }
 
 .shop .cat-note {
-  font-size: 13px;
+  font-size: var(--fs-sans-xs);
   color: var(--ink-2);
   margin-top: 24px;
 }

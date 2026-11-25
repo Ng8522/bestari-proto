@@ -12,7 +12,6 @@
 
   .home .hdr ul a {
     padding: 10px 11px;
-    font-size: 14px;
   }
 }
 
@@ -81,7 +80,7 @@
   .home .hdr.solid ul a {
     padding: 10px 0;
     border-radius: 0;
-    font-size: 17px;
+    font-size: var(--fs-sans-md);
     color: var(--ink);
   }
 
@@ -121,10 +120,6 @@
     padding: 24px;
   }
 
-  .home .door h3 {
-    font-size: 30px;
-  }
-
   /* Carousel: stack heading, pack and info in normal flow so nothing overlaps on a short, narrow screen. */
   .home .hero {
     height: auto;
@@ -157,10 +152,6 @@
 
   .home .hero .slide img {
     height: min(36vh, 280px);
-  }
-
-  .home .hero .name h3 {
-    font-size: 34px;
   }
 
   .home .hero .ctrl {
@@ -213,10 +204,6 @@
   .home .lc {
     grid-template-columns: 100px 1fr;
     gap: 16px;
-  }
-
-  .home .lc h3 {
-    font-size: 19px;
   }
 }
 

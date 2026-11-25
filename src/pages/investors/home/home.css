@@ -8,7 +8,7 @@
 .ir .home-head h2 {
   font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(26px, 3vw, 36px);
+  font-size: var(--fs-serif-lg);
   color: var(--brand);
 }
 
@@ -41,7 +41,7 @@
 }
 
 .ir .widget h3 {
-  font-size: 24px;
+  font-size: var(--fs-serif-md);
   padding-bottom: 10px;
   border-bottom: 2px solid var(--saffron);
 }
@@ -64,7 +64,7 @@
 .ir .widget-list time,
 .ir .widget-date {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: var(--fs-mono-xs);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -86,7 +86,7 @@
 
 .ir .widget-empty {
   color: var(--ink-2);
-  font-size: 15px;
+  font-size: var(--fs-sans-sm);
   flex: 1;
 }
 
@@ -129,7 +129,7 @@
   margin: 12px 0 0;
   display: grid;
   gap: 6px;
-  font-size: 14px;
+  font-size: var(--fs-sans-sm);
 }
 
 .ir .directory-pages a {
