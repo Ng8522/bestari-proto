@@ -40,7 +40,7 @@
 
 .home .door {
   position: relative;
-  border-radius: 28px;
+  border-radius: 0;
   overflow: hidden;
   aspect-ratio: 4 / 4.4;
   display: flex;
@@ -171,6 +171,9 @@
 .home .hero .mq div {
   display: inline-block;
   font-family: var(--serif);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  text-transform: uppercase;
   font-size: var(--fs-serif-4xl);
   line-height: 1;
   color: transparent;
@@ -286,7 +289,7 @@
   height: 8px;
   padding: 0;
   border: 0;
-  border-radius: 9px;
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.4);
   transition: width 0.3s, background 0.3s;
   cursor: pointer;
@@ -306,6 +309,8 @@
 
 .home .hero .count {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-md);
   opacity: 0.8;
 }

@@ -63,7 +63,7 @@
 .ir .tabs-line button:focus-visible {
   outline: 2px solid var(--brand);
   outline-offset: -4px;
-  border-radius: 8px 8px 0 0;
+  border-radius: 0;
 }
 
 .ir .tab-panel--line {
@@ -82,7 +82,7 @@
 .ir .tab-panel--line:focus-visible {
   outline: 2px solid var(--brand);
   outline-offset: 6px;
-  border-radius: 12px;
+  border-radius: 0;
 }
 
 /* ---------- Panel & notice ---------- */
@@ -129,7 +129,7 @@
   display: grid;
   gap: 4px;
   padding: 16px 20px;
-  border-radius: 16px;
+  border-radius: 0;
   border-left: 4px solid var(--brand);
   background: var(--brand-tint);
   color: var(--ink);
@@ -161,13 +161,15 @@
 
 .ir .stat {
   padding: 18px 20px;
-  border-radius: 16px;
+  border-radius: 0;
   background: var(--cream);
   border: 1px solid var(--line);
 }
 
 .ir .stat dt {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-xs);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -194,7 +196,7 @@
 .ir .pending {
   display: inline-block;
   padding: 3px 10px;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--cream-2);
   color: var(--ink-2);
   font-size: var(--fs-sans-xs);
@@ -211,6 +213,8 @@
 
 .ir .ir-table thead th {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-xs);
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -255,7 +259,7 @@
 
 .ir .doc-actions a {
   padding: 5px 12px;
-  border-radius: 999px;
+  border-radius: 0;
   border: 1px solid var(--brand);
   color: var(--brand);
   font-size: var(--fs-sans-xs);
@@ -274,7 +278,7 @@
   align-items: flex-end;
   gap: 12px 14px;
   padding: 16px;
-  border-radius: 16px;
+  border-radius: 0;
   background: var(--cream);
 }
 
@@ -287,6 +291,8 @@
 
 .ir .filter-field label {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-xs);
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -298,7 +304,7 @@
   height: 42px;
   padding: 0 12px;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: 0;
   background: #fff;
   font: inherit;
   color: var(--ink);
@@ -311,7 +317,7 @@
 .ir .filter-reset {
   height: 42px;
   padding: 0 18px;
-  border-radius: 999px;
+  border-radius: 0;
   border: 1px solid var(--ink);
   background: transparent;
   font-weight: 600;
@@ -332,14 +338,14 @@
 .ir .segmented {
   display: inline-flex;
   padding: 4px;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--cream-2);
 }
 
 .ir .segmented button {
   padding: 8px 16px;
   border: 0;
-  border-radius: 999px;
+  border-radius: 0;
   background: transparent;
   font: inherit;
   font-size: var(--fs-sans-sm);
@@ -365,7 +371,7 @@
   min-width: 40px;
   height: 40px;
   padding: 0 12px;
-  border-radius: 10px;
+  border-radius: 0;
   border: 1px solid var(--line);
   background: #fff;
   font: inherit;
@@ -399,6 +405,8 @@
 .ir .bc-label {
   fill: var(--ink-2);
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-sm);
 }
 

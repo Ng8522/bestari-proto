@@ -39,7 +39,7 @@
   justify-content: space-between;
   padding: 30px;
   overflow: hidden;
-  border-radius: 30px;
+  border-radius: 0;
   color: #fff;
   cursor: pointer;
   transition: flex 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -51,6 +51,8 @@
 
 .about .pn .k {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-sm);
   opacity: 0.8;
 }
@@ -101,8 +103,10 @@
   height: 220px;
   padding: 16px;
   border: 1.5px dashed rgba(255, 255, 255, 0.5);
-  border-radius: 24px;
+  border-radius: 0;
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-xs);
   text-align: center;
   opacity: 0;
@@ -129,7 +133,7 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  border-radius: 30px;
+  border-radius: 0;
 }
 
 .about .pn__btn:focus-visible {
@@ -163,6 +167,9 @@
   align-items: center;
   gap: 60px;
   font-family: var(--serif);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  text-transform: uppercase;
   font-size: var(--fs-serif-xl);
 }
 
@@ -208,7 +215,7 @@
   position: relative;
   min-height: 520px;
   overflow: hidden;
-  border-radius: 32px;
+  border-radius: 0;
 }
 
 .about .hq .ph-img {
@@ -218,6 +225,8 @@
   place-items: center;
   background: repeating-linear-gradient(135deg, var(--cream-2) 0 12px, var(--cream) 12px 24px);
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-md);
   color: var(--ink-2);
 }
@@ -227,14 +236,16 @@
   left: 24px;
   bottom: 24px;
   padding: 16px 20px;
-  border-radius: 18px;
+  border-radius: 0;
   background: #fff;
 }
 
 .about .hq .tile .lbl b {
   display: block;
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  text-transform: uppercase;
   font-size: var(--fs-serif-md);
   color: var(--brand);
 }
@@ -250,7 +261,7 @@
   justify-content: space-between;
   padding: 50px;
   border: 1px solid var(--line);
-  border-radius: 32px;
+  border-radius: 0;
   background: #fff;
 }
 
@@ -290,7 +301,9 @@
 .about .hq .stats b {
   display: block;
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  text-transform: uppercase;
   font-size: var(--fs-serif-lg);
   line-height: 1;
   color: var(--ink);
@@ -303,6 +316,6 @@
 
 .about .hq .certs {
   padding: 16px 20px;
-  border-radius: 18px;
+  border-radius: 0;
   background: var(--cream);
 }

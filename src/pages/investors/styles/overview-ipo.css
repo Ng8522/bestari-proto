@@ -35,7 +35,7 @@
 
 .ir .card {
   background: #fff;
-  border-radius: 26px;
+  border-radius: 0;
   padding: 32px;
   border: 1px solid var(--line);
 }
@@ -84,6 +84,8 @@
 
 .ir .quote blockquote {
   font-family: var(--serif);
+  font-weight: var(--display-weight-text);
+  font-stretch: var(--display-stretch-text);
   font-size: var(--fs-serif-md);
   line-height: 1.25;
 }
@@ -111,7 +113,7 @@
 .ir .alloc-bar {
   display: flex;
   height: 56px;
-  border-radius: 14px;
+  border-radius: 0;
   overflow: hidden;
   margin: 20px 0 18px;
 }
@@ -147,12 +149,13 @@
 .ir .swatch {
   width: 14px;
   height: 14px;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 .ir .legend b {
   font-family: var(--mono);
-  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-md);
 }
 
@@ -181,6 +184,8 @@
 
 .ir .tt-date {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-sm);
   color: var(--ink-2);
 }
@@ -193,10 +198,12 @@
 .ir .chip {
   font-size: var(--fs-mono-xs);
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 4px 10px;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--cream-2);
   white-space: nowrap;
 }
@@ -215,14 +222,16 @@
 }
 
 .ir .use {
-  border-radius: 20px;
+  border-radius: 0;
   padding: 22px;
   background: var(--cream);
 }
 
 .ir .use-num {
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  text-transform: uppercase;
   font-size: var(--fs-serif-md);
   color: var(--brand);
   display: block;

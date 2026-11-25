@@ -12,7 +12,7 @@
 }
 
 .shop .banner {
-  border-radius: 30px;
+  border-radius: 0;
   background: var(--brand);
   color: #fff;
   position: relative;
@@ -89,7 +89,7 @@
 }
 
 .shop .mini {
-  border-radius: 30px;
+  border-radius: 0;
   padding: 30px;
   position: relative;
   overflow: hidden;
@@ -132,7 +132,7 @@
   grid-template-columns: repeat(4, 1fr);
   margin-top: 20px;
   border: 1px solid var(--line);
-  border-radius: 22px;
+  border-radius: 0;
   list-style: none;
 }
 

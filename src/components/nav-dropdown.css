@@ -23,7 +23,7 @@
   height: 28px;
   padding: 0;
   border: 0;
-  border-radius: 999px;
+  border-radius: 0;
   background: transparent;
   color: inherit;
   cursor: pointer;
@@ -51,8 +51,8 @@
   list-style: none;
   background: var(--cream);
   border: 1px solid var(--line);
-  border-radius: 14px;
-  box-shadow: 0 18px 40px rgba(42, 26, 20, 0.14);
+  border-radius: 0;
+  box-shadow: 0 18px 40px rgba(0, 103, 71, 0.14);
   opacity: 0;
   visibility: hidden;
   transform: translate(-50%, 6px);
@@ -97,7 +97,7 @@
 .home .hdr .dd .dd__menu a {
   display: block;
   padding: 9px 14px;
-  border-radius: 9px;
+  border-radius: 0;
   font-size: var(--fs-sans-sm);
   font-weight: 600;
   color: var(--ink);
@@ -122,7 +122,7 @@
 
 /* Home header: the link and chevron share one hover pill, white over the hero and ink once solid. */
 .home .hdr .dd__row {
-  border-radius: 999px;
+  border-radius: 0;
   transition: background 0.2s;
 }
 

@@ -36,7 +36,7 @@
   height: 44px;
   padding: 0 18px;
   border: 1.5px solid var(--line);
-  border-radius: 999px;
+  border-radius: 0;
   background: #fff;
   font: inherit;
   font-weight: 700;
@@ -56,7 +56,7 @@
 }
 
 .prod .tab-panel {
-  border-radius: 16px;
+  border-radius: 0;
 }
 
 .prod__cta {
@@ -65,7 +65,7 @@
   gap: 16px;
   margin-bottom: 90px;
   padding: 56px;
-  border-radius: 32px;
+  border-radius: 0;
   background: var(--brand);
   color: var(--cream);
 }
@@ -100,12 +100,12 @@
   overflow: hidden;
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 22px;
+  border-radius: 0;
   transition: box-shadow 0.2s, transform 0.2s;
 }
 
 .prod-card:hover {
-  box-shadow: 0 20px 40px rgba(42, 26, 20, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 103, 71, 0.1);
   transform: translateY(-2px);
 }
 
@@ -127,7 +127,7 @@
   height: 100%;
   padding: 22px;
   object-fit: contain;
-  filter: drop-shadow(0 14px 18px rgba(42, 26, 20, 0.18));
+  filter: drop-shadow(0 14px 18px rgba(0, 103, 71, 0.18));
   transition: transform 0.3s var(--ease-out);
 }
 
@@ -144,6 +144,8 @@
 
 .prod-card__cat {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-xs);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -250,7 +252,7 @@
   position: relative;
   aspect-ratio: 1;
   overflow: hidden;
-  border-radius: 32px;
+  border-radius: 0;
   background: var(--cream-2);
 }
 
@@ -261,7 +263,7 @@
   height: 100%;
   padding: clamp(24px, 5vw, 56px);
   object-fit: contain;
-  filter: drop-shadow(0 22px 28px rgba(42, 26, 20, 0.2));
+  filter: drop-shadow(0 22px 28px rgba(0, 103, 71, 0.2));
 }
 
 .pd__media figcaption {
@@ -288,6 +290,8 @@
   margin-bottom: 12px;
   padding: 0;
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-sm);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -320,7 +324,7 @@
   height: 40px;
   padding: 0 16px;
   border: 1.5px solid var(--line);
-  border-radius: 999px;
+  border-radius: 0;
   background: #fff;
   font-size: var(--fs-sans-sm);
   font-weight: 700;
@@ -347,7 +351,7 @@
   padding: 26px 28px;
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 22px;
+  border-radius: 0;
 }
 
 .pd__spec h2 {
@@ -375,6 +379,8 @@
 .pd__rows dt {
   padding-top: 2px;
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-sm);
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -434,7 +440,7 @@
   .prod__cta {
     margin-bottom: 60px;
     padding: 36px 24px;
-    border-radius: 24px;
+    border-radius: 0;
   }
 
   .pd__main {
@@ -477,7 +483,7 @@
   }
 
   .prod-card {
-    border-radius: 18px;
+    border-radius: 0;
   }
 
   .prod-card__media img {

@@ -53,6 +53,8 @@
   display: flex;
   justify-content: space-between;
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-sm);
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -157,6 +159,8 @@
 .about .purpose .big {
   max-width: 1240px;
   font-family: var(--serif);
+  font-weight: var(--display-weight-text);
+  font-stretch: var(--display-stretch-text);
   font-size: var(--fs-serif-xl);
   line-height: 1.12;
   color: var(--ink);

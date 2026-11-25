@@ -23,7 +23,7 @@
   font: inherit;
   font-size: var(--fs-sans-sm);
   height: 44px;
-  border-radius: 999px;
+  border-radius: 0;
   border: 1px solid var(--line);
   padding: 0 16px;
   background: #fff;
@@ -43,7 +43,7 @@
   font-weight: 600;
   height: 42px;
   padding: 0 18px;
-  border-radius: 999px;
+  border-radius: 0;
   border: 1px solid var(--line);
   background: #fff;
   cursor: pointer;
@@ -68,7 +68,7 @@
 }
 
 .shop .pc {
-  border-radius: 24px;
+  border-radius: 0;
   background: var(--cream);
   overflow: hidden;
   display: flex;
@@ -79,7 +79,7 @@
 
 .shop .pc:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(42, 26, 20, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 103, 71, 0.1);
 }
 
 .shop .pc__im {
@@ -104,11 +104,13 @@
   top: 14px;
   left: 14px;
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-xs);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 5px 10px;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--saffron);
   z-index: 2;
 }
@@ -148,9 +150,11 @@
   white-space: nowrap;
   font: inherit;
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-sm);
   padding: 5px 10px;
-  border-radius: 8px;
+  border-radius: 0;
   border: 1px solid var(--line);
   background: #fff;
   cursor: pointer;
@@ -179,6 +183,9 @@
 
 .shop .price {
   font-family: var(--serif);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  text-transform: uppercase;
   font-size: var(--fs-serif-md);
   color: var(--brand);
 }

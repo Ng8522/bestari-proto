@@ -22,6 +22,8 @@
 /* ---------- Corporate calendar ---------- */
 .ir .cal-date {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-md);
   white-space: nowrap;
 }
@@ -33,7 +35,7 @@
   margin: 6px 0 0;
   padding: 14px 16px;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 0;
 }
 
 .ir .alert-types legend {
@@ -102,6 +104,8 @@
   content: '+';
   flex-shrink: 0;
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-lg);
   line-height: 1;
   color: var(--brand);
@@ -137,6 +141,9 @@
 
 .ir .terms-list > li::marker {
   font-family: var(--serif);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  text-transform: uppercase;
   font-size: var(--fs-serif-sm);
   color: var(--brand);
 }

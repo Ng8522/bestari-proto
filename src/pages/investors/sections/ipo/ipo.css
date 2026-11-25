@@ -12,7 +12,7 @@
   display: grid;
   gap: 12px;
   padding: 18px 20px;
-  border-radius: 16px;
+  border-radius: 0;
   background: var(--cream);
   color: var(--ink-2);
   font-size: var(--fs-sans-sm);
@@ -94,6 +94,9 @@
   content: counter(ipo-step, decimal-leading-zero);
   grid-row: span 2;
   font-family: var(--serif);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  text-transform: uppercase;
   font-size: var(--fs-serif-sm);
   line-height: 1.2;
   color: var(--brand);
@@ -107,8 +110,9 @@
 .ir .ipo-step-meta {
   margin-left: 6px;
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
   font-size: var(--fs-mono-xs);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -135,12 +139,15 @@
   gap: 6px;
   align-content: start;
   padding: 20px 22px;
-  border-radius: 20px;
+  border-radius: 0;
   background: var(--cream);
 }
 
 .ir .ipo-card-num {
   font-family: var(--serif);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  text-transform: uppercase;
   font-size: var(--fs-serif-md);
   line-height: 1;
   color: var(--brand);
@@ -175,6 +182,8 @@
 .ir .ipo-channel p.ipo-route-channel,
 .ir .ipo-routes p.ipo-route-channel {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-xs);
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -206,6 +215,9 @@
 
 .ir .ipo-segment-pct {
   font-family: var(--serif);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  text-transform: uppercase;
   font-size: var(--fs-serif-sm);
   color: var(--brand);
   white-space: nowrap;

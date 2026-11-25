@@ -34,12 +34,14 @@
   content: '';
   position: absolute;
   inset: 14px;
-  border: 1px solid rgba(251, 245, 234, 0.35);
-  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 0;
 }
 
 .ir .ar-cover-brand {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-xs);
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -48,12 +50,17 @@
 
 .ir .ar-cover-title {
   font-family: var(--serif);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  text-transform: uppercase;
   font-size: var(--fs-serif-md);
   line-height: 1.05;
 }
 
 .ir .ar-cover-year {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-md);
   color: var(--brand-tint);
 }
@@ -103,6 +110,8 @@
 
 .ir .ar-format {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-xs);
   letter-spacing: 0.08em;
   color: var(--ink-2);
@@ -137,7 +146,7 @@
 .ir .pr-action {
   display: inline-block;
   padding: 5px 12px;
-  border-radius: 999px;
+  border-radius: 0;
   border: 1px solid var(--brand);
   color: var(--brand);
   font-size: var(--fs-sans-xs);

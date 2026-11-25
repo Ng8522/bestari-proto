@@ -10,7 +10,7 @@
 
 .ir .pp {
   background: #fff;
-  border-radius: 24px;
+  border-radius: 0;
   overflow: hidden;
   border: 1px solid var(--line);
 }
@@ -21,6 +21,8 @@
   display: grid;
   place-items: center;
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-sm);
   color: var(--ink-2);
 }
@@ -88,7 +90,7 @@
   font-weight: 600;
   height: 38px;
   padding: 0 16px;
-  border-radius: 999px;
+  border-radius: 0;
   border: 1px solid var(--line);
   background: #fff;
   cursor: pointer;
@@ -121,6 +123,8 @@
 .ir .doc small {
   display: block;
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-xs);
   color: var(--ink-2);
   margin-top: 4px;
@@ -128,9 +132,11 @@
 
 .ir .doc-link {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-sm);
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 0;
   padding: 6px 12px;
   white-space: nowrap;
 }
@@ -148,6 +154,8 @@
 
 .ir .dir dt {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-xs);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -163,7 +171,7 @@
 .ir .contact {
   background: var(--brand);
   color: #fff;
-  border-radius: 32px;
+  border-radius: 0;
   padding: 50px 56px;
   display: grid;
   grid-template-columns: 1.2fr 1fr;
@@ -205,7 +213,7 @@
   font: inherit;
   font-size: var(--fs-sans-sm);
   border: 0;
-  border-radius: 14px;
+  border-radius: 0;
   padding: 14px 16px;
   background: rgba(255, 255, 255, 0.12);
   color: #fff;

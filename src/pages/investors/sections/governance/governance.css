@@ -27,6 +27,8 @@
 
 .ir .gov-category small {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-sm);
   color: var(--brand-deep);
 }
@@ -52,6 +54,8 @@
 .ir .gov-facts dt {
   padding-top: 2px;
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-xs);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -77,8 +81,9 @@
 .ir .gov-subhead {
   margin-bottom: 6px;
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
   font-size: var(--fs-mono-xs);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-2);
@@ -157,6 +162,9 @@
   content: counter(step, decimal-leading-zero);
   grid-row: span 2;
   font-family: var(--serif);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  text-transform: uppercase;
   font-size: var(--fs-serif-sm);
   color: var(--brand);
 }

@@ -48,7 +48,7 @@
   gap: 20px;
   align-items: center;
   padding: 22px 24px;
-  border-radius: 22px;
+  border-radius: 0;
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.12);
   transition: background 0.3s;
@@ -60,7 +60,9 @@
 
 .home .pillar b {
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  text-transform: uppercase;
   font-size: var(--fs-serif-lg);
   color: var(--saffron);
   line-height: 1;
@@ -80,7 +82,7 @@
 .home .purpose .cert {
   margin-top: 34px;
   background: #fff;
-  border-radius: 16px;
+  border-radius: 0;
   padding: 14px 20px;
   display: inline-block;
 }
@@ -123,7 +125,7 @@
 }
 
 .home .player {
-  border-radius: 28px;
+  border-radius: 0;
   overflow: hidden;
   background: var(--ink);
   aspect-ratio: 16 / 9;
@@ -152,7 +154,7 @@
   align-items: center;
   width: 100%;
   padding: 12px;
-  border-radius: 20px;
+  border-radius: 0;
   background: #fff;
   border: 1.5px solid var(--line);
   cursor: pointer;
@@ -173,7 +175,7 @@
 .home .vi .t {
   display: block;
   aspect-ratio: 1;
-  border-radius: 12px;
+  border-radius: 0;
   overflow: hidden;
   position: relative;
 }
@@ -202,6 +204,8 @@
 
 .home .vi .kind {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-xs);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -212,7 +216,9 @@
 .home .vi .title {
   display: block;
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  text-transform: uppercase;
   line-height: 1.08;
   letter-spacing: -0.01em;
   text-wrap: balance;
@@ -258,7 +264,7 @@
   gap: 20px;
   align-items: center;
   background: #fff;
-  border-radius: 22px;
+  border-radius: 0;
   padding: 14px;
   border: 1px solid var(--line);
   transition: border-color 0.2s, transform 0.2s;
@@ -271,7 +277,7 @@
 
 .home .lc .im {
   aspect-ratio: 1;
-  border-radius: 14px;
+  border-radius: 0;
   overflow: hidden;
   background: var(--cream-2);
 }
@@ -284,6 +290,8 @@
 
 .home .lc .label {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-xs);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -301,6 +309,9 @@
   place-items: center;
   color: var(--saffron);
   font-family: var(--serif);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  text-transform: uppercase;
   font-size: var(--fs-serif-lg);
 }
 

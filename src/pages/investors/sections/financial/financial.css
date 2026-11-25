@@ -24,7 +24,7 @@
 
 .ir .fin-switch .segmented {
   flex-wrap: wrap;
-  border-radius: 22px;
+  border-radius: 0;
 }
 
 .ir .fin-chart-note {
@@ -49,6 +49,8 @@
 
 .ir .fin-row-heading {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-xs);
   letter-spacing: 0.08em;
   text-transform: uppercase;

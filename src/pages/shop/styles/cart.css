@@ -4,7 +4,7 @@
 .shop .scrim {
   position: fixed;
   inset: 0;
-  background: rgba(42, 26, 20, 0.45);
+  background: rgba(0, 103, 71, 0.45);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s;
@@ -85,7 +85,7 @@
   height: 72px;
   object-fit: contain;
   background: var(--cream);
-  border-radius: 14px;
+  border-radius: 0;
   padding: 6px;
 }
 
@@ -101,6 +101,8 @@
 .shop .it__variant {
   font-size: var(--fs-mono-sm);
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   color: var(--ink-2);
 }
 
@@ -144,6 +146,8 @@
   color: var(--ink-2);
   margin-bottom: 16px;
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
 }
 
 .shop .checkout {
@@ -160,7 +164,7 @@
   background: var(--ink);
   color: #fff;
   padding: 14px 22px;
-  border-radius: 999px;
+  border-radius: 0;
   font-weight: 600;
   font-size: var(--fs-sans-sm);
   z-index: 120;

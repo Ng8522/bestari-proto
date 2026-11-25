@@ -29,7 +29,9 @@
 
 .ir .ir-band h1 {
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  text-transform: uppercase;
   font-size: var(--fs-serif-xl);
   line-height: 1.05;
   margin-top: 8px;
@@ -78,6 +80,8 @@
 
 .ir .ir-ticker-name {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-md);
   letter-spacing: 0.08em;
   color: var(--saffron);
@@ -85,6 +89,8 @@
 
 .ir .ir-ticker-field b {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-md);
   margin-left: 4px;
 }
@@ -92,10 +98,12 @@
 .ir .ir-ticker-status {
   margin-left: auto;
   padding: 4px 10px;
-  border-radius: 999px;
+  border-radius: 0;
   background: rgba(242, 174, 46, 0.16);
   color: var(--saffron-soft);
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-xs);
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -103,7 +111,7 @@
 
 .ir .ir-ticker .ph {
   color: var(--cream);
-  border-color: rgba(251, 245, 234, 0.4);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 /* ---------- Icon menu ---------- */
@@ -126,7 +134,7 @@
   gap: 8px;
   height: 100%;
   padding: 12px 6px;
-  border-radius: 14px;
+  border-radius: 0;
   color: var(--ink-2);
   font-size: var(--fs-sans-xs);
   font-weight: 600;
@@ -174,7 +182,7 @@
 .ir .ir-tabs-list a {
   display: inline-block;
   padding: 8px 14px;
-  border-radius: 999px;
+  border-radius: 0;
   font-size: var(--fs-sans-sm);
   font-weight: 600;
   color: var(--ink-2);
@@ -202,7 +210,9 @@
 
 .ir .pg-head h2 {
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  text-transform: uppercase;
   font-size: var(--fs-serif-lg);
   color: var(--brand);
   line-height: 1.1;
@@ -229,7 +239,7 @@
   max-width: 48%;
   padding: 14px 18px;
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: 0;
   background: #fff;
   transition: border-color 0.2s var(--ease-out);
 }
@@ -240,6 +250,8 @@
 
 .ir .ir-pager-link small {
   font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   font-size: var(--fs-mono-xs);
   letter-spacing: 0.1em;
   text-transform: uppercase;
