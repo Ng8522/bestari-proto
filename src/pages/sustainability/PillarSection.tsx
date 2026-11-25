@@ -1,4 +1,3 @@
-import { Ph } from '../../components/text'
 import type { Pillar, PillarStat } from './data'
 
 interface PillarSectionProps {
@@ -46,10 +45,23 @@ function StatList({ stats }: { stats: readonly PillarStat[] }) {
     <ul className="sus-stats" aria-label="What we measure">
       {stats.map((stat) => (
         <li key={stat.label} className="sus-stat reveal">
-          <strong className="sus-stat__value">{stat.value ?? <Ph>[ figure ]</Ph>}</strong>
+          {stat.value ? <strong className="sus-stat__value">{stat.value}</strong> : <FigurePlaceholder />}
           <span className="sus-stat__label">{stat.label}</span>
         </li>
       ))}
     </ul>
+  )
+}
+
+/** Reserved slot for a figure we have not published yet; replace with the real value before launch. */
+function FigurePlaceholder() {
+  return (
+    <span className="sus-stat__ph">
+      <svg className="sus-stat__ph-icon" viewBox="0 0 20 20" aria-hidden="true">
+        <path d="M3 17h14M5 14V9M10 14V4M15 14v-7" />
+      </svg>
+      Figure
+      <span className="visually-hidden"> to be confirmed</span>
+    </span>
   )
 }

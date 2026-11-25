@@ -334,10 +334,34 @@
   color: var(--tone-soft);
 }
 
-/* Placeholders must stay readable on the dark bands too. */
-.sus-stat .ph {
-  justify-self: start;
-  background-color: var(--saffron-soft);
+/* Box marking a figure still to come. Drawn in the band's own text colour so it reads on light and dark bands. */
+.sus-stat__ph {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 72px;
+  padding: 0 20px;
+  border: 1.5px dashed color-mix(in srgb, currentColor 45%, transparent);
+  border-radius: 14px;
+  background: repeating-linear-gradient(
+    135deg,
+    color-mix(in srgb, currentColor 8%, transparent) 0 8px,
+    transparent 8px 16px
+  );
+  font-family: var(--mono);
+  font-size: var(--fs-mono-sm);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.sus-stat__ph-icon {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
 }
 
 /* Reports and contact */
