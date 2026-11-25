@@ -50,11 +50,10 @@
   min-width: 0;
   padding-block: 14px;
   font-family: var(--serif);
-  font-weight: var(--display-weight);
-  font-stretch: var(--display-stretch);
+  font-weight: var(--display-weight-text);
+  font-stretch: var(--display-stretch-text);
   font-size: var(--fs-serif-sm);
   line-height: 1;
-  text-transform: uppercase;
 }
 
 .home .hs-num {

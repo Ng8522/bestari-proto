@@ -3,9 +3,9 @@
  * Page-specific styles live next to each page (src/pages/<page>/<page>.css), scoped under the page's root class.
  */
 :root {
-  /* Corporate colour: Pantone 342 C. In the Bold & Big theme it also replaces black: body text, rules and
-     dark bands are all 342 C. --brand-deep is its shade for hovers and deep bands, --brand-tint the soft
-     text colour used on brand-coloured sections. */
+  /* Corporate colour: Pantone 342 C, for titles that carry the brand, buttons, links, rules and the green
+     bands. --brand-deep is its shade for hovers and deep bands, --brand-tint the soft text colour used on
+     brand-coloured sections. */
   --brand: #006747;
   --brand-deep: #004a33;
   --brand-tint: #dcebe1;
@@ -15,8 +15,10 @@
   /* Page grounds: white, and a light neutral for alternate bands and cards. */
   --cream: #ffffff;
   --cream-2: #efefea;
-  --ink: #006747;
-  --ink-2: #4d504d;
+  /* Reading text: a very deep 342 C green instead of black (about 13:1 on white). Long passages in the
+     bright 342 C itself tire the eyes, so it is kept for accents. --ink-2 is the green-grey for secondary text. */
+  --ink: #12352a;
+  --ink-2: #4a5852;
   --line: rgba(0, 103, 71, 0.18);
   /* Noto Sans SC sits behind each family for Chinese only: none of the three has Chinese glyphs, so without
      it the product names fall to whatever system font the device has. Latin text never reaches it.
@@ -26,9 +28,10 @@
   --serif: 'Archivo', 'JetBrains Mono', 'Noto Sans SC', 'Arial Narrow', sans-serif;
   --display-weight: 800;
   --display-stretch: 75%;
-  /* Display type set at text sizes: a lighter, wider cut so it stays readable. */
+  /* Display type at text sizes (small titles, card and product names): normal width and bold, in normal
+     case, because squeezed capitals blur together when they are small. */
   --display-weight-text: 700;
-  --display-stretch-text: 87.5%;
+  --display-stretch-text: 100%;
   --sans: 'Archivo', 'JetBrains Mono', 'Noto Sans SC', system-ui, sans-serif;
   /* Labels, eyebrows and figures use the same Archivo; the token keeps its name so the label rules
      (and their tabular figures) need no change. */
@@ -71,7 +74,7 @@ body {
   color: var(--ink);
   background: var(--cream);
   font-size: var(--fs-sans-md);
-  line-height: 1.6;
+  line-height: 1.7;
   /* Never fake a bold or italic the loaded fonts don't have: a faked style reads as a fourth typeface. */
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
@@ -102,10 +105,21 @@ h4 {
   font-family: var(--serif);
   font-weight: var(--display-weight);
   font-stretch: var(--display-stretch);
-  line-height: 0.95;
-  letter-spacing: -0.005em;
+  /* A little air between lines and letters, so stacked capitals never touch. */
+  line-height: 1.05;
+  letter-spacing: 0.005em;
   text-transform: uppercase;
   text-wrap: balance;
+}
+
+/* Small titles (cards, product names, list items) read better wider and in normal case. */
+h3,
+h4 {
+  font-weight: var(--display-weight-text);
+  font-stretch: var(--display-stretch-text);
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 p {
@@ -479,11 +493,12 @@ p {
     align-items: center;
   }
 
+  /* Offsets are from the bar's padding edge, which already spans the full width. */
   .nav__menu {
     position: absolute;
     top: 100%;
-    left: -20px;
-    right: -20px;
+    left: 0;
+    right: 0;
     display: none;
     padding: 12px 20px 24px;
     background: var(--cream);

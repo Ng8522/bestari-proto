@@ -9,9 +9,8 @@
 
 .ir .ticker-card h3 {
   font-family: var(--serif);
-  font-weight: var(--display-weight);
-  font-stretch: var(--display-stretch);
-  text-transform: uppercase;
+  font-weight: var(--display-weight-text);
+  font-stretch: var(--display-stretch-text);
   font-size: var(--fs-serif-md);
   color: var(--brand-deep);
 }

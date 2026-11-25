@@ -125,9 +125,8 @@
 .home .vi .title {
   display: block;
   font-family: var(--serif);
-  font-weight: var(--display-weight);
-  font-stretch: var(--display-stretch);
-  text-transform: uppercase;
+  font-weight: var(--display-weight-text);
+  font-stretch: var(--display-stretch-text);
   line-height: 1.08;
   letter-spacing: -0.01em;
   text-wrap: balance;
