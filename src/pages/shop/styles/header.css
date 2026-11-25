@@ -78,6 +78,11 @@
   min-width: 0;
 }
 
+.shop .shop-search__icon {
+  flex: none;
+  color: var(--ink-2);
+}
+
 /* The input drops its own outline, so the pill carries the focus ring. */
 .shop .shop-search:focus-within {
   outline: 2px solid var(--ink);

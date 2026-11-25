@@ -93,7 +93,7 @@
   font-size: var(--fs-serif-md);
 }
 
-.about .pc span:not(.ph) {
+.about .pc span {
   font-size: var(--fs-sans-sm);
   color: var(--ink-2);
 }

@@ -50,7 +50,11 @@ export function ShopNav(props: ShopNavProps) {
         <div className="shop-nav__search" role="search">
           <label className="shop-search" htmlFor={searchId}>
             <span className="visually-hidden">Search products</span>
-            <span aria-hidden="true">⌕</span>
+            {/* An icon, not the ⌕ character: none of the site's three fonts has that glyph. */}
+            <svg className="shop-search__icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+              <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" strokeWidth="2" />
+              <path d="m20 20-4-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
             <input
               ref={searchRef}
               id={searchId}

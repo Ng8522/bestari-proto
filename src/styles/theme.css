@@ -16,7 +16,8 @@
   --ink-2: #6b5548;
   --line: rgba(42, 26, 20, 0.14);
   --serif: 'Young Serif', Georgia, serif;
-  --sans: 'Figtree', system-ui, sans-serif;
+  /* JetBrains Mono backs up Figtree for the few symbols Figtree lacks (● ✕), so they stay in the three families. */
+  --sans: 'Figtree', 'JetBrains Mono', system-ui, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, monospace;
 
   /* Type scale. The site uses only the three families above, and every font-size comes from
@@ -193,9 +194,9 @@ p {
 }
 
 /* Placeholder content that must be replaced before launch */
+/* It keeps the font, size and weight of the text around it, so the final copy can drop in without
+   changing the look; only the striped box marks it. */
 .ph {
-  font-family: var(--mono);
-  font-size: var(--fs-mono-md);
   background: repeating-linear-gradient(135deg, rgba(242, 174, 46, 0.22) 0 6px, rgba(242, 174, 46, 0.1) 6px 12px);
   border: 1px dashed rgba(0, 103, 71, 0.35);
   padding: 1px 8px;
