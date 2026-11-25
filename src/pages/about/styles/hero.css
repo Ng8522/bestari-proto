@@ -92,8 +92,13 @@
   }
 }
 
+/*
+ * Packs stay in the two side columns so the title never covers one: three down the left
+ * (a, e, b), three down the right (c, f, d). Widths stop growing at 1600px, where the
+ * title's font-size caps (16vw = 256px), so the gap between packs and title holds on wide screens.
+ */
 .about .pk.a {
-  width: 13vw;
+  width: min(13vw, 208px);
   left: 4%;
   top: 8%;
   rotate: -16deg;
@@ -101,15 +106,15 @@
 }
 
 .about .pk.b {
-  width: 11vw;
-  left: 20%;
-  bottom: 4%;
+  width: min(10vw, 160px);
+  left: 8%;
+  bottom: 9%;
   rotate: 12deg;
   animation-delay: 0.6s;
 }
 
 .about .pk.c {
-  width: 12vw;
+  width: min(12vw, 192px);
   right: 5%;
   top: 6%;
   rotate: 14deg;
@@ -117,25 +122,25 @@
 }
 
 .about .pk.d {
-  width: 13vw;
-  right: 18%;
-  bottom: 2%;
+  width: min(10vw, 160px);
+  right: 7%;
+  bottom: 9%;
   rotate: -10deg;
   animation-delay: 0.8s;
 }
 
 .about .pk.e {
-  width: 9vw;
+  width: min(9vw, 144px);
   left: -1%;
-  bottom: 22%;
+  bottom: 30%;
   rotate: 8deg;
   animation-delay: 0.9s;
 }
 
 .about .pk.f {
-  width: 9vw;
+  width: min(9vw, 144px);
   right: -1%;
-  bottom: 30%;
+  bottom: 40%;
   rotate: -14deg;
   animation-delay: 1s;
 }

@@ -17,7 +17,7 @@ export function RecipeVideos() {
       <div className="wrap">
         <div className="head">
           <div>
-            <div className="eyebrow">Let’s makan</div>
+            <div className="eyebrow">Recipe videos</div>
             <h2>Cook along with Bestari.</h2>
           </div>
         </div>

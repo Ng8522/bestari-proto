@@ -54,13 +54,16 @@ export function ProductRanges() {
   )
 }
 
-/** 04 Our purpose (342C green): the statement, the three promises and the certification strip. */
+/**
+ * 04 Purpose (342C green): the statement, the three promises and the certification strip.
+ * The eyebrow and title are Bestari's own words, from the About Us page on bestarifood.com.
+ */
 export function PromiseBand() {
   return (
     <section className="band band--brand" aria-labelledby="purpose-title">
       <div className="wrap">
-        <div className="eyebrow">Our purpose</div>
-        <h2 id="purpose-title">Good food brings people together.</h2>
+        <div className="eyebrow">We are Bestari</div>
+        <h2 id="purpose-title">Let’s makan together.</h2>
         <p className="lead">
           We are the playful sous chefs, balancing culinary convenience and taste so families can spend less time
           preparing and more time enjoying great meals together.

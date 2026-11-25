@@ -49,7 +49,7 @@ describe('Home page', () => {
       expect.arrayContaining([
         'Mudah & sedap since 2004.',
         'Kitchen essentials, from batter to seasoning.',
-        'Good food brings people together.',
+        'Let’s makan together.',
         'Bestari Food Berhad is going public.',
       ]),
     )
