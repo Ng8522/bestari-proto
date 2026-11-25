@@ -23,16 +23,17 @@
   /* Noto Sans SC sits behind each family for Chinese only: none of the three has Chinese glyphs, so without
      it the product names fall to whatever system font the device has. Latin text never reaches it.
      --serif keeps its name but is now the display family: Archivo, condensed and heavy (Bold & Big). */
-  /* One family for everything: Archivo. JetBrains Mono is loaded only for the six symbols Archivo lacks
-     (→ ← ↗ ↓ ● ✕), so they never fall to a system font; Noto Sans SC only draws Chinese. */
-  --serif: 'Archivo', 'JetBrains Mono', 'Noto Sans SC', 'Arial Narrow', sans-serif;
+  /* One family for everything: Archivo. Roboto Flex comes first but is loaded with only "&" in it, because
+     Archivo's ampersand is a stylised Et shape; every other character falls through to Archivo. JetBrains
+     Mono is loaded only for the six symbols Archivo lacks (→ ← ↗ ↓ ● ✕); Noto Sans SC only draws Chinese. */
+  --serif: 'Roboto Flex', 'Archivo', 'JetBrains Mono', 'Noto Sans SC', 'Arial Narrow', sans-serif;
   --display-weight: 800;
   --display-stretch: 75%;
   /* Display type at text sizes (small titles, card and product names): normal width and bold, in normal
      case, because squeezed capitals blur together when they are small. */
   --display-weight-text: 700;
   --display-stretch-text: 100%;
-  --sans: 'Archivo', 'JetBrains Mono', 'Noto Sans SC', system-ui, sans-serif;
+  --sans: 'Roboto Flex', 'Archivo', 'JetBrains Mono', 'Noto Sans SC', system-ui, sans-serif;
   /* Labels, eyebrows and figures use the same Archivo; the token keeps its name so the label rules
      (and their tabular figures) need no change. */
   --mono: var(--sans);
