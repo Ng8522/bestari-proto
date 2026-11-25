@@ -293,7 +293,7 @@ describe('Slogan parallax', () => {
 
   it('shifts the floating packs with the mouse', async () => {
     renderHome()
-    const hero = document.getElementById('top') as HTMLElement
+    const hero = document.getElementById('slogan') as HTMLElement
     fireEvent.pointerMove(hero, { pointerType: 'mouse', clientX: window.innerWidth, clientY: window.innerHeight })
     await waitFor(() => expect(floatingPacks()[0].style.transform).toBe('translate(14px,14px)'))
     expect(floatingPacks()[1].style.transform).toBe('translate(-11px,-11px)')
@@ -301,7 +301,7 @@ describe('Slogan parallax', () => {
 
   it('ignores touch pointers', async () => {
     renderHome()
-    const hero = document.getElementById('top') as HTMLElement
+    const hero = document.getElementById('slogan') as HTMLElement
     fireEvent.pointerMove(hero, { pointerType: 'touch', clientX: 0, clientY: 0 })
     await new Promise((resolve) => window.setTimeout(resolve, 40))
     floatingPacks().forEach((pack) => expect(pack.style.transform).toBe(''))
@@ -310,7 +310,7 @@ describe('Slogan parallax', () => {
   it('stays still when reduced motion is requested', async () => {
     stubReducedMotion()
     renderHome()
-    const hero = document.getElementById('top') as HTMLElement
+    const hero = document.getElementById('slogan') as HTMLElement
     fireEvent.pointerMove(hero, { pointerType: 'mouse', clientX: 0, clientY: 0 })
     await new Promise((resolve) => window.setTimeout(resolve, 40))
     floatingPacks().forEach((pack) => expect(pack.style.transform).toBe(''))

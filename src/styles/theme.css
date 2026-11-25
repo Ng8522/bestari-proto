@@ -3,21 +3,30 @@
  * Page-specific styles live next to each page (src/pages/<page>/<page>.css), scoped under the page's root class.
  */
 :root {
-  /* Corporate colour: Pantone 342 C. --brand-deep is its shade for hovers and dark bands,
-     --brand-tint the soft text colour used on brand-coloured sections. */
+  /* Corporate colour: Pantone 342 C. In the Bold & Big theme it also replaces black: body text, rules and
+     dark bands are all 342 C. --brand-deep is its shade for hovers and deep bands, --brand-tint the soft
+     text colour used on brand-coloured sections. */
   --brand: #006747;
   --brand-deep: #004a33;
   --brand-tint: #dcebe1;
-  --saffron: #f2ae2e;
-  --saffron-soft: #fbe3a8;
-  --cream: #fbf5ea;
-  --cream-2: #f4ead6;
-  --ink: #2a1a14;
-  --ink-2: #6b5548;
-  --line: rgba(42, 26, 20, 0.14);
+  /* The accent on green sections (the old saffron's job): a mint that keeps 4.7:1 against 342 C. */
+  --saffron: #a8e0c6;
+  --saffron-soft: #dcebe1;
+  /* Page grounds: white, and a light neutral for alternate bands and cards. */
+  --cream: #ffffff;
+  --cream-2: #efefea;
+  --ink: #006747;
+  --ink-2: #4d504d;
+  --line: rgba(0, 103, 71, 0.18);
   /* Noto Sans SC sits behind each family for Chinese only: none of the three has Chinese glyphs, so without
-     it the product names fall to whatever system font the device has. Latin text never reaches it. */
-  --serif: 'Young Serif', 'Noto Sans SC', Georgia, serif;
+     it the product names fall to whatever system font the device has. Latin text never reaches it.
+     --serif keeps its name but is now the display family: Archivo, condensed and heavy (Bold & Big). */
+  --serif: 'Archivo', 'Noto Sans SC', 'Arial Narrow', sans-serif;
+  --display-weight: 800;
+  --display-stretch: 75%;
+  /* Display type set at text sizes: a lighter, wider cut so it stays readable. */
+  --display-weight-text: 700;
+  --display-stretch-text: 87.5%;
   /* JetBrains Mono backs up Figtree for the few symbols Figtree lacks (● ✕), so they stay in the three families. */
   --sans: 'Figtree', 'JetBrains Mono', 'Noto Sans SC', system-ui, sans-serif;
   --mono: 'JetBrains Mono', 'Noto Sans SC', ui-monospace, monospace;
@@ -88,9 +97,11 @@ h2,
 h3,
 h4 {
   font-family: var(--serif);
-  font-weight: 400;
-  line-height: 1.08;
-  letter-spacing: -0.01em;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  line-height: 0.95;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
   text-wrap: balance;
 }
 
@@ -125,7 +136,7 @@ p {
   left: 8px;
   z-index: 200;
   padding: 10px 18px;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--ink);
   color: #fff;
   font-weight: 700;
@@ -161,9 +172,11 @@ p {
   gap: 10px;
   height: 52px;
   padding: 0 26px;
-  border-radius: 999px;
+  border-radius: 0;
   font-weight: 700;
   font-size: var(--fs-sans-sm);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   border: 0;
   cursor: pointer;
   font-family: var(--sans);
@@ -219,9 +232,9 @@ p {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(251, 245, 234, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 2px solid var(--brand);
 }
 
 .nav__bar {
@@ -388,7 +401,7 @@ p {
   background: var(--cream);
   display: inline-block;
   padding: 10px 16px;
-  border-radius: 14px;
+  border-radius: 0;
   margin-bottom: 20px;
 }
 
@@ -404,7 +417,7 @@ p {
 
 .foot__certs {
   background: #fff;
-  border-radius: 12px;
+  border-radius: 0;
   padding: 14px 18px;
   margin-top: 22px;
   max-width: 420px;
@@ -472,7 +485,7 @@ p {
     padding: 12px 20px 24px;
     background: var(--cream);
     border-bottom: 1px solid var(--line);
-    box-shadow: 0 20px 40px rgba(42, 26, 20, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 103, 71, 0.1);
   }
 
   .nav__menu[data-open='true'] {

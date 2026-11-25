@@ -19,6 +19,89 @@ export const HEADER_SOLID_RATIO = 0.85
 /** Scrolling more than this many pixels gives the header a green backdrop over the hero, so the slogan never shows through the links. */
 export const HEADER_SCRIM_OFFSET_PX = 8
 
+// ---------- Hero slider (first screen) ----------
+
+export const HERO_SLIDE_INTERVAL_MS = 5000
+export const HERO_SLIDE_STORAGE_KEY = 'bestari.home.hero-slide'
+
+export interface HeroPack {
+  src: string
+  alt: string
+}
+
+export interface HeroSlide {
+  id: string
+  /** Background: deep Pantone 342C green or the light neutral. */
+  tone: 'deep' | 'light'
+  eyebrow: string
+  title: string
+  href: string
+  linkLabel: string
+  /** Shown left to right; phones show the first two. */
+  packs: readonly HeroPack[]
+}
+
+const pack = (file: string, alt: string): HeroPack => ({ src: asset(file), alt })
+
+export const HERO_SLIDES: readonly HeroSlide[] = [
+  {
+    id: 'frying',
+    tone: 'deep',
+    eyebrow: 'Bestari · Since 2004',
+    title: 'Multipurpose Crispy Frying Flour Mix',
+    href: ROUTES.products,
+    linkLabel: 'View frying flours',
+    packs: [
+      pack('p-flour-original-1kg.png', 'Bestari Crispy Frying Flour Mix, Original 1 kg pack'),
+      pack('p-flour-hot-1kg.png', 'Bestari Crispy Frying Flour Mix, Hot and Spicy 1 kg pack'),
+      pack('p-flour-garlic-1kg.png', 'Bestari Crispy Frying Flour Mix, Garlic 1 kg pack'),
+      pack('p-flour-mala-520g.png', 'Bestari Crispy Frying Flour Mix, Mala 520 g pack'),
+    ],
+  },
+  {
+    id: 'seasonings',
+    tone: 'light',
+    eyebrow: 'Seasonings & stocks',
+    title: 'Stocks, premixes and seasonings',
+    href: ROUTES.products,
+    linkLabel: 'View seasonings',
+    packs: [
+      pack('p-chickenstock-1kg.png', 'Bestari Chicken Stock, 1 kg pack'),
+      pack('p-rasasedap-230g.png', 'Bestari Rasa Sedap All-in-One Seasoning, 230 g pack'),
+      pack('p-curry-meat.png', 'Bestari Instant Curry Powder Premix pack'),
+      pack('p-saltedegg-800g.png', 'Bestari Golden Salted Egg Seasoning, 800 g pack'),
+    ],
+  },
+  {
+    id: 'sides',
+    tone: 'deep',
+    eyebrow: 'Batters, kuih & sides',
+    title: 'Banana fritters, cucur, custard and more',
+    href: ROUTES.products,
+    linkLabel: 'View the range',
+    packs: [
+      pack('p-banana-1kg.png', 'Bestari Banana Fritter Batter, 1 kg pack'),
+      pack('p-cucur.png', 'Bestari Cucur Udang premix, 160 g pack'),
+      pack('p-custard.png', 'Bestari Custard Powder pack'),
+      pack('p-mashed.png', 'Bestari Instant Mashed Potatoes with Black Pepper Gravy pack'),
+    ],
+  },
+  {
+    id: 'pantry',
+    tone: 'light',
+    eyebrow: 'Pantry staples',
+    title: 'Rock salt, spices, starch and MSG',
+    href: ROUTES.products,
+    linkLabel: 'View pantry staples',
+    packs: [
+      pack('p-salt.png', 'Bestari Iodised Himalayan Rock Salt, 350 g pack'),
+      pack('p-spices.png', 'Bestari Serbuk Cili chilli powder, 100 g pack'),
+      pack('p-starch.png', 'Bestari Potato Starch, 350 g pack'),
+      pack('p-msg.png', 'Bestari Flavour Enhancer MSG, 1 kg pack'),
+    ],
+  },
+]
+
 // ---------- Slogan hero ----------
 
 export type FloatSlot = 'f1' | 'f2' | 'f3' | 'f4'

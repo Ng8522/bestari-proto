@@ -14,7 +14,7 @@ export function SloganHero() {
   useMouseParallax(sectionRef, packRefs, PACK_DEPTHS, !isReducedMotion)
 
   return (
-    <section className="slogan" id="top" ref={sectionRef}>
+    <section className="slogan" id="slogan" ref={sectionRef}>
       {FLOATING_PACKS.map((pack, index) => (
         <div
           key={pack.slot}

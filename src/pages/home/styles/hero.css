@@ -171,7 +171,7 @@
   margin: 0.04em 0;
 }
 
-/* Upright: Young Serif has no italic, and a browser-slanted one reads as a different font. */
+/* Upright: only upright cuts of the display face are loaded, and a browser-slanted one reads as a different font. */
 .home .slogan .mid em {
   font-style: normal;
   font-size: 0.42em;

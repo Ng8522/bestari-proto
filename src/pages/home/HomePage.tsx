@@ -4,6 +4,7 @@ import { BrandCarousel } from './BrandCarousel'
 import { HomeHeader } from './HomeHeader'
 import { RecipeVideos } from './RecipeVideos'
 import { IntroDoors, Latest, Purpose } from './sections'
+import { HeroSlider } from './HeroSlider'
 import { SloganHero } from './SloganHero'
 import './home.css'
 
@@ -18,6 +19,7 @@ export function HomePage() {
       </a>
       <HomeHeader />
       <main id="main">
+        <HeroSlider />
         <SloganHero />
         <IntroDoors />
         <BrandCarousel />
