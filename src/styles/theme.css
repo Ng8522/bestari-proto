@@ -21,18 +21,21 @@
   /* Noto Sans SC sits behind each family for Chinese only: none of the three has Chinese glyphs, so without
      it the product names fall to whatever system font the device has. Latin text never reaches it.
      --serif keeps its name but is now the display family: Archivo, condensed and heavy (Bold & Big). */
-  --serif: 'Archivo', 'Noto Sans SC', 'Arial Narrow', sans-serif;
+  /* One family for everything: Archivo. JetBrains Mono is loaded only for the six symbols Archivo lacks
+     (→ ← ↗ ↓ ● ✕), so they never fall to a system font; Noto Sans SC only draws Chinese. */
+  --serif: 'Archivo', 'JetBrains Mono', 'Noto Sans SC', 'Arial Narrow', sans-serif;
   --display-weight: 800;
   --display-stretch: 75%;
   /* Display type set at text sizes: a lighter, wider cut so it stays readable. */
   --display-weight-text: 700;
   --display-stretch-text: 87.5%;
-  /* JetBrains Mono backs up Figtree for the few symbols Figtree lacks (● ✕), so they stay in the three families. */
-  --sans: 'Figtree', 'JetBrains Mono', 'Noto Sans SC', system-ui, sans-serif;
-  --mono: 'JetBrains Mono', 'Noto Sans SC', ui-monospace, monospace;
+  --sans: 'Archivo', 'JetBrains Mono', 'Noto Sans SC', system-ui, sans-serif;
+  /* Labels, eyebrows and figures use the same Archivo; the token keeps its name so the label rules
+     (and their tabular figures) need no change. */
+  --mono: var(--sans);
 
-  /* Type scale. The site uses only the three families above, and every font-size comes from
-     its family's steps below. Serif steps of 28px and up are fluid, so they need no phone overrides. */
+  /* Type scale. The whole site is set in Archivo: display (condensed, heavy), text and labels each keep
+     their own steps below. Serif steps of 28px and up are fluid, so they need no phone overrides. */
   --fs-serif-4xl: clamp(96px, 16vw, 256px); /* giant display words */
   --fs-serif-3xl: clamp(72px, 9vw, 128px); /* display numbers and stacked words */
   --fs-serif-2xl: clamp(44px, 5.6vw, 80px); /* page titles */

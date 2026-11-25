@@ -91,10 +91,11 @@ describe('Home page', () => {
 })
 
 describe('Home header', () => {
-  it('links the brands, corporate pages and the shop, with no News link', () => {
+  it('links home, the corporate pages and the shop, with no News link', () => {
     renderHome()
     const nav = screen.getByRole('navigation', { name: 'Main' })
-    expect(within(nav).getByRole('link', { name: 'Our Brands' })).toHaveAttribute('href', '#brands')
+    expect(within(nav).getByRole('link', { name: 'Home' })).toHaveAttribute('href', '#top')
+    expect(within(nav).queryByRole('link', { name: 'Our Brands' })).not.toBeInTheDocument()
     expect(within(nav).getByRole('link', { name: 'About Us' })).toHaveAttribute('href', ROUTES.about)
     expect(within(nav).getByRole('link', { name: 'Products' })).toHaveAttribute('href', ROUTES.products)
     expect(within(nav).getByRole('link', { name: 'Investor Relations' })).toHaveAttribute('href', ROUTES.investors)

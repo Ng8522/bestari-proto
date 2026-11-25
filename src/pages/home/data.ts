@@ -7,7 +7,7 @@ import { productPath } from '../products/catalogue'
 
 /** Centre links of the transparent home header. */
 export const HEADER_LINKS: NavItem[] = [
-  { label: 'Our Brands', href: '#brands' },
+  { label: 'Home', href: '#top' },
   { label: 'About Us', href: ROUTES.about },
   { label: 'Products', href: ROUTES.products },
   { label: 'Investor Relations', href: ROUTES.investors, children: IR_MENU },
