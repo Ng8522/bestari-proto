@@ -3,6 +3,7 @@
  * Video titles and the two non-IPO news links are placeholders from the handoff and must be replaced.
  */
 import { asset, IR_MENU, ROUTES, type ImageAsset, type NavItem } from '../../content/site'
+import { productPath } from '../products/catalogue'
 
 /** Centre links of the transparent home header. */
 export const HEADER_LINKS: NavItem[] = [
@@ -16,121 +17,82 @@ export const HEADER_LINKS: NavItem[] = [
 /** The header turns solid once the page has scrolled this share of the viewport height. */
 export const HEADER_SOLID_RATIO = 0.85
 
-/** Scrolling more than this many pixels gives the header a green backdrop over the hero, so the slogan never shows through the links. */
+/** Scrolling more than this many pixels gives the header a green backdrop, so the page never shows through the links. */
 export const HEADER_SCRIM_OFFSET_PX = 8
 
 // ---------- Hero slider (first screen) ----------
 
 export const HERO_SLIDE_INTERVAL_MS = 5000
 export const HERO_SLIDE_STORAGE_KEY = 'bestari.home.hero-slide'
-
-export interface HeroPack {
-  src: string
-  alt: string
-}
+/** The banners are 2048 × 878 (about 2.33:1); each is saved at these widths in public/assets/hero. */
+export const HERO_BANNER_WIDTHS = [768, 1024, 2048] as const
 
 export interface HeroSlide {
+  /** Banner file stem: public/assets/hero/hero-<id>-<width>.png */
   id: string
-  /** Background: deep Pantone 342C green or the light neutral. */
-  tone: 'deep' | 'light'
-  eyebrow: string
+  /** Shown in the green strip under the banner and in the slide's button label. */
   title: string
+  alt: string
   href: string
-  linkLabel: string
-  /** Shown left to right; phones show the first two. */
-  packs: readonly HeroPack[]
 }
 
-const pack = (file: string, alt: string): HeroPack => ({ src: asset(file), alt })
+export interface HeroBannerImage {
+  src: string
+  srcSet: string
+}
 
+export function heroBanner(id: string): HeroBannerImage {
+  return {
+    src: asset(`hero/hero-${id}-1024.png`),
+    srcSet: HERO_BANNER_WIDTHS.map((width) => `${asset(`hero/hero-${id}-${width}.png`)} ${width}w`).join(', '),
+  }
+}
+
+/** The seven campaign banners from the bestarifood.com home slider, in the same order. */
 export const HERO_SLIDES: readonly HeroSlide[] = [
   {
-    id: 'frying',
-    tone: 'deep',
-    eyebrow: 'Bestari · Since 2004',
+    id: 'frying-flour',
     title: 'Multipurpose Crispy Frying Flour Mix',
-    href: ROUTES.products,
-    linkLabel: 'View frying flours',
-    packs: [
-      pack('p-flour-original-1kg.png', 'Bestari Crispy Frying Flour Mix, Original 1 kg pack'),
-      pack('p-flour-hot-1kg.png', 'Bestari Crispy Frying Flour Mix, Hot and Spicy 1 kg pack'),
-      pack('p-flour-garlic-1kg.png', 'Bestari Crispy Frying Flour Mix, Garlic 1 kg pack'),
-      pack('p-flour-mala-520g.png', 'Bestari Crispy Frying Flour Mix, Mala 520 g pack'),
-    ],
+    alt: 'Bestari Multipurpose Crispy Frying Flour Mix in five flavours beside two plates of fried chicken',
+    href: productPath('crispy-frying-flour-mix'),
   },
   {
-    id: 'seasonings',
-    tone: 'light',
-    eyebrow: 'Seasonings & stocks',
-    title: 'Stocks, premixes and seasonings',
-    href: ROUTES.products,
-    linkLabel: 'View seasonings',
-    packs: [
-      pack('p-chickenstock-1kg.png', 'Bestari Chicken Stock, 1 kg pack'),
-      pack('p-rasasedap-230g.png', 'Bestari Rasa Sedap All-in-One Seasoning, 230 g pack'),
-      pack('p-curry-meat.png', 'Bestari Instant Curry Powder Premix pack'),
-      pack('p-saltedegg-800g.png', 'Bestari Golden Salted Egg Seasoning, 800 g pack'),
-    ],
+    id: 'salted-egg',
+    title: 'Golden Salted Egg Seasoning',
+    alt: 'Bestari Golden Salted Egg Seasoning pack and box with a plate of salted egg fried chicken',
+    href: productPath('golden-salted-egg'),
   },
   {
-    id: 'sides',
-    tone: 'deep',
-    eyebrow: 'Batters, kuih & sides',
-    title: 'Banana fritters, cucur, custard and more',
+    id: 'goreng-goreng',
+    title: 'Goreng Goreng Fried Rice & Noodles Seasoning',
+    alt: 'Four Bestari Goreng Goreng fried rice and noodle seasoning packs with plates of fried rice and noodles',
     href: ROUTES.products,
-    linkLabel: 'View the range',
-    packs: [
-      pack('p-banana-1kg.png', 'Bestari Banana Fritter Batter, 1 kg pack'),
-      pack('p-cucur.png', 'Bestari Cucur Udang premix, 160 g pack'),
-      pack('p-custard.png', 'Bestari Custard Powder pack'),
-      pack('p-mashed.png', 'Bestari Instant Mashed Potatoes with Black Pepper Gravy pack'),
-    ],
   },
   {
-    id: 'pantry',
-    tone: 'light',
-    eyebrow: 'Pantry staples',
-    title: 'Rock salt, spices, starch and MSG',
+    id: 'rasa-sedap',
+    title: 'Rasa Sedap All-in-One Seasoning',
+    alt: 'Bestari Rasa Sedap All-in-One Seasoning pack with an omelette and a bowl of stir-fried vegetables',
+    href: productPath('rasa-sedap'),
+  },
+  {
+    id: 'chicken-stock',
+    title: 'Chicken Stock',
+    alt: 'Bestari Stok Ayam chicken stock pack with chicken soup, chicken rice and porridge',
+    href: productPath('chicken-stock'),
+  },
+  {
+    id: 'anchovy-stock',
+    title: 'Anchovy Stock',
+    alt: 'Bestari Stok Ikan Bilis anchovy stock pack with a bowl of noodle soup',
     href: ROUTES.products,
-    linkLabel: 'View pantry staples',
-    packs: [
-      pack('p-salt.png', 'Bestari Iodised Himalayan Rock Salt, 350 g pack'),
-      pack('p-spices.png', 'Bestari Serbuk Cili chilli powder, 100 g pack'),
-      pack('p-starch.png', 'Bestari Potato Starch, 350 g pack'),
-      pack('p-msg.png', 'Bestari Flavour Enhancer MSG, 1 kg pack'),
-    ],
+  },
+  {
+    id: 'banana-fritter',
+    title: 'Banana Fritter Batter',
+    alt: 'Bestari Tepung Goreng Pisang banana fritter batter pack with bananas and a basket of fritters',
+    href: productPath('banana-fritter-batter'),
   },
 ]
-
-// ---------- Slogan hero ----------
-
-export type FloatSlot = 'f1' | 'f2' | 'f3' | 'f4'
-
-export interface FloatingPack {
-  slot: FloatSlot
-  image: string
-  /** Parallax depth in px: the pack moves up to half of this with the mouse (sign sets the direction). */
-  depth: number
-}
-
-export const FLOATING_PACKS: FloatingPack[] = [
-  { slot: 'f1', image: asset('p-chickenstock-1kg.png'), depth: 28 },
-  { slot: 'f2', image: asset('p-saltedegg-800g.png'), depth: -22 },
-  { slot: 'f3', image: asset('p-banana-1kg.png'), depth: -30 },
-  { slot: 'f4', image: asset('p-flour-hot-1kg.png'), depth: 24 },
-]
-
-export const SLOGAN = {
-  first: 'Mudah',
-  middle: 'dan',
-  last: 'Sedap!',
-  /** "Sedap!" starts 0.45s in: 9 steps of the 50ms letter stagger. */
-  lastStartIndex: 9,
-  chipLeft: asset('p-flour-original-1kg.png'),
-  chipRight: asset('p-curry-meat.png'),
-  captionLeft: 'We are Bestari · Since 2004',
-  captionRight: 'Simple & Tasty',
-} as const
 
 // ---------- Intro doors ----------
 

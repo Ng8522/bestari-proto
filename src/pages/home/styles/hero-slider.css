@@ -1,14 +1,16 @@
-/* Home: 01 hero slider (HeroSlider). Four product-range slides of pack shots; the fixed header's
-   white links sit on the Pantone 342C band above them. */
+/* Home: 01 hero slider (HeroSlider). The Bestari campaign banners, full width at their own 2.33:1 shape,
+   with a Pantone 342C band above them for the fixed header's white links and a 342C strip below for the controls. */
 .home .hero-slider {
   background: var(--brand);
   padding-top: calc(var(--nav-h) + 16px);
+  color: #fff;
 }
 
 .home .hs-stage {
   position: relative;
   overflow: hidden;
-  height: clamp(520px, 52vw, 760px);
+  aspect-ratio: 2048 / 878;
+  background: var(--cream-2);
 }
 
 .home .hs-track {
@@ -19,117 +21,55 @@
 
 .home .hs-slide {
   flex: 0 0 100%;
-  position: relative;
-  overflow: hidden;
+  height: 100%;
 }
 
-.home .hs-slide--deep {
-  background: var(--brand-deep);
+.home .hs-slide a,
+.home .hs-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-.home .hs-slide--light {
-  background: var(--cream-2);
+.home .hs-slide img {
+  object-fit: cover;
 }
 
-.home .hs-packs {
-  position: absolute;
-  inset: 0;
+.home .hs-strip {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  padding: 48px 40px 200px;
+  gap: 0 24px;
+  padding-left: clamp(16px, 3vw, 32px);
 }
 
-/* Every pack gets the same square box, so tall and square pack shots line up at one size. */
-.home .hs-packs img {
-  flex: 0 0 auto;
-  width: 25%;
-  height: auto;
-  aspect-ratio: 1 / 1;
-  max-height: 100%;
-  object-fit: contain;
-  filter: drop-shadow(0 24px 28px rgba(0, 0, 0, 0.3));
-}
-
-.home .hs-cap {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: min(600px, 100%);
+.home .hs-name {
   display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 24px clamp(16px, 3vw, 32px) 12px;
-  background: var(--brand);
-  color: #fff;
+  align-items: baseline;
+  gap: 14px;
+  min-width: 0;
+  padding-block: 14px;
+  font-family: var(--serif);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  font-size: var(--fs-serif-sm);
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .home .hs-num {
-  font-family: var(--serif);
-  font-weight: var(--display-weight);
-  font-stretch: var(--display-stretch);
-  font-size: var(--fs-serif-xl);
-  font-variant-numeric: tabular-nums;
-  line-height: 0.8;
   color: var(--saffron);
-}
-
-.home .hs-cap__text {
-  min-width: 0;
-}
-
-.home .hs-eyebrow {
-  font-family: var(--mono);
-  font-size: var(--fs-mono-sm);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--brand-tint);
-}
-
-.home .hs-title {
-  margin-top: 8px;
-  font-family: var(--serif);
-  font-weight: var(--display-weight);
-  font-stretch: var(--display-stretch);
-  font-size: var(--fs-serif-lg);
-  line-height: 0.95;
-  text-transform: uppercase;
-  text-wrap: balance;
-}
-
-.home .hs-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  min-height: 44px;
-  margin-top: 4px;
-  font-size: var(--fs-sans-xs);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #fff;
-}
-
-.home .hs-link .arr {
-  transition: transform 0.2s;
-}
-
-.home .hs-link:hover .arr {
-  transform: translateX(4px);
+  font-variant-numeric: tabular-nums;
 }
 
 .home .hs-ctl {
-  position: absolute;
-  right: 0;
-  bottom: 0;
   display: flex;
   align-items: center;
-  background: var(--brand);
-  color: #fff;
+  margin-left: auto;
 }
 
 .home .hs-btn,
-.home .hs-bar {
+.home .hs-dot {
   height: 52px;
   display: inline-flex;
   align-items: center;
@@ -145,21 +85,21 @@
   width: 52px;
 }
 
-.home .hs-bar {
-  width: 36px;
+.home .hs-dot {
+  width: 30px;
 }
 
 /* Inactive bars stay at 3:1 against 342C; the current one is white and longer. */
-.home .hs-bar span {
+.home .hs-dot span {
   display: block;
-  width: 16px;
+  width: 14px;
   height: 4px;
   background: rgba(255, 255, 255, 0.55);
   transition: width 0.3s, background-color 0.3s;
 }
 
-.home .hs-bar[aria-current='true'] span {
-  width: 28px;
+.home .hs-dot[aria-current='true'] span {
+  width: 24px;
   background: #fff;
 }
 
@@ -174,31 +114,13 @@
   font-variant-numeric: tabular-nums;
 }
 
-@media (max-width: 900px) {
-  .home .hs-ctl {
-    top: 0;
-    bottom: auto;
-  }
-}
-
-/* Phones: two packs per slide, big enough to read the pack names. */
+/* Phones: the counter shows the position, so the seven bars give way and the controls fit beside or under the name. */
 @media (max-width: 640px) {
-  .home .hs-packs {
-    padding: 76px 16px 200px;
+  .home .hs-strip {
+    padding-left: 16px;
   }
 
-  .home .hs-packs img {
-    width: 50%;
-  }
-
-  .home .hs-packs img:nth-child(n + 3) {
-    display: none;
-  }
-}
-
-/* Small phones: the bars already show the position, so the counter goes and every control still fits. */
-@media (max-width: 420px) {
-  .home .hs-count {
+  .home .hs-dot {
     display: none;
   }
 }

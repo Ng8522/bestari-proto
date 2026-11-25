@@ -1,17 +1,26 @@
 import { useRef, useState, type TouchEvent } from 'react'
 import { usePrefersReducedMotion } from '../../components/motion'
 import { SmartLink } from '../../components/routing'
-import { HERO_SLIDE_INTERVAL_MS, HERO_SLIDE_STORAGE_KEY, HERO_SLIDES } from './data'
+import { heroBanner, HERO_SLIDE_INTERVAL_MS, HERO_SLIDE_STORAGE_KEY, HERO_SLIDES } from './data'
 import { useCarousel } from './useCarousel'
 
-/** A horizontal swipe longer than this moves to the next or previous range. */
+/** A horizontal swipe longer than this moves to the next or previous banner. */
 const SWIPE_PX = 40
+/** Intrinsic size of the largest banner file, so the browser reserves the right space before it loads. */
+const BANNER_WIDTH = 2048
+const BANNER_HEIGHT = 878
 
 const twoDigits = (value: number): string => String(value).padStart(2, '0')
 
+/** The current banner and its neighbours load straight away; the rest wait until they are close. */
+function isNearby(slideIndex: number, currentIndex: number, count: number): boolean {
+  const distance = (slideIndex - currentIndex + count) % count
+  return distance === 0 || distance === 1 || distance === count - 1
+}
+
 /**
- * 01 Hero: the first screen is a slider of the product ranges, each slide a row of pack shots.
- * It changes on its own every 5 seconds (never under reduced motion) and has arrows, numbered bars, pause and swipe.
+ * 01 Hero: the first screen is a slider of the Bestari campaign banners, each linking to its product.
+ * It changes on its own every 5 seconds (never under reduced motion) and has arrows, bars, pause and swipe.
  */
 export function HeroSlider() {
   const isReducedMotion = usePrefersReducedMotion()
@@ -25,6 +34,7 @@ export function HeroSlider() {
     isPaused,
   })
   const touchStartX = useRef<number | null>(null)
+  const current = HERO_SLIDES[index]
 
   const handleTouchStart = (event: TouchEvent) => {
     touchStartX.current = event.touches[0]?.clientX ?? null
@@ -47,40 +57,43 @@ export function HeroSlider() {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
+      <h1 className="visually-hidden">Bestari Food Berhad</h1>
       <div className="hs-stage">
         <div className="hs-track" style={{ transform: `translateX(${-100 * index}%)` }} aria-live={isPaused ? 'polite' : 'off'}>
           {HERO_SLIDES.map((slide, slideIndex) => {
             const isCurrent = slideIndex === index
+            const banner = heroBanner(slide.id)
             return (
               <div
                 key={slide.id}
-                className={`hs-slide hs-slide--${slide.tone}`}
+                className="hs-slide"
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`${slideIndex + 1} of ${count}`}
                 aria-hidden={!isCurrent}
               >
-                <div className="hs-packs">
-                  {slide.packs.map((pack) => (
-                    <img key={pack.src} src={pack.src} alt={pack.alt} draggable={false} />
-                  ))}
-                </div>
-                <div className="hs-cap">
-                  <p className="hs-num" aria-hidden="true">
-                    {twoDigits(slideIndex + 1)}
-                  </p>
-                  <div className="hs-cap__text">
-                    <p className="hs-eyebrow">{slide.eyebrow}</p>
-                    <p className="hs-title">{slide.title}</p>
-                    <SmartLink className="hs-link" href={slide.href} tabIndex={isCurrent ? 0 : -1}>
-                      {slide.linkLabel} <span className="arr" aria-hidden="true">→</span>
-                    </SmartLink>
-                  </div>
-                </div>
+                <SmartLink href={slide.href} tabIndex={isCurrent ? 0 : -1}>
+                  <img
+                    src={banner.src}
+                    srcSet={banner.srcSet}
+                    sizes="100vw"
+                    width={BANNER_WIDTH}
+                    height={BANNER_HEIGHT}
+                    alt={slide.alt}
+                    loading={isNearby(slideIndex, index, count) ? 'eager' : 'lazy'}
+                    decoding="async"
+                    draggable={false}
+                  />
+                </SmartLink>
               </div>
             )
           })}
         </div>
+      </div>
+      <div className="hs-strip">
+        <p className="hs-name" aria-hidden="true">
+          <span className="hs-num">{twoDigits(index + 1)}</span> {current.title}
+        </p>
         <div className="hs-ctl">
           <button type="button" className="hs-btn" aria-label="Previous range" onClick={() => step(-1)}>
             <ChevronIcon direction="left" />
@@ -89,7 +102,7 @@ export function HeroSlider() {
             <button
               key={slide.id}
               type="button"
-              className="hs-bar"
+              className="hs-dot"
               aria-label={`Show range ${slideIndex + 1}: ${slide.title}`}
               aria-current={slideIndex === index}
               onClick={() => show(slideIndex)}

@@ -7,8 +7,8 @@ import { HEADER_LINKS, HEADER_SCRIM_OFFSET_PX, HEADER_SOLID_RATIO } from './data
 import { useScrolledPast } from './useHomeMotion'
 
 /**
- * The home page's own fixed header: transparent at the very top of the slogan hero, a green bar
- * once the page starts scrolling (so the slogan slides under the links), and solid cream past 85%
+ * The home page's own fixed header: transparent on the hero slider's green band, a green bar
+ * once the page starts scrolling (so the page slides under the links), and solid white past 85%
  * of the viewport. At 900px and below the links fold into a hamburger-menu disclosure.
  */
 export function HomeHeader() {

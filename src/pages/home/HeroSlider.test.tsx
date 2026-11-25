@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen, within } from '@testing-library/react'
 import { MemoryRouter } from 'react-router'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { HERO_SLIDE_INTERVAL_MS, HERO_SLIDE_STORAGE_KEY, HERO_SLIDES } from './data'
@@ -20,6 +20,8 @@ function currentSlide(): number {
   return slides().findIndex((slide) => slide.getAttribute('aria-hidden') === 'false') + 1
 }
 
+const total = String(HERO_SLIDES.length).padStart(2, '0')
+
 afterEach(() => {
   vi.useRealTimers()
   vi.unstubAllGlobals()
@@ -27,44 +29,60 @@ afterEach(() => {
 })
 
 describe('HeroSlider', () => {
-  it('opens on the first range with every slide made of pack shots', () => {
+  it('opens on the first banner, each banner a described image in three sizes', () => {
     renderSlider()
 
     expect(slides()).toHaveLength(HERO_SLIDES.length)
     expect(currentSlide()).toBe(1)
-    expect(screen.getByText('01 / 04')).toBeInTheDocument()
+    expect(screen.getByText(`01 / ${total}`)).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1, name: 'Bestari Food Berhad' })).toBeInTheDocument()
     for (const slide of HERO_SLIDES) {
-      expect(slide.packs.length).toBeGreaterThan(1)
-      for (const pack of slide.packs) expect(screen.getByAltText(pack.alt)).toBeInTheDocument()
+      const image = screen.getByAltText(slide.alt)
+      expect(image.getAttribute('srcset')).toContain(`hero/hero-${slide.id}-2048.png 2048w`)
+      expect(image.getAttribute('srcset')).toContain(`hero/hero-${slide.id}-768.png 768w`)
     }
   })
 
-  it('moves with the arrows and the numbered bars, wrapping at both ends', () => {
+  it('links each banner to its product and keeps hidden banners out of the tab order', () => {
+    renderSlider()
+
+    slides().forEach((slide, slideIndex) => {
+      const link = within(slide).getByRole('link', { hidden: true })
+      expect(link).toHaveAttribute('href', HERO_SLIDES[slideIndex].href)
+      expect(link).toHaveAttribute('tabindex', slideIndex === 0 ? '0' : '-1')
+    })
+  })
+
+  it('loads the current banner and its neighbours first and the rest lazily', () => {
+    renderSlider()
+    const loading = HERO_SLIDES.map((slide) => screen.getByAltText(slide.alt).getAttribute('loading'))
+
+    expect(loading[0]).toBe('eager')
+    expect(loading[1]).toBe('eager')
+    expect(loading[HERO_SLIDES.length - 1]).toBe('eager')
+    expect(loading[3]).toBe('lazy')
+  })
+
+  it('moves with the arrows and the bars, wrapping at both ends, and names the current banner', () => {
     renderSlider()
 
     fireEvent.click(screen.getByRole('button', { name: 'Next range' }))
     expect(currentSlide()).toBe(2)
-    expect(screen.getByText('02 / 04')).toBeInTheDocument()
+    expect(screen.getByText(`02 / ${total}`)).toBeInTheDocument()
+    expect(screen.getByText(HERO_SLIDES[1].title)).toBeInTheDocument()
 
-    fireEvent.click(screen.getByRole('button', { name: `Show range 4: ${HERO_SLIDES[3].title}` }))
-    expect(currentSlide()).toBe(4)
+    const last = HERO_SLIDES.length
+    fireEvent.click(screen.getByRole('button', { name: `Show range ${last}: ${HERO_SLIDES[last - 1].title}` }))
+    expect(currentSlide()).toBe(last)
 
     fireEvent.click(screen.getByRole('button', { name: 'Next range' }))
     expect(currentSlide()).toBe(1)
 
     fireEvent.click(screen.getByRole('button', { name: 'Previous range' }))
-    expect(currentSlide()).toBe(4)
+    expect(currentSlide()).toBe(last)
   })
 
-  it('keeps links in hidden slides out of the tab order', () => {
-    renderSlider()
-    const links = screen.getAllByRole('link', { hidden: true })
-
-    expect(links.filter((link) => link.tabIndex === 0)).toHaveLength(1)
-    expect(links[0]).toHaveAttribute('tabindex', '0')
-  })
-
-  it('changes slide on its own and stops when paused', () => {
+  it('changes banner on its own and stops when paused', () => {
     vi.useFakeTimers()
     renderSlider()
 
@@ -80,7 +98,7 @@ describe('HeroSlider', () => {
     expect(currentSlide()).toBe(3)
   })
 
-  it('swipes to the next and previous range on touch screens', () => {
+  it('swipes to the next and previous banner on touch screens', () => {
     renderSlider()
     const slider = screen.getByRole('region', { name: 'Bestari product ranges' })
 
@@ -93,7 +111,7 @@ describe('HeroSlider', () => {
     expect(currentSlide()).toBe(1)
   })
 
-  it('does not change slide on its own when reduced motion is requested', () => {
+  it('does not change banner on its own when reduced motion is requested', () => {
     vi.stubGlobal(
       'matchMedia',
       vi.fn((query: string) => ({
@@ -110,7 +128,7 @@ describe('HeroSlider', () => {
     expect(currentSlide()).toBe(1)
   })
 
-  it('remembers the last range between visits', () => {
+  it('remembers the last banner between visits', () => {
     window.localStorage.setItem(HERO_SLIDE_STORAGE_KEY, '2')
     renderSlider()
 

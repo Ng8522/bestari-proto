@@ -58,14 +58,15 @@ afterEach(() => {
 })
 
 describe('Home page', () => {
-  it('shows the slogan hero, skip link, footer and default title', () => {
+  it('opens on the hero slider with the skip link, footer and default title, and no slogan section', () => {
     renderHome()
-    expect(screen.getByRole('heading', { level: 1, name: 'Mudah dan Sedap!' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1, name: 'Bestari Food Berhad' })).toBeInTheDocument()
+    expect(screen.getByRole('region', { name: 'Bestari product ranges' })).toHaveAttribute('id', 'top')
+    expect(document.querySelector('.home .slogan')).toBeNull()
     expect(screen.getByRole('link', { name: 'Skip to content' })).toHaveAttribute('href', '#main')
     expect(screen.getByRole('main')).toHaveAttribute('id', 'main')
     expect(screen.getByRole('contentinfo')).toBeInTheDocument()
     expect(screen.queryByRole('link', { name: 'Scroll to content' })).not.toBeInTheDocument()
-    expect(document.querySelector('.home .slogan .cue')).toBeNull()
     expect(screen.queryByText('Scroll')).not.toBeInTheDocument()
     expect(document.title).toBe('Bestari Food Berhad | Mudah dan Sedap!')
   })
@@ -283,36 +284,5 @@ describe('Recipe videos', () => {
     expect(player()).toHaveAttribute('title', `Bestari video: ${second.title}`)
     expect(secondButton).toHaveAttribute('aria-pressed', 'true')
     expect(within(playlist).getByRole('button', { name: new RegExp(first.title) })).toHaveAttribute('aria-pressed', 'false')
-  })
-})
-
-describe('Slogan parallax', () => {
-  function floatingPacks(): HTMLElement[] {
-    return Array.from(document.querySelectorAll<HTMLElement>('.slogan .fl'))
-  }
-
-  it('shifts the floating packs with the mouse', async () => {
-    renderHome()
-    const hero = document.getElementById('slogan') as HTMLElement
-    fireEvent.pointerMove(hero, { pointerType: 'mouse', clientX: window.innerWidth, clientY: window.innerHeight })
-    await waitFor(() => expect(floatingPacks()[0].style.transform).toBe('translate(14px,14px)'))
-    expect(floatingPacks()[1].style.transform).toBe('translate(-11px,-11px)')
-  })
-
-  it('ignores touch pointers', async () => {
-    renderHome()
-    const hero = document.getElementById('slogan') as HTMLElement
-    fireEvent.pointerMove(hero, { pointerType: 'touch', clientX: 0, clientY: 0 })
-    await new Promise((resolve) => window.setTimeout(resolve, 40))
-    floatingPacks().forEach((pack) => expect(pack.style.transform).toBe(''))
-  })
-
-  it('stays still when reduced motion is requested', async () => {
-    stubReducedMotion()
-    renderHome()
-    const hero = document.getElementById('slogan') as HTMLElement
-    fireEvent.pointerMove(hero, { pointerType: 'mouse', clientX: 0, clientY: 0 })
-    await new Promise((resolve) => window.setTimeout(resolve, 40))
-    floatingPacks().forEach((pack) => expect(pack.style.transform).toBe(''))
   })
 })

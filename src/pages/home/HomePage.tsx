@@ -5,7 +5,6 @@ import { HomeHeader } from './HomeHeader'
 import { RecipeVideos } from './RecipeVideos'
 import { IntroDoors, Latest, Purpose } from './sections'
 import { HeroSlider } from './HeroSlider'
-import { SloganHero } from './SloganHero'
 import './home.css'
 
 /** Home, ported from "Bestari Corporate & IPO.html". It draws its own header instead of using Layout. */
@@ -20,7 +19,6 @@ export function HomePage() {
       <HomeHeader />
       <main id="main">
         <HeroSlider />
-        <SloganHero />
         <IntroDoors />
         <BrandCarousel />
         <Purpose />
