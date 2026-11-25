@@ -15,10 +15,12 @@
   --ink: #2a1a14;
   --ink-2: #6b5548;
   --line: rgba(42, 26, 20, 0.14);
-  --serif: 'Young Serif', Georgia, serif;
+  /* Noto Sans SC sits behind each family for Chinese only: none of the three has Chinese glyphs, so without
+     it the product names fall to whatever system font the device has. Latin text never reaches it. */
+  --serif: 'Young Serif', 'Noto Sans SC', Georgia, serif;
   /* JetBrains Mono backs up Figtree for the few symbols Figtree lacks (● ✕), so they stay in the three families. */
-  --sans: 'Figtree', 'JetBrains Mono', system-ui, sans-serif;
-  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --sans: 'Figtree', 'JetBrains Mono', 'Noto Sans SC', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', 'Noto Sans SC', ui-monospace, monospace;
 
   /* Type scale. The site uses only the three families above, and every font-size comes from
      its family's steps below. Serif steps of 28px and up are fluid, so they need no phone overrides. */
@@ -58,6 +60,8 @@ body {
   background: var(--cream);
   font-size: var(--fs-sans-md);
   line-height: 1.6;
+  /* Never fake a bold or italic the loaded fonts don't have: a faked style reads as a fourth typeface. */
+  font-synthesis: none;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -108,6 +112,11 @@ p {
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
+}
+
+/* Hidden headings still get a size from the scale rather than the browser's default. */
+:is(h1, h2, h3, h4).visually-hidden {
+  font-size: var(--fs-serif-sm);
 }
 
 .skip-link {

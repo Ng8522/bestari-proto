@@ -68,7 +68,7 @@
 .ir .fin-segment--sub {
   padding-left: 16px;
   font-weight: 400;
-  font-style: italic;
+  color: var(--ink-2);
 }
 
 /* The last row of the table is its total. */

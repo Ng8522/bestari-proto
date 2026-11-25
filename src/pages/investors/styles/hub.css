@@ -78,12 +78,14 @@
 
 .ir .ir-ticker-name {
   font-family: var(--mono);
+  font-size: var(--fs-mono-md);
   letter-spacing: 0.08em;
   color: var(--saffron);
 }
 
 .ir .ir-ticker-field b {
   font-family: var(--mono);
+  font-size: var(--fs-mono-md);
   margin-left: 4px;
 }
 

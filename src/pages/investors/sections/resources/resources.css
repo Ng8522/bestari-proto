@@ -137,6 +137,7 @@
 
 .ir .terms-list > li::marker {
   font-family: var(--serif);
+  font-size: var(--fs-serif-sm);
   color: var(--brand);
 }
 

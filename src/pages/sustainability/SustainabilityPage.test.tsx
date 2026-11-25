@@ -57,8 +57,11 @@ describe('Sustainability page', () => {
     renderAt(ROUTES.sustainability)
 
     const environment = screen.getByRole('region', { name: PILLARS[1].title })
-    const stats = within(environment).getAllByRole('listitem').filter((item) => item.querySelector('.ph'))
+    const stats = within(environment)
+      .getAllByRole('listitem')
+      .filter((item) => within(item).queryByText(/to be confirmed/) !== null)
     expect(stats).toHaveLength(PILLARS[1].stats?.length ?? 0)
+    stats.forEach((item) => expect(item).toHaveTextContent(/^Figure to be confirmed/))
   })
 
   it('shows unpublished reports as coming soon, and offers the enquiry email', () => {
