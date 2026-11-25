@@ -70,6 +70,10 @@
   color: var(--ink-2);
 }
 
+.ir .widget-list small {
+  font-size: var(--fs-sans-xs);
+}
+
 .ir .widget-list a {
   font-weight: 600;
   color: var(--ink);
@@ -161,6 +165,10 @@
 .ir .cta-card--light {
   background: var(--saffron-soft);
   color: var(--ink);
+}
+
+.ir .cta-card h3 {
+  font-size: var(--fs-serif-sm);
 }
 
 .ir .cta-card p {

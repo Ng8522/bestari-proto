@@ -121,6 +121,7 @@
 
 .shop .trade__list b {
   font-family: var(--mono);
+  font-size: var(--fs-mono-md);
   color: var(--saffron);
   font-weight: 500;
 }
