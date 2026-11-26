@@ -1,13 +1,20 @@
 /* Home: floating header (HomeHeader). The first screen is in hero-slider.css. */
 
 /* ---------- Floating header ---------- */
+/* Logo height and the header's top/bottom padding. hero-slider.css sizes the green band above the
+   banners from these, so the band always matches the header's height at the top of the page. */
+.home {
+  --hdr-logo-h: 64px;
+  --hdr-pad: 16px;
+}
+
 .home .hdr {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 60;
-  padding: 18px 0;
+  padding: var(--hdr-pad) 0;
   transition: background 0.3s, padding 0.3s;
 }
 
@@ -37,12 +44,13 @@
 .home .hdr .logo {
   background: var(--cream);
   border-radius: 0;
-  padding: 6px 12px;
+  padding: 6px 14px;
   display: block;
+  flex: none;
 }
 
 .home .hdr .logo img {
-  height: 46px;
+  height: var(--hdr-logo-h);
   width: auto;
 }
 

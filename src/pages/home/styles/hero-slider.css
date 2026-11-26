@@ -2,7 +2,8 @@
    with a Pantone 342C band above them for the fixed header's white links and a 342C strip below for the controls. */
 .home .hero-slider {
   background: var(--brand);
-  padding-top: calc(var(--nav-h) + 16px);
+  /* The header's height at the top: logo + its 6px cream box padding top and bottom + header padding. */
+  padding-top: calc(var(--hdr-logo-h) + 12px + 2 * var(--hdr-pad));
   color: #fff;
 }
 

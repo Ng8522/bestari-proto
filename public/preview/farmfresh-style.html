@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bestari Food Berhad | Mudah dan Sedap!</title>
-<meta name="description" content="Design preview of the whole Bestari Food Berhad site, laid out after farmfresh.com.my in Bestari's own colours.">
+<meta name="description" content="Bestari Food Berhad: Malaysian food premixes and ingredients since 2004. Mudah dan sedap!">
 <link rel="icon" href="../assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -115,10 +115,6 @@ h3, h4 { font-weight: 700; line-height: 1.25; text-wrap: balance; }
     repeating-linear-gradient(90deg, rgba(18, 53, 42, 0.018) 0 1px, transparent 1px 7px);
 }
 
-/* ---------- Preview note ---------- */
-.pv-note { background: var(--ink); color: #dcebe1; font-size: 13px; text-align: center; padding: 8px 48px; position: relative; }
-.pv-note b { color: var(--mint); }
-.pv-note button { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #fff; font-size: 18px; display: grid; place-items: center; width: 28px; height: 28px; }
 
 /* ---------- Header ---------- */
 .hdr { position: sticky; top: 0; z-index: 50; background: #fff; box-shadow: 0 2px 14px rgba(18, 53, 42, 0.08); }
@@ -781,7 +777,6 @@ h3, h4 { font-weight: 700; line-height: 1.25; text-wrap: balance; }
   .calband h2, .ircontact h2 { font-size: 28px; }
   .ircontact ul { flex-direction: column; align-items: center; gap: 14px; }
   .specs th { width: 42%; }
-  .pv-note { font-size: 12px; padding: 7px 40px 7px 12px; text-align: left; }
   .fab { right: 10px; bottom: 10px; }
   .hero-photo { min-height: 400px; }
   .hero-photo p { font-size: 17px; }
@@ -792,10 +787,6 @@ h3, h4 { font-weight: 700; line-height: 1.25; text-wrap: balance; }
 </style>
 </head>
 <body>
-<div class="pv-note" id="pvNote" role="note">
-  <b>Design preview:</b> the whole Bestari site laid out after farmfresh.com.my, in Bestari colours. Forms, cart and links are for demonstration only.
-  <button type="button" id="pvClose" aria-label="Hide preview note"></button>
-</div>
 <header class="hdr">
   <!-- Corporate site header: every page except Shop Today. -->
   <div class="hdr__in hdr__in--site">
@@ -1170,6 +1161,8 @@ const TONE_COLOUR = { brand: '#006747', sand: '#d9d2b8', saffron: '#a8e0c6', dee
 
 const tel = (label, number = label) => { const d = number.replace(/[^\d+]/g, ''); return [label, `tel:${d.startsWith('+') ? d : `+6${d}`}`]; };
 const KEE_HUA = ['Sarawak', 'Kee Hua Food Sdn Bhd', 'Sublot 28, Batu 9, Jalan Penrissen, 93250 Kuching, Sarawak', [tel('082-614 473')]];
+/* Markets reached through the export team rather than a listed partner. */
+const EXPORT_TEAM_MARKETS = ['Brunei', 'Australia', 'Cambodia', 'Sri Lanka'];
 const OUTLETS = [
   { id: 'retail', title: 'Shops & retail', text: 'These distributors supply Bestari to grocers, minimarts and supermarkets in each state.', list: [
     ['Kedah', 'Aintai Jitra Sdn Bhd', 'No. 13, Kawasan Perindustrian, Bandar Darul Aman, 06000 Jitra, Kedah', [tel('04-917 2714')]],
@@ -1191,9 +1184,12 @@ const OUTLETS = [
     ['Seri Kembangan, Selangor', 'Pemborong Barang Runcit Soon Sheng', '120, Jalan Taming 6, Taman Taming Jaya, 43300 Seri Kembangan, Selangor', [tel('011-2805 9484')]],
     ['Sabah', 'Woo Joo Food Sdn Bhd', 'Lot 5, Jalan Buah Duku 1, Kolombong Industrial, Inanam, 88769 Kota Kinabalu, Sabah', [tel('+60 88 435 511')]],
     KEE_HUA ] },
-  { id: 'international', title: 'Outside Malaysia', text: 'Bestari is exported through partners abroad.', note: 'Brunei, Australia, Cambodia, Sri Lanka and other markets: contact our export team at gabriel (at) synerchem.com.my.', list: [
+  { id: 'international', title: 'Outside Malaysia', text: 'Bestari is exported through partners abroad.', note: `${EXPORT_TEAM_MARKETS.join(', ')} and other markets: contact our export team at gabriel (at) synerchem.com.my.`, list: [
     ['Saudi Arabia', 'Khairat Alastoura Trading Company', 'King Faisal Road, Al-Mahjar District, Modern Warehouses, 22511 Jeddah, Saudi Arabia', []] ] },
 ];
+/* Home page stats, counted from the lists above so they follow any distributor added or removed. */
+const outletGroup = (id) => OUTLETS.find((g) => g.id === id).list;
+const exportMarketCount = () => new Set([...outletGroup('international').map(([market]) => market), ...EXPORT_TEAM_MARKETS]).size;
 
 /* Shop: sample prices for design only (the commerce backend sets the real ones). */
 const sv = (label, price, img) => ({ label, price, img });
@@ -1348,9 +1344,9 @@ function pageHome() {
       <h2 class="title">Homegrown in Selangor</h2>
       <p class="lead">Bestari has been made in Telok Panglima Garang, Selangor, since 2004. Our distributors bring it to grocers, supermarkets and food businesses across Malaysia, and our partners take it abroad.</p>
       <div class="stats">
-        <div class="stat"><b>13</b><span>retail distributors, state by state</span></div>
-        <div class="stat"><b>5</b><span>food service distributors for F&amp;B</span></div>
-        <div class="stat"><b>5+</b><span>export markets, from Saudi Arabia to Australia</span></div>
+        <div class="stat"><b>${outletGroup('retail').length}</b><span>retail distributors, state by state</span></div>
+        <div class="stat"><b>${outletGroup('food-service').length}</b><span>food service distributors for F&amp;B</span></div>
+        <div class="stat"><b>${exportMarketCount()}+</b><span>export markets, from Saudi Arabia to Australia</span></div>
       </div>
       <a class="btn" href="#/onsite-outlets">Find an outlet</a>
     </div>
@@ -1921,7 +1917,6 @@ function buildChrome() {
   $('#backToSite').innerHTML = `${ic('chevL')}About Bestari`;
   $$('.drawer__close').forEach((b) => { b.innerHTML = ic('close'); });
   $('#videoClose').innerHTML = ic('close');
-  $('#pvClose').innerHTML = ic('close');
   $('#toTop').innerHTML = ic('chevU');
   $('#mailFab').innerHTML = ic('mail');
   $('#footer').innerHTML = `
@@ -2213,7 +2208,6 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') $$('.drawe
 $('#videoClose').addEventListener('click', () => $('#videoModal').close());
 $('#videoModal').addEventListener('close', () => { $('#videoSlot').innerHTML = ''; });
 $('#videoModal').addEventListener('click', (e) => { if (e.target.id === 'videoModal') $('#videoModal').close(); });
-$('#pvClose').addEventListener('click', () => $('#pvNote').remove());
 const toTop = $('#toTop');
 /* A page can name a section the up button returns to first ([data-back-to], e.g. Sustainability's
    "Our commitment"); from that section or above it, the button goes to the top as usual. */
