@@ -82,16 +82,20 @@
   box-shadow: 0 20px 40px rgba(0, 103, 71, 0.1);
 }
 
+/* A fixed square every packshot fits inside, whatever its shape. The image is taken out of flow
+   so a tall pack can't stretch the box (aspect-ratio alone lets in-flow content grow it). */
 .shop .pc__im {
   aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  padding: 18px;
   position: relative;
 }
 
 .shop .pc__im img {
-  max-height: 100%;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 18px;
+  object-fit: contain;
   transition: transform 0.4s;
 }
 
